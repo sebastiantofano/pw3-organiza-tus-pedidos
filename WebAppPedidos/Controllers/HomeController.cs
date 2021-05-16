@@ -20,7 +20,25 @@ namespace WebAppPedidos.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            bool estaLogeado = true;
+            bool esAdmin = true;
+
+            /* Logica para mostrar la primera vista al iniciar la aplicación o ingresar a la página*/
+            if (estaLogeado)
+            {
+                if (esAdmin)
+                {
+                    return RedirectToAction("Index", "Home", new { Area = "Administrador" });
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home", new { Area = "Moderador" });
+                }
+            }
+            else
+            {
+                return RedirectToAction("Index", "Login", new { Area = "Usuario" });
+            }
         }
 
         public IActionResult Privacy()

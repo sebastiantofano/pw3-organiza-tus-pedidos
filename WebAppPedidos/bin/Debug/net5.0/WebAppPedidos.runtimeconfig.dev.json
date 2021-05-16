@@ -1,8 +1,0 @@
-{
-  "runtimeOptions": {
-    "additionalProbingPaths": [
-      "C:\\Users\\stofano\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\stofano\\.nuget\\packages"
-    ]
-  }
-}

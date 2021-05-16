@@ -1,0 +1,99 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebAppPedidos</title>
+    @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/css/site.css" />*@
+
+    <!-- ================= Favicon ================== -->
+    <!-- Standard -->
+    <link rel="shortcut icon" href="http://placehold.it/64.png/000/fff">
+    <!-- Retina iPad Touch Icon-->
+    <link rel="apple-touch-icon" sizes="144x144" href="http://placehold.it/144.png/000/fff">
+    <!-- Retina iPhone Touch Icon-->
+    <link rel="apple-touch-icon" sizes="114x114" href="http://placehold.it/114.png/000/fff">
+    <!-- Standard iPad Touch Icon-->
+    <link rel="apple-touch-icon" sizes="72x72" href="http://placehold.it/72.png/000/fff">
+    <!-- Standard iPhone Touch Icon-->
+    <link rel="apple-touch-icon" sizes="57x57" href="http://placehold.it/57.png/000/fff">
+
+    <!-- Common Template -->
+    <link href="~/themes/assets/css/lib/font-awesome.min.css" rel="stylesheet">
+    <link href="~/themes/assets/css/lib/themify-icons.css" rel="stylesheet">
+    <link href="~/themes/assets/css/lib/bootstrap.min.css" rel="stylesheet">
+    <link href="~/themes/assets/css/lib/menubar/sidebar.css" rel="stylesheet">
+    <link href="~/themes/assets/css/lib/helper.css" rel="stylesheet">
+    <link href="~/themes/assets/css/style.css" rel="stylesheet">
+    <link href="~/themes/assets/css/lib/select2/select2.min.css" rel="stylesheet">
+
+
+</head>
+<style>
+    .fondo-login {
+        background: rgb(255,255,255);
+        background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(5,92,220,1) 100%);
+    }
+</style>
+<body>
+    <div class="main fondo-login">
+
+        <div class="unix-login">
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="login-content">
+                            <div class="login-logo">
+                                <a href="index.html"><span><strong>Programación Web III - 2021-1C</strong></span></a>
+                            </div>
+                            <div class="login-form">
+                                <h4>Bienvenido a Organizá tus Pedidos</h4>
+                                <form>
+                                    <div class="form-group">
+                                        <label>Correo electrónico</label>
+                                        <input type="email" class="form-control" placeholder="correo.electronico@dominio.com">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Contraseña</label>
+                                        <input type="password" class="form-control" placeholder="Contraseña">
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">Ingresar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Para paginas que requieran validaciones, ver como quitamos esto de aca y lo ponemos en cada pagina
+     pero que se recargue al final-->
+    <script src="~/themes/assets/js/lib/select2/select2.full.min.js"></script>
+    <script src="~/themes/assets/js/lib/form-validation/jquery.validate.min.js"></script>
+    <script src="~/themes/assets/js/lib/form-validation/jquery.validate-init.js"></script>
+
+
+    <!-- Common Template-->
+    <script src="~/themes/assets/js/lib/jquery.min.js"></script>
+    <script src="~/themes/assets/js/lib/jquery.nanoscroller.min.js"></script>
+    <script src="~/themes/assets/js/lib/menubar/sidebar.js"></script>
+    <script src="~/themes/assets/js/lib/preloader/pace.min.js"></script>
+    <script src="~/themes/assets/js/lib/bootstrap.min.js"></script>
+    <script src="~/themes/assets/js/scripts.js"></script>
+
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+
+</body>
+</html>
