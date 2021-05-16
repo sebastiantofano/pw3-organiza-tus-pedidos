@@ -1,6 +1,24 @@
+# Lenguaje que vamos a usar
 language: csharp
 mono: none
+# Version del SDK de NetCore que queremos utilizar
 dotnet: 5.0.2
+
+# Matriz de sistemas operativos sobre los que queremos lanzar el CI
+os:
+  - linux
+  - osx
+
+# Script de compilacion
 script:
+# Comando que queremos ejecutar ANTES de compilar 
  - dotnet restore
+ # Compilamos el proyecto
  - dotnet build
+ 
+# Ejecutamos las pruebas unitarias
+#- dotnet test PruebasUnitarias/PruebasUnitarias.csproj
+
+ # No queremos que nos notifique por email los resultados
+-notifications:
+-  email: false
