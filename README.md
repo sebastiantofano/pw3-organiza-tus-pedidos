@@ -1,4 +1,4 @@
-{Build Status}[https://www.travis-ci.com/sebastiantofano/pw3-organiza-tus-pedidos]
+{<img src="https://www.travis-ci.com/sebastiantofano/pw3-organiza-tus-pedidos.svg?branch=master" alt="Build Status" />}[https://www.travis-ci.com/sebastiantofano/pw3-organiza-tus-pedidos]
 # pw3-organiza-tus-pedidos
 TP Grupal
 C#
