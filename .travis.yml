@@ -7,7 +7,6 @@ dotnet: 5.0.2
 # Matriz de sistemas operativos sobre los que queremos lanzar el CI
 os:
   - linux
-  - osx
 
 # Script de compilacion
 script:
