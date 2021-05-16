@@ -13,6 +13,12 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
         {
             return View();
         }
+
+        public IActionResult AdministrarUsuarios()
+        {
+            return View();
+        }
+        
         public IActionResult CrearUsuario()
         {
             return View();
