@@ -46,14 +46,27 @@ namespace WebAppPedidos
 
             app.UseAuthorization();
 
+
+
+            /* AGREGADO: Redirecciones a páginas de errores */
+            app.UseStatusCodePages(async context =>
+            {
+                if (context.HttpContext.Response.StatusCode == 404)
+                {
+                    context.HttpContext.Response.Redirect("/404notfound");
+                }
+            });
+
             app.UseEndpoints(endpoints =>
             {
 
+                /* AGREGADO: Routes para Area "Usuario" */
                 endpoints.MapAreaControllerRoute(
                     name: "Usuario",
                     areaName: "Usuario",
                     pattern: "Usuario/{controller=Login}/{action=Index}/{id?}");
 
+                /* AGREGADO: Routes para las otras Areas */
                 endpoints.MapControllerRoute(
                     name: "areas",
                     pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
@@ -63,6 +76,7 @@ namespace WebAppPedidos
                     pattern: "{controller=Home}/{action=Index}/{id?}");
 
             });
+
         }
     }
 }

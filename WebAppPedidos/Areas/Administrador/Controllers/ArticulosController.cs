@@ -11,7 +11,7 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("AdministrarArticulos");
         }
 
         public IActionResult AdministrarArticulos()
