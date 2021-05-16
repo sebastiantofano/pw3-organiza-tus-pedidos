@@ -10,7 +10,6 @@ os:
   - osx
 # Comando que queremos ejecutar ANTES de compilar  
 install:
-
 - dotnet restore
 
 # Script de compilacion
