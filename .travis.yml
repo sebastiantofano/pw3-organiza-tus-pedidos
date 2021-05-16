@@ -10,7 +10,11 @@ os:
   - osx
 # Comando que queremos ejecutar ANTES de compilar  
 install:
+- task: NuGetToolInstaller@1
+          inputs:
+              versionSpec: 4.x.x
 - dotnet restore
+
 # Script de compilacion
 script:
   # Compilamos el proyecto
