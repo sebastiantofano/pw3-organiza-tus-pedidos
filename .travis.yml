@@ -8,13 +8,14 @@ dotnet: 2.1.301
 os:
   - linux
   - osx
+  
 # Comando que queremos ejecutar ANTES de compilar  
 install:
 - task: NuGetToolInstaller@1
           inputs:
               versionSpec: 4.x.x
 - dotnet restore
-
+Famailla61668.
 # Script de compilacion
 script:
   # Compilamos el proyecto
