@@ -7,7 +7,7 @@
     <div class="col-lg-8 p-r-0 title-margin-right">
         <div class="page-header">
             <div class="page-title">
-                <h2><i class="ti-pencil-alt text-default"></i> Nuevo Pedido</h2>
+                <h2><i class="ti-pencil text-default"></i> Editar Pedido</h2>
             </div>
         </div>
     </div>
@@ -18,16 +18,59 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="card">
+                                <div class="stat-widget-four">
+                                    <div class="stat-icon">
+                                        <i class="ti-user"></i>
+                                    </div>
+                                    <div class="stat-content">
+                                        <div class="text-left dib">
+                                            <div class="stat-heading">Nombre del Cliente</div>
+                                            <div class="stat-text">Cliente</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="card bg-warning">
+                                <div class="stat-widget-four">
+                                    <div class="stat-icon">
+                                        <i class="ti-stats-up"></i>
+                                    </div>
+                                    <div class="stat-content">
+                                        <div class="text-left dib">
+                                            <div class="stat-heading">PEDIDO <span>ABIERTO</span></div>
+                                            <div class="stat-text">Estado del Pedido</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 ml-auto">
+                            <div class="card">
+                                <div class="stat-widget-four">
+                                    <div class="stat-icon">
+                                        <i class="ti-pencil"></i>
+                                    </div>
+                                    <div class="stat-content">
+                                        <div class="text-left dib">
+                                            <div class="stat-heading">Última Modificación</div>
+                                            <div class="stat-text">Fecha: <span> 05/05/2021</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                     <div class="form-validation">
                         <form class="form-valide" action="#" method="post">
-                            <div class="form-group row">
-                                <label class="col-form-label" for="val-username">
-                                    Cliente <span class="text-danger">*</span>
-                                </label>
-                                <div class="col-lg-5">
-                                    <input type="text" class="form-control" id="val-username"
-                                           name="val-username" placeholder="Ingrese cliente">
-                                </div>
+                            <div class="card-title">
+                                <h4>Agregar un artículo</h4>
                             </div>
                             <div class="form-group row">
                                 <label class="col-form-label" for="val-skill">
@@ -52,7 +95,7 @@
                                 <div class="col-lg-1">
                                     <button type="submit" class="btn btn-success">
                                         Agregar
-                                        artículo al pedido
+                                        artículo
                                     </button>
                                 </div>
                             </div>
@@ -96,8 +139,8 @@
                                     <td>Cantidad</td>
                                     <td>
                                         <button type="button"
-                                                class="btn btn-info btn-flat btn-addon btn-sm">
-                                            <i class="ti-search"></i>Editar
+                                                class="btn btn-danger btn-flat btn-addon btn-sm">
+                                            <i class="ti-close"></i>Quitar
                                         </button>
                                     </td>
                                 </tr>
@@ -107,8 +150,8 @@
                                     <td>Cantidad</td>
                                     <td>
                                         <button type="button"
-                                                class="btn btn-info btn-flat btn-addon btn-sm">
-                                            <i class="ti-search"></i>Editar
+                                                class="btn btn-danger btn-flat btn-addon btn-sm">
+                                            <i class="ti-close"></i>Quitar
                                         </button>
                                     </td>
                                 </tr>
@@ -118,8 +161,8 @@
                                     <td>Cantidad</td>
                                     <td>
                                         <button type="button"
-                                                class="btn btn-info btn-flat btn-addon btn-sm">
-                                            <i class="ti-search"></i>Editar
+                                                class="btn btn-danger btn-flat btn-addon btn-sm">
+                                            <i class="ti-close"></i>Quitar
                                         </button>
                                     </td>
                                 </tr>
@@ -129,8 +172,8 @@
                                     <td>Cantidad</td>
                                     <td>
                                         <button type="button"
-                                                class="btn btn-info btn-flat btn-addon btn-sm">
-                                            <i class="ti-search"></i>Editar
+                                                class="btn btn-danger btn-flat btn-addon btn-sm">
+                                            <i class="ti-close"></i>Quitar
                                         </button>
                                     </td>
                                 </tr>
@@ -144,9 +187,11 @@
 
     <div class="row">
         <div class="col-lg-12 d-flex align-items-center">
-            <button type="button" class="btn btn-info col-lg-4 m-1">Agregar Pedido</button>
-            <button type="button" class="btn btn-info m-1">Agregar Pedido y cargar otro</button>
-            <a href="javascript:history.back(-1);" class="btn btn-default ml-auto ">Volver</a>
+            <button type="button" class="btn btn-info m-1">Guardar Modificaciones</button>
+            <button type="button" class="btn btn-warning m-1">Cerrar Pedido</button>
+            <button type="button" class="btn btn-success m-1">Marcar como Entregado</button>
+            <button type="button" class="btn btn-danger ml-auto">Eliminar Pedido</button>
+            <a href="javascript:history.back(-1);" class="btn btn-default ml-3">Volver</a>
         </div>
     </div>
 </section>

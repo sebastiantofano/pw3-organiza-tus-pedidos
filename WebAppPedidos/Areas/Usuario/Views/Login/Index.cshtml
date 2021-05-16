@@ -31,16 +31,16 @@
     <link href="~/themes/assets/css/style.css" rel="stylesheet">
     <link href="~/themes/assets/css/lib/select2/select2.min.css" rel="stylesheet">
 
+    <style>
+        .fondo-login {
+            background: no-repeat 100% url(https://thumbs.dreamstime.com/z/two-color-paper-blue-white-overlap-floor-split-half-image-background-140178019.jpg)
+        }
+    </style>
 
 </head>
-<style>
-    .fondo-login {
-        background: rgb(255,255,255);
-        background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(5,92,220,1) 100%);
-    }
-</style>
-<body>
-    <div class="main fondo-login">
+
+<body class="fondo-login">
+    <div class="main">
 
         <div class="unix-login">
             <div class="container-fluid">
@@ -48,11 +48,11 @@
                     <div class="col-lg-6">
                         <div class="login-content">
                             <div class="login-logo">
-                                <a href="index.html"><span><strong>Programación Web III - 2021-1C</strong></span></a>
+                                <a href="index.html"><span class="text-black-50"><strong>Programación Web III - 2021-1C</strong></span></a>
                             </div>
                             <div class="login-form">
-                                <h4>Bienvenido a Organizá tus Pedidos</h4>
-                                <form>
+                                <h3  class="text-black-50 text-center">Bienvenido a Organizá tus Pedidos</h3>
+                                <form class="m-t-20">
                                     <div class="form-group">
                                         <label>Correo electrónico</label>
                                         <input type="email" class="form-control" placeholder="correo.electronico@dominio.com">
@@ -62,7 +62,7 @@
                                         <input type="password" class="form-control" placeholder="Contraseña">
                                     </div>
 
-                                    <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">Ingresar</button>
+                                    <button type="submit" class="btn btn-info btn-flat m-b-30 m-t-30">Ingresar</button>
                                 </form>
                             </div>
                         </div>
