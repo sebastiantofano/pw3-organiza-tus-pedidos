@@ -19,8 +19,13 @@
     <Folder Include="Areas\Administrador\Models\" />
     <Folder Include="Areas\Moderador\Data\" />
     <Folder Include="Areas\Moderador\Models\" />
-    <Folder Include="Areas\Usuario\Data\" />
-    <Folder Include="Areas\Usuario\Models\" />
+    <Folder Include="Areas\UsuarioGeneral\Data\" />
+    <Folder Include="Areas\UsuarioGeneral\Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ModeloDatosProvisorios\ModeloDatosProvisorios.csproj" />
+    <ProjectReference Include="..\Servicios\Servicios.csproj" />
   </ItemGroup>
 
 	

@@ -1,7 +1,7 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using ModeloDatosProvisorios.Modelos
+@model List<Articulo>
 @{
+
 }
 <div class="row">
     <div class="col-lg-8 p-r-0 title-margin-right">
@@ -73,40 +73,28 @@
                                         <th class="col-md-6">Descripción</th>
                                         <th class="col-md-1">Vigencia</th>
                                         <th class="col-md-2"></th>
-
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Código</td>
-                                        <td>Descripción del Artículo</td>
-                                        <td><span class="badge badge-success">VIGENTE</span></td>
-                                        <td>
-                                            <a href="/Administrador/Articulos/EditarArticulo"
-                                               class="btn btn-warning btn-flat btn-addon btn-sm">
-                                                <i class="ti-pencil"></i>Editar
-                                            </a>
-                                            <a href=""
-                                               class="btn btn-danger btn-flat btn-addon btn-sm">
-                                                <i class="ti-close"></i>Eliminar
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Código</td>
-                                        <td>Descripción del Artículo</td>
-                                        <td><span class="badge badge-danger">ELIMINADO</span></td>
-                                        <td>
-                                            <a href="/Administrador/Articulos/EditarArticulo"
-                                               class="btn btn-warning btn-flat btn-addon btn-sm">
-                                                <i class="ti-pencil"></i>Editar
-                                            </a>
-                                            <a href=""
-                                               class="btn btn-danger btn-flat btn-addon btn-sm">
-                                                <i class="ti-close"></i>Eliminar
-                                            </a>
-                                        </td>
-                                    </tr>
+                                    @foreach (var articulo in Model)
+                                    {
+                                        <tr>
+                                            <td>@articulo.Codigo</td>
+                                            <td>@articulo.Descripcion</td>
+                                            <td><span class="badge badge-@(articulo.FechaBorrado == null ? "success" : "danger")">
+                                                @(articulo.FechaBorrado == null ? "VIGENTE" : "ELIMINADO")</span></td>
+                                            <td>
+                                                <a href="/Administrador/Articulos/EditarArticulo/@articulo.IdArticulo"
+                                                   class="btn btn-warning btn-flat btn-addon btn-sm">
+                                                    <i class="ti-pencil"></i>Editar
+                                                </a>
+                                                <a href=""
+                                                   class="btn btn-danger btn-flat btn-addon btn-sm">
+                                                    <i class="ti-close"></i>Eliminar
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
                                 </tbody>
                             </table>
                         </div>

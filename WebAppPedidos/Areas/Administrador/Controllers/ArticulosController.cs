@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ModeloDatosProvisorios.Modelos;
+using Servicios.Administrador;
+using Servicios.Administrador.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +19,10 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
 
         public IActionResult AdministrarArticulos()
         {
-            return View();
+            IArticulosService articulosService = new ArticulosServiceImpl();
+
+            List<Articulo> listaArticulos = articulosService.ObtenerTodos();
+            return View(listaArticulos);
         }
         public IActionResult AgregarArticulo()
         {

@@ -73,12 +73,12 @@
                     </li>
                     <li class="label">Pedidos</li>
                     <li>
-                        <a href="/Usuario/Pedidos/GestionarPedidos">
+                        <a href="/UsuarioGeneral/Pedidos/GestionarPedidos">
                             <i class="ti-clipboard"></i> Gestionar pedidos
                         </a>
                     </li>
                     <li>
-                        <a href="/Usuario/Pedidos/AgregarPedido">
+                        <a href="/UsuarioGeneral/Pedidos/AgregarPedido">
                             <i class="ti-plus"></i> <i class="ti-pencil-alt"></i> Agregar pedido
                         </a>
                     </li>
@@ -99,7 +99,7 @@
     </div>
     <!-- /# sidebar -->
 
-    @{await Html.RenderPartialAsync("~/Areas/Usuario/Views/Shared/pv_HeaderUsuario.cshtml");};
+    @{await Html.RenderPartialAsync("~/Areas/UsuarioGeneral/Views/Shared/pv_HeaderUsuario.cshtml");};
 
     <div class="content-wrap">
         <div class="main">
@@ -107,7 +107,7 @@
                 @RenderBody()
 
                 <div class="row">
-                    @{await Html.RenderPartialAsync("~/Areas/Usuario/Views/Shared/pv_FooterUsuario.cshtml");};
+                    @{await Html.RenderPartialAsync("~/Areas/UsuarioGeneral/Views/Shared/pv_FooterUsuario.cshtml");};
                 </div>
             </div>
         </div>

@@ -67,7 +67,7 @@
     <!-- /# sidebar -->
 
  
-    @{await Html.RenderPartialAsync("~/Areas/Usuario/Views/Shared/pv_HeaderUsuario.cshtml");};
+    @{await Html.RenderPartialAsync("~/Areas/UsuarioGeneral/Views/Shared/pv_HeaderUsuario.cshtml");};
 
     <div class="content-wrap">
         <div class="main">
@@ -75,7 +75,7 @@
                 @RenderBody()
 
                 <div class="row">
-                    @{await Html.RenderPartialAsync("~/Areas/Usuario/Views/Shared/pv_FooterUsuario.cshtml");};
+                    @{await Html.RenderPartialAsync("~/Areas/UsuarioGeneral/Views/Shared/pv_FooterUsuario.cshtml");};
                 </div>
             </div>
         </div>

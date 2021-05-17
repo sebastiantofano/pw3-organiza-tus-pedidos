@@ -49,12 +49,14 @@ namespace WebAppPedidos
 
 
             /* AGREGADO: Redirecciones a páginas de errores */
-            app.UseStatusCodePages(async context =>
-            {
+            app.UseStatusCodePages(context => {
                 if (context.HttpContext.Response.StatusCode == 404)
                 {
+                    /* Utiliza un Route al endpoint /UsuarioGeneral/Errores/Error404 */
                     context.HttpContext.Response.Redirect("/404notfound");
                 }
+
+                return Task.CompletedTask;
             });
 
             app.UseEndpoints(endpoints =>
@@ -62,19 +64,27 @@ namespace WebAppPedidos
 
                 /* AGREGADO: Routes para Area "Usuario" */
                 endpoints.MapAreaControllerRoute(
-                    name: "Usuario",
-                    areaName: "Usuario",
-                    pattern: "Usuario/{controller=Login}/{action=Index}/{id?}");
+                    name: "UsuarioGeneral",
+                    areaName: "UsuarioGeneral",
+                    pattern: "UsuarioGeneral/{controller=Login}/{action=Index}/{id?}");
 
-                /* AGREGADO: Routes para las otras Areas */
-                endpoints.MapControllerRoute(
-                    name: "areas",
-                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                /* AGREGADO: Routes para Area "Administrador" */
+                endpoints.MapAreaControllerRoute(
+                    name: "Administrador",
+                    areaName: "Administrador",
+                    pattern: "Administrador/{controller=Home}/{action=Index}/{id?}");
+
+                /* AGREGADO: Routes para Area "Moderador" */
+                endpoints.MapAreaControllerRoute(
+                    name: "Moderador",
+                    areaName: "Moderador",
+                    pattern: "Moderador/{controller=Home}/{action=Index}/{id?}");
 
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+                
             });
 
         }

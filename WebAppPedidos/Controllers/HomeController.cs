@@ -37,7 +37,7 @@ namespace WebAppPedidos.Controllers
             }
             else
             {
-                return RedirectToAction("Index", "Login", new { Area = "Usuario" });
+                return RedirectToAction("Index", "Login", new { Area = "UsuarioGeneral" });
             }
         }
 

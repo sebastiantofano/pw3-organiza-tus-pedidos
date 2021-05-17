@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebAppPedidos.Areas.Administrador.Controllers
+namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
 {
-    [Area("Usuario")]
+    [Area("UsuarioGeneral")]
     public class PedidosController : Controller
     {
         public IActionResult Index()

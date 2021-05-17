@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebAppPedidos.Areas.Usuario.Controllers
+namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
 {
-    [Area("Usuario")]
+    [Area("UsuarioGeneral")]
     public class ErroresController : Controller
     {
         
