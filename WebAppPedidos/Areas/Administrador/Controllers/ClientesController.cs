@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ModeloDatosProvisorios.Modelos;
+using Servicios.Administrador;
+using Servicios.Administrador.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +24,10 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
 
         public IActionResult AdministrarClientes()
         {
-            return View();
+            IClientesService clienteService = new ClientesServiceImpl();
+
+            List<Cliente> listaClientes = clienteService.ObtenerTodos();
+            return View(listaClientes);
         }
 
         public IActionResult EditarCliente()

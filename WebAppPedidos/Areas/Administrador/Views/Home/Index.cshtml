@@ -18,10 +18,8 @@
                     officia unde blanditiis.
                 </div>
                 <div class="text-center">
-                    <a href="/Administrador/Clientes/AdministrarClientes" class="btn btn-primary col-lg-6 mt-2">Administrar Clientes</a>
-                    <a href="/Administrador/Clientes/AgregarCliente" class="btn btn-primary col-lg-5 mt-2">Agregar Cliente</a>
-
-                    <a  asp-area="Administrador" asp-controller="Clientes" asp-action="AgregarCliente"  class="btn btn-primary col-lg-5 mt-2">Agregar Cliente</a>
+                    <a asp-area="Administrador" asp-controller="Clientes" asp-action="AdministrarClientes" class="btn btn-primary col-lg-6 mt-2">Administrar Clientes</a>
+                    <a asp-area="Administrador" asp-controller="Clientes" asp-action="AgregarCliente"  class="btn btn-primary col-lg-5 mt-2">Agregar Cliente</a>
                 </div>
             </div>
         </div>
@@ -38,8 +36,8 @@
                     officia unde blanditiis.
                 </div>
                 <div class="text-center">
-                    <a href="/Administrador/Articulos/AdministrarArticulos" class="btn btn-success col-lg-6 mt-2">Administrar Artículos</a>
-                    <a href="/Administrador/Articulos/AgregarArticulo" class="btn btn-success col-lg-5 mt-2">Agregar Artículo</a>
+                    <a asp-area="Administrador" asp-controller="Articulos" asp-action="AdministrarArticulos" class="btn btn-success col-lg-6 mt-2">Administrar Artículos</a>
+                    <a asp-area="Administrador" asp-controller="Articulos" asp-action="AgregarArticulo" class="btn btn-success col-lg-5 mt-2">Agregar Artículo</a>
                 </div>
             </div>
         </div>
@@ -56,8 +54,8 @@
                     officia unde blanditiis.
                 </div>
                 <div class="text-center">
-                    <a href="/UsuarioGeneral/Pedidos/GestionarPedidos" class="btn btn-warning col-lg-6 mt-2">Gestionar Pedidos</a>
-                    <a href="/UsuarioGeneral/Pedidos/AgregarPedido" class="btn btn-warning col-lg-5 mt-2">Agregar Pedido</a>
+                    <a asp-area="UsuarioGeneral" asp-controller="Pedidos" asp-action="GestionarPedidos" class="btn btn-warning col-lg-6 mt-2">Gestionar Pedidos</a>
+                    <a asp-area="UsuarioGeneral" asp-controller="Pedidos" asp-action="AgregarPedido" class="btn btn-warning col-lg-5 mt-2">Agregar Pedido</a>
                 </div>
             </div>
         </div>
@@ -74,8 +72,8 @@
                     officia unde blanditiis.
                 </div>
                 <div class="text-center">
-                    <a href="/Administrador/Usuarios/AdministrarUsuarios" class="btn btn-default col-lg-6 mt-2">Administrar Usuarios</a>
-                    <a href="/Administrador/Usuarios/CrearUsuario" class="btn btn-default col-lg-5 mt-2">Crear Usuario</a>
+                    <a asp-area="Administrador" asp-controller="Usuarios" asp-action="AdministrarUsuarios" class="btn btn-default col-lg-6 mt-2">Administrar Usuarios</a>
+                    <a asp-area="Administrador" asp-controller="Usuarios" asp-action="CrearUsuario" class="btn btn-default col-lg-5 mt-2">Crear Usuario</a>
                 </div>
             </div>
         </div>
@@ -85,7 +83,7 @@
         <div class="card">
             <div class="stat-widget-one">
                 <div class="text-center">
-                    <a href="/Moderador/" class="btn btn-danger btn-block font-italic">CAMBIAR A VISTA DE MODERADOR (BOTON TEMPORAL)</a>
+                    <a asp-area="Moderador" class="btn btn-danger btn-block font-italic">CAMBIAR A VISTA DE MODERADOR (BOTON TEMPORAL)</a>
                 </div>
             </div>
         </div>

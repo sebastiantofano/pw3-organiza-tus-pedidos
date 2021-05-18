@@ -1,23 +1,11 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - WebAppPedidos</title>
     @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
         <link rel="stylesheet" href="~/css/site.css" />*@
-
-    <!-- ================= Favicon ================== -->
-    <!-- Standard -->
-    <link rel="shortcut icon" href="http://placehold.it/64.png/000/fff">
-    <!-- Retina iPad Touch Icon-->
-    <link rel="apple-touch-icon" sizes="144x144" href="http://placehold.it/144.png/000/fff">
-    <!-- Retina iPhone Touch Icon-->
-    <link rel="apple-touch-icon" sizes="114x114" href="http://placehold.it/114.png/000/fff">
-    <!-- Standard iPad Touch Icon-->
-    <link rel="apple-touch-icon" sizes="72x72" href="http://placehold.it/72.png/000/fff">
-    <!-- Standard iPhone Touch Icon-->
-    <link rel="apple-touch-icon" sizes="57x57" href="http://placehold.it/57.png/000/fff">
 
     <!-- Common Template -->
     <link href="~/themes/assets/css/lib/font-awesome.min.css" rel="stylesheet">
@@ -37,59 +25,58 @@
         <div class="nano">
             <div class="nano-content">
                 <div class="logo">
-                    <a href="/home/index">
-                        <!-- <img src="~/themes/assets/images/logo.png" alt="" /> -->
+                    <a asp-area="Administrador" asp-controller="Home" asp-action="Index">
                         <span>Programación Web III</span>
                     </a>
                 </div>
                 <ul>
                     <li class="label">Inicio</li>
                     <li>
-                        <a href="/Administrador">
+                        <a asp-area="Administrador" asp-controller="Home" asp-action="Index" >
                             <i class="ti-home"></i> Principal
                         </a>
                     </li>
                     <li class="label">Clientes</li>
                     <li>
-                        <a href="/Administrador/Clientes/AdministrarClientes">
+                        <a asp-area="Administrador" asp-controller="Clientes" asp-action="AdministrarClientes">
                             <i class="ti-id-badge"></i> Administrar clientes
                         </a>
                     </li>
                     <li>
-                        <a href="/Administrador/Clientes/AgregarCliente">
+                        <a asp-area="Administrador" asp-controller="Clientes" asp-action="AgregarCliente">
                             <i class="ti-plus"></i><i class="ti-face-smile"></i> Agregar cliente
                         </a>
                     </li>
                     <li class="label">Artículos</li>
                     <li>
-                        <a href="/Administrador/Articulos/AdministrarArticulos">
+                        <a asp-area="Administrador" asp-controller="Articulos" asp-action="AdministrarArticulos">
                             <i class="ti-receipt"></i> Administrar artículos
                         </a>
                     </li>
                     <li>
-                        <a href="/Administrador/Articulos/AgregarArticulo">
+                        <a asp-area="Administrador" asp-controller="Articulos" asp-action="AgregarArticulo">
                             <i class="ti-plus"></i><i class="ti-package"></i> Agregar artículo
                         </a>
                     </li>
                     <li class="label">Pedidos</li>
                     <li>
-                        <a href="/UsuarioGeneral/Pedidos/GestionarPedidos">
+                        <a asp-area="UsuarioGeneral" asp-controller="Pedidos" asp-action="GestionarPedidos">
                             <i class="ti-clipboard"></i> Gestionar pedidos
                         </a>
                     </li>
                     <li>
-                        <a href="/UsuarioGeneral/Pedidos/AgregarPedido">
+                        <a asp-area="UsuarioGeneral" asp-controller="Pedidos" asp-action="AgregarPedido">
                             <i class="ti-plus"></i> <i class="ti-pencil-alt"></i> Agregar pedido
                         </a>
                     </li>
                     <li class="label">Usuarios</li>
                     <li>
-                        <a href="/Administrador/Usuarios/AdministrarUsuarios">
+                        <a asp-area="Administrador" asp-controller="Usuarios" asp-action="AdministrarUsuarios">
                             <i class="ti-view-list-alt"></i> Administrar usuarios
                         </a>
                     </li>
                     <li>
-                        <a href="/Administrador/Usuarios/CrearUsuario">
+                        <a asp-area="Administrador" asp-controller="Usuarios" asp-action="CrearUsuario">
                             <i class="ti-plus"></i><i class="ti-user"></i> Crear usuario
                         </a>
                     </li>
@@ -97,9 +84,8 @@
             </div>
         </div>
     </div>
-    <!-- /# sidebar -->
 
-    @{await Html.RenderPartialAsync("~/Areas/UsuarioGeneral/Views/Shared/pv_HeaderUsuario.cshtml");};
+    @{await Html.RenderPartialAsync("~/Areas/UsuarioGeneral/Views/Shared/pv_HeaderUsuarioGeneral.cshtml");};
 
     <div class="content-wrap">
         <div class="main">
@@ -107,15 +93,12 @@
                 @RenderBody()
 
                 <div class="row">
-                    @{await Html.RenderPartialAsync("~/Areas/UsuarioGeneral/Views/Shared/pv_FooterUsuario.cshtml");};
+                    @{await Html.RenderPartialAsync("~/Areas/UsuarioGeneral/Views/Shared/pv_FooterUsuarioGeneral.cshtml");};
                 </div>
             </div>
         </div>
 
     </div>
-
-
-
 
 
     <!-- Para paginas que requieran validaciones, ver como quitamos esto de aca y lo ponemos en cada pagina

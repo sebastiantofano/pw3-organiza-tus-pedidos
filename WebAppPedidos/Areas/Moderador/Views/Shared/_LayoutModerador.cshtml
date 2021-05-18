@@ -1,23 +1,11 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - WebAppPedidos</title>
     @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
         <link rel="stylesheet" href="~/css/site.css" />*@
-
-    <!-- ================= Favicon ================== -->
-    <!-- Standard -->
-    <link rel="shortcut icon" href="http://placehold.it/64.png/000/fff">
-    <!-- Retina iPad Touch Icon-->
-    <link rel="apple-touch-icon" sizes="144x144" href="http://placehold.it/144.png/000/fff">
-    <!-- Retina iPhone Touch Icon-->
-    <link rel="apple-touch-icon" sizes="114x114" href="http://placehold.it/114.png/000/fff">
-    <!-- Standard iPad Touch Icon-->
-    <link rel="apple-touch-icon" sizes="72x72" href="http://placehold.it/72.png/000/fff">
-    <!-- Standard iPhone Touch Icon-->
-    <link rel="apple-touch-icon" sizes="57x57" href="http://placehold.it/57.png/000/fff">
 
     <!-- Common Template -->
     <link href="~/themes/assets/css/lib/font-awesome.min.css" rel="stylesheet">
@@ -27,8 +15,6 @@
     <link href="~/themes/assets/css/lib/helper.css" rel="stylesheet">
     <link href="~/themes/assets/css/style.css" rel="stylesheet">
     <link href="~/themes/assets/css/lib/select2/select2.min.css" rel="stylesheet">
-
-
 </head>
 
 <body>
@@ -36,7 +22,7 @@
         <div class="nano">
             <div class="nano-content">
                 <div class="logo">
-                    <a href="/home/index">
+                    <a asp-area="Moderador" asp-controller="Home" asp-action="Index">
                         <!-- <img src="~/themes/assets/images/logo.png" alt="" /> -->
                         <span>Programación Web III</span>
                     </a>
@@ -44,18 +30,18 @@
                 <ul>
                     <li class="label">Inicio</li>
                     <li>
-                        <a href="/Moderador">
+                        <a asp-area="Moderador" asp-controller="Home" asp-action="Index">
                             <i class="ti-home"></i> Principal
                         </a>
                     </li>
                     <li class="label">Pedidos</li>
                     <li>
-                        <a href="/Usuario/Pedidos/GestionarPedidos">
+                        <a asp-area="UsuarioGeneral" asp-controller="Pedidos" asp-action="GestionarPedidos">
                             <i class="ti-clipboard"></i> Gestionar pedidos
                         </a>
                     </li>
                     <li>
-                        <a href="/Usuario/Pedidos/AgregarPedido">
+                        <a asp-area="UsuarioGeneral" asp-controller="Pedidos" asp-action="AgregarPedido">
                             <i class="ti-plus"></i> <i class="ti-pencil-alt"></i> Agregar pedido
                         </a>
                     </li>
@@ -64,26 +50,21 @@
             </div>
         </div>
     </div>
-    <!-- /# sidebar -->
 
- 
-    @{await Html.RenderPartialAsync("~/Areas/UsuarioGeneral/Views/Shared/pv_HeaderUsuario.cshtml");};
+    @{await Html.RenderPartialAsync("~/Areas/UsuarioGeneral/Views/Shared/pv_HeaderUsuarioGeneral.cshtml");};
 
     <div class="content-wrap">
         <div class="main">
             <div class="container-fluid">
+
                 @RenderBody()
 
                 <div class="row">
-                    @{await Html.RenderPartialAsync("~/Areas/UsuarioGeneral/Views/Shared/pv_FooterUsuario.cshtml");};
+                    @{await Html.RenderPartialAsync("~/Areas/UsuarioGeneral/Views/Shared/pv_FooterUsuarioGeneral.cshtml");};
                 </div>
             </div>
         </div>
-
     </div>
-
-
-
 
 
     <!-- Para paginas que requieran validaciones, ver como quitamos esto de aca y lo ponemos en cada pagina

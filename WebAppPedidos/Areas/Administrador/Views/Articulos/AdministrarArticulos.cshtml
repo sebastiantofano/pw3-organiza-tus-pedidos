@@ -84,7 +84,7 @@
                                             <td><span class="badge badge-@(articulo.FechaBorrado == null ? "success" : "danger")">
                                                 @(articulo.FechaBorrado == null ? "VIGENTE" : "ELIMINADO")</span></td>
                                             <td>
-                                                <a href="/Administrador/Articulos/EditarArticulo/@articulo.IdArticulo"
+                                                <a asp-area="Administrador" asp-controller="Articulos" asp-action="EditarArticulo"  asp-route-id="@articulo.IdArticulo"
                                                    class="btn btn-warning btn-flat btn-addon btn-sm">
                                                     <i class="ti-pencil"></i>Editar
                                                 </a>

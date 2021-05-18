@@ -12,6 +12,11 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
     [Area("Administrador")]
     public class ArticulosController : Controller
     {
+        IArticulosService ArticulosService;
+        public ArticulosController()
+        {
+            ArticulosService = new ArticulosServiceImpl();
+        }
         public IActionResult Index()
         {
             return RedirectToAction("AdministrarArticulos");
@@ -19,9 +24,8 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
 
         public IActionResult AdministrarArticulos()
         {
-            IArticulosService articulosService = new ArticulosServiceImpl();
 
-            List<Articulo> listaArticulos = articulosService.ObtenerTodos();
+            List<Articulo> listaArticulos = ArticulosService.ObtenerTodos();
             return View(listaArticulos);
         }
         public IActionResult AgregarArticulo()
@@ -29,9 +33,11 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
             return View();
         }
 
-        public IActionResult EditarArticulo()
+        public IActionResult EditarArticulo(string id)
         {
-            return View();
+            int IdArticulo = int.Parse(id);
+            Articulo articulo = ArticulosService.ObtenerPorId(IdArticulo);
+            return View(articulo);
         }
     }
 }

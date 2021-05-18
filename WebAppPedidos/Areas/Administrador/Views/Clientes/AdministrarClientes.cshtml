@@ -1,6 +1,5 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using ModeloDatosProvisorios.Modelos
+@model List<Cliente>
 @{
 }
 <div class="row">
@@ -31,58 +30,27 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1232</td>
-                                    <td>Nombre del Cliente</td>
-                                    <td>correo.electronico@gmail.com</td>
-                                    <td>20-32324293-31</td>
-                                    <td><span class="badge badge-success">VIGENTE</span></td>
-                                    <td>
-                                        <a href="/Administrador/Clientes/EditarCliente"
-                                           class="btn btn-warning btn-flat btn-addon btn-sm">
-                                            <i class="ti-pencil"></i>Editar
-                                        </a>
-                                        <a href=""
-                                           class="btn btn-danger btn-flat btn-addon btn-sm">
-                                            <i class="ti-close"></i>Eliminar
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1232</td>
-                                    <td>Nombre del Cliente</td>
-                                    <td>correo.electronico@gmail.com</td>
-                                    <td>20-32324293-31</td>
-                                    <td><span class="badge badge-danger">ELIMINADO</span></td>
-                                    <td>
-                                        <a href="/Administrador/Clientes/EditarCliente"
-                                           class="btn btn-warning btn-flat btn-addon btn-sm">
-                                            <i class="ti-pencil"></i>Editar
-                                        </a>
-                                        <a href=""
-                                           class="btn btn-danger btn-flat btn-addon btn-sm">
-                                            <i class="ti-close"></i>Eliminar
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1232</td>
-                                    <td>Nombre del Cliente</td>
-                                    <td>correo.electronico@gmail.com</td>
-                                    <td>20-32324293-31</td>
-                                    <td><span class="badge badge-success">VIGENTE</span></td>
-                                    <td>
-                                        <a href="/Administrador/Clientes/EditarCliente"
-                                           class="btn btn-warning btn-flat btn-addon btn-sm">
-                                            <i class="ti-pencil"></i>Editar
-                                        </a>
-                                        <a href=""
-                                           class="btn btn-danger btn-flat btn-addon btn-sm">
-                                            <i class="ti-close"></i>Eliminar
-                                        </a>
-                                    </td>
-                                </tr>
-
+                                @foreach (var cliente in Model)
+                                {
+                                    <tr>
+                                        <td>@cliente.IdCliente</td>
+                                        <td>@cliente.Nombre</td>
+                                        <td>@cliente.Email</td>
+                                        <td>@cliente.CUIT</td>
+                                        <td><span class="badge badge-@(cliente.FechaBorrado == null ? "success" : "danger")">
+                                            @(cliente.FechaBorrado == null ? "VIGENTE" : "ELIMINADO")</span></td>
+                                        <td>
+                                            <a href="/Administrador/Clientes/EditarCliente"
+                                               class="btn btn-warning btn-flat btn-addon btn-sm">
+                                                <i class="ti-pencil"></i>Editar
+                                            </a>
+                                            <a href=""
+                                               class="btn btn-danger btn-flat btn-addon btn-sm">
+                                                <i class="ti-close"></i>Eliminar
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
                             </tbody>
                         </table>
                     </div>
