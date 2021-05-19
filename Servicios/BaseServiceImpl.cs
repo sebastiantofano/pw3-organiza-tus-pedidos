@@ -19,31 +19,26 @@ namespace Servicios
 
         public TEntity ObtenerPorId(int id)
         {
-            TEntity entityObject; 
-            Type type = typeof(TEntity);
-            if (type == typeof(Articulo)) 
-            {
-                List<Articulo> listadoArticulos = Datos.ListadoObjetos as List<Articulo>;
-                entityObject = (TEntity) Convert.ChangeType(listadoArticulos.Find(i => i.IdArticulo == id), typeof(TEntity));
-            }
-            else
-            {
-                entityObject = null;
-            }
-     
-            return entityObject;
+            TEntity entity = Datos.ObtenerPorId(id);
+            return entity;
         }
         public List<TEntity> ObtenerTodos()
         {
-            List<TEntity> listEntity = (List<TEntity>) Convert.ChangeType(Datos.ListadoObjetos, typeof(List<TEntity>));
+            List<TEntity> listEntity = Datos.ObtenerTodos();
             return listEntity;
         }
-        public void Actualizar(TEntity dataObject)
+
+        public void Insertar(TEntity entity)
+        {
+
+        }
+
+        public void Actualizar(TEntity entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Eliminar(TEntity dataObject)
+        public void Eliminar(TEntity entity)
         {
             throw new NotImplementedException();
         }
@@ -53,10 +48,6 @@ namespace Servicios
             throw new NotImplementedException();
         }
 
-        public void Insertar(TEntity dataObject)
-        {
-            throw new NotImplementedException();
-        }
 
 
 

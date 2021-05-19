@@ -22,6 +22,20 @@ namespace ModeloDatosProvisorios.Datos
 
         public static readonly List<Articulo> listaArticulos = new() { art1, art2, art3 ,art4, art5 , art6, art7, art8 };
 
-        public List<Articulo> ListadoObjetos => listaArticulos;
+
+        public Articulo ObtenerPorId(int id)
+        {
+            return listaArticulos.Find(i => i.IdArticulo == id);
+        }
+
+        public List<Articulo> ObtenerTodos()
+        {
+            return listaArticulos;
+        }
+
+        public void Insertar(Articulo articulo)
+        {
+            listaArticulos.Add(articulo);
+        }
     }
 }

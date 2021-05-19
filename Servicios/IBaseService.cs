@@ -10,9 +10,9 @@ namespace Servicios
     {
         TEntity ObtenerPorId(int id);
         List<TEntity> ObtenerTodos();
-        void Insertar(TEntity dataObject);
-        void Actualizar(TEntity dataObject);
-        void Eliminar(TEntity dataObject);
+        void Insertar(TEntity entity);
+        void Actualizar(TEntity entity);
+        void Eliminar(TEntity entity);
         void EliminarPorId(int id);
 
     }

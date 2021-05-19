@@ -22,7 +22,20 @@ namespace ModeloDatosProvisorios.Datos
 
         public static readonly List<Cliente> listaClientes = new() { cli1, cli2, cli3, cli4, cli5, cli6, cli7, cli8, cli9 };
 
-        public List<Cliente> ListadoObjetos => listaClientes;
+        public Cliente ObtenerPorId(int id)
+        {
+            return listaClientes.Find(i => i.IdCliente == id);
+        }
+
+        public List<Cliente> ObtenerTodos()
+        {
+            return listaClientes;
+        }
+
+        public void Insertar(Cliente cliente)
+        {
+            listaClientes.Add(cliente);
+        }
     }
 }
 

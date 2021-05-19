@@ -11,7 +11,7 @@ namespace Servicios.Administrador
 {
     public class ClientesServiceImpl : BaseServiceImpl<Cliente>, IClientesService
     {
-        public ClientesServiceImpl() : base(new ClientesDatos())
+        public ClientesServiceImpl() : base(new ClientesDatos()) // Hago el new porque no tengo inyeccion de dependencias
         {
         }
     }

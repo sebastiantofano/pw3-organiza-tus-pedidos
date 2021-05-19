@@ -11,7 +11,7 @@ namespace Servicios.Administrador
 {
     public class UsuariosServiceImpl : BaseServiceImpl<Usuario>, IUsuariosServices
     {
-        public UsuariosServiceImpl(IDatos<Usuario> entity) : base(entity)
+        public UsuariosServiceImpl(IDatos<Usuario> entity) : base(entity) // CAMBIAR ESTO, ESTO ES POR DEFECTO
         {
         }
     }

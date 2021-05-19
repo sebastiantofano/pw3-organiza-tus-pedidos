@@ -8,6 +8,10 @@ namespace ModeloDatosProvisorios.Datos
 {
     public interface IDatos<TEntity>
     {
-        List<TEntity> ListadoObjetos { get; }
+        TEntity ObtenerPorId(int id);
+
+        List<TEntity> ObtenerTodos();
+
+        void Insertar(TEntity entity);
     }
 }
