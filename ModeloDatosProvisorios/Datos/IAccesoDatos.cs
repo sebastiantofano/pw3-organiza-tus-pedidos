@@ -15,5 +15,7 @@ namespace ModeloDatosProvisorios.Datos
         void Insertar(TEntity entity);
 
         void Actualizar(TEntity entity);
+
+        void EliminarPorId(int id);
     }
 }

@@ -41,6 +41,11 @@ namespace ModeloDatosProvisorios.Datos
         {
             throw new NotImplementedException();
         }
+
+        public void EliminarPorId(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

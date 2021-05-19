@@ -62,7 +62,7 @@
                                                 <div class="stat-content">
                                                     <div class="text-left dib">
                                                         <div class="stat-text">Fecha de Última Modificación</div>
-                                                        <div class="stat-heading">@(Model.ModificadoPor != null ? Model.FechaModificacion?.ToShortDateString() : "...")</div>
+                                                        <div class="stat-heading">@(Model.FechaModificacion != null ? Model.FechaModificacion?.ToShortDateString() : "...")</div>
                                                         <div class="stat-text">Modificado Por</div>
                                                         <div class="stat-heading">@(Model.ModificadoPor != null ? Model.ModificadoPor : "No ha sido modificado")</div>
                                                     </div>
@@ -70,6 +70,27 @@
                                             </div>
                                         </div>
                                     </div>
+                                    @if (Model.FechaBorrado != null)
+                                    {
+                                        <div class="col-lg-4">
+                                            <div class="card">
+                                                <div class="stat-widget-four">
+                                                    <div class="stat-icon">
+                                                        <i class="ti-close"></i>
+                                                    </div>
+                                                    <div class="stat-content">
+                                                        <div class="text-left dib">
+                                                            <div class="stat-text">Fecha de Última Modificación</div>
+                                                            <div class="stat-heading">@(Model.FechaBorrado != null ? Model.FechaBorrado?.ToShortDateString() : "...")</div>
+                                                            <div class="stat-text">Modificado Por</div>
+                                                            <div class="stat-heading">@(Model.BorradoPor != null ? Model.BorradoPor : "No ha sido modificado")</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+
                                     <div class="col-lg-3 ml-auto">
                                         @if (Model.FechaBorrado == null)
                                         {

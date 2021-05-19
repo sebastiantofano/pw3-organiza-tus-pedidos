@@ -42,7 +42,15 @@ namespace ModeloDatosProvisorios.Datos
             Articulo articuloEncontrado = listaArticulos.FirstOrDefault(x => x.IdArticulo == entity.IdArticulo);
             articuloEncontrado.Codigo = entity.Codigo;
             articuloEncontrado.Descripcion = entity.Descripcion;
+            articuloEncontrado.FechaModificacion = DateTime.Today;
             
+        }
+
+        public void EliminarPorId(int id)
+        {
+            Articulo articuloEncontrado = listaArticulos.FirstOrDefault(x => x.IdArticulo == id);
+            articuloEncontrado.FechaBorrado = DateTime.Today;
+            articuloEncontrado.BorradoPor = "Alguien lo borró";
         }
     }
 }

@@ -48,5 +48,15 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
             ArticulosService.Actualizar(articulo);
             return RedirectToAction("AdministrarArticulos");
         }
+
+        [HttpPost]
+        public IActionResult EliminarArticuloPorId(string id)
+        {
+            int IdArticulo = int.Parse(id);
+            ArticulosService.EliminarPorId(IdArticulo);
+
+            return RedirectToAction("AdministrarArticulos");
+        }
+
     }
 }

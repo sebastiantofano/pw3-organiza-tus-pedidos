@@ -45,7 +45,7 @@ namespace Servicios
 
         public void EliminarPorId(int id)
         {
-            throw new NotImplementedException();
+            Datos.EliminarPorId(id);
         }
 
 
