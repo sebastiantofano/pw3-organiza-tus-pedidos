@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ModeloDatosProvisorios.Datos
 {
-    public class ArticulosDatos : IDatos<Articulo>
+    public class ArticulosAccesoDatos : IAccesoDatos<Articulo>
     {
         private static Articulo art1 = new Articulo { IdArticulo = 1, Codigo = "COD_01", Descripcion = "Descripción del Articulo 1", FechaCreacion = new DateTime(2021, 10, 24), 
             CreadorPor = "Sebastian Tofano", FechaModificacion = new DateTime(2021, 11, 02), ModificadoPor = "Pepito Perez"};
@@ -22,7 +22,6 @@ namespace ModeloDatosProvisorios.Datos
 
         public static readonly List<Articulo> listaArticulos = new() { art1, art2, art3 ,art4, art5 , art6, art7, art8 };
 
-
         public Articulo ObtenerPorId(int id)
         {
             return listaArticulos.Find(i => i.IdArticulo == id);
@@ -36,6 +35,14 @@ namespace ModeloDatosProvisorios.Datos
         public void Insertar(Articulo articulo)
         {
             listaArticulos.Add(articulo);
+        }
+
+        public void Actualizar(Articulo entity)
+        {
+            Articulo articuloEncontrado = listaArticulos.FirstOrDefault(x => x.IdArticulo == entity.IdArticulo);
+            articuloEncontrado.Codigo = entity.Codigo;
+            articuloEncontrado.Descripcion = entity.Descripcion;
+            
         }
     }
 }

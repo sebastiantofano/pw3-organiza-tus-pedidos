@@ -10,7 +10,7 @@ namespace Servicios.UsuarioGeneral
 {
     public class PedidosServiceImpl : BaseServiceImpl<Pedido>
     {
-        public PedidosServiceImpl(IDatos<Pedido> entity) : base(entity)
+        public PedidosServiceImpl(IAccesoDatos<Pedido> entity) : base(entity)
         {
         }
     }

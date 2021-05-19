@@ -10,9 +10,9 @@ namespace Servicios
 {
     public abstract class BaseServiceImpl<TEntity> : IBaseService<TEntity> where TEntity : class
     {
-        public IDatos<TEntity> Datos { get; set; }
+        public IAccesoDatos<TEntity> Datos { get; set; }
 
-        public BaseServiceImpl(IDatos<TEntity> entity){
+        public BaseServiceImpl(IAccesoDatos<TEntity> entity){
 
             Datos = entity;
         }
@@ -35,7 +35,7 @@ namespace Servicios
 
         public void Actualizar(TEntity entity)
         {
-            throw new NotImplementedException();
+            Datos.Actualizar(entity);
         }
 
         public void Eliminar(TEntity entity)

@@ -11,7 +11,7 @@ namespace Servicios.Administrador
 {
     public class ArticulosServiceImpl : BaseServiceImpl<Articulo> , IArticulosService
     {
-        public ArticulosServiceImpl() : base(new ArticulosDatos()) // Hago el new porque no tengo inyeccion de dependencias
+        public ArticulosServiceImpl() : base(new ArticulosAccesoDatos()) // Hago el new porque no tengo inyeccion de dependencias
         {
 
         }

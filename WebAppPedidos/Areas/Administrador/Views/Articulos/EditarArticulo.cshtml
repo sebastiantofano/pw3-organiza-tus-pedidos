@@ -1,5 +1,6 @@
 ﻿@using ModeloDatosProvisorios.Modelos
 @model Articulo
+
 @{
 }
 <div class="row">
@@ -15,108 +16,111 @@
 <section id="main-content">
     <div class="row">
         <div class="col-lg-12">
-            <div class="form-validation">
-                <form class="form-valide">
-                    <div class="card">
-                        <div class="card-body">
+                <div class="form-validation">
+                    <form class="form-valide" action="/Administrador/Articulos/EditarArticulo" method="POST">
+                        <div class="card">
+                            <div class="card-body">
 
-
-                            <div class="form-group row align-items-center">
-                                <label class="col-lg-1 col-form-label">Código <span class="text-danger">*</span></label>
-                                <div class="col-lg-5">
-                                    <input type="text" class="form-control" placeholder="Código del Artículo" value="@Model.IdArticulo" required>
-                                </div>
-                            </div>
-                            <div class="form-group row align-items-center">
-                                <label class="col-lg-1 col-form-label p-0">Descripción <span class="text-danger">*</span></label>
-                                <div class="col-lg-11">
-                                    <input type="text" class="form-control" placeholder="Descripción del Artículo" value="@Model.Descripcion">
-                                </div>
-                            </div>
-
-                            <div class="row align-items-center">
-                                <div class="col-lg-4">
-                                    <div class="card">
-                                        <div class="stat-widget-four">
-                                            <div class="stat-icon">
-                                                <i class="ti-plus"></i>
-                                            </div>
-                                            <div class="stat-content">
-                                                <div class="text-left dib">
-                                                    <div class="stat-text">Fecha de Creación</div>
-                                                    <div class="stat-heading">@Model.FechaCreacion?.ToShortDateString()</div>
-                                                    <div class="stat-text">Creado Por</div>
-                                                    <div class="stat-heading">@Model.CreadorPor</div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                <input type="hidden" name="IdArticulo" value="@Model.IdArticulo"/>
+                                <div class="form-group row align-items-center">
+                                    <label class="col-lg-1 col-form-label">Código <span class="text-danger">*</span></label>
+                                    <div class="col-lg-5">
+                                        <input type="text" class="form-control" name="Codigo" placeholder="Código del Artículo" value="@Model.Codigo" required>
                                     </div>
                                 </div>
-                                <div class="col-lg-4">
-                                    <div class="card">
-                                        <div class="stat-widget-four">
-                                            <div class="stat-icon">
-                                                <i class="ti-pencil"></i>
-                                            </div>
-                                            <div class="stat-content">
-                                                <div class="text-left dib">
-                                                    <div class="stat-text">Fecha de Última Modificación</div>
-                                                    <div class="stat-heading">@(Model.ModificadoPor != null ? Model.FechaModificacion?.ToShortDateString() : "...")</div>
-                                                    <div class="stat-text">Modificado Por</div>
-                                                    <div class="stat-heading">@(Model.ModificadoPor != null ? Model.ModificadoPor : "No ha sido modificado")</div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                <div class="form-group row align-items-center">
+                                    <label class="col-lg-1 col-form-label p-0">Descripción <span class="text-danger">*</span></label>
+                                    <div class="col-lg-11">
+                                        <input type="text" class="form-control" name="Descripcion" placeholder="Descripción del Artículo" value="@Model.Descripcion">
                                     </div>
                                 </div>
-                                <div class="col-lg-3 ml-auto">
-                                    @if (Model.FechaBorrado == null)
-                                    {
-                                        <div class="card bg-success">
-                                            <div class="stat-widget-six">
+
+                                <div class="row align-items-center">
+                                    <div class="col-lg-4">
+                                        <div class="card">
+                                            <div class="stat-widget-four">
                                                 <div class="stat-icon">
-                                                    <i class="ti-check"></i>
+                                                    <i class="ti-plus"></i>
                                                 </div>
                                                 <div class="stat-content">
                                                     <div class="text-left dib">
-                                                        <div class="stat-heading font-weight-bold">ARTÍCULO VIGENTE</div>
-                                                        <div class="stat-text">Estatus Actual del Artículo</div>
+                                                        <div class="stat-text">Fecha de Creación</div>
+                                                        <div class="stat-heading">@Model.FechaCreacion?.ToShortDateString()</div>
+                                                        <div class="stat-text">Creado Por</div>
+                                                        <div class="stat-heading">@Model.CreadorPor</div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    }
-                                    else
-                                    {
-                                        <div class="card bg-danger">
-                                            <div class="stat-widget-six">
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="card">
+                                            <div class="stat-widget-four">
                                                 <div class="stat-icon">
-                                                    <i class="ti-close"></i>
+                                                    <i class="ti-pencil"></i>
                                                 </div>
                                                 <div class="stat-content">
                                                     <div class="text-left dib">
-                                                        <div class="stat-heading font-weight-bold">ARTÍCULO ELIMINADO</div>
-                                                        <div class="stat-text">Estatus Actual del Artículo</div>
+                                                        <div class="stat-text">Fecha de Última Modificación</div>
+                                                        <div class="stat-heading">@(Model.ModificadoPor != null ? Model.FechaModificacion?.ToShortDateString() : "...")</div>
+                                                        <div class="stat-text">Modificado Por</div>
+                                                        <div class="stat-heading">@(Model.ModificadoPor != null ? Model.ModificadoPor : "No ha sido modificado")</div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    }
-                                </div>
+                                    </div>
+                                    <div class="col-lg-3 ml-auto">
+                                        @if (Model.FechaBorrado == null)
+                                        {
+                                            <div class="card bg-success">
+                                                <div class="stat-widget-six">
+                                                    <div class="stat-icon">
+                                                        <i class="ti-check"></i>
+                                                    </div>
+                                                    <div class="stat-content">
+                                                        <div class="text-left dib">
+                                                            <div class="stat-heading font-weight-bold">ARTÍCULO VIGENTE</div>
+                                                            <div class="stat-text">Estatus Actual del Artículo</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="card bg-danger">
+                                                <div class="stat-widget-six">
+                                                    <div class="stat-icon">
+                                                        <i class="ti-close"></i>
+                                                    </div>
+                                                    <div class="stat-content">
+                                                        <div class="text-left dib">
+                                                            <div class="stat-heading font-weight-bold">ARTÍCULO ELIMINADO</div>
+                                                            <div class="stat-text">Estatus Actual del Artículo</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
 
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="row">
-                        <div class="col-lg-12 d-flex align-items-center">
-                            <button type="submit" class="btn btn-info col-lg-4 m-1">Guardar Modificaciones</button>
-                            <button type="submit" class="btn btn-danger col-lg-3 ml-auto">Eliminar Artículo</button>
-                            <a href="javascript:history.back(-1);" class="btn btn-default ml-2">Volver</a>
+                        <div class="row">
+                            <div class="col-lg-12 d-flex align-items-center">
+                                <button type="submit" class="btn btn-info col-lg-4 m-1">Guardar Modificaciones</button>
+                                <button type="submit" class="btn btn-danger col-lg-3 ml-auto">Eliminar Artículo</button>
+                                <a href="javascript:history.back(-1);" class="btn btn-default ml-2">Volver</a>
+                            </div>
                         </div>
-                    </div>
-                </form>
-            </div>
+                    </form>
+                </div>
+
+            
+
         </div>
     </div>
 </section>

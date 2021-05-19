@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 namespace ModeloDatosProvisorios.Datos
 {
-    public interface IDatos<TEntity>
+    public interface IAccesoDatos<TEntity>
     {
         TEntity ObtenerPorId(int id);
 
         List<TEntity> ObtenerTodos();
 
         void Insertar(TEntity entity);
+
+        void Actualizar(TEntity entity);
     }
 }

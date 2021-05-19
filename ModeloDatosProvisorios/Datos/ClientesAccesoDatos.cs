@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ModeloDatosProvisorios.Datos
 {
-    public class ClientesDatos : IDatos<Cliente>
+    public class ClientesAccesoDatos : IAccesoDatos<Cliente>
     {
         private static Cliente cli1 = new Cliente { IdCliente = 1, Numero = 1, Nombre = "Nombre Nombre Apellido 1", CUIT = 111111111111 };
         private static Cliente cli2 = new Cliente { IdCliente = 2, Numero = 2, Nombre = "Nombre Nombre Apellido 2", CUIT = 222222222222 };
@@ -35,6 +35,11 @@ namespace ModeloDatosProvisorios.Datos
         public void Insertar(Cliente cliente)
         {
             listaClientes.Add(cliente);
+        }
+
+        public void Actualizar(Cliente entity)
+        {
+            throw new NotImplementedException();
         }
     }
 }

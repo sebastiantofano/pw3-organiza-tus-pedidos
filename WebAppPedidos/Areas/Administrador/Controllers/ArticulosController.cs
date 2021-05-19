@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using ModeloDatosProvisorios.Modelos;
 using Servicios.Administrador;
 using Servicios.Administrador.Interfaces;
@@ -33,11 +34,19 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult EditarArticulo(string id)
         {
             int IdArticulo = int.Parse(id);
             Articulo articulo = ArticulosService.ObtenerPorId(IdArticulo);
             return View(articulo);
+        }
+
+        [HttpPost]
+        public IActionResult EditarArticulo(Articulo articulo)
+        {
+            ArticulosService.Actualizar(articulo);
+            return RedirectToAction("AdministrarArticulos");
         }
     }
 }
