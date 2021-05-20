@@ -34,6 +34,9 @@ namespace ModeloDatosProvisorios.Datos
 
         public void Insertar(Articulo articulo)
         {
+            int idUltimoArticulo = listaArticulos.Last().IdArticulo;
+            int IdnuevoArticulo = idUltimoArticulo + 1;
+            articulo.IdArticulo = IdnuevoArticulo;
             listaArticulos.Add(articulo);
         }
 

@@ -37,8 +37,11 @@
                                         <td>@cliente.Nombre</td>
                                         <td>@cliente.Email</td>
                                         <td>@cliente.CUIT</td>
-                                        <td><span class="badge badge-@(cliente.FechaBorrado == null ? "success" : "danger")">
-                                            @(cliente.FechaBorrado == null ? "VIGENTE" : "ELIMINADO")</span></td>
+                                        <td>
+                                            <span class="badge badge-@(cliente.FechaBorrado == null ? "success" : "danger")">
+                                                @(cliente.FechaBorrado == null ? "VIGENTE" : "ELIMINADO")
+                                            </span>
+                                        </td>
                                         <td>
                                             <a href="/Administrador/Clientes/EditarCliente"
                                                class="btn btn-warning btn-flat btn-addon btn-sm">
@@ -66,13 +69,16 @@
     </div>
 </section>
 
-<!-- scripit init-->
-<script src="~/themes/assets/js/lib/data-table/datatables.min.js"></script>
-<script src="~/themes/assets/js/lib/data-table/dataTables.buttons.min.js"></script>
-<script src="~/themes/assets/js/lib/data-table/buttons.flash.min.js"></script>
-<script src="~/themes/assets/js/lib/data-table/jszip.min.js"></script>
-<script src="~/themes/assets/js/lib/data-table/pdfmake.min.js"></script>
-<script src="~/themes/assets/js/lib/data-table/vfs_fonts.js"></script>
-<script src="~/themes/assets/js/lib/data-table/buttons.html5.min.js"></script>
-<script src="~/themes/assets/js/lib/data-table/buttons.print.min.js"></script>
-<script src="~/themes/assets/js/lib/data-table/datatables-init.js"></script>
+
+@section Scripts{
+   
+    <script src="~/themes/assets/js/lib/data-table/datatables.min.js"></script>
+    <script src="~/themes/assets/js/lib/data-table/dataTables.buttons.min.js"></script>
+    <script src="~/themes/assets/js/lib/data-table/buttons.flash.min.js"></script>
+    <script src="~/themes/assets/js/lib/data-table/jszip.min.js"></script>
+    <script src="~/themes/assets/js/lib/data-table/pdfmake.min.js"></script>
+    <script src="~/themes/assets/js/lib/data-table/vfs_fonts.js"></script>
+    <script src="~/themes/assets/js/lib/data-table/buttons.html5.min.js"></script>
+    <script src="~/themes/assets/js/lib/data-table/buttons.print.min.js"></script>
+    <script src="~/themes/assets/js/lib/data-table/datatables-init.js"></script>
+}

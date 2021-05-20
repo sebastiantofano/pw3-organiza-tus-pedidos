@@ -30,7 +30,7 @@ namespace Servicios
 
         public void Insertar(TEntity entity)
         {
-
+            Datos.Insertar(entity);
         }
 
         public void Actualizar(TEntity entity)

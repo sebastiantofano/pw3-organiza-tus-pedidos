@@ -25,13 +25,27 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
 
         public IActionResult AdministrarArticulos()
         {
-
             List<Articulo> listaArticulos = ArticulosService.ObtenerTodos();
             return View(listaArticulos);
         }
+
         public IActionResult AgregarArticulo()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult AgregarArticulo(Articulo articulo)
+        {
+            /* Intentar realizar una validación cuando tenemos el atajo de agregar un articulo en la vista de administracion de articulos */
+            if (ModelState.IsValid)
+            {
+                ArticulosService.Insertar(articulo);
+                return RedirectToAction("AdministrarArticulos");
+            }
+
+            return View();
+
         }
 
         [HttpGet]
@@ -39,6 +53,7 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
         {
             int IdArticulo = int.Parse(id);
             Articulo articulo = ArticulosService.ObtenerPorId(IdArticulo);
+
             return View(articulo);
         }
 
@@ -46,6 +61,7 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
         public IActionResult EditarArticulo(Articulo articulo)
         {
             ArticulosService.Actualizar(articulo);
+
             return RedirectToAction("AdministrarArticulos");
         }
 

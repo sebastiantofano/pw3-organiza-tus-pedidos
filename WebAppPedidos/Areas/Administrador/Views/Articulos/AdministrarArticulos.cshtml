@@ -18,11 +18,8 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-
-
-
                     <div class="form-validation">
-                        <form class="form-valide" action="#" method="post">
+                        <form class="form-valide" action="/Administrador/Articulos/AgregarArticulo" method="POST">
                             <div class="card-title">
                                 <h4>Agregar un nuevo artículo</h4>
                             </div>
@@ -31,24 +28,22 @@
                                     Código <span class="text-danger">*</span>
                                 </label>
                                 <div class="col-lg-2">
-                                    <input type="text" class="form-control" id="val-codigo"
-                                           name="val-codigo" placeholder="Código del Artículo" required>
+                                    <input type="text" name="Codigo" class="form-control" id="val-codigo"
+                                           placeholder="Código del Artículo">
+                                    <span class="text-danger"></span>
                                 </div>
 
-                                <label class="col-form-label m-auto" for="val-descripcion">
+                                <label class="col-form-label m-auto" for="Codigo">
                                     Descripción <span class="text-danger">*</span>
                                 </label>
                                 <div class="col-lg-7">
-                                    <input type="text" class="form-control" id="val-descripcion"
-                                           name="val-descripcion"
-                                           placeholder="Ingrese Descripción del Artículo" required>
+                                    <input type="text" name="Descripcion" class="form-control" id="val-descripcion" placeholder="Descripción del Artículo" required>
                                 </div>
-                                <button type="submit" class="btn btn-success">
+                                <button type="submit" class="btn btn-success" id="toastr-success-bottom-right">
                                     Agregar
                                     Artículo
                                 </button>
                             </div>
-
                         </form>
                     </div>
                 </div>
@@ -78,29 +73,29 @@
                                 <tbody>
                                     @foreach (var articulo in Model)
                                     {
-                                    <tr>
-                                        <td>@articulo.Codigo</td>
-                                        <td>@articulo.Descripcion</td>
-                                        <td>
-                                            <span class="badge badge-@(articulo.FechaBorrado == null ? "success" : "danger")">
-                                                @(articulo.FechaBorrado == null ? "VIGENTE" : "ELIMINADO")
-                                            </span>
-                                        </td>
-                                        <td class="row justify-content-between align-items-center">
-                                            <a asp-area="Administrador" asp-controller="Articulos" asp-action="EditarArticulo" asp-route-id="@articulo.IdArticulo"
-                                               class="btn btn-warning btn-flat btn-addon btn-sm ml-4">
-                                                <i class="ti-pencil"></i>Editar
-                                            </a>
-                                            @if (articulo.FechaBorrado == null)
-                                            {
-                                                <form method="POST" asp-area="Administrador" asp-controller="Articulos" asp-action="EliminarArticuloPorId" asp-route-id="@articulo.IdArticulo">
-                                                    <button type="submit" class="btn btn-danger btn-flat btn-addon btn-sm"> <i class="ti-close"></i>Eliminar</button>
-                                                </form>
+                                        <tr>
+                                            <td>@articulo.Codigo</td>
+                                            <td>@articulo.Descripcion</td>
+                                            <td>
+                                                <span class="badge badge-@(articulo.FechaBorrado == null ? "success" : "danger")">
+                                                    @(articulo.FechaBorrado == null ? "VIGENTE" : "ELIMINADO")
+                                                </span>
+                                            </td>
+                                            <td class="row justify-content-between align-items-center">
+                                                <a asp-area="Administrador" asp-controller="Articulos" asp-action="EditarArticulo" asp-route-id="@articulo.IdArticulo"
+                                                   class="btn btn-warning btn-flat btn-addon btn-sm ml-4">
+                                                    <i class="ti-pencil"></i>Editar
+                                                </a>
+                                                @if (articulo.FechaBorrado == null)
+                                                {
+                                                    <form method="POST" asp-area="Administrador" asp-controller="Articulos" asp-action="EliminarArticuloPorId" asp-route-id="@articulo.IdArticulo">
+                                                        <button type="submit" class="btn btn-danger btn-flat btn-addon btn-sm"> <i class="ti-close"></i>Eliminar</button>
+                                                    </form>
 
                                                 }
 
-                                        </td>
-                                    </tr>
+                                            </td>
+                                        </tr>
                                     }
                                 </tbody>
                             </table>
@@ -118,14 +113,18 @@
 </section>
 
 
+@section Scripts{
+
+    <script src="~/themes/assets/js/lib/data-table/datatables.min.js"></script>
+    <script src="~/themes/assets/js/lib/data-table/dataTables.buttons.min.js"></script>
+    <script src="~/themes/assets/js/lib/data-table/buttons.flash.min.js"></script>
+    <script src="~/themes/assets/js/lib/data-table/jszip.min.js"></script>
+    <script src="~/themes/assets/js/lib/data-table/pdfmake.min.js"></script>
+    <script src="~/themes/assets/js/lib/data-table/vfs_fonts.js"></script>
+    <script src="~/themes/assets/js/lib/data-table/buttons.html5.min.js"></script>
+    <script src="~/themes/assets/js/lib/data-table/buttons.print.min.js"></script>
+    <script src="~/themes/assets/js/lib/data-table/datatables-init.js"></script>
 
 
-<script src="~/themes/assets/js/lib/data-table/datatables.min.js"></script>
-<script src="~/themes/assets/js/lib/data-table/dataTables.buttons.min.js"></script>
-<script src="~/themes/assets/js/lib/data-table/buttons.flash.min.js"></script>
-<script src="~/themes/assets/js/lib/data-table/jszip.min.js"></script>
-<script src="~/themes/assets/js/lib/data-table/pdfmake.min.js"></script>
-<script src="~/themes/assets/js/lib/data-table/vfs_fonts.js"></script>
-<script src="~/themes/assets/js/lib/data-table/buttons.html5.min.js"></script>
-<script src="~/themes/assets/js/lib/data-table/buttons.print.min.js"></script>
-<script src="~/themes/assets/js/lib/data-table/datatables-init.js"></script>
+}
+

@@ -1,6 +1,5 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using ModeloDatosProvisorios.Modelos
+@model Articulo
 @{
 }
 <div class="row">
@@ -17,21 +16,23 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="form-validation">
-                <form class="form-valide">
+                <form class="form-valide" action="/Administrador/Articulos/AgregarArticulo" method="POST">
                     <div class="card">
                         <div class="card-body">
 
 
                             <div class="form-group row align-items-center">
-                                <label class="col-lg-1 col-form-label">Código <span class="text-danger">*</span></label>
+                                <label asp-for="Codigo" class="col-lg-1 col-form-label">Código <span class="text-danger">*</span></label>
                                 <div class="col-lg-5">
-                                    <input type="text" class="form-control" placeholder="Código del Artículo" required>
+                                    <input type="text" name="Codigo" class="form-control" placeholder="Código del Artículo" asp-for="Codigo">
+                                    <span asp-validation-for="Codigo" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="form-group row align-items-center">
-                                <label class="col-lg-1 col-form-label p-0">Descripción <span class="text-danger">*</span></label>
+                                <label asp-for="Descripcion" class="col-lg-1 col-form-label p-0">Descripción <span class="text-danger">*</span></label>
                                 <div class="col-lg-11">
-                                    <input type="text" class="form-control" placeholder="Descripción del Artículo">
+                                    <input asp-for="Descripcion" type="text" name="Descripcion" class="form-control" placeholder="Descripción del Artículo">
+                                    <span asp-validation-for="Descripcion" class="text-danger"></span>
                                 </div>
                             </div>
 

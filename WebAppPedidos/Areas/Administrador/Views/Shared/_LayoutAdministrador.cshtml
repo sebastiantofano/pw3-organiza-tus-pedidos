@@ -15,8 +15,9 @@
     <link href="~/themes/assets/css/lib/helper.css" rel="stylesheet">
     <link href="~/themes/assets/css/style.css" rel="stylesheet">
     <link href="~/themes/assets/css/lib/select2/select2.min.css" rel="stylesheet">
+    <link href="~/themes/assets/css/lib/toastr/toastr.min.css" rel="stylesheet">
 
-     <!-- Para paginas con Data Table -->
+    <!-- Para paginas con Data Table -->
     <link href="~/themes/assets/css/lib/data-table/buttons.bootstrap.min.css" rel="stylesheet" />
 </head>
 
@@ -32,7 +33,7 @@
                 <ul>
                     <li class="label">Inicio</li>
                     <li>
-                        <a asp-area="Administrador" asp-controller="Home" asp-action="Index" >
+                        <a asp-area="Administrador" asp-controller="Home" asp-action="Index">
                             <i class="ti-home"></i> Principal
                         </a>
                     </li>
@@ -100,13 +101,9 @@
 
     </div>
 
-
-    <!-- Para paginas que requieran validaciones, ver como quitamos esto de aca y lo ponemos en cada pagina
-     pero que se recargue al final-->
-    <script src="~/themes/assets/js/lib/select2/select2.full.min.js"></script>
-    <script src="~/themes/assets/js/lib/form-validation/jquery.validate.min.js"></script>
-    <script src="~/themes/assets/js/lib/form-validation/jquery.validate-init.js"></script>
-
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
 
     <!-- Common Template-->
     <script src="~/themes/assets/js/lib/jquery.min.js"></script>
@@ -117,10 +114,10 @@
     <script src="~/themes/assets/js/scripts.js"></script>
 
 
+    <!-- Para paginas que requieran validaciones, ver como quitamos esto de aca y lo ponemos en cada pagina
+    pero que se recargue al final-->
+    <script src="~/themes/assets/js/lib/select2/select2.full.min.js"></script>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 
 
