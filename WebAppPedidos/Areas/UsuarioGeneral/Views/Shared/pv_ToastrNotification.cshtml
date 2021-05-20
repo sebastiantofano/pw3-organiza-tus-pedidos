@@ -1,0 +1,27 @@
+﻿<script src="~/themes/assets/js/lib/toastr/toastr.min.js"></script>
+<script src="~/themes/assets/js/lib/toastr/toastr.init.js"></script>
+<script>
+    $(function () {
+
+        toastr.options = {
+            "debug": false,
+            "positionClass": "toast-bottom-right",
+            "onclick": null,
+            "fadeIn": 300,
+            "fadeOut": 1000,
+            "timeOut": 10000,
+            "extendedTimeOut": 1000,
+            "closeButton": true
+        }
+
+        
+        if ('@TempData["toastr_error"]') toastr.error('@TempData["toastr_error"]');
+        if ('@TempData["toastr_success"]') toastr.success('@TempData["toastr_success"]');
+        if ('@TempData["toastr_info"]') toastr.info('@TempData["toastr_info"]');
+        if ('@TempData["toastr_warning"]') toastr.warning('@TempData["toastr_warning"]');
+
+        /* Modifico el tamaño del toast*/
+        $('.toast').width('300');
+
+        })
+</script>

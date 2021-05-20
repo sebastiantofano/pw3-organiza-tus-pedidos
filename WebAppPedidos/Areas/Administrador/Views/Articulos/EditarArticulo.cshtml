@@ -16,12 +16,16 @@
 <section id="main-content">
     <div class="row">
         <div class="col-lg-12">
-                <div class="form-validation">
-                    <form class="form-valide" action="/Administrador/Articulos/EditarArticulo" method="POST">
+            <div class="form-validation">
+
+                @using (Html.BeginForm("EditarArticulo", "Articulos", new { area = "Administrador" }, FormMethod.Post))
+                {
+
+                    <div class="form-valide">
                         <div class="card">
                             <div class="card-body">
 
-                                <input type="hidden" name="IdArticulo" value="@Model.IdArticulo"/>
+                                <input type="hidden" name="IdArticulo" value="@Model.IdArticulo" />
                                 <div class="form-group row align-items-center">
                                     <label class="col-lg-1 col-form-label">Código <span class="text-danger">*</span></label>
                                     <div class="col-lg-5">
@@ -133,15 +137,21 @@
                         <div class="row">
                             <div class="col-lg-12 d-flex align-items-center">
                                 <button type="submit" class="btn btn-info col-lg-4 m-1">Guardar Modificaciones</button>
-                                <button type="submit" class="btn btn-danger col-lg-3 ml-auto">Eliminar Artículo</button>
+
                                 <a href="javascript:history.back(-1);" class="btn btn-default ml-2">Volver</a>
+
                             </div>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                }
+                @using (Html.BeginForm("EliminarArticuloPorId", "Articulos", new { area = "Administrador" }, FormMethod.Post))
+                {
+                    <input type="hidden" name="id" value="@Model.IdArticulo" />
+                    <button type="submit" class="btn btn-danger col-lg-3 ml-auto">Eliminar Artículo</button>
+                }
 
-            
-
+            </div>
         </div>
-    </div>
+    </div>                  
+            
 </section>

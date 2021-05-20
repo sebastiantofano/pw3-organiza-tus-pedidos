@@ -41,11 +41,12 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
             if (ModelState.IsValid)
             {
                 ArticulosService.Insertar(articulo);
+                TempData["toastr_success"] = "Se ha creado el artículo correctamente !";
                 return RedirectToAction("AdministrarArticulos");
             }
 
+            TempData["toastr_error"] = "No se ha podido crear el artículo correctamente !";
             return View();
-
         }
 
         [HttpGet]
@@ -62,6 +63,8 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
         {
             ArticulosService.Actualizar(articulo);
 
+            TempData["toastr_success"] = "Se ha editado el artículo correctamente !";
+
             return RedirectToAction("AdministrarArticulos");
         }
 
@@ -71,6 +74,7 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
             int IdArticulo = int.Parse(id);
             ArticulosService.EliminarPorId(IdArticulo);
 
+            TempData["toastr_info"] = "Se ha eliminado el artículo correctamente !";
             return RedirectToAction("AdministrarArticulos");
         }
 

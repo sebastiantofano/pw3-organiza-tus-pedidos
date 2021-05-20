@@ -1,7 +1,14 @@
 ﻿@using ModeloDatosProvisorios.Modelos
 @model Articulo
 @{
+    var to = TempData["toastr_success"];
 }
+
+@{
+
+
+}
+
 <div class="row">
     <div class="col-lg-8 p-r-0 title-margin-right">
         <div class="page-header">
@@ -52,3 +59,7 @@
         </div>
     </div>
 </section>
+
+@section Scripts{
+    @{await Html.RenderPartialAsync("~/Areas/UsuarioGeneral/Views/Shared/pv_ToastrNotification.cshtml");};
+}

@@ -39,7 +39,7 @@
                                 <div class="col-lg-7">
                                     <input type="text" name="Descripcion" class="form-control" id="val-descripcion" placeholder="Descripción del Artículo" required>
                                 </div>
-                                <button type="submit" class="btn btn-success" id="toastr-success-bottom-right">
+                                <button type="submit" class="btn btn-success">
                                     Agregar
                                     Artículo
                                 </button>
@@ -113,6 +113,7 @@
 </section>
 
 
+
 @section Scripts{
 
     <script src="~/themes/assets/js/lib/data-table/datatables.min.js"></script>
@@ -125,6 +126,5 @@
     <script src="~/themes/assets/js/lib/data-table/buttons.print.min.js"></script>
     <script src="~/themes/assets/js/lib/data-table/datatables-init.js"></script>
 
-
+    @{await Html.RenderPartialAsync("~/Areas/UsuarioGeneral/Views/Shared/pv_ToastrNotification.cshtml");};
 }
-
