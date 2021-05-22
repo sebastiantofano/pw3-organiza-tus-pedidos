@@ -12,6 +12,13 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
     [Area("Administrador")]
     public class ClientesController : Controller
     {
+        private readonly IClientesService clientesService;
+        public ClientesController(/*IClientesService clientesService*/)
+        {
+            //ClientesService = clientesService;
+            this.clientesService = new ClientesServiceImpl(); // Debo instanciar el servicio ya que todavia no tenemos inyeccion de dependencias
+
+        }
         public IActionResult Index()
         {
             return RedirectToAction("AdministrarClientes");
@@ -24,9 +31,8 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
 
         public IActionResult AdministrarClientes()
         {
-            IClientesService clienteService = new ClientesServiceImpl();
 
-            List<Cliente> listaClientes = clienteService.ObtenerTodos();
+            List<Cliente> listaClientes = clientesService.ObtenerTodos();
             return View(listaClientes);
         }
 

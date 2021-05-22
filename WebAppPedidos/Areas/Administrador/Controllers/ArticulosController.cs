@@ -13,10 +13,11 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
     [Area("Administrador")]
     public class ArticulosController : Controller
     {
-        IArticulosService ArticulosService;
-        public ArticulosController()
+        private readonly IArticulosService articulosService;
+        public ArticulosController(/*IArticulosService articulosService*/) 
         {
-            ArticulosService = new ArticulosServiceImpl();
+            //this.articulosService = articulosService;
+            articulosService = new ArticulosServiceImpl(); // Debo instanciar el servicio ya que todavia no tenemos inyeccion de dependencias
         }
         public IActionResult Index()
         {
@@ -25,7 +26,7 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
 
         public IActionResult AdministrarArticulos()
         {
-            List<Articulo> listaArticulos = ArticulosService.ObtenerTodos();
+            List<Articulo> listaArticulos = articulosService.ObtenerTodos();
             return View(listaArticulos);
         }
 
@@ -40,7 +41,7 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
             /* Intentar realizar una validación cuando tenemos el atajo de agregar un articulo en la vista de administracion de articulos */
             if (ModelState.IsValid)
             {
-                ArticulosService.Insertar(articulo);
+                articulosService.Insertar(articulo);
                 TempData["toastr_success"] = "Se ha creado el artículo correctamente !";
                 return RedirectToAction("AdministrarArticulos");
             }
@@ -53,7 +54,7 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
         public IActionResult EditarArticulo(string id)
         {
             int IdArticulo = int.Parse(id);
-            Articulo articulo = ArticulosService.ObtenerPorId(IdArticulo);
+            Articulo articulo = articulosService.ObtenerPorId(IdArticulo);
 
             return View(articulo);
         }
@@ -61,7 +62,7 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
         [HttpPost]
         public IActionResult EditarArticulo(Articulo articulo)
         {
-            ArticulosService.Actualizar(articulo);
+            articulosService.Actualizar(articulo);
 
             TempData["toastr_success"] = "Se ha editado el artículo correctamente !";
 
@@ -72,7 +73,7 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
         public IActionResult EliminarArticuloPorId(string id)
         {
             int IdArticulo = int.Parse(id);
-            ArticulosService.EliminarPorId(IdArticulo);
+            articulosService.EliminarPorId(IdArticulo);
 
             TempData["toastr_info"] = "Se ha eliminado el artículo correctamente !";
             return RedirectToAction("AdministrarArticulos");

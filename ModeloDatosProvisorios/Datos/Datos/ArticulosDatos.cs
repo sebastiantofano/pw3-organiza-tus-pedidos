@@ -32,6 +32,7 @@ namespace ModeloDatosProvisorios.Datos.Datos
         public static readonly List<Articulo> listaArticulos = new() { art1, art2, art3, art4, art5, art6, art7, art8 };
 
 
+        // Es probable que esta logica la tengamos que eliminar ya que todo esto va a ser resuelto en el Repositorio, es mas, la clase directamente hay que eliminar
         public Articulo ObtenerPorId(int id)
         {
             return listaArticulos.Find(i => i.IdArticulo == id);

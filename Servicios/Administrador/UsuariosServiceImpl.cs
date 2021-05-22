@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Servicios.Administrador
 {
-    public class UsuariosServiceImpl : BaseServiceImpl<Usuario>, IUsuariosServices
+    public class UsuariosServiceImpl : BaseServiceImpl<Usuario>, IUsuariosService
     {
         public UsuariosServiceImpl() : base(new UsuariosRepositoryImpl()) // Hago el NEW porque todavia no vimos inyeccion de dependencias
         {

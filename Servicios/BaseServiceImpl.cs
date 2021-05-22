@@ -11,32 +11,32 @@ namespace Servicios
 {
     public abstract class BaseServiceImpl<TEntity> : IBaseService<TEntity> where TEntity : class
     {
-        public IBaseRepository<TEntity> Datos { get; set; }
+        private readonly IBaseRepository<TEntity> tEntityRepository;
 
-        public BaseServiceImpl(IBaseRepository<TEntity> entity){
+        public BaseServiceImpl(IBaseRepository<TEntity> tEntityRepository){
 
-            Datos = entity;
+            this.tEntityRepository = tEntityRepository;
         }
 
         public TEntity ObtenerPorId(int id)
         {
-            TEntity entity = Datos.ObtenerPorId(id);
+            TEntity entity = tEntityRepository.ObtenerPorId(id);
             return entity;
         }
         public List<TEntity> ObtenerTodos()
         {
-            List<TEntity> listEntity = Datos.ObtenerTodos();
+            List<TEntity> listEntity = tEntityRepository.ObtenerTodos();
             return listEntity;
         }
 
         public void Insertar(TEntity entity)
         {
-            Datos.Insertar(entity);
+            tEntityRepository.Insertar(entity);
         }
 
         public void Actualizar(TEntity entity)
         {
-            Datos.Actualizar(entity);
+            tEntityRepository.Actualizar(entity);
         }
 
         public void Eliminar(TEntity entity)
@@ -46,7 +46,7 @@ namespace Servicios
 
         public void EliminarPorId(int id)
         {
-            Datos.EliminarPorId(id);
+            tEntityRepository.EliminarPorId(id);
         }
 
 

@@ -11,38 +11,38 @@ namespace ModeloDatosProvisorios.Datos.Repositorios
     public class BaseRepositoryImpl<TEntity> : IBaseRepository<TEntity> where TEntity : class
     {
         // Simula ser la sesion a la base de datos
-        public IDatos<TEntity> Datos;
+        private readonly IDatos<TEntity> tEntityDatos;
 
-        public BaseRepositoryImpl(IDatos<TEntity> Datos)
+        public BaseRepositoryImpl(IDatos<TEntity> tEntityDatos)
         {
-            this.Datos = Datos;
+            this.tEntityDatos = tEntityDatos;
         }
 
-        /*Estos metodos luego van a cambiar por las consultas a la base de datos,
-             puede que algunos sean virtuales y se tengan que sobrescribir en las implementaciones particulares*/
+        /*Estos metodos luego van a cambiar por las consultas a la base de datos, es decir, llamarán a una sesión y harán la logica
+             puede que algunos sean virtuales y se tengan que sobrescribir en las implementaciones particulares ya que puede tener diferentes logicas*/
         public TEntity ObtenerPorId(int id)
         {
-            return Datos.ObtenerPorId(id);
+            return tEntityDatos.ObtenerPorId(id);
         }
         public List<TEntity> ObtenerTodos()
         {
-            return Datos.ObtenerTodos();
+            return tEntityDatos.ObtenerTodos();
         }
         public void Actualizar(TEntity entity)
         {
-            Datos.Actualizar(entity);
+            tEntityDatos.Actualizar(entity);
         }
         public void Insertar(TEntity entity)
         {
-            Datos.Insertar(entity);
+            tEntityDatos.Insertar(entity);
         }
         public void EliminarPorId(int id)
         {
-            Datos.EliminarPorId(id);
+            tEntityDatos.EliminarPorId(id);
         }
         public void Eliminar(TEntity entity)
         {
-            Datos.Eliminar(entity);
+            tEntityDatos.Eliminar(entity);
         }
     }
 }

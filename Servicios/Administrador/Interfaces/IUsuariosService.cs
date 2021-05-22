@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Servicios.Administrador.Interfaces
 {
-    public interface IUsuariosServices : IBaseService<Usuario>
+    public interface IUsuariosService : IBaseService<Usuario>
     {
     }
 }
