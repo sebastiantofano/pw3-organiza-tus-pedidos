@@ -5,9 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ModeloDatosProvisorios.Datos.Repositorios.Interfaces
+namespace ModeloDatosProvisorios.DAO.Interfaces
 {
-    public interface IUsuariosRepository : IBaseRepository<Usuario>
+    public interface IArticulosDAO : IDAO<Articulo>
     {
+
     }
 }

@@ -1,5 +1,4 @@
 ﻿using ModeloDatosProvisorios.Datos.Repositorios;
-using ModeloDatosProvisorios.Datos.Repositorios.Interfaces;
 using ModeloDatosProvisorios.Modelos;
 using Servicios.Administrador.Interfaces;
 using System;

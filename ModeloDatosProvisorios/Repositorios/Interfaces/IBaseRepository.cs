@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ModeloDatosProvisorios.Datos.Repositorios.Interfaces
+namespace ModeloDatosProvisorios.Repositorios.Interfaces
 {
     public interface IBaseRepository<TEntity>
     {

@@ -1,6 +1,6 @@
 ﻿using ModeloDatosProvisorios.Datos;
-using ModeloDatosProvisorios.Datos.Repositorios.Interfaces;
 using ModeloDatosProvisorios.Modelos;
+using ModeloDatosProvisorios.Repositorios.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

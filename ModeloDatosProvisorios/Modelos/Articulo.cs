@@ -9,6 +9,7 @@ namespace ModeloDatosProvisorios.Modelos
         public int IdArticulo { get; set; }
 
         [Required(ErrorMessage = "Debe introducir obligatoriamente un código de artículo")]
+        [StringLength(8, ErrorMessage = "El código no puede tener más de 8 caractéres")]
         public string Codigo { get; set; }
 
         [Required(ErrorMessage = "Debe introducir obligatoriamente una descripción del artículo")]
