@@ -1,4 +1,5 @@
 ﻿using ModeloDatosProvisorios.Datos;
+using ModeloDatosProvisorios.Datos.Repositorios;
 using ModeloDatosProvisorios.Modelos;
 using Servicios.Administrador.Interfaces;
 using System;
@@ -11,7 +12,7 @@ namespace Servicios.Administrador
 {
     public class UsuariosServiceImpl : BaseServiceImpl<Usuario>, IUsuariosServices
     {
-        public UsuariosServiceImpl(IAccesoDatos<Usuario> entity) : base(entity) // CAMBIAR ESTO, ESTO ES POR DEFECTO
+        public UsuariosServiceImpl() : base(new UsuariosRepositoryImpl()) // Hago el NEW porque todavia no vimos inyeccion de dependencias
         {
         }
     }

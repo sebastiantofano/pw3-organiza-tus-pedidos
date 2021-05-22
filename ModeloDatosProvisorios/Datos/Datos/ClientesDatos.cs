@@ -1,4 +1,5 @@
-﻿using ModeloDatosProvisorios.Modelos;
+﻿using ModeloDatosProvisorios.Datos.Datos.Interfaces;
+using ModeloDatosProvisorios.Modelos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace ModeloDatosProvisorios.Datos
 {
-    public class ClientesAccesoDatos : IAccesoDatos<Cliente>
+    /* Esta clase simula ser una tabla de la base de datos */
+    public class ClientesDatos : IDatos<Cliente>
     {
         private static Cliente cli1 = new Cliente { IdCliente = 1, Numero = 1, Nombre = "Nombre Nombre Apellido 1", CUIT = 111111111111 };
         private static Cliente cli2 = new Cliente { IdCliente = 2, Numero = 2, Nombre = "Nombre Nombre Apellido 2", CUIT = 222222222222 };
@@ -43,6 +45,11 @@ namespace ModeloDatosProvisorios.Datos
         }
 
         public void EliminarPorId(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Eliminar(Cliente entity)
         {
             throw new NotImplementedException();
         }

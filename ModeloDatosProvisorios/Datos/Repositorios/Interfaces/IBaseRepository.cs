@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ModeloDatosProvisorios.Datos
+namespace ModeloDatosProvisorios.Datos.Repositorios.Interfaces
 {
-    public interface IAccesoDatos<TEntity>
+    public interface IBaseRepository<TEntity>
     {
         TEntity ObtenerPorId(int id);
 
@@ -17,5 +17,7 @@ namespace ModeloDatosProvisorios.Datos
         void Actualizar(TEntity entity);
 
         void EliminarPorId(int id);
+
+        void Eliminar(TEntity entity);
     }
 }

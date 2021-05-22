@@ -1,4 +1,4 @@
-﻿using ModeloDatosProvisorios.Datos;
+﻿using ModeloDatosProvisorios.Datos.Repositorios;
 using ModeloDatosProvisorios.Modelos;
 using Servicios.Administrador.Interfaces;
 using System;
@@ -11,7 +11,7 @@ namespace Servicios.Administrador
 {
     public class ArticulosServiceImpl : BaseServiceImpl<Articulo> , IArticulosService
     {
-        public ArticulosServiceImpl() : base(new ArticulosAccesoDatos()) // Hago el new porque no tengo inyeccion de dependencias
+        public ArticulosServiceImpl() : base(new ArticulosRepositoryImpl()) // Hago el NEW porque todavia no vimos inyeccion de dependencias
         {
 
         }

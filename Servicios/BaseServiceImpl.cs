@@ -1,4 +1,5 @@
 ﻿using ModeloDatosProvisorios.Datos;
+using ModeloDatosProvisorios.Datos.Repositorios.Interfaces;
 using ModeloDatosProvisorios.Modelos;
 using System;
 using System.Collections.Generic;
@@ -10,9 +11,9 @@ namespace Servicios
 {
     public abstract class BaseServiceImpl<TEntity> : IBaseService<TEntity> where TEntity : class
     {
-        public IAccesoDatos<TEntity> Datos { get; set; }
+        public IBaseRepository<TEntity> Datos { get; set; }
 
-        public BaseServiceImpl(IAccesoDatos<TEntity> entity){
+        public BaseServiceImpl(IBaseRepository<TEntity> entity){
 
             Datos = entity;
         }
