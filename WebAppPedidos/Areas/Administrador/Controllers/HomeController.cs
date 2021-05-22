@@ -9,6 +9,11 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
     [Area("Administrador")]
     public class HomeController : Controller
     {
+
+        public HomeController()
+        {
+
+        }
         //Probando los Route para cambiar la URL
         //[Route("Home")]
         public IActionResult Index()

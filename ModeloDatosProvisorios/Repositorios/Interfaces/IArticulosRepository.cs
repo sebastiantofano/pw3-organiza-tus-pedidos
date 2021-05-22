@@ -9,5 +9,6 @@ namespace ModeloDatosProvisorios.Repositorios.Interfaces
 {
     public interface IArticulosRepository : IBaseRepository<Articulo>
     {
+        void AlgoParticularDelArticulo();
     }
 }

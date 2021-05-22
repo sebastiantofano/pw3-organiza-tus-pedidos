@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace ModeloDatosProvisorios.DAO
 {
     /* Esta clase simula ser una tabla de la base de datos */
-    public class PedidosDaoImpl : IPedidosDAO
+    public class PedidosDAOImpl : IPedidosDAO
     {
         public void Actualizar(Pedido entity)
         {

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ModeloDatosProvisorios.Repositorios.Interfaces
 {
-    interface IClientesRepository : IBaseRepository<Cliente>
+    public interface IClientesRepository : IBaseRepository<Cliente>
     {
     }
 }

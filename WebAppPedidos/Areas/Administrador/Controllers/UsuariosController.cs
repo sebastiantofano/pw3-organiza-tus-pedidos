@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ModeloDatosProvisorios.DAO;
+using ModeloDatosProvisorios.Repositorios;
 using Servicios.Administrador;
 using Servicios.Administrador.Interfaces;
 using System;
@@ -16,7 +18,7 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
         public UsuariosController(/*IUsuariosService usuariosService*/)
         {
             //this.usuariosService = usuariosService;
-            this.usuariosService = new UsuariosServiceImpl(); // Debo instanciar el servicio ya que todavia no tenemos inyeccion de dependencias
+            this.usuariosService = new UsuariosServiceImpl(new UsuariosRepositoryImpl(new UsuariosDAOImpl())); // Debo instanciar el servicio ya que todavia no tenemos inyeccion de dependencias
         }
         public IActionResult Index()
         {

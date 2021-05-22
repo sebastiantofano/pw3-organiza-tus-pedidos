@@ -7,15 +7,22 @@ using System.Text;
 using System.Threading.Tasks;
 using ModeloDatosProvisorios.Repositorios;
 using ModeloDatosProvisorios.DAO;
+using ModeloDatosProvisorios.DAO.Interfaces;
 
 namespace ModeloDatosProvisorios.Datos.Repositorios
 {
     public class ArticulosRepositoryImpl : BaseRepositoryImpl<Articulo>, IArticulosRepository
     {
-        
-        public ArticulosRepositoryImpl() : base(new ArticulosDAOImpl())
+        private readonly IArticulosDAO articulosDAO;
+
+        public ArticulosRepositoryImpl(IArticulosDAO articulosDAO) : base(articulosDAO)
         {
+            this.articulosDAO = articulosDAO;
         }
 
+        public void AlgoParticularDelArticulo()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

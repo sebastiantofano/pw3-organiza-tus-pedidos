@@ -1,4 +1,5 @@
 ﻿using ModeloDatosProvisorios.DAO;
+using ModeloDatosProvisorios.DAO.Interfaces;
 using ModeloDatosProvisorios.Datos;
 using ModeloDatosProvisorios.Modelos;
 using ModeloDatosProvisorios.Repositorios.Interfaces;
@@ -12,9 +13,10 @@ namespace ModeloDatosProvisorios.Repositorios
 {
     public class PedidosRepositoryImpl : BaseRepositoryImpl<Pedido> , IPedidosRepository
     {
-        public PedidosRepositoryImpl() : base(new PedidosDaoImpl())
+        private readonly IPedidosDAO pedidosDAO; 
+        public PedidosRepositoryImpl(IPedidosDAO pedidosDAO) : base(pedidosDAO)
         {
-
+            this.pedidosDAO = pedidosDAO;
         }
     }
 }

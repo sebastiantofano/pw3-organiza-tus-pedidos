@@ -9,6 +9,10 @@ namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
     [Area("UsuarioGeneral")]
     public class LoginController : Controller
     {
+        public LoginController()
+        {
+
+        }
         public IActionResult Index()
         {
             return View();

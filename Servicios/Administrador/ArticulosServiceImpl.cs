@@ -1,5 +1,7 @@
-﻿using ModeloDatosProvisorios.Datos.Repositorios;
+﻿using ModeloDatosProvisorios.DAO;
+using ModeloDatosProvisorios.Datos.Repositorios;
 using ModeloDatosProvisorios.Modelos;
+using ModeloDatosProvisorios.Repositorios.Interfaces;
 using Servicios.Administrador.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -11,16 +13,22 @@ namespace Servicios.Administrador
 {
     public class ArticulosServiceImpl : BaseServiceImpl<Articulo> , IArticulosService
     {
+        
+        private readonly IArticulosRepository articulosRepository;
+
         //Constructor con inyeccion de dependencias
         /*public ArticulosServiceImpl(IArticulosRepository articulosRepository) : base(articulosRepository)
         {
 
         }*/
-        public ArticulosServiceImpl() : base(new ArticulosRepositoryImpl()) // Hago el NEW porque todavia no vimos inyeccion de dependencias
+        public ArticulosServiceImpl(IArticulosRepository articulosRepository) : base(articulosRepository) // Hago el NEW porque todavia no vimos inyeccion de dependencias
         {
-
+            this.articulosRepository = articulosRepository;
         }
 
-
+        public void MetodoParticularDeArticulos(Articulo articulo)
+        {
+            articulosRepository.AlgoParticularDelArticulo();
+        }
     }
 }

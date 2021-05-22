@@ -9,10 +9,14 @@ using System.Threading.Tasks;
 
 namespace ModeloDatosProvisorios.DAO
 {  
-    /* Esta clase simula ser una tabla de la base de datos */
+   /* Clase que se conectará con la base de datos*/
     public class ArticulosDAOImpl : IArticulosDAO
     {
-        
+        public ArticulosDAOImpl()
+        {
+
+        }
+
         public Articulo ObtenerPorId(int id)
         {
             return ArticulosDatos.ListaArticulos.Find(i => i.IdArticulo == id);

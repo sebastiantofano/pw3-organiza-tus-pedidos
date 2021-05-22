@@ -9,7 +9,11 @@ namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
     [Area("UsuarioGeneral")]
     public class ErroresController : Controller
     {
-        
+        public ErroresController()
+        {
+
+        }
+
         public IActionResult Index()
         {
             return View();

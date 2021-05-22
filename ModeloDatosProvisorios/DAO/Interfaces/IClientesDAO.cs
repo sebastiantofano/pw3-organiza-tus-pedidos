@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ModeloDatosProvisorios.DAO.Interfaces
 {
-    interface IClientesDAO : IDAO<Cliente>
+    public interface IClientesDAO : IDAO<Cliente>
     {
     }
 }

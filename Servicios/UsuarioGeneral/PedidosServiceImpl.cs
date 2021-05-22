@@ -1,5 +1,6 @@
 ﻿using ModeloDatosProvisorios.Modelos;
 using ModeloDatosProvisorios.Repositorios;
+using ModeloDatosProvisorios.Repositorios.Interfaces;
 using Servicios.UsuarioGeneral.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -11,8 +12,10 @@ namespace Servicios.UsuarioGeneral
 {
     public class PedidosServiceImpl : BaseServiceImpl<Pedido>, IPedidosService
     {
-        public PedidosServiceImpl() : base(new PedidosRepositoryImpl())
+        private readonly IPedidosRepository pedidosRepository;
+        public PedidosServiceImpl(IPedidosRepository pedidosRepository) : base(pedidosRepository)
         {
+            this.pedidosRepository = pedidosRepository;
         }
     }
 }

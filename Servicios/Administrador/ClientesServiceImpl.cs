@@ -1,6 +1,7 @@
-﻿using ModeloDatosProvisorios.Datos.Repositorios;
+﻿using ModeloDatosProvisorios.DAO;
 using ModeloDatosProvisorios.Modelos;
 using ModeloDatosProvisorios.Repositorios;
+using ModeloDatosProvisorios.Repositorios.Interfaces;
 using Servicios.Administrador.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -12,8 +13,12 @@ namespace Servicios.Administrador
 {
     public class ClientesServiceImpl : BaseServiceImpl<Cliente>, IClientesService
     {
-        public ClientesServiceImpl() : base(new ClientesRepositoryImpl()) // Hago el NEW porque todavia no vimos inyeccion de dependencias
+        private readonly IClientesRepository clientesRepository;
+        public ClientesServiceImpl(IClientesRepository clientesRepository) : base(clientesRepository) // Hago el NEW porque todavia no vimos inyeccion de dependencias
         {
+            this.clientesRepository = clientesRepository;
         }
+
+        
     }
 }

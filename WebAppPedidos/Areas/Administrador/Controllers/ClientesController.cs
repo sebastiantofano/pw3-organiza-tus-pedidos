@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ModeloDatosProvisorios.DAO;
 using ModeloDatosProvisorios.Modelos;
+using ModeloDatosProvisorios.Repositorios;
 using Servicios.Administrador;
 using Servicios.Administrador.Interfaces;
 using System;
@@ -16,7 +18,7 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
         public ClientesController(/*IClientesService clientesService*/)
         {
             //ClientesService = clientesService;
-            this.clientesService = new ClientesServiceImpl(); // Debo instanciar el servicio ya que todavia no tenemos inyeccion de dependencias
+            this.clientesService = new ClientesServiceImpl(new ClientesRepositoryImpl(new ClientesDAOImpl())); // Debo instanciar el servicio ya que todavia no tenemos inyeccion de dependencias
 
         }
         public IActionResult Index()

@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ModeloDatosProvisorios.DAO;
+using ModeloDatosProvisorios.Datos.Repositorios;
 using ModeloDatosProvisorios.Modelos;
 using Servicios.Administrador;
 using Servicios.Administrador.Interfaces;
@@ -14,10 +16,10 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
     public class ArticulosController : Controller
     {
         private readonly IArticulosService articulosService;
-        public ArticulosController(/*IArticulosService articulosService*/) 
+        public ArticulosController(/*IArticulosService articulosService*/)  // Esto sera la inyeccion de dependencias
         {
             //this.articulosService = articulosService;
-            articulosService = new ArticulosServiceImpl(); // Debo instanciar el servicio ya que todavia no tenemos inyeccion de dependencias
+            articulosService = new ArticulosServiceImpl(new ArticulosRepositoryImpl(new ArticulosDAOImpl())); // Debo instanciar el servicio ya que todavia no tenemos inyeccion de dependencias
         }
         public IActionResult Index()
         {

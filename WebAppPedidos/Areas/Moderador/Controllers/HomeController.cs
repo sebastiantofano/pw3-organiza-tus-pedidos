@@ -9,6 +9,11 @@ namespace WebAppPedidos.Areas.Moderador.Controllers
     [Area("Moderador")]
     public class HomeController : Controller
     {
+        public HomeController()
+        {
+
+        }
+
         public IActionResult Index()
         {
             return View();
