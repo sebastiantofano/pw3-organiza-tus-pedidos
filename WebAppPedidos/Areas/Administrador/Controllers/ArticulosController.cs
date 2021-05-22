@@ -64,7 +64,7 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
         {
             articulosService.Actualizar(articulo);
 
-            TempData["toastr_success"] = "Se ha editado el artículo correctamente !";
+            TempData["toastr_warning"] = "Se ha editado el artículo correctamente !";
 
             return RedirectToAction("AdministrarArticulos");
         }

@@ -115,6 +115,7 @@
 
 
     @await RenderSectionAsync("Scripts", required: false)
+    @{await Html.RenderPartialAsync("~/Areas/UsuarioGeneral/Views/Shared/pv_ToastrNotification.cshtml");};
 
 
 </body>
