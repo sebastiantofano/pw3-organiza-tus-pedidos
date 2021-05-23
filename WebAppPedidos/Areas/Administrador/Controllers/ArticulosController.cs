@@ -12,8 +12,8 @@ using System.Threading.Tasks;
 
 namespace WebAppPedidos.Areas.Administrador.Controllers
 {
-    [Area("Administrador")]
-    public class ArticulosController : Controller
+    [Area("Administrador")]  // Defino a que area pertenecera este controller
+    public class ArticulosController : Controller 
     {
         private readonly IArticulosService articulosService;
         public ArticulosController(/*IArticulosService articulosService*/)  // Esto sera la inyeccion de dependencias

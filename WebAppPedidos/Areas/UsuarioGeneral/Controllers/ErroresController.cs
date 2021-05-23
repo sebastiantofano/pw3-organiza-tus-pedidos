@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
 {
-    [Area("UsuarioGeneral")]
+    [Area("UsuarioGeneral")] // Defino a que area corresponde el controller
     public class ErroresController : Controller
     {
         public ErroresController()

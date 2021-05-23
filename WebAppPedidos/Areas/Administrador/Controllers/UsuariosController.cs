@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace WebAppPedidos.Areas.Administrador.Controllers
 {
-    [Area("Administrador")]
+    [Area("Administrador")] // Defino a que area corresponde el controller
     public class UsuariosController : Controller
     {
         private readonly IUsuariosService usuariosService;

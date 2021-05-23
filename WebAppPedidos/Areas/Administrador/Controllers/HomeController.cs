@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace WebAppPedidos.Areas.Administrador.Controllers
 {
-    [Area("Administrador")]
-    public class HomeController : Controller
+    [Area("Administrador")] // Defino a que area corresponde el controller
+    public class HomeController : Controller 
     {
 
         public HomeController()

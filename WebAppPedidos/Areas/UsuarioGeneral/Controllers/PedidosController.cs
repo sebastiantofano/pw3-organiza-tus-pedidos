@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
 {
-    [Area("UsuarioGeneral")]
+    [Area("UsuarioGeneral")] // Defino a que area corresponde el controller
     public class PedidosController : Controller
     {
         private readonly IPedidosService pedidosService;
