@@ -53,5 +53,11 @@ namespace ModeloDatosProvisorios.DAO
             return (usuarioEncontrado is not null );
 
         }
+
+        public Usuario ObtenerPorEmail(string email)
+        {
+            Usuario usuarioEncontrado = UsuariosDatos.listaUsuarios.Find(o => o.Email.Equals(email) );
+            return usuarioEncontrado;
+        }
     }
 }

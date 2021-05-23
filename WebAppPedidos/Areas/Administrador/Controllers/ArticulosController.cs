@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ModeloDatosProvisorios.DAO;
 using ModeloDatosProvisorios.Datos.Repositorios;
@@ -26,16 +27,19 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
             return RedirectToAction("AdministrarArticulos");
         }
 
+        //[Authorize]
         public IActionResult AdministrarArticulos()
         {
             List<Articulo> listaArticulos = articulosService.ObtenerTodos();
             return View(listaArticulos);
         }
 
+
         public IActionResult AgregarArticulo()
         {
             return View();
         }
+
 
         [HttpPost]
         public IActionResult AgregarArticulo(Articulo articulo)
@@ -60,6 +64,7 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
 
             return View(articulo);
         }
+
 
         [HttpPost]
         public IActionResult EditarArticulo(Articulo articulo)

@@ -13,7 +13,8 @@ using System.Threading.Tasks;
 
 using System.Security.Principal;
 using System.Web;
-
+using Servicios.Helpers;
+using Microsoft.AspNetCore.Http;
 
 namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
 {
@@ -40,7 +41,9 @@ namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
             {
                 try
                 {
-                    usuario = loginService.IniciarSesion(usuario);
+                    Usuario usuarioValidado = loginService.IniciarSesion(usuario);
+                    var token = TokenService.CreateToken(usuarioValidado);
+                    HttpContext.Session.SetString("token", token);
 
                     return RedirectToAction("Index", "Home", new { Area = "Administrador" });
                 }

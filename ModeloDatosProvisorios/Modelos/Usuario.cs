@@ -25,5 +25,7 @@ namespace ModeloDatosProvisorios.Modelos
         public string CreadorPor { get; set; }
         public string ModificadoPor { get; set; }
         public string BorradoPor { get; set; }
+
+        public string Roles { get; set; }
     }
 }

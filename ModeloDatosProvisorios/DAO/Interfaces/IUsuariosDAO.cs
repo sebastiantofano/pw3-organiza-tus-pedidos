@@ -10,5 +10,7 @@ namespace ModeloDatosProvisorios.DAO.Interfaces
     public interface IUsuariosDAO : IDAO<Usuario>
     {
         bool ValidarUsuarioYContrasenaCorrecta(Usuario usuario);
+
+        Usuario ObtenerPorEmail(string email);
     }
 }

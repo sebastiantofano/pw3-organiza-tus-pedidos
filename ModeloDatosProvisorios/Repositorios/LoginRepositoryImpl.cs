@@ -31,7 +31,8 @@ namespace ModeloDatosProvisorios.Repositorios
                     throw new InvalidLoginException("Credenciales invalidas");
             }
 
-            return usuario;
+            Usuario usuarioEncontrado = usuariosDAO.ObtenerPorEmail(usuario.Email);
+            return usuarioEncontrado;
         }
     }
 }

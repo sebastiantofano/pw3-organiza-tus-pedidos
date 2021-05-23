@@ -25,8 +25,9 @@ namespace Servicios.UsuarioGeneral
         {
             try
             {
-                usuario = loginRepository.IniciarSesion(usuario);
-                return usuario;
+                Usuario usuarioEncontrado = loginRepository.IniciarSesion(usuario);
+
+                return usuarioEncontrado;
             }
             catch (InvalidLoginException)
             {

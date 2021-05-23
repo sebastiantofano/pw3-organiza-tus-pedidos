@@ -31,6 +31,7 @@ namespace WebAppPedidos
             /* INICIO: Codigo agregado para el uso de sesiones */
             services.AddDistributedMemoryCache();
 
+
             services.AddSession(options =>
             {
                 options.Cookie.Name = "WebAppPedidosSession";
@@ -41,6 +42,7 @@ namespace WebAppPedidos
             });
             /* FIN: Codigo agregado para el uso de sesiones */
 
+            services.AddControllersWithViews();
             //////////////////////////////
             var key = Encoding.ASCII.GetBytes(Settings.Secret);
             services.AddAuthentication(x =>
@@ -61,8 +63,9 @@ namespace WebAppPedidos
 
             });
             //////////////////////////////
+    
 
-            services.AddControllersWithViews();
+            
 
         }
 
@@ -82,12 +85,12 @@ namespace WebAppPedidos
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-            app.UseRouting();
-
             app.UseAuthentication();
+            app.UseRouting();
             app.UseAuthorization();
-
             app.UseSession(); // Agregado para el uso de sesiones
+
+            
 
             /* AGREGADO: Redirecciones a páginas de errores */
             app.UseStatusCodePages(context => {
