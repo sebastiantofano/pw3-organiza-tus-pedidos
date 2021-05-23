@@ -23,19 +23,22 @@ namespace WebAppPedidos
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
-
             /* INICIO: Codigo agregado para el uso de sesiones */
             services.AddDistributedMemoryCache();
 
             services.AddSession(options =>
             {
                 options.Cookie.Name = "WebAppPedidosSession";
-                options.IdleTimeout = TimeSpan.FromSeconds(30);
+                options.IdleTimeout = TimeSpan.FromSeconds(10);
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
+                
             });
             /* FIN: Codigo agregado para el uso de sesiones */
+
+
+            services.AddControllersWithViews();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
