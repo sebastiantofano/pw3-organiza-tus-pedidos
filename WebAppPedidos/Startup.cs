@@ -24,6 +24,18 @@ namespace WebAppPedidos
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            /* INICIO: Codigo agregado para el uso de sesiones */
+            services.AddDistributedMemoryCache();
+
+            services.AddSession(options =>
+            {
+                options.Cookie.Name = "WebAppPedidosSession";
+                options.IdleTimeout = TimeSpan.FromSeconds(30);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+            /* FIN: Codigo agregado para el uso de sesiones */
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,7 +58,7 @@ namespace WebAppPedidos
 
             app.UseAuthorization();
 
-
+            app.UseSession(); // Agregado para el uso de sesiones
 
             /* AGREGADO: Redirecciones a páginas de errores */
             app.UseStatusCodePages(context => {

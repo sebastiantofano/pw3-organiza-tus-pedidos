@@ -1,4 +1,6 @@
-﻿@{
+﻿@using ModeloDatosProvisorios.Modelos
+@model Usuario
+@{
     Layout = null;
 }
 <!DOCTYPE html>
@@ -7,20 +9,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WebAppPedidos</title>
-    @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="~/css/site.css" />*@
 
     <!-- ================= Favicon ================== -->
     <!-- Standard -->
     <link rel="shortcut icon" href="http://placehold.it/64.png/000/fff">
-    <!-- Retina iPad Touch Icon-->
-    <link rel="apple-touch-icon" sizes="144x144" href="http://placehold.it/144.png/000/fff">
-    <!-- Retina iPhone Touch Icon-->
-    <link rel="apple-touch-icon" sizes="114x114" href="http://placehold.it/114.png/000/fff">
-    <!-- Standard iPad Touch Icon-->
-    <link rel="apple-touch-icon" sizes="72x72" href="http://placehold.it/72.png/000/fff">
-    <!-- Standard iPhone Touch Icon-->
-    <link rel="apple-touch-icon" sizes="57x57" href="http://placehold.it/57.png/000/fff">
 
     <!-- Common Template -->
     <link href="~/themes/assets/css/lib/font-awesome.min.css" rel="stylesheet">
@@ -29,8 +21,7 @@
     <link href="~/themes/assets/css/lib/menubar/sidebar.css" rel="stylesheet">
     <link href="~/themes/assets/css/lib/helper.css" rel="stylesheet">
     <link href="~/themes/assets/css/style.css" rel="stylesheet">
-    <link href="~/themes/assets/css/lib/select2/select2.min.css" rel="stylesheet">
-
+    <link href="~/themes/assets/css/lib/toastr/toastr.min.css" rel="stylesheet">
     <style>
         .fondo-login {
             background: no-repeat 100% url(https://thumbs.dreamstime.com/z/two-color-paper-blue-white-overlap-floor-split-half-image-background-140178019.jpg)
@@ -51,19 +42,24 @@
                                 <a href="index.html"><span class="text-black-50"><strong>Programación Web III - 2021-1C</strong></span></a>
                             </div>
                             <div class="login-form">
-                                <h3  class="text-black-50 text-center">Bienvenido a Organizá tus Pedidos</h3>
-                                <form class="m-t-20">
-                                    <div class="form-group">
-                                        <label>Correo electrónico</label>
-                                        <input type="email" class="form-control" placeholder="correo.electronico@dominio.com">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Contraseña</label>
-                                        <input type="password" class="form-control" placeholder="Contraseña">
-                                    </div>
+                                <h3 class="text-black-50 text-center">Bienvenido a Organizá tus Pedidos</h3>
+                                @using (Html.BeginForm("IniciarSesion", "Login", new { area = "UsuarioGeneral" }, FormMethod.Post))
+                                {
+                                    <div class="m-t-20">
+                                        <div class="form-group">
+                                            <label asp-for="Email">Correo electrónico</label>
+                                            <input type="email" name="Email" asp-for="Email" class="form-control" placeholder="correo.electronico@dominio.com">
+                                            <span asp-validation-for="Email " class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Contraseña</label>
+                                            <input type="password" name="Password" class="form-control" placeholder="Contraseña">
+                                        </div>
 
-                                    <button type="submit" class="btn btn-info btn-flat m-b-30 m-t-30">Ingresar</button>
-                                </form>
+                                        <button type="submit" class="btn btn-info btn-flat m-b-30 m-t-30">Ingresar</button>
+                                    </div>
+                                }
+
                             </div>
                         </div>
                     </div>
@@ -72,13 +68,6 @@
         </div>
 
     </div>
-
-    <!-- Para paginas que requieran validaciones, ver como quitamos esto de aca y lo ponemos en cada pagina
-     pero que se recargue al final-->
-    <script src="~/themes/assets/js/lib/select2/select2.full.min.js"></script>
-    <script src="~/themes/assets/js/lib/form-validation/jquery.validate.min.js"></script>
-    <script src="~/themes/assets/js/lib/form-validation/jquery.validate-init.js"></script>
-
 
     <!-- Common Template-->
     <script src="~/themes/assets/js/lib/jquery.min.js"></script>
@@ -94,6 +83,7 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 
+    @{await Html.RenderPartialAsync("~/Areas/UsuarioGeneral/Views/Shared/pv_ToastrNotification.cshtml");};
 
 </body>
 </html>
