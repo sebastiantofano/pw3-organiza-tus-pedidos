@@ -9,6 +9,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="5.0.6" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.11.1" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.11.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ModeloDatosProvisorios\ModeloDatosProvisorios.csproj" />
   </ItemGroup>
 

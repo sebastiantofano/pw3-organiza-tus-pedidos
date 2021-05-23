@@ -31,7 +31,7 @@ namespace ModeloDatosProvisorios.DAO
 
         public Usuario ObtenerPorId(int id)
         {
-            throw new NotImplementedException();
+            return UsuariosDatos.listaUsuarios.Find(i => i.IdUsuario == id);
         }
 
         public List<Usuario> ObtenerTodos()

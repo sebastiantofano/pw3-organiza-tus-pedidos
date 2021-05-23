@@ -11,6 +11,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+using System.Security.Principal;
+using System.Web;
+
+
 namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
 {
     [Area("UsuarioGeneral")] // Defino a que area corresponde el controller
@@ -23,6 +27,7 @@ namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
             //this.loginService = loginService;
             this.loginService = new LoginServiceImpl(new LoginRepositoryImpl(new UsuariosDAOImpl()));
         }
+
         public IActionResult Index()
         {
             return View();
@@ -35,7 +40,8 @@ namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
             {
                 try
                 {
-                    loginService.IniciarSesion(usuario);
+                    usuario = loginService.IniciarSesion(usuario);
+
                     return RedirectToAction("Index", "Home", new { Area = "Administrador" });
                 }
                 catch (InvalidLoginException)
