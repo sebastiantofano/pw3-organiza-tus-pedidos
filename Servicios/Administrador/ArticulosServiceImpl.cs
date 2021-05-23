@@ -30,5 +30,10 @@ namespace Servicios.Administrador
         {
             articulosRepository.AlgoParticularDelArticulo();
         }
+
+        public bool ValidarCodigoExistente(string codigo)
+        {
+            return articulosRepository.ValidarCodigoExistente(codigo);
+        }
     }
 }

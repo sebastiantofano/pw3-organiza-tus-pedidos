@@ -3,7 +3,9 @@ using ModeloDatosProvisorios.Datos;
 using ModeloDatosProvisorios.Modelos;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -35,15 +37,15 @@ namespace ModeloDatosProvisorios.DAO
             ArticulosDatos.ListaArticulos.Add(articulo);
         }
 
-        public void Actualizar(Articulo entity)
+        public void Actualizar(Articulo articulo)
         {
-            Articulo articuloEncontrado = ArticulosDatos.ListaArticulos.FirstOrDefault(x => x.IdArticulo == entity.IdArticulo);
-            articuloEncontrado.Codigo = entity.Codigo;
-            articuloEncontrado.Descripcion = entity.Descripcion;
+            Articulo articuloEncontrado = ArticulosDatos.ListaArticulos.FirstOrDefault(x => x.IdArticulo == articulo.IdArticulo);
+            articuloEncontrado.Codigo = articulo.Codigo;
+            articuloEncontrado.Descripcion = articulo.Descripcion;
             articuloEncontrado.FechaModificacion = DateTime.Today;
         }
 
-        public void Eliminar(Articulo entity)
+        public void Eliminar(Articulo articulo)
         {
             throw new NotImplementedException();
         }
@@ -55,8 +57,11 @@ namespace ModeloDatosProvisorios.DAO
             articuloEncontrado.BorradoPor = "Alguien lo borró";
         }
 
+        public bool ValidarCodigoExistente(string codigo)
+        {
+            Articulo articulo = ArticulosDatos.ListaArticulos.FirstOrDefault(x => x.Codigo.Equals(codigo));
+            return (articulo != null) ? true : false;
 
-
-
+        }
     }
 }

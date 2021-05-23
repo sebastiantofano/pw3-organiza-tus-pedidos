@@ -24,5 +24,10 @@ namespace ModeloDatosProvisorios.Datos.Repositorios
         {
             throw new NotImplementedException();
         }
+
+        public bool ValidarCodigoExistente(string codigo)
+        {
+            return articulosDAO.ValidarCodigoExistente(codigo);
+        }
     }
 }

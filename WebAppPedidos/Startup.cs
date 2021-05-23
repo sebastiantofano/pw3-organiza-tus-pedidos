@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -28,7 +27,7 @@ namespace WebAppPedidos
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            /* INICIO: Codigo agregado para el uso de sesiones */
+            /* INICIO: Agregado para el uso de sesiones */
             services.AddDistributedMemoryCache();
 
 
@@ -40,10 +39,12 @@ namespace WebAppPedidos
                 options.Cookie.IsEssential = true;
                 
             });
-            /* FIN: Codigo agregado para el uso de sesiones */
+            /* FIN: Agregado para el uso de sesiones */
 
             services.AddControllersWithViews();
-            //////////////////////////////
+
+
+            /* INICIO: Agregado para el uso de Json Web Token (JWT) */
             var key = Encoding.ASCII.GetBytes(Settings.Secret);
             services.AddAuthentication(x =>
             {
@@ -62,10 +63,7 @@ namespace WebAppPedidos
                 };
 
             });
-            //////////////////////////////
-    
-
-            
+            /* FIN: Agregado para el uso de Json Web Token (JWT) */
 
         }
 

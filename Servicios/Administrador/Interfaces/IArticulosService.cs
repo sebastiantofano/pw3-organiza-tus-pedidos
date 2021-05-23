@@ -10,5 +10,6 @@ namespace Servicios.Administrador.Interfaces
     public interface IArticulosService : IBaseService<Articulo>
     {
         void MetodoParticularDeArticulos(Articulo articulo);
+        bool ValidarCodigoExistente(string codigo);
     }
 }

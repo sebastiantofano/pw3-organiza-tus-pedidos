@@ -9,6 +9,6 @@ namespace ModeloDatosProvisorios.DAO.Interfaces
 {
     public interface IArticulosDAO : IDAO<Articulo>
     {
-
+        bool ValidarCodigoExistente(string codigo);
     }
 }

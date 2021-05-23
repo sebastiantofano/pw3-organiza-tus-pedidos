@@ -23,7 +23,7 @@ namespace WebAppPedidos.Controllers
             bool estaLogeado = true;
             bool esAdmin = true;
 
-            /* Logica para mostrar la primera vista al iniciar la aplicación o ingresar a la página*/
+            /* Logica para mostrar la primera vista al iniciar la aplicación o ingresar a la página, Esto no tiene nada que ver con el LoginController*/
             if (estaLogeado)
             {
                 if (esAdmin)

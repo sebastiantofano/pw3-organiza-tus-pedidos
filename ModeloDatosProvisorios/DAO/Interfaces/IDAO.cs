@@ -19,5 +19,6 @@ namespace ModeloDatosProvisorios.DAO.Interfaces
         void EliminarPorId(int id);
 
         void Eliminar(TEntity entity);
+
     }
 }

@@ -14,7 +14,7 @@ namespace ModeloDatosProvisorios.DAO
     {
 
 
-        public void Actualizar(Usuario entity)
+        public void Actualizar(Usuario usuario)
         {
             throw new NotImplementedException();
         }
@@ -24,7 +24,7 @@ namespace ModeloDatosProvisorios.DAO
             throw new NotImplementedException();
         }
 
-        public void Insertar(Usuario entity)
+        public void Insertar(Usuario usuario)
         {
             throw new NotImplementedException();
         }
@@ -36,10 +36,10 @@ namespace ModeloDatosProvisorios.DAO
 
         public List<Usuario> ObtenerTodos()
         {
-            throw new NotImplementedException();
+            return UsuariosDatos.listaUsuarios;
         }
 
-        public void Eliminar(Usuario entity)
+        public void Eliminar(Usuario usuario)
         {
             throw new NotImplementedException();
         }

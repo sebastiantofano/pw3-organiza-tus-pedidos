@@ -23,12 +23,14 @@ namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
 
     {
         private readonly ILoginService loginService;
+
         public LoginController(/*ILoginService loginService*/) // Luego tendremos inyeccion de dependencias
         {
             //this.loginService = loginService;
             this.loginService = new LoginServiceImpl(new LoginRepositoryImpl(new UsuariosDAOImpl()));
         }
 
+        [Route("Login")]
         public IActionResult Index()
         {
             return View();
@@ -42,10 +44,20 @@ namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
                 try
                 {
                     Usuario usuarioValidado = loginService.IniciarSesion(usuario);
-                    var token = TokenService.CreateToken(usuarioValidado);
-                    HttpContext.Session.SetString("token", token);
+                    //var token = TokenService.CreateToken(usuarioValidado);
+                    //HttpContext.Session.SetString("token", token);
 
-                    return RedirectToAction("Index", "Home", new { Area = "Administrador" });
+                    if (usuarioValidado.EsAdmin)
+                    {
+                        TempData["toastr_success"] = $"Bienvenido {usuarioValidado.Nombre} (Usted es Administrador)";
+                        return RedirectToAction("Index", "Home", new { Area = "Administrador" });
+                    }
+                    else
+                    { 
+                        TempData["toastr_success"] = $"Bienvenido {usuarioValidado.Nombre} (Usted es Moderador)";
+                        return RedirectToAction("Index", "Home", new { Area = "Moderador" });
+                    }
+                    
                 }
                 catch (InvalidLoginException)
                 {

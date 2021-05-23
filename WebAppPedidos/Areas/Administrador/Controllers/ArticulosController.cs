@@ -47,6 +47,13 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
             /* Intentar realizar una validación cuando tenemos el atajo de agregar un articulo en la vista de administracion de articulos */
             if (ModelState.IsValid)
             {
+                // Donde se debe validar si ya existe el articulo? En este Controller o en el Service
+                bool codigoYaExistente = articulosService.ValidarCodigoExistente(articulo.Codigo);
+                if (codigoYaExistente)
+                {
+                    TempData["toastr_error"] = "El codigo de artículo que ha ingresado ya existe!";
+                    return RedirectToAction("AdministrarArticulos");
+                }
                 articulosService.Insertar(articulo);
                 TempData["toastr_success"] = "Se ha creado el artículo correctamente !";
                 return RedirectToAction("AdministrarArticulos");

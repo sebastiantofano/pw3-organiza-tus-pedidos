@@ -16,7 +16,7 @@ namespace ModeloDatosProvisorios.DAO
 
         public Cliente ObtenerPorId(int id)
         {
-            throw new NotImplementedException();
+            return ClientesDatos.listaClientes.Find(i => i.IdCliente == id);
         }
 
         public List<Cliente> ObtenerTodos()
@@ -24,22 +24,30 @@ namespace ModeloDatosProvisorios.DAO
             return ClientesDatos.listaClientes;
         }
 
-        public void Insertar(Cliente entity)
+        public void Insertar(Cliente cliente)
         {
-            throw new NotImplementedException();
+            int idUltimoCliente = ClientesDatos.listaClientes.Last().IdCliente;
+            int IdnuevoCliente = idUltimoCliente + 1;
+            cliente.IdCliente = IdnuevoCliente;
+            ClientesDatos.listaClientes.Add(cliente);
         }
 
-        public void Actualizar(Cliente entity)
+        public void Actualizar(Cliente cliente)
         {
-            throw new NotImplementedException();
+            Cliente clienteEncontado = ClientesDatos.listaClientes.FirstOrDefault(x => x.IdCliente == cliente.IdCliente);
+            clienteEncontado.Numero = cliente.Numero;
+            clienteEncontado.Nombre = cliente.Nombre;
+            clienteEncontado.FechaModificacion = DateTime.Today;
         }
 
         public void EliminarPorId(int id)
         {
-            throw new NotImplementedException();
+            Cliente clienteEncontado = ClientesDatos.listaClientes.FirstOrDefault(x => x.IdCliente == id);
+            clienteEncontado.FechaBorrado = DateTime.Today;
+            clienteEncontado.BorradoPor = "Alguien lo borró";
         }
 
-        public void Eliminar(Cliente entity)
+        public void Eliminar(Cliente cliente)
         {
             throw new NotImplementedException();
         }
