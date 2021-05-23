@@ -22,7 +22,6 @@
     <Folder Include="Areas\Moderador\Models\" />
     <Folder Include="Areas\UsuarioGeneral\Data\" />
     <Folder Include="Areas\UsuarioGeneral\Models\" />
-    <Folder Include="Helpers\" />
   </ItemGroup>
 
   <ItemGroup>

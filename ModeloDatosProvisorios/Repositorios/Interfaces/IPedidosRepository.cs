@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ModeloDatosProvisorios.Repositorios.Interfaces
 {
-    public interface IPedidosRepository : IBaseRepository<Pedido>
+    public interface IPedidosRepository : IBaseRepository<Pedido> // Esta interface hereda todos los metodos del la interface del repositorio base
     {
     }
 }

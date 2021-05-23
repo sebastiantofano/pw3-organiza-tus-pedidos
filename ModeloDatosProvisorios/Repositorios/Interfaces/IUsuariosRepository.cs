@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ModeloDatosProvisorios.Repositorios.Interfaces
 {
-    public interface IUsuariosRepository : IBaseRepository<Usuario>
+    public interface IUsuariosRepository : IBaseRepository<Usuario> // Esta interface hereda todos los metodos del la interface del repositorio base
     {
     }
 }

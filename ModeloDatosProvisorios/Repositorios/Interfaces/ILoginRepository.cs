@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace ModeloDatosProvisorios.Repositorios.Interfaces
 {
-    public interface IArticulosRepository : IBaseRepository<Articulo> // Esta interface hereda todos los metodos del la interface del repositorio base
+    public interface ILoginRepository
     {
-        void AlgoParticularDelArticulo();
+        Usuario IniciarSesion(Usuario usuario);
+        void CerrarSesion();
     }
 }

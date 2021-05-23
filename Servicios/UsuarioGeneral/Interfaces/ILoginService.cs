@@ -5,10 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ModeloDatosProvisorios.DAO.Interfaces
+namespace Servicios.UsuarioGeneral.Interfaces
 {
-    public interface IUsuariosDAO : IDAO<Usuario>
+    public interface ILoginService
     {
-        bool ValidarUsuarioYContrasenaCorrecta(Usuario usuario);
+        Usuario IniciarSesion(Usuario usuario);
+        void CerrarSesion();
+
+
     }
 }

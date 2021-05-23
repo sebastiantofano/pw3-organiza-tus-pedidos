@@ -1,4 +1,5 @@
 ﻿using ModeloDatosProvisorios.DAO.Interfaces;
+using ModeloDatosProvisorios.Datos;
 using ModeloDatosProvisorios.Modelos;
 using System;
 using System.Collections.Generic;
@@ -41,6 +42,16 @@ namespace ModeloDatosProvisorios.DAO
         public void Eliminar(Usuario entity)
         {
             throw new NotImplementedException();
+        }
+
+        public bool ValidarUsuarioYContrasenaCorrecta(Usuario usuario)
+        {
+            string email = usuario.Email;
+            string contrasena = usuario.Password;
+
+            Usuario usuarioEncontrado = UsuariosDatos.listaUsuarios.Find(o => o.Email.Equals(email) && o.Password.Equals(contrasena));
+            return (usuarioEncontrado is not null );
+
         }
     }
 }
