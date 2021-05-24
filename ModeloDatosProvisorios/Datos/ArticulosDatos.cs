@@ -13,7 +13,6 @@ namespace ModeloDatosProvisorios.Datos
             IdArticulo = 1,
             Codigo = "COD_01",
             Descripcion = "Descripción del Articulo 1",
-            FechaCreacion = new DateTime(2021, 10, 24),
             CreadorPor = "Sebastian Tofano",
             FechaModificacion = new DateTime(2021, 11, 02),
             ModificadoPor = "Pepito Perez"

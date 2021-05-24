@@ -14,7 +14,7 @@ namespace ModeloDatosProvisorios.Modelos
 
         [Required(ErrorMessage = "Debe introducir obligatoriamente una descripción del artículo")]
         public string Descripcion { get; set; }
-        public DateTime? FechaCreacion { get; set; }
+        public DateTime? FechaCreacion { get; private set; } = DateTime.Today;
         public DateTime? FechaModificacion { get; set; }
         public DateTime? FechaBorrado { get; set; }
         public string CreadorPor { get; set; }

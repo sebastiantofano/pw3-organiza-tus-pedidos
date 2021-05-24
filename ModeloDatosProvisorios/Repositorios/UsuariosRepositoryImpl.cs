@@ -19,5 +19,12 @@ namespace ModeloDatosProvisorios.Repositorios
         {
             this.usuariosDAO = usuariosDAO;
         }
+
+        public bool ValidarEmailExistente(string email)
+        {
+            bool EsUsuarioExistente = usuariosDAO.ValidarEmailExistente(email);
+            return EsUsuarioExistente;
+
+        }
     }
 }

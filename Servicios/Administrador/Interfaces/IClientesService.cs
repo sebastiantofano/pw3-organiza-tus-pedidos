@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Servicios.Administrador.Interfaces
 {
-    public interface IClientesService : IBaseService<Cliente>
+    public interface IClientesService : IBaseService<Cliente> // Esta interface hereda el CRUD de Servicio Base
     {
     }
 }

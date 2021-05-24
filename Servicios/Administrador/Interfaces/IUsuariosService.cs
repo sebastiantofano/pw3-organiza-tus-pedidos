@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace Servicios.Administrador.Interfaces
 {
-    public interface IUsuariosService : IBaseService<Usuario>
+    public interface IUsuariosService : IBaseService<Usuario> // Esta interface hereda el CRUD de Servicio Base
     {
+        bool ValidarEmailExistente(string email);
     }
 }

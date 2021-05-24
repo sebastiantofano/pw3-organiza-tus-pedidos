@@ -12,5 +12,7 @@ namespace ModeloDatosProvisorios.DAO.Interfaces
         bool ValidarUsuarioYContrasenaCorrecta(Usuario usuario);
 
         Usuario ObtenerPorEmail(string email);
+
+        bool ValidarEmailExistente(string email);
     }
 }

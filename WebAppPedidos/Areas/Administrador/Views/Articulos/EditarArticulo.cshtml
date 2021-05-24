@@ -16,11 +16,9 @@
 <section id="main-content">
     <div class="row">
         <div class="col-lg-12">
-            <div class="form-validation">
 
-                @using (Html.BeginForm("EditarArticulo", "Articulos", new { area = "Administrador" }, FormMethod.Post))
-                {
-
+            @using (Html.BeginForm("EditarArticulo", "Articulos", new { area = "Administrador" }, FormMethod.Post))
+            {<div class="form-validation">
                     <div class="form-valide">
                         <div class="card">
                             <div class="card-body">
@@ -132,25 +130,30 @@
 
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-lg-12 d-flex align-items-center">
-                                <button type="submit" class="btn btn-info col-lg-4 m-1">Guardar Modificaciones</button>
-
-                                <a href="javascript:history.back(-1);" class="btn btn-default ml-2">Volver</a>
-
+                            <div class="row">
+                                <div class="col-lg-12 d-flex align-items-center">
+                                    <button type="submit" class="btn btn-info col-lg-4 m-1">Guardar Modificaciones</button>
+                                    <a asp-area="Administrador" asp-controller="Articulos" asp-action="AdministrarArticulos" class="btn btn-default ml-2">Volver</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                }
+                </div>
+
+            }
+            @if (Model.FechaBorrado == null)
+            {
+
                 @using (Html.BeginForm("EliminarArticuloPorId", "Articulos", new { area = "Administrador" }, FormMethod.Post))
                 {
                     <input type="hidden" name="id" value="@Model.IdArticulo" />
                     <button type="submit" class="btn btn-danger col-lg-3 ml-auto">Eliminar Artículo</button>
                 }
+            }
 
-            </div>
+
+
+
         </div>
     </div>                  
             

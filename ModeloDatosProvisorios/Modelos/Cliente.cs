@@ -16,7 +16,7 @@ namespace ModeloDatosProvisorios.Modelos
         public string Email { get; set; }
         public string Direccion { get; set; }
         public long CUIT { get; set; }
-        public DateTime? FechaCreacion { get; set; }
+        public DateTime? FechaCreacion { get; private set; } = DateTime.Today;
         public DateTime? FechaModificacion { get; set; }
         public DateTime? FechaBorrado { get; set; }
         public string ModificadoPor { get; set; }

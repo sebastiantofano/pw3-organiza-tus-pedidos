@@ -33,10 +33,10 @@ namespace WebAppPedidos
 
             services.AddSession(options =>
             {
-                options.Cookie.Name = "WebAppPedidosSession";
-                options.IdleTimeout = TimeSpan.FromSeconds(10);
-                options.Cookie.HttpOnly = true;
-                options.Cookie.IsEssential = true;
+                options.Cookie.Name = ".WebAppPedidos.Session";
+                options.IdleTimeout = TimeSpan.FromSeconds(15);
+                //options.Cookie.HttpOnly = true;
+                //options.Cookie.IsEssential = true;
                 
             });
             /* FIN: Agregado para el uso de sesiones */
@@ -80,12 +80,15 @@ namespace WebAppPedidos
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-            app.UseAuthentication();
             app.UseRouting();
+
+            app.UseAuthentication();
             app.UseAuthorization();
+
             app.UseSession(); // Agregado para el uso de sesiones
 
             

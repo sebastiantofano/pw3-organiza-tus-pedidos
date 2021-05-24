@@ -77,7 +77,7 @@
                                             <td>@articulo.Codigo</td>
                                             <td>@articulo.Descripcion</td>
                                             <td>
-                                                <span class="badge badge-@(articulo.FechaBorrado == null ? "success" : "danger")">
+                                                <span class="badge badge-@(articulo.FechaBorrado == null ? "info" : "danger")">
                                                     @(articulo.FechaBorrado == null ? "VIGENTE" : "ELIMINADO")
                                                 </span>
                                             </td>
@@ -107,7 +107,7 @@
     </div>
     <div class="row">
         <div class="col-lg-12 d-flex align-items-center">
-            <a href="javascript:history.back(-1);" class="btn btn-default ml-auto ">Volver</a>
+            <a asp-area="Administrador" asp-controller="Home" asp-action="Index" class="btn btn-default ml-auto ">Volver</a>
         </div>
     </div>
 </section>

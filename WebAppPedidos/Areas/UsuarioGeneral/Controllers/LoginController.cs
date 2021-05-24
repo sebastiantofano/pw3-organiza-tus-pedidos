@@ -39,17 +39,17 @@ namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
         [HttpPost]
         public IActionResult IniciarSesion(Usuario usuario)
         {
-            if (ModelState.IsValid)
-            {
                 try
                 {
                     Usuario usuarioValidado = loginService.IniciarSesion(usuario);
                     //var token = TokenService.CreateToken(usuarioValidado);
-                    //HttpContext.Session.SetString("token", token);
+                    
 
                     if (usuarioValidado.EsAdmin)
                     {
                         TempData["toastr_success"] = $"Bienvenido {usuarioValidado.Nombre} (Usted es Administrador)";
+                        //HttpContext.Session.SetString("NombreUsuario", usuarioValidado.Nombre.ToString());
+                        //HttpContext.Session.SetString("ApellidoUsuario", usuarioValidado.Apellido.ToString());
                         return RedirectToAction("Index", "Home", new { Area = "Administrador" });
                     }
                     else
@@ -65,9 +65,9 @@ namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
                     TempData["toastr_error"] = "Credenciales Inválidas";
                     return RedirectToAction("Index", "Login", new { Area = "UsuarioGeneral" });
                 }
-            }
-            TempData["toastr_error"] = "Debe ingresar sus credenciales correctamente";
-            return RedirectToAction("Index", "Login", new { Area = "UsuarioGeneral" });
+  
+
+
 
         }
     }

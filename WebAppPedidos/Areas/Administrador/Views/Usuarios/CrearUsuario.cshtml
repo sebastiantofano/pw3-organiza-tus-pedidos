@@ -1,6 +1,5 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using ModeloDatosProvisorios.Modelos
+@model Usuario
 @{
 }
 <div class="row">
@@ -19,46 +18,55 @@
             <div class="card">
                 <div class="card-body">
                     <div class="form-validation">
-                        <form class="form-valide">
-                            <div class="form-group row">
-                                <div class="input-group align-items-center">
-                                    <label class="col-lg-1 col-form-label">E-mail</label>
-                                    <div class="input-group-prepend col-lg-10">
-                                        <span class="input-group-text">@@</span>
-                                        <input type="text" class="form-control" placeholder="E-mail">
+                        @using (Html.BeginForm("CrearUsuario", "Usuarios", new { area = "Administrador" }, FormMethod.Post))
+                        {
+                            <div class="form-valide">
+                                <div class="form-group row">
+                                    <div class="input-group align-items-center">
+                                        <label asp-for="Email" class="col-lg-1 col-form-label">E-mail</label>
+                                        <div class="input-group-prepend col-lg-10">
+                                            <span class="input-group-text">@@</span>
+                                            <input type="text" name="Email" asp-for="Email" class="form-control" placeholder="E-mail">
+                                            <span asp-validation-for="Email" class="text-danger"></span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-group row align-items-center">
-                                <label class="col-lg-1 col-form-label p-2">Contraseña</label>
-                                <div class="col-lg-10">
-                                    <input type="password" class="form-control" placeholder="Contraseña">
+                                <div class="form-group row align-items-center">
+                                    <label asp-for="Password" class="col-lg-1 col-form-label p-2">Contraseña</label>
+                                    <div class="col-lg-10">
+                                        <input type="password" name="password" asp-for="Password" class="form-control" placeholder="Contraseña">
+                                        <span asp-validation-for="Password" class="text-danger"></span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group row align-items-center">
-                                <label class="col-lg-1 col-form-label">Nombre</label>
-                                <div class="col-lg-3">
-                                    <input type="text" class="form-control" placeholder="Nombre">
+                                <div class="form-group row align-items-center">
+                                    <label asp-for="Nombre" class="col-lg-1 col-form-label">Nombre</label>
+                                    <div class="col-lg-3">
+                                        <input type="text" name="Nombre" asp-for="Nombre" class="form-control" placeholder="Nombre">
+                                        <span asp-validation-for="Nombre" class="text-danger"></span>
+                                    </div>
+                                    <label asp-for="Apellido" class="col-lg-1 col-form-label">Apellido</label>
+                                    <div class="col-lg-3">
+                                        <input type="text" name="Apellido" asp-for="Apellido" class="form-control" placeholder="Apellido">
+                                        <span asp-validation-for="Apellido" class="text-danger"></span>
+                                    </div>
+                                    <label class="col-lg-1 col-form-label p-0">Fecha de Nacimiento</label>
+                                    <div class="col-lg-2">
+                                        <input type="date" name="FechaNacimiento" class="form-control" placeholder="Fecha de Nacimiento">
+                                    </div>
                                 </div>
-                                <label class="col-lg-1 col-form-label">Apellido</label>
-                                <div class="col-lg-3">
-                                    <input type="text" class="form-control" placeholder="Apellido">
-                                </div>
-                                <label class="col-lg-1 col-form-label p-0">Fecha de Nacimiento</label>
-                                <div class="col-lg-2">
-                                    <input type="date" class="form-control" placeholder="Fecha de Nacimiento">
-                                </div>
-                            </div>
 
-                            <div class="form-group row">
-                                <div class="col-auto my-1">
-                                    <div class="custom-control custom-checkbox mr-sm-2">
-                                        <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
-                                        <label class="custom-control-label" for="customControlAutosizing">Usuario Administrador</label>
+                                <div class="form-group row">
+                                    <div class="col-auto my-1">
+                                        <div class="custom-control custom-checkbox mr-sm-2">
+                                            <input type="checkbox" name="EsAdmin" value="true" class="custom-control-input" id="customControlAutosizing">
+                                            <label class="custom-control-label" for="customControlAutosizing">Usuario Administrador</label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                            <button type="submit" class="btn btn-info col-lg-4 m-1">Crear Usuario</button>
+                        }
+
                     </div>
                 </div>
             </div>
@@ -67,8 +75,14 @@
 
     <div class="row">
         <div class="col-lg-12 d-flex align-items-center">
-            <button type="button" class="btn btn-info col-lg-4 m-1">Crear Usuario</button>
-            <a href="javascript:history.back(-1);" class="btn btn-default ml-auto ">Volver</a>
+
+            <a asp-area="Administrador" asp-controller="Usuarios" asp-action="AdministrarUsuarios" class="btn btn-default ml-auto ">Volver</a>
         </div>
     </div>
 </section>
+
+
+
+@section Scripts{
+
+}

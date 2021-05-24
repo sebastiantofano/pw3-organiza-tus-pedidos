@@ -19,5 +19,10 @@ namespace Servicios.Administrador
         {
             this.usuariosRepository = usuariosRepository;
         }
+
+        public bool ValidarEmailExistente(string email)
+        {
+            return usuariosRepository.ValidarEmailExistente(email);
+        }
     }
 }

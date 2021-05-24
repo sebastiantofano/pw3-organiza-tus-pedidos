@@ -16,17 +16,28 @@ namespace ModeloDatosProvisorios.DAO
 
         public void Actualizar(Usuario usuario)
         {
-            throw new NotImplementedException();
+            Usuario usuarioEncontrado = UsuariosDatos.listaUsuarios.FirstOrDefault(x => x.IdUsuario == usuario.IdUsuario);
+            usuarioEncontrado.Nombre = usuario.Nombre ?? usuarioEncontrado.Nombre;
+            usuarioEncontrado.Apellido = usuario.Apellido ?? usuarioEncontrado.Apellido;
+            usuarioEncontrado.Email = usuario.Email ?? usuarioEncontrado.Email;
+            usuarioEncontrado.FechaNacimiento = usuario.FechaNacimiento ?? usuarioEncontrado.FechaNacimiento;
+            usuarioEncontrado.EsAdmin = usuario.EsAdmin;
+            usuarioEncontrado.FechaModificacion = DateTime.Today;
         }
 
         public void EliminarPorId(int id)
         {
-            throw new NotImplementedException();
+            Usuario usuarioEncontrado = UsuariosDatos.listaUsuarios.FirstOrDefault(x => x.IdUsuario == id);
+            usuarioEncontrado.FechaBorrado = DateTime.Today;
+            usuarioEncontrado.BorradoPor = "Alguien lo borró";
         }
 
         public void Insertar(Usuario usuario)
         {
-            throw new NotImplementedException();
+            int idUltimoUsuario = UsuariosDatos.listaUsuarios.Last().IdUsuario;
+            int IdnuevoUsuario = idUltimoUsuario + 1;
+            usuario.IdUsuario = IdnuevoUsuario;
+            UsuariosDatos.listaUsuarios.Add(usuario);
         }
 
         public Usuario ObtenerPorId(int id)
@@ -58,6 +69,12 @@ namespace ModeloDatosProvisorios.DAO
         {
             Usuario usuarioEncontrado = UsuariosDatos.listaUsuarios.Find(o => o.Email.Equals(email) );
             return usuarioEncontrado;
+        }
+
+        public bool ValidarEmailExistente(string email)
+        {
+            Usuario usuario = UsuariosDatos.listaUsuarios.FirstOrDefault(x => x.Email.Equals(email));
+            return (usuario != null) ? true : false;
         }
     }
 }
