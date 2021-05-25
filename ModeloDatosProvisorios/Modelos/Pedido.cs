@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 
 namespace ModeloDatosProvisorios.Modelos
 {
     public class Pedido
     {
+        [Required(ErrorMessage = "Id Requerido")]
         public int IdPedido { get; set; }
         public int IdCliente { get; set; }
         public int IdEstado { get; set; }

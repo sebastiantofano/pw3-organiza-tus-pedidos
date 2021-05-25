@@ -5,7 +5,7 @@ namespace ModeloDatosProvisorios.Modelos
 {
     public class Articulo
     {
-        
+        [Required(ErrorMessage = "Id Requerido")]
         public int IdArticulo { get; set; }
 
         [Required(ErrorMessage = "Debe introducir obligatoriamente un código de artículo")]

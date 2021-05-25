@@ -9,6 +9,7 @@ namespace ModeloDatosProvisorios.Modelos
 {
     public class Cliente
     {
+        [Required(ErrorMessage = "Id Requerido")]
         public int IdCliente { get; set; }
         public int Numero { get; set; }
         public string Nombre { get; set; }

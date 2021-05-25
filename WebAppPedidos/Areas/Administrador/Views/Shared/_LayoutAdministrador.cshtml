@@ -22,16 +22,16 @@
 
 <body>
 
-    @{await Html.RenderPartialAsync("~/Areas/UsuarioGeneral/Views/Shared/pv_SidebarUsuarioGeneral.cshtml");};
+    @{await Html.RenderPartialAsync("~/Areas/UsuarioGeneral/Views/Shared/pv_SidebarUsuarioGeneral.cshtml");}
 
-    @{await Html.RenderPartialAsync("~/Areas/UsuarioGeneral/Views/Shared/pv_HeaderUsuarioGeneral.cshtml");};
+    @{await Html.RenderPartialAsync("~/Areas/UsuarioGeneral/Views/Shared/pv_HeaderUsuarioGeneral.cshtml");}
 
     <div class="content-wrap">
         <div class="main">
             <div class="container-fluid">
                 @RenderBody()
                 <div class="row">
-                    @{await Html.RenderPartialAsync("~/Areas/UsuarioGeneral/Views/Shared/pv_FooterUsuarioGeneral.cshtml");};
+                    @{await Html.RenderPartialAsync("~/Areas/UsuarioGeneral/Views/Shared/pv_FooterUsuarioGeneral.cshtml");}
                 </div>
             </div>
         </div>
@@ -48,8 +48,10 @@
     <script src="~/themes/assets/js/lib/preloader/pace.min.js"></script>
     <script src="~/themes/assets/js/lib/bootstrap.min.js"></script>
     <script src="~/themes/assets/js/scripts.js"></script>
+
+    @*<script src="~/js/site.min.js"></script>*@
     @await RenderSectionAsync("Scripts", required: false)
-    @{await Html.RenderPartialAsync("~/Areas/UsuarioGeneral/Views/Shared/pv_ToastrNotification.cshtml");};
+    @{await Html.RenderPartialAsync("~/Areas/UsuarioGeneral/Views/Shared/pv_ToastrNotification.cshtml");}
 
 
 </body>

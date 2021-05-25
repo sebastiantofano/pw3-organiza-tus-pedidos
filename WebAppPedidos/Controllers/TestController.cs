@@ -55,7 +55,7 @@ namespace WebAppPedidos.Controllers
 
 
         [HttpGet]
-        [Route("administrador")]
+        [Route("administradorAPI")]
         [Authorize(Roles = "Administrador")]
         public string admin()
         {

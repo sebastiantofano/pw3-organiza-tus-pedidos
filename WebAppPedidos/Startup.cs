@@ -31,6 +31,7 @@ namespace WebAppPedidos
         {
 
             /* INICIO: Agregado para el uso de Json Web Token (JWT) */
+            /* ESTO ESTA A MODO DE PRUEBA - DEBEMOS DESHABILITARLO PARA LA WEB APP, SOLO FUNCIONARA EN LA API */
             //var key = Encoding.ASCII.GetBytes(Settings.Secret);
             //services.AddAuthentication(x =>
             //{
@@ -89,8 +90,6 @@ namespace WebAppPedidos
             /* FIN: Agregado para el uso de sesiones */
 
             services.AddControllersWithViews();
-
-
 
 
         }

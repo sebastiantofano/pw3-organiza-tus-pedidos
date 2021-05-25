@@ -29,6 +29,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ModeloDatosProvisorios\ModeloDatosProvisorios.csproj" />
     <ProjectReference Include="..\Servicios\Servicios.csproj" />
+    <ProjectReference Include="..\WebAppPedidosAPI\WebAppPedidosAPI.csproj" />
   </ItemGroup>
 
 	
