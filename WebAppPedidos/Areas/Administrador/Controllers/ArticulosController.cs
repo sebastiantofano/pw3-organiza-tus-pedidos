@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 namespace WebAppPedidos.Areas.Administrador.Controllers
 {
     [Area("Administrador")]  // Defino a que area corresponde el controller
+    [Authorize(Roles = "Administrador")]
     public class ArticulosController : Controller 
     {
         private readonly IArticulosService articulosService;
@@ -27,7 +28,7 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
             return RedirectToAction("AdministrarArticulos");
         }
 
-        //[Authorize]
+        
         public IActionResult AdministrarArticulos()
         {
             List<Articulo> listaArticulos = articulosService.ObtenerTodos();

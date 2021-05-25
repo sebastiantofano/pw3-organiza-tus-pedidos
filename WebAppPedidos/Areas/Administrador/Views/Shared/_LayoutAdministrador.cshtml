@@ -21,69 +21,8 @@
 </head>
 
 <body>
-    <div class="sidebar sidebar-hide-to-small sidebar-shrink sidebar-gestures">
-        <div class="nano">
-            <div class="nano-content">
-                <div class="logo">
-                    <a asp-area="Administrador" asp-controller="Home" asp-action="Index">
-                        <span>Programación Web III</span>
-                    </a>
-                </div>
-                <ul>
-                    <li class="label">Inicio</li>
-                    <li>
-                        <a asp-area="Administrador" asp-controller="Home" asp-action="Index">
-                            <i class="ti-home"></i> Principal
-                        </a>
-                    </li>
-                    <li class="label">Clientes</li>
-                    <li>
-                        <a asp-area="Administrador" asp-controller="Clientes" asp-action="AdministrarClientes">
-                            <i class="ti-id-badge"></i> Administrar clientes
-                        </a>
-                    </li>
-                    <li>
-                        <a asp-area="Administrador" asp-controller="Clientes" asp-action="AgregarCliente">
-                            <i class="ti-plus"></i><i class="ti-face-smile"></i> Agregar cliente
-                        </a>
-                    </li>
-                    <li class="label">Artículos</li>
-                    <li>
-                        <a asp-area="Administrador" asp-controller="Articulos" asp-action="AdministrarArticulos">
-                            <i class="ti-receipt"></i> Administrar artículos
-                        </a>
-                    </li>
-                    <li>
-                        <a asp-area="Administrador" asp-controller="Articulos" asp-action="AgregarArticulo">
-                            <i class="ti-plus"></i><i class="ti-package"></i> Agregar artículo
-                        </a>
-                    </li>
-                    <li class="label">Pedidos</li>
-                    <li>
-                        <a asp-area="UsuarioGeneral" asp-controller="Pedidos" asp-action="GestionarPedidos">
-                            <i class="ti-clipboard"></i> Gestionar pedidos
-                        </a>
-                    </li>
-                    <li>
-                        <a asp-area="UsuarioGeneral" asp-controller="Pedidos" asp-action="AgregarPedido">
-                            <i class="ti-plus"></i> <i class="ti-pencil-alt"></i> Agregar pedido
-                        </a>
-                    </li>
-                    <li class="label">Usuarios</li>
-                    <li>
-                        <a asp-area="Administrador" asp-controller="Usuarios" asp-action="AdministrarUsuarios">
-                            <i class="ti-view-list-alt"></i> Administrar usuarios
-                        </a>
-                    </li>
-                    <li>
-                        <a asp-area="Administrador" asp-controller="Usuarios" asp-action="CrearUsuario">
-                            <i class="ti-plus"></i><i class="ti-user"></i> Crear usuario
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
+
+    @{await Html.RenderPartialAsync("~/Areas/UsuarioGeneral/Views/Shared/pv_SidebarUsuarioGeneral.cshtml");};
 
     @{await Html.RenderPartialAsync("~/Areas/UsuarioGeneral/Views/Shared/pv_HeaderUsuarioGeneral.cshtml");};
 

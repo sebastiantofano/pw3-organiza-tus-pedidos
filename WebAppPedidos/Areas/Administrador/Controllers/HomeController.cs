@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +9,7 @@ using System.Threading.Tasks;
 namespace WebAppPedidos.Areas.Administrador.Controllers
 {
     [Area("Administrador")] // Defino a que area corresponde el controller
+    [Authorize(Roles = "Administrador")]
     public class HomeController : Controller 
     {
 
@@ -18,6 +21,7 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
         //[Route("Home")]
         public IActionResult Index()
         {
+            //ViewData["NombreUsuario"] = HttpContext.Session.GetString("NombreUsuario");
             return View();
         }
     }

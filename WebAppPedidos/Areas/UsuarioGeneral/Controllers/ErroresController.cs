@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,9 +21,17 @@ namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
         }
 
         [Route("404notfound")]
+        [Authorize(Roles = "Administrador, Moderador")]
         public IActionResult Error404()
+        {
+            return View();
+        }
+
+        [Route("401unauthorized")]
+        public IActionResult Error401()
         {
             return View();
         }
     }
 }
+

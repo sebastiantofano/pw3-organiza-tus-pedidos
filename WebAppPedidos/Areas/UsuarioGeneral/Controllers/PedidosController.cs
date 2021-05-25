@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ModeloDatosProvisorios.DAO;
 using ModeloDatosProvisorios.Repositorios;
 using Servicios.UsuarioGeneral;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
 {
     [Area("UsuarioGeneral")] // Defino a que area corresponde el controller
+    [Authorize(Roles = "Administrador, Moderador")]
     public class PedidosController : Controller
     {
         private readonly IPedidosService pedidosService;

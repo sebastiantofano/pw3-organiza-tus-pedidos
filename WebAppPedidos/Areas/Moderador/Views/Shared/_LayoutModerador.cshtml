@@ -19,38 +19,7 @@
 </head>
 
 <body>
-    <div class="sidebar sidebar-hide-to-small sidebar-shrink sidebar-gestures">
-        <div class="nano">
-            <div class="nano-content">
-                <div class="logo">
-                    <a asp-area="Moderador" asp-controller="Home" asp-action="Index">
-                        <!-- <img src="~/themes/assets/images/logo.png" alt="" /> -->
-                        <span>Programación Web III</span>
-                    </a>
-                </div>
-                <ul>
-                    <li class="label">Inicio</li>
-                    <li>
-                        <a asp-area="Moderador" asp-controller="Home" asp-action="Index">
-                            <i class="ti-home"></i> Principal
-                        </a>
-                    </li>
-                    <li class="label">Pedidos</li>
-                    <li>
-                        <a asp-area="UsuarioGeneral" asp-controller="Pedidos" asp-action="GestionarPedidos">
-                            <i class="ti-clipboard"></i> Gestionar pedidos
-                        </a>
-                    </li>
-                    <li>
-                        <a asp-area="UsuarioGeneral" asp-controller="Pedidos" asp-action="AgregarPedido">
-                            <i class="ti-plus"></i> <i class="ti-pencil-alt"></i> Agregar pedido
-                        </a>
-                    </li>
-
-                </ul>
-            </div>
-        </div>
-    </div>
+    @{await Html.RenderPartialAsync("~/Areas/UsuarioGeneral/Views/Shared/pv_SidebarUsuarioGeneral.cshtml");};
 
     @{await Html.RenderPartialAsync("~/Areas/UsuarioGeneral/Views/Shared/pv_HeaderUsuarioGeneral.cshtml");};
 

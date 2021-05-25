@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ModeloDatosProvisorios.DAO;
 using ModeloDatosProvisorios.Modelos;
 using ModeloDatosProvisorios.Repositorios;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 namespace WebAppPedidos.Areas.Administrador.Controllers
 {
     [Area("Administrador")] // Defino a que area corresponde el controller
+    [Authorize(Roles = "Administrador")]
     public class UsuariosController : Controller
     {
         private readonly IUsuariosService usuariosService;

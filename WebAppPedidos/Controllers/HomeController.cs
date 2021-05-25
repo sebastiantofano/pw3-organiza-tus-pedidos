@@ -18,27 +18,10 @@ namespace WebAppPedidos.Controllers
             _logger = logger;
         }
 
+        // Primera ejecución de la aplicación
         public IActionResult Index()
         {
-            bool estaLogeado = true;
-            bool esAdmin = true;
-
-            /* Logica para mostrar la primera vista al iniciar la aplicación o ingresar a la página, Esto no tiene nada que ver con el LoginController*/
-            if (estaLogeado)
-            {
-                if (esAdmin)
-                {
-                    return RedirectToAction("Index", "Home", new { Area = "Administrador" });
-                }
-                else
-                {
-                    return RedirectToAction("Index", "Home", new { Area = "Moderador" });
-                }
-            }
-            else
-            {
-                return RedirectToAction("Index", "Login", new { Area = "UsuarioGeneral" });
-            }
+            return View("~/"); 
         }
 
         public IActionResult Privacy()

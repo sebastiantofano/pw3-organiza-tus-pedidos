@@ -14,15 +14,15 @@ namespace Servicios.Helpers
     public class TokenService
     {
         private const double EXPIRE_HOURS = 1.0;
-        public static string CreateToken(Usuario user)
+        public static string CreateToken(Usuario usuario)
         {
             var key = Encoding.ASCII.GetBytes(Settings.Secret);
             var tokenHandler = new JwtSecurityTokenHandler();
             var descriptor = new SecurityTokenDescriptor {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, user.Email.ToString()),
-                    new Claim(ClaimTypes.Role, user.Roles.ToString())
+                    new Claim(ClaimTypes.Name, usuario.Email.ToString()),
+                    new Claim(ClaimTypes.Role, usuario.Roles.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddHours(EXPIRE_HOURS),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

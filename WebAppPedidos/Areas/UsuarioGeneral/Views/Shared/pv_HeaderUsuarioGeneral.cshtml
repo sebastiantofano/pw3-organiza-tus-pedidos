@@ -1,4 +1,6 @@
-﻿
+﻿@{ 
+    //string nombreUsuario = (string) ViewData["NombreUsuario"];
+}
 <div class="header">
     <div class="container-fluid">
         <div class="row">
@@ -12,17 +14,20 @@
                 </div>
                 <div class="header-icon">
                     <i class="ti-user"> </i>
-                    <span class="user-avatar">Nombre del usuario  (Tipo de Usuario - Aquí va Administrador o Modereador)</span>
+                    <span class="user-avatar">@*@nombreUsuario (Tipo de Usuario - Aquí va Administrador o Modereador)*@</span>
                 </div>
-                <div class="float-right">
-                    <div class="header-icon">
-                        <span class="user-avatar">
-                            Cerrar sesión
-                            <i class="ti-power-off"></i>
-                        </span>
-
+                @using (Html.BeginForm("CerrarSesion", "Login", new { area = "UsuarioGeneral" }, FormMethod.Post))
+                {
+                    <div class="float-right">
+                        <div class="header-icon">
+                            <button class="btn btn-outline-danger user-avatar">
+                                Cerrar sesión
+                                <i class="ti-power-off"></i>
+                            </button>
+                        </div>
                     </div>
-                </div>
+                }
+
             </div>
         </div>
     </div>
