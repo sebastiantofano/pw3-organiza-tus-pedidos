@@ -31,6 +31,14 @@ namespace WebAppPedidosAPI
         public void ConfigureServices(IServiceCollection services)
         {
 
+
+
+            services.AddControllers();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAppPedidosAPI", Version = "v1" });
+            });
+
             /* INICIO: Agregado para el uso de Json Web Token (JWT) */
             var key = Encoding.ASCII.GetBytes(Settings.Secret);
             services.AddAuthentication(x =>
@@ -51,12 +59,6 @@ namespace WebAppPedidosAPI
 
             });
             /* FIN: Agregado para el uso de Json Web Token (JWT) */
-
-            services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAppPedidosAPI", Version = "v1" });
-            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

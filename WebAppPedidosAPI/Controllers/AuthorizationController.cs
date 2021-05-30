@@ -54,16 +54,25 @@ namespace WebAppPedidosAPI.Controllers
         }
 
         [HttpGet]
+        [Route("authenticated")]
+        [Authorize]
+        public string Authenticated() => String.Format("You are Authenticated - {0}", User.Identity.Name);
+
+        [HttpGet]
         [Route("administrador")]
         [Authorize(Roles = "Administrador")]
         public string Admin()
         {
-            return "You are a Administrador";
+            return $"You are a Administrador - {User.Identity.Name}";
         }
 
         [HttpGet]
-        [Route("authenticated")]
-        [Authorize]
-        public string Authenticated() => String.Format("Authenticated - {0}", User.Identity.Name);
+        [Route("validar")]
+        [Authorize(Roles = "Administrador")]
+        public string Validar(string id)
+        {
+            return $"You are a Administrador - {User.Identity.Name}";
+        }
+
     }
 }
