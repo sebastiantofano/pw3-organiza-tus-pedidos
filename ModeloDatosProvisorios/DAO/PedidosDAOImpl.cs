@@ -21,7 +21,7 @@ namespace ModeloDatosProvisorios.DAO
             throw new NotImplementedException();
         }
 
-        public void EliminarPorId(int id)
+        public void EliminarPorId(int id, string who)
         {
             throw new NotImplementedException();
         }

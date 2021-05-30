@@ -29,8 +29,9 @@ namespace WebAppPedidos.Helpers.Security
         /* Metodo para obtener los claims del usuario */
         private IEnumerable<Claim> GetUserClaims(Usuario usuario)
         {
+
             List<Claim> claims = new List<Claim>();
-            //claims.Add(new Claim(ClaimTypes.Name, usuario.Email));
+            claims.Add(new Claim(ClaimTypes.Name, $"{usuario.Nombre} {usuario.Apellido}"));
             claims.Add(new Claim(ClaimTypes.Email, usuario.Email));
             claims.Add(new Claim(ClaimTypes.Role, usuario.Roles));
             return claims;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ModeloDatosProvisorios.Modelos.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,10 +8,16 @@ using System.Threading.Tasks;
 
 namespace ModeloDatosProvisorios.Modelos
 {
-    public class Usuario
+    public class Usuario : BaseEntity, ITrackeableEntity
     {
-        [Required(ErrorMessage = "Id Requerido")]
-        public int IdUsuario { get; set; }
+        public int IdUsuario {
+            get {
+                return base.Id;
+            }
+            set {
+                base.Id = value;
+            }
+        }
 
         public bool EsAdmin { get; set; }
 
@@ -29,12 +36,14 @@ namespace ModeloDatosProvisorios.Modelos
         public string Apellido { get; set; }
         public DateTime? FechaNacimiento { get; set; }
         public DateTime? FechaUltimoLogin { get; set; }
-        public DateTime? FechaCreacion { get; private set; } = DateTime.Today;
+
+        public DateTime? FechaCreacion { get; set; } = DateTime.Today;
         public DateTime? FechaModificacion { get; set; }
         public DateTime? FechaBorrado { get; set; }
-        public string CreadorPor { get; set; }
+        public string CreadoPor { get; set; }
         public string ModificadoPor { get; set; }
         public string BorradoPor { get; set; }
+
 
         public string Roles {
             get {

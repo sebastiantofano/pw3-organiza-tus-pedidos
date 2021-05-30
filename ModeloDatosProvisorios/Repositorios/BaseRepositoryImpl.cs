@@ -35,9 +35,9 @@ namespace ModeloDatosProvisorios.Repositorios
         {
             tEntityDAO.Insertar(entity);
         }
-        public void EliminarPorId(int id)
+        public void EliminarPorId(int id, string who)
         {
-            tEntityDAO.EliminarPorId(id);
+            tEntityDAO.EliminarPorId(id, who);
         }
         public void Eliminar(TEntity entity)
         {

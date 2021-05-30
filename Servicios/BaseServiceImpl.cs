@@ -44,9 +44,9 @@ namespace Servicios
             entityRepository.Eliminar(entity);
         }
 
-        public void EliminarPorId(int id)
+        public void EliminarPorId(int id, string who)
         {
-            entityRepository.EliminarPorId(id);
+            entityRepository.EliminarPorId(id, who);
         }
 
 

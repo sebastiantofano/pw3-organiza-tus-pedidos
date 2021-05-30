@@ -25,7 +25,7 @@ namespace ModeloDatosProvisorios.DAO
             usuarioEncontrado.FechaModificacion = DateTime.Today;
         }
 
-        public void EliminarPorId(int id)
+        public void EliminarPorId(int id, string who)
         {
             Usuario usuarioEncontrado = UsuariosDatos.listaUsuarios.FirstOrDefault(x => x.IdUsuario == id);
             usuarioEncontrado.FechaBorrado = DateTime.Today;

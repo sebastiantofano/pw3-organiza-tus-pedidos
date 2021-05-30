@@ -29,6 +29,9 @@
                             <div class="card-title">
                                 <h4>Agregar un nuevo artículo</h4>
                             </div>
+
+                            <input type="hidden" name="CreadoPor" value="@User.Identity.Name" />
+
                             <div class="form-group row">
                                 <label class="col-form-label m-auto" for="val-codigo">
                                     Código <span class="text-danger">*</span>
@@ -88,13 +91,13 @@
                                                 </span>
                                             </td>
                                             <td class="row justify-content-between align-items-center">
-                                                <a asp-area="Administrador" asp-controller="Articulos" asp-action="EditarArticulo" asp-route-id="@articulo.IdArticulo"
+                                                <a asp-area="Administrador" asp-controller="Articulos" asp-action="EditarArticulo" asp-route-id="@articulo.Id"
                                                    class="btn btn-warning btn-flat btn-addon btn-sm ml-4">
                                                     <i class="ti-pencil"></i>Editar
                                                 </a>
                                                 @if (articulo.FechaBorrado == null)
                                                 {
-                                                    <form method="POST" asp-area="Administrador" asp-controller="Articulos" asp-action="EliminarArticuloPorId" asp-route-id="@articulo.IdArticulo">
+                                                    <form method="POST" asp-area="Administrador" asp-controller="Articulos" asp-action="EliminarArticuloPorId" asp-route-id="@articulo.IdArticulo" asp-route-who="@User.Identity.Name">
                                                         <button type="submit" class="btn btn-danger btn-flat btn-addon btn-sm" onclick="return confirm('¿Usted está seguro que desea eliminar artículo? \nCódigo: @articulo.Codigo \nDescripción: @articulo.Descripcion')"> <i class="ti-close"></i>Eliminar</button>
                                                     </form>
 

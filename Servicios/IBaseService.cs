@@ -13,7 +13,7 @@ namespace Servicios
         void Insertar(TEntity entity);
         void Actualizar(TEntity entity);
         void Eliminar(TEntity entity);
-        void EliminarPorId(int id);
+        void EliminarPorId(int id, string who);
 
     }
 }

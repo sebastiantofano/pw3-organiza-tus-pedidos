@@ -71,6 +71,8 @@ namespace WebAppPedidosAPI.Controllers
         [Authorize(Roles = "Administrador")]
         public string Validar(string id)
         {
+
+
             return $"You are a Administrador - {User.Identity.Name}";
         }
 

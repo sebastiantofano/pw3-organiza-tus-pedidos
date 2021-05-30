@@ -40,7 +40,7 @@ namespace ModeloDatosProvisorios.DAO
             clienteEncontado.FechaModificacion = DateTime.Today;
         }
 
-        public void EliminarPorId(int id)
+        public void EliminarPorId(int id, string who)
         {
             Cliente clienteEncontado = ClientesDatos.listaClientes.FirstOrDefault(x => x.IdCliente == id);
             clienteEncontado.FechaBorrado = DateTime.Today;

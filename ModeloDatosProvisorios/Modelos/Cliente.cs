@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ModeloDatosProvisorios.Modelos.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,21 +8,30 @@ using System.Threading.Tasks;
 
 namespace ModeloDatosProvisorios.Modelos
 {
-    public class Cliente
+    public class Cliente : BaseEntity, ITrackeableEntity
     {
-        [Required(ErrorMessage = "Id Requerido")]
-        public int IdCliente { get; set; }
+        public int IdCliente {
+            get {
+                return base.Id;
+            }
+            set {
+                base.Id = value;
+            }
+        }
+
         public int Numero { get; set; }
         public string Nombre { get; set; }
         public long Telefono { get; set; }
         public string Email { get; set; }
         public string Direccion { get; set; }
         public long CUIT { get; set; }
-        public DateTime? FechaCreacion { get; private set; } = DateTime.Today;
+
+        public DateTime? FechaCreacion { get; set; } = DateTime.Today;
         public DateTime? FechaModificacion { get; set; }
         public DateTime? FechaBorrado { get; set; }
+        public string CreadoPor { get; set; }
         public string ModificadoPor { get; set; }
-        public string CreadorPor { get; set; }
         public string BorradoPor { get; set; }
+
     }
 }

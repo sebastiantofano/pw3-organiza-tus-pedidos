@@ -85,10 +85,10 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
         }
 
         [HttpPost]
-        public IActionResult EliminarArticuloPorId(string id)
+        public IActionResult EliminarArticuloPorId(string id, string who)
         {
             int IdArticulo = int.Parse(id);
-            articulosService.EliminarPorId(IdArticulo);
+            articulosService.EliminarPorId(IdArticulo, who);
 
             TempData["toastr_info"] = "Se ha eliminado el artículo correctamente !";
             return RedirectToAction("AdministrarArticulos");
