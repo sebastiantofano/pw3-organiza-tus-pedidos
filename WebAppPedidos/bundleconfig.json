@@ -27,7 +27,9 @@
       "wwwroot/themes/assets/js/lib/menubar/sidebar.js",
       "wwwroot/themes/assets/js/lib/preloader/pace.min.js",
       "wwwroot/themes/assets/js/lib/bootstrap.min.js",
-      "wwwroot/themes/assets/js/scripts.js"
+      "wwwroot/themes/assets/js/scripts.js",
+      "wwwroot/themes/assets/js/lib/toastr/toastr.min.js",
+      "wwwroot/themes/assets/js/lib/toastr/toastr.init.js"
     ],
     "minify": {
       "enabled": false,

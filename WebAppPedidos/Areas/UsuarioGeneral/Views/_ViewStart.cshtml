@@ -1,13 +1,3 @@
 ﻿@{
-
-    /* Ver como hacer esta variable dinamica para que el layout dependa del rol del usuario*/
-    var esAdmin = true;
-    if (esAdmin)
-    {
-        Layout = "~/Areas/Administrador/Views/Shared/_LayoutAdministrador.cshtml";
-    }
-    else
-    {
-        Layout = "~/Areas/Moderador/Views/Shared/_LayoutModerador.cshtml";
-    }
+    Layout = "~/Areas/UsuarioGeneral/Views/Shared/_LayoutUsuarioGeneral.cshtml";
 }

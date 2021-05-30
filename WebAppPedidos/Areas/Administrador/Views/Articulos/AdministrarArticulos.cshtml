@@ -95,7 +95,7 @@
                                                 @if (articulo.FechaBorrado == null)
                                                 {
                                                     <form method="POST" asp-area="Administrador" asp-controller="Articulos" asp-action="EliminarArticuloPorId" asp-route-id="@articulo.IdArticulo">
-                                                        <button type="submit" class="btn btn-danger btn-flat btn-addon btn-sm"> <i class="ti-close"></i>Eliminar</button>
+                                                        <button type="submit" class="btn btn-danger btn-flat btn-addon btn-sm" onclick="return confirm('¿Usted está seguro que desea eliminar artículo? \nCódigo: @articulo.Codigo \nDescripción: @articulo.Descripcion')"> <i class="ti-close"></i>Eliminar</button>
                                                     </form>
 
                                                 }

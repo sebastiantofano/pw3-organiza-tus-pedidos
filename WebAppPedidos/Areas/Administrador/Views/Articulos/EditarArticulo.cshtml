@@ -17,7 +17,7 @@
     <div class="row">
         <div class="col-lg-12">
 
-            @using (Html.BeginForm("EditarArticulo", "Articulos", new { area = "Administrador" }, FormMethod.Post))
+            @using (Html.BeginForm("EditarArticulo", "Articulos", new { area = "Administrador" }, FormMethod.Post) )
             {<div class="form-validation">
                     <div class="form-valide">
                         <div class="card">
@@ -147,7 +147,7 @@
                 @using (Html.BeginForm("EliminarArticuloPorId", "Articulos", new { area = "Administrador" }, FormMethod.Post))
                 {
                     <input type="hidden" name="id" value="@Model.IdArticulo" />
-                    <button type="submit" class="btn btn-danger col-lg-3 ml-auto">Eliminar Artículo</button>
+                    <button type="submit" class="btn btn-danger col-lg-3 ml-auto" onclick="return confirm('¿Usted está seguro que desea eliminar artículo? \nCódigo: @Model.Codigo \nDescripción: @Model.Descripcion')">Eliminar Artículo</button>
                 }
             }
 

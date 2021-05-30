@@ -15,8 +15,10 @@
 
 <body>
 
+    @* PV SideBar *@
     @{await Html.RenderPartialAsync("~/Areas/UsuarioGeneral/Views/Shared/pv_SidebarUsuarioGeneral.cshtml");}
 
+    @* PV Header *@
     @{await Html.RenderPartialAsync("~/Areas/UsuarioGeneral/Views/Shared/pv_HeaderUsuarioGeneral.cshtml");}
 
     <div class="content-wrap">
@@ -24,6 +26,7 @@
             <div class="container-fluid">
                 @RenderBody()
                 <div class="row">
+                    @* PV Footer*@
                     @{await Html.RenderPartialAsync("~/Areas/UsuarioGeneral/Views/Shared/pv_FooterUsuarioGeneral.cshtml");}
                 </div>
             </div>

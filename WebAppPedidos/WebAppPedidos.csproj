@@ -21,8 +21,10 @@
   <ItemGroup>
     <Folder Include="Areas\Administrador\Data\" />
     <Folder Include="Areas\Administrador\Models\" />
+    <Folder Include="Areas\Administrador\Views\Shared\" />
     <Folder Include="Areas\Moderador\Data\" />
     <Folder Include="Areas\Moderador\Models\" />
+    <Folder Include="Areas\Moderador\Views\Shared\" />
     <Folder Include="Areas\UsuarioGeneral\Data\" />
     <Folder Include="Areas\UsuarioGeneral\Models\" />
     <Folder Include="wwwroot\bundles\" />
