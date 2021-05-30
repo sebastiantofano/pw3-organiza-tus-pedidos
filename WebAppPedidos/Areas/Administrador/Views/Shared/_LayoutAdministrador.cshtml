@@ -5,19 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - WebAppPedidos</title>
 
-    <!-- Common Template -->
-    <link href="~/themes/assets/css/lib/font-awesome.min.css" rel="stylesheet">
-    <link href="~/themes/assets/css/lib/themify-icons.css" rel="stylesheet">
-    <link href="~/themes/assets/css/lib/bootstrap.min.css" rel="stylesheet">
-    <link href="~/themes/assets/css/lib/menubar/sidebar.css" rel="stylesheet">
-    <link href="~/themes/assets/css/lib/helper.css" rel="stylesheet">
-    <link href="~/themes/assets/css/style.css" rel="stylesheet">
-    <link href="~/themes/assets/css/lib/select2/select2.min.css" rel="stylesheet">
-    <link href="~/themes/assets/css/lib/toastr/toastr.min.css" rel="stylesheet">
+    @*Usar Bundled File que contiene todos los CSS necesarios, configurado unicamente en el archivo bundleconfig.json*@
+    <link rel="stylesheet" href="~/bundles/site-bundled-file.css" />
+    
+    @* Seccion de Styles por si se requieren estilos en particular por cada pagina *@
     @await RenderSectionAsync("Styles", required: false)
 
-    <!-- Para paginas con Data Table -->
-    <link href="~/themes/assets/css/lib/data-table/buttons.bootstrap.min.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -37,20 +30,15 @@
         </div>
     </div>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
 
-    <!-- Common Template-->
-    <script src="~/themes/assets/js/lib/jquery.min.js"></script>
-    <script src="~/themes/assets/js/lib/jquery.nanoscroller.min.js"></script>
-    <script src="~/themes/assets/js/lib/menubar/sidebar.js"></script>
-    <script src="~/themes/assets/js/lib/preloader/pace.min.js"></script>
-    <script src="~/themes/assets/js/lib/bootstrap.min.js"></script>
-    <script src="~/themes/assets/js/scripts.js"></script>
+    @*Usar Bundled File que contiene todos los SCRIPTS necesarios, configurado unicamente en el archivo bundleconfig.json*@
+    <script src="~/bundles/site-bundled-file.js"></script>
 
-    @*<script src="~/js/site.min.js"></script>*@
+
+    @* Seccion de Scripts por si se requieren scripts en particular por cada pagina *@
     @await RenderSectionAsync("Scripts", required: false)
+
+    @* Partial View para las notificaciones con Toastr *@
     @{await Html.RenderPartialAsync("~/Areas/UsuarioGeneral/Views/Shared/pv_ToastrNotification.cshtml");}
 
 

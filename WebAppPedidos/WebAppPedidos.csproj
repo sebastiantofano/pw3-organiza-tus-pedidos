@@ -11,6 +11,7 @@
     <Content Remove="Views\Home\NewFolder\**" />
     <EmbeddedResource Remove="Views\Home\NewFolder\**" />
     <None Remove="Views\Home\NewFolder\**" />
+    <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.6" />
 	<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.5" />
@@ -24,6 +25,7 @@
     <Folder Include="Areas\Moderador\Models\" />
     <Folder Include="Areas\UsuarioGeneral\Data\" />
     <Folder Include="Areas\UsuarioGeneral\Models\" />
+    <Folder Include="wwwroot\bundles\" />
   </ItemGroup>
 
   <ItemGroup>

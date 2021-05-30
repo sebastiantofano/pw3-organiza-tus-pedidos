@@ -1,0 +1,38 @@
+﻿[
+  {
+    "outputFileName": "wwwroot/bundles/site-bundled-file.css",
+    "inputFiles": [
+      "wwwroot/themes/assets/css/lib/font-awesome.min.css",
+      "wwwroot/themes/assets/css/lib/themify-icons.css",
+      "wwwroot/themes/assets/css/lib/bootstrap.min.css",
+      "wwwroot/themes/assets/css/lib/menubar/sidebar.css",
+      "wwwroot/themes/assets/css/lib/helper.css",
+      "wwwroot/themes/assets/css/style.css",
+      "wwwroot/themes/assets/css/lib/select2/select2.min.css",
+      "wwwroot/themes/assets/css/lib/toastr/toastr.min.css"
+
+    ],
+    "minify": {
+      "enabled": false,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+
+  {
+    "outputFileName": "wwwroot/bundles/site-bundled-file.js",
+    "inputFiles": [
+      "wwwroot/themes/assets/js/lib/jquery.min.js",
+      "wwwroot/themes/assets/js/lib/jquery.nanoscroller.min.js",
+      "wwwroot/themes/assets/js/lib/menubar/sidebar.js",
+      "wwwroot/themes/assets/js/lib/preloader/pace.min.js",
+      "wwwroot/themes/assets/js/lib/bootstrap.min.js",
+      "wwwroot/themes/assets/js/scripts.js"
+    ],
+    "minify": {
+      "enabled": false,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  }
+]
