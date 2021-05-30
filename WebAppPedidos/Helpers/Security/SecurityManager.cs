@@ -15,7 +15,7 @@ namespace WebAppPedidos.Helpers.Security
         /* Metodo para la autenticacion */
         public async void SignIn(HttpContext httpContext, Usuario usuario)
         {
-            ClaimsIdentity claimsIdentity = new ClaimsIdentity(getUserClaims(usuario), CookieAuthenticationDefaults.AuthenticationScheme);
+            ClaimsIdentity claimsIdentity = new ClaimsIdentity(GetUserClaims(usuario), CookieAuthenticationDefaults.AuthenticationScheme);
             ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
             await httpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal);
         }
@@ -27,7 +27,7 @@ namespace WebAppPedidos.Helpers.Security
         }
 
         /* Metodo para obtener los claims del usuario */
-        private IEnumerable<Claim> getUserClaims(Usuario usuario)
+        private IEnumerable<Claim> GetUserClaims(Usuario usuario)
         {
             List<Claim> claims = new List<Claim>();
             //claims.Add(new Claim(ClaimTypes.Name, usuario.Email));
