@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 #nullable disable
 
@@ -22,12 +23,13 @@ namespace DAL.Modelos
         }
 
         // TODO : SACAR DE ACA ESTA PROPERTY ROLES, PROVISORIO
-        //public string Roles {
-        //    get {
-        //        return EsAdmin ? "Administrador" : "Moderador";
-        //    }
-        //    set { }
-        //}
+        [NotMapped]
+        public string Roles {
+            get {
+                return EsAdmin ? "Administrador" : "Moderador";
+            }
+            set { }
+        }
 
         public int IdUsuario { get; set; }
         public bool EsAdmin { get; set; }

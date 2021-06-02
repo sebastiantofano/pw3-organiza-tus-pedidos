@@ -22,7 +22,7 @@ namespace Servicios.Helpers
                 Subject = new ClaimsIdentity(new Claim[]
                 {
                     new Claim(ClaimTypes.Name, usuario.Email.ToString()),
-                    //new Claim(ClaimTypes.Role, usuario.Roles.ToString())
+                    new Claim(ClaimTypes.Role, usuario.Roles.ToString()) //TODO
                 }),
                 Expires = DateTime.UtcNow.AddHours(EXPIRE_HOURS),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

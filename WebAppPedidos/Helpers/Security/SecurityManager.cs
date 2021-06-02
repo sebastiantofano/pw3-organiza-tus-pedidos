@@ -33,7 +33,7 @@ namespace WebAppPedidos.Helpers.Security
             List<Claim> claims = new List<Claim>();
             claims.Add(new Claim(ClaimTypes.Name, $"{usuario.Nombre} {usuario.Apellido}"));
             claims.Add(new Claim(ClaimTypes.Email, usuario.Email));
-            //claims.Add(new Claim(ClaimTypes.Role, usuario.Roles)); //TODO
+            claims.Add(new Claim(ClaimTypes.Role, usuario.Roles)); //TODO
             return claims;
         }
     }

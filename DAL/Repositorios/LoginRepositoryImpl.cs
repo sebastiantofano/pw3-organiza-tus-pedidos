@@ -25,7 +25,7 @@ namespace DAL.Repositorios
         public Usuario IniciarSesion(Usuario usuario)
         {
 
-            Usuario usuarioValidado = pedidosPW3Context.Usuarios.Where(x => x.Email == usuario.Email && x.Password == usuario.Password).FirstOrDefault();
+            Usuario usuarioValidado = pedidosPW3Context.Usuarios.Where(x => x.Email == usuario.Email && x.Password == usuario.Password).FirstOrDefault(); //TODO
 
             if (usuarioValidado != null)
             {
