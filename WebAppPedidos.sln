@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Servicios", "Servicios\Serv
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModeloDatosProvisorios", "ModeloDatosProvisorios\ModeloDatosProvisorios.csproj", "{CAD773A4-D081-46EE-8954-42DA52312DC3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAppPedidosAPI", "WebAppPedidosAPI\WebAppPedidosAPI.csproj", "{5056098C-4DD6-4491-A16D-25C948B44F17}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAppPedidosAPI", "WebAppPedidosAPI\WebAppPedidosAPI.csproj", "{5056098C-4DD6-4491-A16D-25C948B44F17}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{CF986D6C-3FB7-479C-A055-C2A563083899}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{5056098C-4DD6-4491-A16D-25C948B44F17}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5056098C-4DD6-4491-A16D-25C948B44F17}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5056098C-4DD6-4491-A16D-25C948B44F17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF986D6C-3FB7-479C-A055-C2A563083899}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF986D6C-3FB7-479C-A055-C2A563083899}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF986D6C-3FB7-479C-A055-C2A563083899}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF986D6C-3FB7-479C-A055-C2A563083899}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
