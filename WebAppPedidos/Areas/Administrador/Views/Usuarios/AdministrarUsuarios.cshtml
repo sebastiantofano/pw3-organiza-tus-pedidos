@@ -1,4 +1,4 @@
-﻿@using ModeloDatosProvisorios.Modelos
+﻿@using DAL.Modelos
 @model List<Usuario>
 @{
 }
@@ -39,8 +39,8 @@
                                     <tr>
                                         <td>@usuario.Nombre @usuario.Apellido</td>
                                         <td>@usuario.Email</td>
-                                        <td><span class="badge badge-@(usuario.EsAdmin ? "success" : "info")">@usuario.Roles</span></td>
-                                        <td>@usuario.FechaCreacion?.ToShortDateString()</td>
+                                        <td><span class="badge badge-@(usuario.EsAdmin ? "success" : "info")">@*@usuario.Roles*@</span></td> @*TODO*@
+                                        <td>@usuario.FechaCreacion.ToShortDateString()</td>
                                         <td>
                                             <a asp-area="Administrador" asp-controller="Usuarios" asp-action="EditarUsuario" asp-route-id="@usuario.IdUsuario"
                                                class="btn btn-warning btn-flat btn-addon btn-sm ml-4">

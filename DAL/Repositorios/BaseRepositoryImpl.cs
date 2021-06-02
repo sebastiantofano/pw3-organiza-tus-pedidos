@@ -28,7 +28,7 @@ namespace DAL.Repositorios
         }
         public List<TEntity> ObtenerTodos()
         {
-            return (List<TEntity>)dbSet.AsNoTracking();
+            return dbSet.AsNoTracking().ToList();
         }
         public void Actualizar(TEntity entity)
         {
