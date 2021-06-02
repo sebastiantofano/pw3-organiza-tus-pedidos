@@ -11,11 +11,11 @@ namespace DAL.Repositorios
     public abstract class BaseRepositoryImpl<TEntity> : IBaseRepository<TEntity> where TEntity : class
     {
 
-        private readonly PedidosPW3Context pedidosPW3Context;
+        private readonly PedidosPW3Context pedidosPW3Context; 
 
-        public BaseRepositoryImpl()
+        public BaseRepositoryImpl(PedidosPW3Context pedidosPW3Context)
         {
-            pedidosPW3Context = new PedidosPW3Context();
+            this.pedidosPW3Context = pedidosPW3Context;
         }
 
 
@@ -25,23 +25,23 @@ namespace DAL.Repositorios
         }
         public List<TEntity> ObtenerTodos()
         {
-            return new();
+            return new List<TEntity>();
         }
         public void Actualizar(TEntity entity)
         {
-
+      
         }
         public void Insertar(TEntity entity)
         {
-
+          
         }
         public void EliminarPorId(int id, string who)
         {
-
+       
         }
         public void Eliminar(TEntity entity)
         {
-
+     
         }
     }
 }
