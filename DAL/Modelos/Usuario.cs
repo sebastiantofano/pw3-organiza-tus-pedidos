@@ -21,6 +21,14 @@ namespace DAL.Modelos
             PedidoModificadoPorNavigations = new HashSet<Pedido>();
         }
 
+        // TODO : SACAR DE ACA ESTA PROPERTY ROLES, PROVISORIO
+        //public string Roles {
+        //    get {
+        //        return EsAdmin ? "Administrador" : "Moderador";
+        //    }
+        //    set { }
+        //}
+
         public int IdUsuario { get; set; }
         public bool EsAdmin { get; set; }
         public string Email { get; set; }
