@@ -15,6 +15,11 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.6" />
 	<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.5" />
+	<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.6" />
+	<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.6">
+	  <PrivateAssets>all</PrivateAssets>
+	  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	</PackageReference>
 	<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
   </ItemGroup>
 
@@ -31,7 +36,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ModeloDatosProvisorios\ModeloDatosProvisorios.csproj" />
+    <ProjectReference Include="..\DAL\DAL.csproj" />
     <ProjectReference Include="..\Servicios\Servicios.csproj" />
     <ProjectReference Include="..\WebAppPedidosAPI\WebAppPedidosAPI.csproj" />
   </ItemGroup>

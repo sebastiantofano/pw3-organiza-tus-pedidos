@@ -1,9 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ModeloDatosProvisorios.DAO;
-using ModeloDatosProvisorios.Helpers.Exceptions;
-using ModeloDatosProvisorios.Modelos;
-using ModeloDatosProvisorios.Repositorios;
-using ModeloDatosProvisorios.Repositorios.Interfaces;
 using Servicios.UsuarioGeneral;
 using System;
 using System.Collections.Generic;
@@ -13,6 +8,10 @@ using System.Web;
 using Servicios.Helpers;
 using WebAppPedidos.Helpers.Security;
 using Microsoft.AspNetCore.Authorization;
+using DAL.Helpers.Exceptions;
+using Servicios.UsuarioGeneral.Interfaces;
+using DAL.Repositorios;
+using DAL.Modelos;
 
 namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
 {
@@ -26,7 +25,7 @@ namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
         public LoginController(/*ILoginService loginService*/) // Luego tendremos inyeccion de dependencias
         {
             //this.loginService = loginService;
-            this.loginService = new LoginServiceImpl(new LoginRepositoryImpl(new UsuariosDAOImpl()));
+            this.loginService = new LoginServiceImpl(new LoginRepositoryImpl(new PedidosPW3Context()));
 
             /*Utilizado para implementar la seguridad*/
             this.securityManager = new SecurityManager();

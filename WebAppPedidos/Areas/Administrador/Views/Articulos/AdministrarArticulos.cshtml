@@ -1,4 +1,4 @@
-﻿@using ModeloDatosProvisorios.Modelos
+﻿@using DAL.Modelos
 @model List<Articulo>
 @{
 
@@ -91,7 +91,7 @@
                                                 </span>
                                             </td>
                                             <td class="row justify-content-between align-items-center">
-                                                <a asp-area="Administrador" asp-controller="Articulos" asp-action="EditarArticulo" asp-route-id="@articulo.Id"
+                                                <a asp-area="Administrador" asp-controller="Articulos" asp-action="EditarArticulo" asp-route-id="@articulo.IdArticulo"
                                                    class="btn btn-warning btn-flat btn-addon btn-sm ml-4">
                                                     <i class="ti-pencil"></i>Editar
                                                 </a>

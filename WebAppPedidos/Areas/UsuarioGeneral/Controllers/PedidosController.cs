@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using DAL.Modelos;
+using DAL.Repositorios;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using ModeloDatosProvisorios.DAO;
-using ModeloDatosProvisorios.Repositorios;
 using Servicios.UsuarioGeneral;
 using Servicios.UsuarioGeneral.Interfaces;
 using System;
@@ -20,7 +20,7 @@ namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
         public PedidosController(/*IPedidosService pedidosService*/) // Esto sera la inyeccion de dependencias
         {
             //this.pedidosService = pedidosService;
-            pedidosService = new PedidosServiceImpl(new PedidosRepositoryImpl(new PedidosDAOImpl())); // Debo instanciar el servicio ya que todavia no tenemos inyeccion de dependencias
+            pedidosService = new PedidosServiceImpl(new PedidosRepositoryImpl(new PedidosPW3Context())); // Debo instanciar el servicio ya que todavia no tenemos inyeccion de dependencias
         }
 
         public IActionResult Index()

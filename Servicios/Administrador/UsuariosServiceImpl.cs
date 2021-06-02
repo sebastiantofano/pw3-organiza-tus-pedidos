@@ -1,8 +1,5 @@
-﻿using ModeloDatosProvisorios.Datos;
-using ModeloDatosProvisorios.Datos.Repositorios;
-using ModeloDatosProvisorios.Modelos;
-using ModeloDatosProvisorios.Repositorios;
-using ModeloDatosProvisorios.Repositorios.Interfaces;
+﻿using DAL.Modelos;
+using DAL.Repositorios.Interfaces;
 using Servicios.Administrador.Interfaces;
 using System;
 using System.Collections.Generic;

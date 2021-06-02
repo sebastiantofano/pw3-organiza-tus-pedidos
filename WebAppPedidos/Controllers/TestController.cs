@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using DAL.Modelos;
+using DAL.Repositorios;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using ModeloDatosProvisorios.DAO;
-using ModeloDatosProvisorios.Modelos;
-using ModeloDatosProvisorios.Repositorios;
 using Servicios.Administrador;
 using Servicios.Helpers;
 using System;
@@ -24,7 +23,7 @@ namespace WebAppPedidos.Controllers
         [Route("TestToken")]
         public async Task<ActionResult<dynamic>> Authenticate([FromBody] Usuario usuario)
         {
-            UsuariosServiceImpl usuariosService = new UsuariosServiceImpl(new UsuariosRepositoryImpl(new UsuariosDAOImpl())); 
+            UsuariosServiceImpl usuariosService = new UsuariosServiceImpl(new UsuariosRepositoryImpl(new PedidosPW3Context())); 
             var userEncontrado = usuariosService.ObtenerPorId(usuario.IdUsuario);
 
             if (userEncontrado == null)

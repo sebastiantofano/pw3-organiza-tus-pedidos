@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using DAL.Modelos;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
-using ModeloDatosProvisorios.Modelos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +33,7 @@ namespace WebAppPedidos.Helpers.Security
             List<Claim> claims = new List<Claim>();
             claims.Add(new Claim(ClaimTypes.Name, $"{usuario.Nombre} {usuario.Apellido}"));
             claims.Add(new Claim(ClaimTypes.Email, usuario.Email));
-            claims.Add(new Claim(ClaimTypes.Role, usuario.Roles));
+            //claims.Add(new Claim(ClaimTypes.Role, usuario.Roles));
             return claims;
         }
     }

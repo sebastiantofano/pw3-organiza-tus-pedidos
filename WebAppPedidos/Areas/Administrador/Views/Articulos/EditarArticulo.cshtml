@@ -1,4 +1,4 @@
-﻿@using ModeloDatosProvisorios.Modelos
+﻿@using DAL.Modelos
 @model Articulo
 
 @{
@@ -17,7 +17,7 @@
     <div class="row">
         <div class="col-lg-12">
 
-            @using (Html.BeginForm("EditarArticulo", "Articulos", new { area = "Administrador" }, FormMethod.Post) )
+            @using (Html.BeginForm("EditarArticulo", "Articulos", new { area = "Administrador" }, FormMethod.Post))
             {<div class="form-validation">
                     <div class="form-valide">
                         <div class="card">
@@ -49,7 +49,7 @@
                                                 <div class="stat-content">
                                                     <div class="text-left dib">
                                                         <div class="stat-text">Fecha de Creación</div>
-                                                        <div class="stat-heading">@Model.FechaCreacion?.ToShortDateString()</div>
+                                                        <div class="stat-heading">@Model.FechaCreacion.ToShortDateString()</div>
                                                         <div class="stat-text">Creado Por</div>
                                                         <div class="stat-heading">@Model.CreadoPor</div>
                                                     </div>
@@ -158,6 +158,6 @@
 
 
         </div>
-    </div>                  
-            
+    </div>
+
 </section>

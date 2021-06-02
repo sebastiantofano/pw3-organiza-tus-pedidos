@@ -1,6 +1,7 @@
-﻿using ModeloDatosProvisorios.Helpers.Exceptions;
-using ModeloDatosProvisorios.Modelos;
-using ModeloDatosProvisorios.Repositorios.Interfaces;
+﻿using DAL.Helpers.Exceptions;
+using DAL.Modelos;
+using DAL.Repositorios.Interfaces;
+using Servicios.UsuarioGeneral.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

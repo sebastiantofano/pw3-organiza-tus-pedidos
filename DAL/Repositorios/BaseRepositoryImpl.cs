@@ -1,5 +1,6 @@
 ﻿using DAL.Modelos;
 using DAL.Repositorios.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,11 +12,13 @@ namespace DAL.Repositorios
     public abstract class BaseRepositoryImpl<TEntity> : IBaseRepository<TEntity> where TEntity : class
     {
 
-        private readonly PedidosPW3Context pedidosPW3Context; 
+        private readonly PedidosPW3Context pedidosPW3Context;
+        private readonly DbSet<TEntity> dbSet;
 
         public BaseRepositoryImpl(PedidosPW3Context pedidosPW3Context)
         {
             this.pedidosPW3Context = pedidosPW3Context;
+            this.dbSet = pedidosPW3Context.Set<TEntity>();
         }
 
 
@@ -25,7 +28,7 @@ namespace DAL.Repositorios
         }
         public List<TEntity> ObtenerTodos()
         {
-            return new List<TEntity>();
+            return (List<TEntity>)dbSet.AsNoTracking();
         }
         public void Actualizar(TEntity entity)
         {

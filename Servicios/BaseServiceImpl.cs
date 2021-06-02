@@ -1,6 +1,4 @@
-﻿using ModeloDatosProvisorios.Datos;
-using ModeloDatosProvisorios.Modelos;
-using ModeloDatosProvisorios.Repositorios.Interfaces;
+﻿using DAL.Repositorios.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

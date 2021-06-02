@@ -1,4 +1,4 @@
-﻿@using ModeloDatosProvisorios.Modelos
+﻿@using DAL.Modelos
 @model List<Cliente>
 @{
 }
@@ -42,7 +42,7 @@
                                         <td>@cliente.IdCliente</td>
                                         <td>@cliente.Nombre</td>
                                         <td>@cliente.Email</td>
-                                        <td>@cliente.CUIT</td>
+                                        <td>@cliente.Cuit</td>
                                         <td>
                                             <span class="badge badge-@(cliente.FechaBorrado == null ? "success" : "danger")">
                                                 @(cliente.FechaBorrado == null ? "VIGENTE" : "ELIMINADO")

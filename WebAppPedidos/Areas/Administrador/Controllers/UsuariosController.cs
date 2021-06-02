@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using DAL.Modelos;
+using DAL.Repositorios;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using ModeloDatosProvisorios.DAO;
-using ModeloDatosProvisorios.Modelos;
-using ModeloDatosProvisorios.Repositorios;
 using Servicios.Administrador;
 using Servicios.Administrador.Interfaces;
 using System;
@@ -21,7 +20,7 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
         public UsuariosController(/*IUsuariosService usuariosService*/)
         {
             //this.usuariosService = usuariosService;
-            this.usuariosService = new UsuariosServiceImpl(new UsuariosRepositoryImpl(new UsuariosDAOImpl())); // Debo instanciar el servicio ya que todavia no tenemos inyeccion de dependencias
+            this.usuariosService = new UsuariosServiceImpl(new UsuariosRepositoryImpl(new PedidosPW3Context())); // Debo instanciar el servicio ya que todavia no tenemos inyeccion de dependencias
         }
         public IActionResult Index()
         {

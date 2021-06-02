@@ -1,12 +1,11 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using DAL.Helpers.Exceptions;
+using DAL.Modelos;
+using DAL.Repositorios;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using ModeloDatosProvisorios.DAO;
-using ModeloDatosProvisorios.Helpers.Exceptions;
-using ModeloDatosProvisorios.Modelos;
-using ModeloDatosProvisorios.Repositorios;
-using ModeloDatosProvisorios.Repositorios.Interfaces;
 using Servicios.Helpers;
 using Servicios.UsuarioGeneral;
+using Servicios.UsuarioGeneral.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +23,7 @@ namespace WebAppPedidosAPI.Controllers
 
         public AuthorizationController()
         {
-            loginService = new LoginServiceImpl(new LoginRepositoryImpl(new UsuariosDAOImpl()));
+            loginService = new LoginServiceImpl(new LoginRepositoryImpl(new PedidosPW3Context()));
         }
 
         [HttpPost]
