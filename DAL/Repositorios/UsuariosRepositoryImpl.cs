@@ -10,10 +10,10 @@ namespace DAL.Repositorios
 {
     public class UsuariosRepositoryImpl : BaseRepositoryImpl<Usuario>, IUsuariosRepository
     {
-        private readonly PedidosPW3Context pedidosPW3Context;
-        public UsuariosRepositoryImpl(PedidosPW3Context pedidosPW3Context) : base(pedidosPW3Context)
+        private readonly PedidosPW3Context _pedidosPW3Context;
+        public UsuariosRepositoryImpl(PedidosPW3Context pedidosPW3Context) : base(pedidosPW3Context) // IoC en StartUp.cs
         {
-            this.pedidosPW3Context = pedidosPW3Context;
+            _pedidosPW3Context = pedidosPW3Context;
         }
 
         public bool ValidarEmailExistente(string email)

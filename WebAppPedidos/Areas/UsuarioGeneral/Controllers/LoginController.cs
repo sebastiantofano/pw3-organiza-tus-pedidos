@@ -19,16 +19,15 @@ namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
     public class LoginController : Controller
 
     {
-        private readonly ILoginService loginService;
-        private readonly SecurityManager securityManager;
+        private readonly ILoginService _loginService;
+        private readonly SecurityManager _securityManager;
 
-        public LoginController(/*ILoginService loginService*/) // Luego tendremos inyeccion de dependencias
+        public LoginController(ILoginService loginService) // IoC en StartUp.cs
         {
-            //this.loginService = loginService;
-            this.loginService = new LoginServiceImpl(new LoginRepositoryImpl(new PedidosPW3Context()));
+            _loginService = loginService;
 
             /*Utilizado para implementar la seguridad*/
-            this.securityManager = new SecurityManager();
+            _securityManager = new SecurityManager();
         }
 
         [Route("~/")]
@@ -57,9 +56,9 @@ namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
         {
                 try
                 {
-                    Usuario usuarioValidado = loginService.IniciarSesion(usuario);
+                    Usuario usuarioValidado = _loginService.IniciarSesion(usuario);
                     var token = TokenService.CreateToken(usuarioValidado);
-                    securityManager.SignIn(HttpContext, usuarioValidado);
+                    _securityManager.SignIn(HttpContext, usuarioValidado);
 
                 if (usuarioValidado.EsAdmin)
                     {
@@ -89,7 +88,7 @@ namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
         [Authorize(Roles = "Administrador, Moderador")]
         public IActionResult CerrarSesion()
         {
-            securityManager.SignOut(HttpContext); //Agregar esta linea para eliminar los claims del usuario
+            _securityManager.SignOut(HttpContext); //Agregar esta linea para eliminar los claims del usuario
             TempData["toastr_success"] = "Ha cerrado su sesión correctamente!";
             return RedirectToAction("Index", "Login", new { Area = "UsuarioGeneral" });
         }

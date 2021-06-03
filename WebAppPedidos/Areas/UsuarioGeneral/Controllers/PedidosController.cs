@@ -15,12 +15,11 @@ namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
     [Authorize(Roles = "Administrador, Moderador")]
     public class PedidosController : Controller
     {
-        private readonly IPedidosService pedidosService;
+        private readonly IPedidosService _pedidosService;
 
-        public PedidosController(/*IPedidosService pedidosService*/) // Esto sera la inyeccion de dependencias
+        public PedidosController(IPedidosService pedidosService) // IoC en StartUp.cs
         {
-            //this.pedidosService = pedidosService;
-            pedidosService = new PedidosServiceImpl(new PedidosRepositoryImpl(new PedidosPW3Context())); // Debo instanciar el servicio ya que todavia no tenemos inyeccion de dependencias
+            _pedidosService = pedidosService;
         }
 
         public IActionResult Index()

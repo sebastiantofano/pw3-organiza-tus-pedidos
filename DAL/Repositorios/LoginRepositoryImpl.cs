@@ -11,11 +11,11 @@ namespace DAL.Repositorios
 {
     public class LoginRepositoryImpl : ILoginRepository
     {
-        private readonly PedidosPW3Context pedidosPW3Context;
+        private readonly PedidosPW3Context _pedidosPW3Context;
 
-        public LoginRepositoryImpl(PedidosPW3Context pedidosPW3Context)
+        public LoginRepositoryImpl(PedidosPW3Context pedidosPW3Context) // IoC en StartUp.cs
         {
-            this.pedidosPW3Context = pedidosPW3Context;
+            _pedidosPW3Context = pedidosPW3Context;
         }
         public void CerrarSesion()
         {
@@ -25,11 +25,11 @@ namespace DAL.Repositorios
         public Usuario IniciarSesion(Usuario usuario)
         {
 
-            Usuario usuarioValidado = pedidosPW3Context.Usuarios.Where(x => x.Email == usuario.Email && x.Password == usuario.Password).FirstOrDefault(); //TODO
+            Usuario usuarioValidado = _pedidosPW3Context.Usuarios.Where(x => x.Email == usuario.Email && x.Password == usuario.Password).FirstOrDefault(); //TODO
 
-            if (usuarioValidado != null)
+            if (usuarioValidado == null)
             {
-                throw new InvalidLoginException("Credenciales invalidas");
+                throw new InvalidLoginException("Credenciales inválidas");
             }
             return usuarioValidado;
             /*bool usuarioValidado = usuariosDAO.ValidarUsuarioYContrasenaCorrecta(usuario);

@@ -15,11 +15,10 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
     //[Authorize(Roles = "Administrador")]
     public class ClientesController : Controller
     {
-        private readonly IClientesService clientesService;
-        public ClientesController(/*IClientesService clientesService*/)
+        private readonly IClientesService _clientesService;
+        public ClientesController(IClientesService clientesService) // IoC en StartUp.cs
         {
-            //ClientesService = clientesService;
-            this.clientesService = new ClientesServiceImpl(new ClientesRepositoryImpl(new PedidosPW3Context())); // Debo instanciar el servicio ya que todavia no tenemos inyeccion de dependencias
+            _clientesService = clientesService;
 
         }
         public IActionResult Index()
@@ -35,7 +34,7 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
         public IActionResult AdministrarClientes()
         {
 
-            List<Cliente> listaClientes = clientesService.ObtenerTodos();
+            List<Cliente> listaClientes = _clientesService.ObtenerTodos();
             return View(listaClientes);
         }
 

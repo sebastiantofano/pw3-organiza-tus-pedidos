@@ -12,19 +12,19 @@ namespace DAL.Repositorios
     public abstract class BaseRepositoryImpl<TEntity> : IBaseRepository<TEntity> where TEntity : class
     {
 
-        private readonly PedidosPW3Context pedidosPW3Context;
+        private readonly PedidosPW3Context _pedidosPW3Context;
         private readonly DbSet<TEntity> dbSet;
 
-        public BaseRepositoryImpl(PedidosPW3Context pedidosPW3Context)
+        public BaseRepositoryImpl(PedidosPW3Context pedidosPW3Context) // IoC proveniente de quien extienda de esta clase
         {
-            this.pedidosPW3Context = pedidosPW3Context;
+            _pedidosPW3Context = pedidosPW3Context;
             this.dbSet = pedidosPW3Context.Set<TEntity>();
         }
 
 
         public TEntity ObtenerPorId(int id)
         {
-            return pedidosPW3Context.Find<TEntity>(id);
+            return _pedidosPW3Context.Find<TEntity>(id);
         }
         public List<TEntity> ObtenerTodos()
         {

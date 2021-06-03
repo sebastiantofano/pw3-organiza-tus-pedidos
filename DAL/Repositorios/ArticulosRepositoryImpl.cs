@@ -10,11 +10,11 @@ namespace DAL.Repositorios
 {
     public class ArticulosRepositoryImpl : BaseRepositoryImpl<Articulo>, IArticulosRepository
     {
-        private readonly PedidosPW3Context pedidosPW3Context;
+        private readonly PedidosPW3Context _pedidosPW3Context;
 
-        public ArticulosRepositoryImpl(PedidosPW3Context pedidosPW3Context) : base(pedidosPW3Context)
+        public ArticulosRepositoryImpl(PedidosPW3Context pedidosPW3Context) : base(pedidosPW3Context) // IoC en StartUp.cs
         {
-            this.pedidosPW3Context = pedidosPW3Context;
+            _pedidosPW3Context = pedidosPW3Context;
         }
 
         public void AlgoParticularDelArticulo()

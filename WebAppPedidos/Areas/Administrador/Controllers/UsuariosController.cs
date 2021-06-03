@@ -15,12 +15,11 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
     [Authorize(Roles = "Administrador")]
     public class UsuariosController : Controller
     {
-        private readonly IUsuariosService usuariosService;
+        private readonly IUsuariosService _usuariosService;
 
-        public UsuariosController(/*IUsuariosService usuariosService*/)
+        public UsuariosController(IUsuariosService usuariosService) // IoC en StartUp.cs
         {
-            //this.usuariosService = usuariosService;
-            this.usuariosService = new UsuariosServiceImpl(new UsuariosRepositoryImpl(new PedidosPW3Context())); // Debo instanciar el servicio ya que todavia no tenemos inyeccion de dependencias
+            _usuariosService = usuariosService; 
         }
         public IActionResult Index()
         {
@@ -29,7 +28,7 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
 
         public IActionResult AdministrarUsuarios()
         {
-            List<Usuario> usuarios = usuariosService.ObtenerTodos();
+            List<Usuario> usuarios = _usuariosService.ObtenerTodos();
             return View(usuarios);
         }
 
@@ -46,13 +45,13 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
             if (ModelState.IsValid)
             {
                 // Donde se debe validar si ya existe el email? En este Controller o en el Service
-                bool emailYaExistente = usuariosService.ValidarEmailExistente(usuario.Email);
+                bool emailYaExistente = _usuariosService.ValidarEmailExistente(usuario.Email);
                 if (emailYaExistente)
                 {
                     TempData["toastr_error"] = "El email ya se encuentra registrado!";
                     return RedirectToAction("AdministrarUsuarios");
                 }
-                usuariosService.Insertar(usuario);
+                _usuariosService.Insertar(usuario);
                 TempData["toastr_success"] = "Se ha creado al usuario correctamente !";
                 return RedirectToAction("AdministrarUsuarios");
             }
@@ -65,7 +64,7 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
         public IActionResult EditarUsuario(string id)
         {
             int idUsuario = int.Parse(id);
-            Usuario usuario = usuariosService.ObtenerPorId(idUsuario);
+            Usuario usuario = _usuariosService.ObtenerPorId(idUsuario);
 
             return View(usuario);
         }
@@ -75,7 +74,7 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
         {
             if (ModelState.IsValid)
             {
-                usuariosService.Actualizar(usuario);
+                _usuariosService.Actualizar(usuario);
 
                 TempData["toastr_success"] = "Se ha editado el usuario correctamente !";
                 return RedirectToAction("AdministrarUsuarios");

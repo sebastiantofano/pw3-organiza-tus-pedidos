@@ -39,7 +39,7 @@
                                     <tr>
                                         <td>@usuario.Nombre @usuario.Apellido</td>
                                         <td>@usuario.Email</td>
-                                        <td><span class="badge badge-@(usuario.EsAdmin ? "success" : "info")">@*@usuario.Roles*@</span></td> @*TODO*@
+                                        <td><span class="badge badge-@(usuario.EsAdmin ? "success" : "info")">@usuario.Roles</span></td> @*TODO*@
                                         <td>@usuario.FechaCreacion.ToShortDateString()</td>
                                         <td>
                                             <a asp-area="Administrador" asp-controller="Usuarios" asp-action="EditarUsuario" asp-route-id="@usuario.IdUsuario"

@@ -1,13 +1,21 @@
+using DAL.Modelos;
+using DAL.Repositorios;
+using DAL.Repositorios.Interfaces;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using Servicios.Administrador;
+using Servicios.Administrador.Interfaces;
+using Servicios.UsuarioGeneral;
+using Servicios.UsuarioGeneral.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -91,7 +99,28 @@ namespace WebAppPedidos
 
             services.AddControllersWithViews();
 
+            /* INICIO: IoC (Inyeccion de Dependencias) para la base de datos */
+            services.AddDbContext<PedidosPW3Context>(options => 
+                options.UseSqlServer(Configuration.GetConnectionString("WebAppPedidosContext")));
+            /* FIN: IoC (Inyeccion de Dependencias) para la base de datos */
 
+
+            /* INICIO: IoC (Inyeccion de Dependencias) para Servicios y Repositorios */
+            services.AddTransient<ILoginService, LoginServiceImpl>();
+            services.AddTransient<ILoginRepository, LoginRepositoryImpl>();
+
+            services.AddTransient<IClientesService, ClientesServiceImpl>();
+            services.AddTransient<IClientesRepository, ClientesRepositoryImpl>();
+
+            services.AddTransient<IArticulosService, ArticulosServiceImpl>();
+            services.AddTransient<IArticulosRepository, ArticulosRepositoryImpl>();
+
+            services.AddTransient<IUsuariosService, UsuariosServiceImpl>();
+            services.AddTransient<IUsuariosRepository, UsuariosRepositoryImpl>();
+
+            services.AddTransient<IPedidosService, PedidosServiceImpl>();
+            services.AddTransient<IPedidosRepository, PedidosRepositoryImpl>();
+            /* FIN: IoC (Inyeccion de Dependencias) para Servicios y Repositorios */
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

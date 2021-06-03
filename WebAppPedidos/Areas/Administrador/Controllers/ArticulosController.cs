@@ -13,14 +13,13 @@ using System.Threading.Tasks;
 namespace WebAppPedidos.Areas.Administrador.Controllers
 {
     [Area("Administrador")]  // Defino a que area corresponde el controller
-    //[Authorize(Roles = "Administrador")]
+    [Authorize(Roles = "Administrador")]
     public class ArticulosController : Controller 
     {
-        private readonly IArticulosService articulosService;
-        public ArticulosController(/*IArticulosService articulosService*/)  // Esto sera la inyeccion de dependencias
+        private readonly IArticulosService _articulosService;
+        public ArticulosController(IArticulosService articulosService) // IoC en StartUp.cs
         {
-            //this.articulosService = articulosService;
-            articulosService = new ArticulosServiceImpl(new ArticulosRepositoryImpl(new PedidosPW3Context())); // Debo instanciar el servicio ya que todavia no tenemos inyeccion de dependencias
+            _articulosService = articulosService; 
         }
         public IActionResult Index()
         {
@@ -30,7 +29,7 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
         
         public IActionResult AdministrarArticulos()
         {
-            List<Articulo> listaArticulos = articulosService.ObtenerTodos();
+            List<Articulo> listaArticulos = _articulosService.ObtenerTodos();
             return View(listaArticulos);
         }
 
@@ -48,13 +47,13 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
             if (ModelState.IsValid)
             {
                 // Donde se debe validar si ya existe el articulo? En este Controller o en el Service
-                bool codigoYaExistente = articulosService.ValidarCodigoExistente(articulo.Codigo);
+                bool codigoYaExistente = _articulosService.ValidarCodigoExistente(articulo.Codigo);
                 if (codigoYaExistente)
                 {
                     TempData["toastr_error"] = "El codigo de artículo que ha ingresado ya existe!";
                     return RedirectToAction("AdministrarArticulos");
                 }
-                articulosService.Insertar(articulo);
+                _articulosService.Insertar(articulo);
                 TempData["toastr_success"] = "Se ha creado el artículo correctamente !";
                 return RedirectToAction("AdministrarArticulos");
             }
@@ -67,7 +66,7 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
         public IActionResult EditarArticulo(string id)
         {
             int IdArticulo = int.Parse(id);
-            Articulo articulo = articulosService.ObtenerPorId(IdArticulo);
+            Articulo articulo = _articulosService.ObtenerPorId(IdArticulo);
 
             return View(articulo);
         }
@@ -76,7 +75,7 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
         [HttpPost]
         public IActionResult EditarArticulo(Articulo articulo)
         {
-            articulosService.Actualizar(articulo);
+            _articulosService.Actualizar(articulo);
 
             TempData["toastr_success"] = "Se ha editado el artículo correctamente !";
 
@@ -87,7 +86,7 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
         public IActionResult EliminarArticuloPorId(string id, string who)
         {
             int IdArticulo = int.Parse(id);
-            articulosService.EliminarPorId(IdArticulo, who);
+            _articulosService.EliminarPorId(IdArticulo, who);
 
             TempData["toastr_info"] = "Se ha eliminado el artículo correctamente !";
             return RedirectToAction("AdministrarArticulos");

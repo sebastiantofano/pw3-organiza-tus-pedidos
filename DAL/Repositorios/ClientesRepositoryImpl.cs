@@ -10,10 +10,10 @@ namespace DAL.Repositorios
 {
     public class ClientesRepositoryImpl : BaseRepositoryImpl<Cliente>, IClientesRepository
     {
-        private readonly PedidosPW3Context pedidosPW3Context;
-        public ClientesRepositoryImpl(PedidosPW3Context pedidosPW3Context) : base(pedidosPW3Context)
+        private readonly PedidosPW3Context _pedidosPW3Context;
+        public ClientesRepositoryImpl(PedidosPW3Context pedidosPW3Context) : base(pedidosPW3Context) // IoC en StartUp.cs
         {
-            this.pedidosPW3Context = pedidosPW3Context;
+            _pedidosPW3Context = pedidosPW3Context;
         }
 
 

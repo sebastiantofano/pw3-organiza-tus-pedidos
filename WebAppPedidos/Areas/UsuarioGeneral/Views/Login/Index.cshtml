@@ -10,18 +10,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WebAppPedidos</title>
 
-    <!-- ================= Favicon ================== -->
-    <!-- Standard -->
-    <link rel="shortcut icon" href="http://placehold.it/64.png/000/fff">
+    @*Usar Bundled File que contiene todos los CSS necesarios, configurado unicamente en el archivo bundleconfig.json*@
+    <link rel="stylesheet" href="~/bundles/site-bundled-file.css" />
 
-    <!-- Common Template -->
-    <link href="~/themes/assets/css/lib/font-awesome.min.css" rel="stylesheet">
-    <link href="~/themes/assets/css/lib/themify-icons.css" rel="stylesheet">
-    <link href="~/themes/assets/css/lib/bootstrap.min.css" rel="stylesheet">
-    <link href="~/themes/assets/css/lib/menubar/sidebar.css" rel="stylesheet">
-    <link href="~/themes/assets/css/lib/helper.css" rel="stylesheet">
-    <link href="~/themes/assets/css/style.css" rel="stylesheet">
-    <link href="~/themes/assets/css/lib/toastr/toastr.min.css" rel="stylesheet">
+
     <style>
         .fondo-login {
             background: no-repeat 100% url(https://thumbs.dreamstime.com/z/two-color-paper-blue-white-overlap-floor-split-half-image-background-140178019.jpg)
@@ -69,21 +61,14 @@
 
     </div>
 
-    <!-- Common Template-->
-    <script src="~/themes/assets/js/lib/jquery.min.js"></script>
-    <script src="~/themes/assets/js/lib/jquery.nanoscroller.min.js"></script>
-    <script src="~/themes/assets/js/lib/menubar/sidebar.js"></script>
-    <script src="~/themes/assets/js/lib/preloader/pace.min.js"></script>
-    <script src="~/themes/assets/js/lib/bootstrap.min.js"></script>
-    <script src="~/themes/assets/js/scripts.js"></script>
+
+    @*Usar Bundled File que contiene todos los SCRIPTS necesarios, configurado unicamente en el archivo bundleconfig.json*@
+    <script src="~/bundles/site-bundled-file.js"></script>
 
 
+    @* Partial View para las notificaciones con Toastr *@
+    @{await Html.RenderPartialAsync("~/Areas/UsuarioGeneral/Views/Shared/pv_ToastrNotification.cshtml");}
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-
-    @{await Html.RenderPartialAsync("~/Areas/UsuarioGeneral/Views/Shared/pv_ToastrNotification.cshtml");};
 
 </body>
 </html>
