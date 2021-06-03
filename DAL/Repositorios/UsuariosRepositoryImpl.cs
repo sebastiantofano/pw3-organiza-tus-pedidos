@@ -20,6 +20,14 @@ namespace DAL.Repositorios
         {
             /*bool EsUsuarioExistente = usuariosDAO.ValidarEmailExistente(email);
             return EsUsuarioExistente;*/
+
+
+            Usuario usuarioExistente = _pedidosPW3Context.Usuarios.Where(o => o.Email == email).FirstOrDefault();
+            if (usuarioExistente == null)
+            {
+                return false;
+            }
+
             return true;
 
         }

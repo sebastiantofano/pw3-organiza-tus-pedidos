@@ -11,10 +11,10 @@ namespace Servicios.Administrador
 {
     public class ClientesServiceImpl : BaseServiceImpl<Cliente>, IClientesService
     {
-        private readonly IClientesRepository clientesRepository;
+        private readonly IClientesRepository _clientesRepository;
         public ClientesServiceImpl(IClientesRepository clientesRepository) : base(clientesRepository) // Hago el NEW porque todavia no vimos inyeccion de dependencias
         {
-            this.clientesRepository = clientesRepository;
+            _clientesRepository = clientesRepository;
         }
 
         

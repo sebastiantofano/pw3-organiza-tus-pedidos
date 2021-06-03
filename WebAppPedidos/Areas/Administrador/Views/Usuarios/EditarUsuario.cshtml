@@ -23,7 +23,10 @@
                         {
                             <form class="form-valide">
                                 <div class="form-group row">
+
                                     <input type="hidden" name="IdUsuario" value="@Model.IdUsuario" />
+                                    <input type="hidden" name="FechaCreacion" value="@Model.FechaCreacion" />   @*Ver como solucionar este problema de la fecha*@
+
                                     <div class="input-group align-items-center">
                                         <label asp-for="Email" class="col-lg-1 col-form-label">E-mail</label>
                                         <div class="input-group-prepend col-lg-10">

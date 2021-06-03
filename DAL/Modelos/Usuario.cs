@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DAL.Modelos.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -6,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DAL.Modelos
 {
-    public partial class Usuario
+    public partial class Usuario 
     {
         public Usuario()
         {

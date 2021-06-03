@@ -24,9 +24,13 @@ namespace DAL.Repositorios
 
         public bool ValidarCodigoExistente(string codigo)
         {
+            Articulo articuloExistente = _pedidosPW3Context.Articulos.Where(o => o.Codigo == codigo).FirstOrDefault();
+            if(articuloExistente == null)
+            {
+                return false;
+            }
+
             return true;
-            //PONER LOGICA
-            //return articulosDAO.ValidarCodigoExistente(codigo);
         }
     }
 }

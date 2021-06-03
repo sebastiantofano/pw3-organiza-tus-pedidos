@@ -1,4 +1,5 @@
-﻿using DAL.Repositorios.Interfaces;
+﻿using DAL.Modelos.Interfaces;
+using DAL.Repositorios.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Servicios
 {
-    public abstract class BaseServiceImpl<TEntity> : IBaseService<TEntity> where TEntity : class
+    public abstract class BaseServiceImpl<TEntity> : IBaseService<TEntity> where TEntity : class, ITrackeableEntity
     {
         private readonly IBaseRepository<TEntity> entityRepository;
 
@@ -29,11 +30,13 @@ namespace Servicios
 
         public void Insertar(TEntity entity)
         {
+            entity.FechaCreacion = DateTime.Today;
             entityRepository.Insertar(entity);
         }
 
         public void Actualizar(TEntity entity)
         {
+            entity.FechaModificacion = DateTime.Today;
             entityRepository.Actualizar(entity);
         }
 

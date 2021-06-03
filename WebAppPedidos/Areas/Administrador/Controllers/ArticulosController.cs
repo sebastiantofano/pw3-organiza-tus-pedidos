@@ -17,6 +17,7 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
     public class ArticulosController : Controller 
     {
         private readonly IArticulosService _articulosService;
+
         public ArticulosController(IArticulosService articulosService) // IoC en StartUp.cs
         {
             _articulosService = articulosService; 
@@ -32,6 +33,7 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
             List<Articulo> listaArticulos = _articulosService.ObtenerTodos();
             return View(listaArticulos);
         }
+
 
         [HttpGet]
         public IActionResult AgregarArticulo()
@@ -62,6 +64,7 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
             return View();
         }
 
+
         [HttpGet]
         public IActionResult EditarArticulo(string id)
         {
@@ -75,12 +78,18 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
         [HttpPost]
         public IActionResult EditarArticulo(Articulo articulo)
         {
-            _articulosService.Actualizar(articulo);
+            if (ModelState.IsValid)
+            {
+                _articulosService.Actualizar(articulo);
+                TempData["toastr_success"] = "Se ha editado el artículo correctamente !";
+                return RedirectToAction("AdministrarArticulos");
+            }
 
-            TempData["toastr_success"] = "Se ha editado el artículo correctamente !";
+            TempData["toastr_error"] = "No se ha podido editar el artículo correctamente !";
+            return View();
 
-            return RedirectToAction("AdministrarArticulos");
         }
+        
 
         [HttpPost]
         public IActionResult EliminarArticuloPorId(string id, string who)

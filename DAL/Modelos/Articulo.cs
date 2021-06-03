@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DAL.Modelos.Interfaces;
+using System;
 using System.Collections.Generic;
 
 #nullable disable
