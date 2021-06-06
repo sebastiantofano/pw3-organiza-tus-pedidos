@@ -14,7 +14,7 @@ namespace Servicios.Administrador
         
         private readonly IArticulosRepository articulosRepository;
 
-        public ArticulosServiceImpl(IArticulosRepository articulosRepository) : base(articulosRepository) // Hago el NEW porque todavia no vimos inyeccion de dependencias
+        public ArticulosServiceImpl(IArticulosRepository articulosRepository) : base(articulosRepository)
         {
             this.articulosRepository = articulosRepository;
         }

@@ -1,5 +1,6 @@
 ﻿
 using DAL.Modelos;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +11,8 @@ namespace Servicios.UsuarioGeneral.Interfaces
 {
     public interface ILoginService
     {
-        Usuario IniciarSesion(Usuario usuario);
-        void CerrarSesion();
+        Usuario IniciarSesion(HttpContext httpContext, Usuario usuario);
+        void CerrarSesion(HttpContext httpContext);
 
 
     }

@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL.Modelos
+/* En este namespace encontramos todas las clases "Metadata" donde se realizarán las validaciones sobre los Data Models */
+/* Las validaciones no se podrán hacer sobre las clases originales ya que se sobrescriben al inicializar el contexto nuevamente */
+namespace DAL.Modelos.Metadata
 {
+
     public class ArticuloMetadata
     {
         [Required(ErrorMessage = "Debe introducir obligatoriamente un código de artículo")]
@@ -19,6 +23,18 @@ namespace DAL.Modelos
 
     }
 
+    public class UsuarioMetadata
+    {
 
+    }
 
+    public class ClienteMetadata
+    {
+
+    }
+
+    public class PedidoMetadata
+    {
+
+    }
 }

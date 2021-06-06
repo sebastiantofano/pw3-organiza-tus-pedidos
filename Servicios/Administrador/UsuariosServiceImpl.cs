@@ -12,7 +12,7 @@ namespace Servicios.Administrador
     public class UsuariosServiceImpl : BaseServiceImpl<Usuario>, IUsuariosService
     {
         private readonly IUsuariosRepository usuariosRepository;
-        public UsuariosServiceImpl(IUsuariosRepository usuariosRepository) : base(usuariosRepository) // Hago el NEW porque todavia no vimos inyeccion de dependencias
+        public UsuariosServiceImpl(IUsuariosRepository usuariosRepository) : base(usuariosRepository)
         {
             this.usuariosRepository = usuariosRepository;
         }

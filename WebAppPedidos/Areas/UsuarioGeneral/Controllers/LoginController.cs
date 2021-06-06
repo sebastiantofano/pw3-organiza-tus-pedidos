@@ -6,7 +6,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using Servicios.Helpers;
-using WebAppPedidos.Helpers.Security;
 using Microsoft.AspNetCore.Authorization;
 using DAL.Helpers.Exceptions;
 using Servicios.UsuarioGeneral.Interfaces;
@@ -20,14 +19,11 @@ namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
 
     {
         private readonly ILoginService _loginService;
-        private readonly SecurityManager _securityManager;
+
 
         public LoginController(ILoginService loginService) // IoC en StartUp.cs
         {
             _loginService = loginService;
-
-            /*Utilizado para implementar la seguridad*/
-            _securityManager = new SecurityManager();
         }
 
         [Route("~/")]
@@ -54,41 +50,39 @@ namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
         [AllowAnonymous]
         public IActionResult IniciarSesion(Usuario usuario)
         {
-                try
-                {
-                    Usuario usuarioValidado = _loginService.IniciarSesion(usuario);
-                    var token = TokenService.CreateToken(usuarioValidado);
-                    _securityManager.SignIn(HttpContext, usuarioValidado);
+            try
+            {
+                Usuario usuarioValidado = _loginService.IniciarSesion(HttpContext, usuario);
+                //var token = TokenService.CreateToken(usuarioValidado);
+                //_securityManager.SignIn(HttpContext, usuarioValidado);
 
                 if (usuarioValidado.EsAdmin)
-                    {
-                    
-                    //HttpContext.Session.SetString("NombreUsuario", usuarioValidado.Nombre.ToString());
-                    //HttpContext.Session.SetString("ApellidoUsuario", usuarioValidado.Apellido.ToString());
-                    TempData["toastr_success"] = $"Bienvenido {usuarioValidado.Nombre} (Usted es Administrador)";
-
-                        return RedirectToAction("Index", "Home", new { Area = "Administrador" });
-                    }
-                    else
-                    { 
-                        TempData["toastr_success"] = $"Bienvenido {usuarioValidado.Nombre} (Usted es Moderador)";
-                        return RedirectToAction("Index", "Home", new { Area = "Moderador" });
-                    }
-                    
-                }
-                catch (InvalidLoginException)
                 {
-
-                    TempData["toastr_error"] = "Credenciales Inválidas";
-                    return RedirectToAction("Index", "Login", new { Area = "UsuarioGeneral" });
+                    
+                //HttpContext.Session.SetString("NombreUsuario", usuarioValidado.Nombre.ToString());
+                //HttpContext.Session.SetString("ApellidoUsuario", usuarioValidado.Apellido.ToString());
+                    TempData["toastr_success"] = $"Bienvenido {usuarioValidado.Nombre} (Usted es Administrador)";
+                    return RedirectToAction("Index", "Home", new { Area = "Administrador" });
                 }
+                else
+                { 
+                    TempData["toastr_success"] = $"Bienvenido {usuarioValidado.Nombre} (Usted es Moderador)";
+                    return RedirectToAction("Index", "Home", new { Area = "Moderador" });
+                }
+                    
+            }
+            catch (InvalidLoginException)
+            {
+                TempData["toastr_error"] = "Credenciales Inválidas";
+                return RedirectToAction("Index", "Login", new { Area = "UsuarioGeneral" });
+            }
         }
 
         [HttpPost]
         [Authorize(Roles = "Administrador, Moderador")]
         public IActionResult CerrarSesion()
         {
-            _securityManager.SignOut(HttpContext); //Agregar esta linea para eliminar los claims del usuario
+            _loginService.CerrarSesion(HttpContext);
             TempData["toastr_success"] = "Ha cerrado su sesión correctamente!";
             return RedirectToAction("Index", "Login", new { Area = "UsuarioGeneral" });
         }

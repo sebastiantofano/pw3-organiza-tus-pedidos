@@ -86,7 +86,6 @@ namespace WebAppPedidos
             /* INICIO: Agregado para el uso de sesiones */
             services.AddDistributedMemoryCache();
 
-
             services.AddSession(options =>
             {
                 options.Cookie.Name = "WebAppPedidosSession";
@@ -97,7 +96,9 @@ namespace WebAppPedidos
             });
             /* FIN: Agregado para el uso de sesiones */
 
+
             services.AddControllersWithViews();
+
 
             /* INICIO: IoC (Inyeccion de Dependencias) para la base de datos */
             services.AddDbContext<PedidosPW3Context>(options => 
@@ -138,8 +139,6 @@ namespace WebAppPedidos
             }
 
 
-
-
             /* INICIO: Agregado - Redirecciones a páginas de errores */
             app.UseStatusCodePages(context => {
                 if (context.HttpContext.Response.StatusCode == 401) context.HttpContext.Response.Redirect("/401unauthorized"); /* Utiliza un Route al endpoint /UsuarioGeneral/Errores/Error401 */
@@ -156,12 +155,11 @@ namespace WebAppPedidos
             app.UseRouting();
 
             app.UseAuthentication();
-            app.UseAuthorization();
+            app.UseAuthorization(); // Agregado para el uso de autorizacion
 
             app.UseSession(); // Agregado para el uso de sesiones
 
             
-
                 app.UseEndpoints(endpoints =>
             {
                 /* AGREGADO: Routes para Area "Usuario" */

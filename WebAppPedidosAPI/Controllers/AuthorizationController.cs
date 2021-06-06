@@ -18,12 +18,12 @@ namespace WebAppPedidosAPI.Controllers
     [Route("api/[controller]")]
     public class AuthorizationController : Controller
     {
-        private readonly ILoginService loginService;
+        private readonly ILoginService _loginService;
 
 
         public AuthorizationController()
         {
-            loginService = new LoginServiceImpl(new LoginRepositoryImpl(new PedidosPW3Context()));
+            //loginService = new LoginServiceImpl(new LoginRepositoryImpl(new PedidosPW3Context()));
         }
 
         [HttpPost]
@@ -33,7 +33,7 @@ namespace WebAppPedidosAPI.Controllers
         {
             try
             {
-                Usuario usuarioValidado = loginService.IniciarSesion(usuarioValidar);
+                Usuario usuarioValidado = _loginService.IniciarSesion(HttpContext, usuarioValidar);
                 var token = TokenService.CreateToken(usuarioValidado);
                 UsuarioLogueadoResponse usuarioLogueadoResponse = new(usuarioValidado.IdUsuario, usuarioValidado.Nombre,
                                                                       usuarioValidado.Apellido, usuarioValidado.FechaNacimiento);
@@ -55,7 +55,10 @@ namespace WebAppPedidosAPI.Controllers
         [HttpGet]
         [Route("authenticated")]
         [Authorize]
-        public string Authenticated() => String.Format("You are Authenticated - {0}", User.Identity.Name);
+        public string Authenticated()
+        {
+            return string.Format("You are Authenticated - {0}", User.Identity.Name);
+        }
 
         [HttpGet]
         [Route("administrador")]

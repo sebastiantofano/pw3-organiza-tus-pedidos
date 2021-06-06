@@ -8,12 +8,14 @@ using Servicios.Administrador.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace WebAppPedidos.Areas.Administrador.Controllers
 {
     [Area("Administrador")]  // Defino a que area corresponde el controller
-    [Authorize(Roles = "Administrador")]
+    [Authorize(Roles = "Administrador")] // Defino autorizacion para todos los metodos del controller, "Roles" es una property logica de la clase "Usuario"
     public class ArticulosController : Controller 
     {
         private readonly IArticulosService _articulosService;
@@ -48,13 +50,20 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
             /* Intentar realizar una validación cuando tenemos el atajo de agregar un articulo en la vista de administracion de articulos */
             if (ModelState.IsValid)
             {
-                // Donde se debe validar si ya existe el articulo? En este Controller o en el Service
+                // Donde se debe validar si ya existe el articulo? En este Controller o en el Service? TODO , preguntar
                 bool codigoYaExistente = _articulosService.ValidarCodigoExistente(articulo.Codigo);
                 if (codigoYaExistente)
                 {
                     TempData["toastr_error"] = "El codigo de artículo que ha ingresado ya existe!";
                     return RedirectToAction("AdministrarArticulos");
                 }
+
+                var identity = User.Claims;
+                var sid = identity.Where(c => c.Type == ClaimTypes.PrimarySid)
+                            .Select(c => c.Value).SingleOrDefault();
+
+                articulo.CreadoPor = int.Parse(sid);
+
                 _articulosService.Insertar(articulo);
                 TempData["toastr_success"] = "Se ha creado el artículo correctamente !";
                 return RedirectToAction("AdministrarArticulos");
