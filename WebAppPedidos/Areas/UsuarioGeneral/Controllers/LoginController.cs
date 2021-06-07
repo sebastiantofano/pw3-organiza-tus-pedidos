@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 using System.Web;
 using Servicios.Helpers;
 using Microsoft.AspNetCore.Authorization;
-using DAL.Helpers.Exceptions;
 using Servicios.UsuarioGeneral.Interfaces;
 using DAL.Repositorios;
 using DAL.Modelos;
+using Servicios.Helpers.Exceptions;
 
 namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
 {
@@ -69,9 +69,8 @@ namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
                     TempData["toastr_success"] = $"Bienvenido {usuarioValidado.Nombre} (Usted es Moderador)";
                     return RedirectToAction("Index", "Home", new { Area = "Moderador" });
                 }
-                    
             }
-            catch (InvalidLoginException)
+            catch (LoginException)
             {
                 TempData["toastr_error"] = "Credenciales Inválidas";
                 return RedirectToAction("Index", "Login", new { Area = "UsuarioGeneral" });

@@ -29,6 +29,9 @@ namespace DAL.Modelos
             set { }
         }
 
+        [NotMapped]
+        public string Token { get; set; }
+
     }
 
     [MetadataType(typeof(ClienteMetadata))] // Con este decorador "MetadataType" asociamos las clases "Metadata" que realizarán validaciones sobre el modelo

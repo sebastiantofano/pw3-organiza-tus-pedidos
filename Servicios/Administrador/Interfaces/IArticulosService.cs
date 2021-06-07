@@ -9,7 +9,5 @@ namespace Servicios.Administrador.Interfaces
 { 
     public interface IArticulosService : IBaseService<Articulo> // Esta interface hereda el CRUD de Servicio Base
     {
-        void MetodoParticularDeArticulos(Articulo articulo);
-        bool ValidarCodigoExistente(string codigo);
     }
 }

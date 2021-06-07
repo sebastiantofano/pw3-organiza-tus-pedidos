@@ -1,7 +1,7 @@
-﻿using DAL.Helpers.Exceptions;
-using DAL.Modelos;
+﻿using DAL.Modelos;
 using DAL.Repositorios.Interfaces;
 using Microsoft.AspNetCore.Http;
+using Servicios.Helpers.Exceptions;
 using Servicios.Helpers.Security;
 using Servicios.UsuarioGeneral.Interfaces;
 using System;
@@ -33,11 +33,12 @@ namespace Servicios.UsuarioGeneral
             try
             {
                 Usuario usuarioEncontrado = loginRepository.IniciarSesion(usuario);
+                usuarioEncontrado.Token = TokenService.CreateToken(usuarioEncontrado); // Eso sera de ayuda cuando se inicie la APP en modo API
                 _securityManager.SignIn(httpContext, usuarioEncontrado); // Agrega los claims al usuario actual
 
                 return usuarioEncontrado;
             }
-            catch (InvalidLoginException)
+            catch (LoginException)
             {
                 throw;
             }

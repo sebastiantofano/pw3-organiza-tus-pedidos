@@ -14,6 +14,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Servicios.Administrador;
 using Servicios.Administrador.Interfaces;
+using Servicios.Helpers.Security;
 using Servicios.UsuarioGeneral;
 using Servicios.UsuarioGeneral.Interfaces;
 using System;
@@ -21,7 +22,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WebAppPedidos.Helpers;
 
 namespace WebAppPedidos
 {
@@ -37,29 +37,6 @@ namespace WebAppPedidos
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            /* INICIO: Agregado para el uso de Json Web Token (JWT) */
-            /* ESTO ESTA A MODO DE PRUEBA - DEBEMOS DESHABILITARLO PARA LA WEB APP, SOLO FUNCIONARA EN LA API */
-            //var key = Encoding.ASCII.GetBytes(Settings.Secret);
-            //services.AddAuthentication(x =>
-            //{
-            //    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            //    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            //})
-            //.AddJwtBearer(x =>
-            //{
-            //    x.RequireHttpsMetadata = false;
-            //    x.SaveToken = true;
-            //    x.TokenValidationParameters = new TokenValidationParameters {
-            //        ValidateIssuerSigningKey = true,
-            //        IssuerSigningKey = new SymmetricSecurityKey(key),
-            //        ValidateIssuer = false,
-            //        ValidateAudience = false
-            //    };
-
-            //});
-            /* FIN: Agregado para el uso de Json Web Token (JWT) */
-
 
             /* INICIO: Agregado para el uso de seguridad por roles */
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -121,6 +98,7 @@ namespace WebAppPedidos
 
             services.AddTransient<IPedidosService, PedidosServiceImpl>();
             services.AddTransient<IPedidosRepository, PedidosRepositoryImpl>();
+            
             /* FIN: IoC (Inyeccion de Dependencias) para Servicios y Repositorios */
         }
 

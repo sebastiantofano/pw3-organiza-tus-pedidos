@@ -1,20 +1,30 @@
+using DAL.Modelos;
+using DAL.Repositorios;
+using DAL.Repositorios.Interfaces;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Servicios.Administrador;
+using Servicios.Administrador.Interfaces;
+using Servicios.Helpers.Security;
+using Servicios.UsuarioGeneral;
+using Servicios.UsuarioGeneral.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WebAppPedidos.Helpers;
+
 
 namespace WebAppPedidosAPI
 {
@@ -30,8 +40,6 @@ namespace WebAppPedidosAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -59,6 +67,51 @@ namespace WebAppPedidosAPI
 
             });
             /* FIN: Agregado para el uso de Json Web Token (JWT) */
+
+
+
+            /* INICIO: Agregado para el uso de seguridad por roles */
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                   .AddCookie(options =>
+                   {
+                       /* INICIO: Agregado para solucionar el problema de que devolvía un statusCode 302(Redireccion) en vez del 401 (No autorizado)*/
+                       options.Events.OnRedirectToLogin = context =>
+                       {
+                           context.Response.Headers["Location"] = context.RedirectUri;
+                           context.Response.StatusCode = 401;
+                           return Task.CompletedTask;
+                       };
+
+                       /* FIN: Agregado para solucionar el problema de que devolvía un statusCode 302(Redireccion) en vez del 401 (No autorizado)*/
+                   });
+            /* FIN: Agregado para el uso de seguridad por roles */
+
+
+
+            /* INICIO: IoC (Inyeccion de Dependencias) para la base de datos */
+            services.AddDbContext<PedidosPW3Context>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("WebAppPedidosContext")));
+            /* FIN: IoC (Inyeccion de Dependencias) para la base de datos */
+
+
+
+            /* INICIO: IoC (Inyeccion de Dependencias) para Servicios y Repositorios */
+            services.AddTransient<ILoginService, LoginServiceImpl>();
+            services.AddTransient<ILoginRepository, LoginRepositoryImpl>();
+
+            services.AddTransient<IClientesService, ClientesServiceImpl>();
+            services.AddTransient<IClientesRepository, ClientesRepositoryImpl>();
+
+            services.AddTransient<IArticulosService, ArticulosServiceImpl>();
+            services.AddTransient<IArticulosRepository, ArticulosRepositoryImpl>();
+
+            services.AddTransient<IUsuariosService, UsuariosServiceImpl>();
+            services.AddTransient<IUsuariosRepository, UsuariosRepositoryImpl>();
+
+            _ = services.AddTransient<IPedidosService, PedidosServiceImpl>();
+            services.AddTransient<IPedidosRepository, PedidosRepositoryImpl>();
+
+            /* FIN: IoC (Inyeccion de Dependencias) para Servicios y Repositorios */
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

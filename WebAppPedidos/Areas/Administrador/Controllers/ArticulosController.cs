@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Servicios.Administrador;
 using Servicios.Administrador.Interfaces;
+using Servicios.Helpers.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,27 +51,32 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
             /* Intentar realizar una validación cuando tenemos el atajo de agregar un articulo en la vista de administracion de articulos */
             if (ModelState.IsValid)
             {
-                // Donde se debe validar si ya existe el articulo? En este Controller o en el Service? TODO , preguntar
-                bool codigoYaExistente = _articulosService.ValidarCodigoExistente(articulo.Codigo);
-                if (codigoYaExistente)
+                try
                 {
-                    TempData["toastr_error"] = "El codigo de artículo que ha ingresado ya existe!";
+                    /* TODO: Esta logica debe ir en el Controller o el Service??? No podemos usar User en un Servicio */
+                    var identity = User.Claims;
+                    var sid = identity.Where(c => c.Type == ClaimTypes.NameIdentifier)
+                                .Select(c => c.Value).SingleOrDefault();
+
+                    articulo.CreadoPor = int.Parse(sid);
+
+                    _articulosService.Insertar(articulo);
+                    TempData["toastr_success"] = "Se ha creado el artículo correctamente !";
                     return RedirectToAction("AdministrarArticulos");
                 }
-
-                var identity = User.Claims;
-                var sid = identity.Where(c => c.Type == ClaimTypes.PrimarySid)
-                            .Select(c => c.Value).SingleOrDefault();
-
-                articulo.CreadoPor = int.Parse(sid);
-
-                _articulosService.Insertar(articulo);
-                TempData["toastr_success"] = "Se ha creado el artículo correctamente !";
-                return RedirectToAction("AdministrarArticulos");
+                catch (ArticuloException e)
+                {
+                    TempData["toastr_error"] = e.Message;
+                    return View();
+                }
+            }
+            else
+            {
+                TempData["toastr_error"] = "No ha ingresado correctamente la información del Artículo !";
+                return View();
             }
 
-            TempData["toastr_error"] = "No se ha podido crear el artículo correctamente !";
-            return View();
+     
         }
 
 

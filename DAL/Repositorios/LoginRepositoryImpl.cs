@@ -1,5 +1,4 @@
-﻿using DAL.Helpers.Exceptions;
-using DAL.Modelos;
+﻿using DAL.Modelos;
 using DAL.Repositorios.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -24,22 +23,8 @@ namespace DAL.Repositorios
 
         public Usuario IniciarSesion(Usuario usuario)
         {
-
-            Usuario usuarioValidado = _pedidosPW3Context.Usuarios.Where(x => x.Email == usuario.Email && x.Password == usuario.Password).FirstOrDefault(); //TODO
-
-            if (usuarioValidado == null)
-            {
-                throw new InvalidLoginException("Credenciales inválidas");
-            }
-            return usuarioValidado;
-            /*bool usuarioValidado = usuariosDAO.ValidarUsuarioYContrasenaCorrecta(usuario);
-            if (!usuarioValidado)
-            {
-                throw new InvalidLoginException("Credenciales invalidas");
-            }
-
-            Usuario usuarioEncontrado = usuariosDAO.ObtenerPorEmail(usuario.Email);
-            return usuarioEncontrado*/
+            Usuario usuarioBuscado = _pedidosPW3Context.Usuarios.Where(x => x.Email == usuario.Email && x.Password == usuario.Password).FirstOrDefault(); //TODO
+            return usuarioBuscado ?? null ; // Si encuentra al usuario devuelve al usuario, sino devuelve null
         }
     }
 }

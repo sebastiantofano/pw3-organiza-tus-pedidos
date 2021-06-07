@@ -1,15 +1,17 @@
-﻿using DAL.Helpers.Exceptions;
-using DAL.Modelos;
+﻿using DAL.Modelos;
 using DAL.Repositorios;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Servicios.Helpers;
+using Servicios.Helpers.Exceptions;
+using Servicios.Helpers.Security;
 using Servicios.UsuarioGeneral;
 using Servicios.UsuarioGeneral.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using WebAppPedidosAPI.ResponseObjects;
 
@@ -21,29 +23,29 @@ namespace WebAppPedidosAPI.Controllers
         private readonly ILoginService _loginService;
 
 
-        public AuthorizationController()
+        public AuthorizationController(ILoginService loginService)
         {
-            //loginService = new LoginServiceImpl(new LoginRepositoryImpl(new PedidosPW3Context()));
+            _loginService = loginService;
         }
 
         [HttpPost]
         [Route("login")]
         [AllowAnonymous]
-        public async Task<ActionResult<dynamic>> Login([FromBody] Usuario usuarioValidar)
+        public async Task<ActionResult<dynamic>> IniciarSesion([FromBody] Usuario usuarioValidar)
         {
             try
             {
                 Usuario usuarioValidado = _loginService.IniciarSesion(HttpContext, usuarioValidar);
-                var token = TokenService.CreateToken(usuarioValidado);
+                //var token = TokenService.CreateToken(usuarioValidado);
                 UsuarioLogueadoResponse usuarioLogueadoResponse = new(usuarioValidado.IdUsuario, usuarioValidado.Nombre,
                                                                       usuarioValidado.Apellido, usuarioValidado.FechaNacimiento);
                 // Devuelvo un JSON con los datos del usuario y el JWT
                 return new {
                     usuario = usuarioLogueadoResponse,
-                    token = token
+                    token = usuarioValidado.Token
                 };
             }
-            catch (InvalidLoginException)
+            catch (LoginException)
             {
                 return new {
                     usuario = false,
@@ -51,6 +53,18 @@ namespace WebAppPedidosAPI.Controllers
                 };
             }
         }
+
+        [HttpPost]
+        [Route("logout")]
+        [Authorize] // Solo puede cerrar sesion quien este autenticado
+        public async Task<ActionResult<dynamic>> CerrarSesion([FromBody] Usuario usuarioValidar)
+        {
+            _loginService.CerrarSesion(HttpContext);
+            return new {
+                mensaje = "Ha cerrado sesión exitosamente"
+            };
+        }
+
 
         [HttpGet]
         [Route("authenticated")]
@@ -73,8 +87,6 @@ namespace WebAppPedidosAPI.Controllers
         [Authorize(Roles = "Administrador")]
         public string Validar(string id)
         {
-
-
             return $"You are a Administrador - {User.Identity.Name}";
         }
 
