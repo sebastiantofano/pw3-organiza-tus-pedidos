@@ -25,12 +25,15 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
         {
             _articulosService = articulosService; 
         }
+
+        [HttpGet]
         public IActionResult Index()
         {
             return RedirectToAction("AdministrarArticulos");
         }
 
-        
+
+        [HttpGet]
         public IActionResult AdministrarArticulos()
         {
             List<Articulo> listaArticulos = _articulosService.ObtenerTodos();
@@ -45,41 +48,6 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
         }
 
 
-        [HttpPost]
-        public IActionResult AgregarArticulo(Articulo articulo)
-        {
-            /* Intentar realizar una validación cuando tenemos el atajo de agregar un articulo en la vista de administracion de articulos */
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    /* TODO: Esta logica debe ir en el Controller o el Service??? No podemos usar User en un Servicio */
-                    var identity = User.Claims;
-                    var sid = identity.Where(c => c.Type == ClaimTypes.NameIdentifier)
-                                .Select(c => c.Value).SingleOrDefault();
-
-                    articulo.CreadoPor = int.Parse(sid);
-
-                    _articulosService.Insertar(articulo);
-                    TempData["toastr_success"] = "Se ha creado el artículo correctamente !";
-                    return RedirectToAction("AdministrarArticulos");
-                }
-                catch (ArticuloException e)
-                {
-                    TempData["toastr_error"] = e.Message;
-                    return View();
-                }
-            }
-            else
-            {
-                TempData["toastr_error"] = "No ha ingresado correctamente la información del Artículo !";
-                return View();
-            }
-
-     
-        }
-
-
         [HttpGet]
         public IActionResult EditarArticulo(string id)
         {
@@ -91,26 +59,50 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
 
 
         [HttpPost]
-        public IActionResult EditarArticulo(Articulo articulo)
+        public IActionResult AgregarArticulo(Articulo articulo)
         {
-            if (ModelState.IsValid)
+            /* Intentar realizar una validación cuando tenemos el atajo de agregar un articulo en la vista de administracion de articulos */
+            if (!ModelState.IsValid)
             {
-                _articulosService.Actualizar(articulo);
-                TempData["toastr_success"] = "Se ha editado el artículo correctamente !";
+                TempData["toastr_error"] = "No ha ingresado correctamente la información del Artículo !";
+                return View();
+            }
+            
+            try
+            {
+                _articulosService.Insertar(articulo);
+                TempData["toastr_success"] = "Se ha creado el artículo correctamente !";
                 return RedirectToAction("AdministrarArticulos");
             }
-
-            TempData["toastr_error"] = "No se ha podido editar el artículo correctamente !";
-            return View();
+            catch (ArticuloException e)
+            {
+                TempData["toastr_error"] = e.Message;
+                return View();
+            }
 
         }
+
+
+        [HttpPost]
+        public IActionResult EditarArticulo(Articulo articulo)
+        {
+            if (!ModelState.IsValid)
+            {
+                TempData["toastr_error"] = "No se ha podido editar el artículo correctamente !";
+                return View();
+            }
+
+            _articulosService.Actualizar(articulo);
+            TempData["toastr_success"] = "Se ha editado el artículo correctamente !";
+            return RedirectToAction("AdministrarArticulos");
+         }
+
         
 
         [HttpPost]
-        public IActionResult EliminarArticuloPorId(string id, string who)
+        public IActionResult EliminarArticulo(Articulo articulo) //TODO: Editar
         {
-            int IdArticulo = int.Parse(id);
-            _articulosService.EliminarPorId(IdArticulo, who);
+            _articulosService.Eliminar(articulo);
 
             TempData["toastr_info"] = "Se ha eliminado el artículo correctamente !";
             return RedirectToAction("AdministrarArticulos");

@@ -27,5 +27,18 @@ namespace DAL.Repositorios
             Articulo articuloExistente = _pedidosPW3Context.Articulos.Where(o => o.Codigo == codigo).FirstOrDefault();
             return articuloExistente != null ? true : false;
         }
+
+        public override void Actualizar(Articulo articulo)
+        {
+            _pedidosPW3Context.Set<Articulo>().Attach(articulo);
+
+            //Specify the fields that should be updated.
+            _pedidosPW3Context.Entry(articulo).Property(x => x.Codigo).IsModified = true;
+            _pedidosPW3Context.Entry(articulo).Property(x => x.Descripcion).IsModified = true;
+            _pedidosPW3Context.Entry(articulo).Property(x => x.ModificadoPor).IsModified = true;
+            _pedidosPW3Context.Entry(articulo).Property(x => x.FechaModificacion).IsModified = true;
+
+            _pedidosPW3Context.SaveChanges();
+        }
     }
 }

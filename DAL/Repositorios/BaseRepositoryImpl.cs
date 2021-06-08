@@ -1,4 +1,5 @@
 ﻿using DAL.Modelos;
+using DAL.Modelos.Interfaces;
 using DAL.Repositorios.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Repositorios
 {
-    public abstract class BaseRepositoryImpl<TEntity> : IBaseRepository<TEntity> where TEntity : class
+    public abstract class BaseRepositoryImpl<TEntity> : IBaseRepository<TEntity> where TEntity : class, ITrackeableEntity
     {
 
         private readonly PedidosPW3Context _pedidosPW3Context;
@@ -32,7 +33,7 @@ namespace DAL.Repositorios
             return _dbSet.AsNoTracking().ToList();
         }
 
-        public void Actualizar(TEntity entity)
+        public virtual void Actualizar(TEntity entity)
         {
             _pedidosPW3Context.Set<TEntity>().Update(entity);
             _pedidosPW3Context.SaveChanges();
@@ -44,17 +45,15 @@ namespace DAL.Repositorios
             _pedidosPW3Context.SaveChanges();
         }
 
-        public void EliminarPorId(int id, string who)
-        {
-            //Este metodo no funciona debemos arreglarlo, falla por el tema de las referencias hacia otras tablas
-            _dbSet.Remove(ObtenerPorId(id));
-            _pedidosPW3Context.SaveChanges();
-        }
-
         public void Eliminar(TEntity entity)
         {
-            //Este metodo no funciona debemos arreglarlo, falla por el tema de las referencias hacia otras tablas
-            _pedidosPW3Context.Remove<TEntity>(entity);
+            //Borrado logico
+            _pedidosPW3Context.Set<TEntity>().Attach(entity);
+
+            //Specify the fields that should be updated.
+            _pedidosPW3Context.Entry(entity).Property(x => x.BorradoPor).IsModified = true;
+            _pedidosPW3Context.Entry(entity).Property(x => x.FechaBorrado).IsModified = true;
+
             _pedidosPW3Context.SaveChanges();
         }
 

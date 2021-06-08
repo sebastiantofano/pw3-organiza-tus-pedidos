@@ -16,8 +16,6 @@ namespace DAL.Repositorios.Interfaces
 
         void Actualizar(TEntity entity);
 
-        void EliminarPorId(int id, string who);
-
         void Eliminar(TEntity entity);
     }
 }

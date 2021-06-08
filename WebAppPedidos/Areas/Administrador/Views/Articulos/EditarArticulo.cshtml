@@ -24,8 +24,7 @@
                             <div class="card-body">
 
                                 <input type="hidden" name="IdArticulo" value="@Model.IdArticulo" />
-                                <input type="hidden" name="FechaCreacion" value="@Model.FechaCreacion" />   @*Ver como solucionar este problema de la fecha*@
-                                @*<input type="hidden" name="ModificadoPor" value="@User.Identity.Name" />*@
+                                <input type="hidden" name="FechaCreacion" value="@Model.FechaCreacion" />   @*TODO: Ver como solucionar este problema de la fecha*@
 
                                 <div class="form-group row align-items-center">
                                     <label class="col-lg-1 col-form-label">Código <span class="text-danger">*</span></label>
@@ -147,10 +146,9 @@
             @if (Model.FechaBorrado == null)
             {
 
-                @using (Html.BeginForm("EliminarArticuloPorId", "Articulos", new { area = "Administrador" }, FormMethod.Post))
+                @using (Html.BeginForm("EliminarArticulo", "Articulos", new { area = "Administrador" }, FormMethod.Post))
                 {
-                    <input type="hidden" name="id" value="@Model.IdArticulo" />
-                    <input type="hidden" name="who" value="@User.Identity.Name" />
+                    <input type="hidden" name="IdArticulo" value="@Model.IdArticulo" />
                     <button type="submit" class="btn btn-danger col-lg-3 ml-auto" onclick="return confirm('¿Usted está seguro que desea eliminar artículo? \nCódigo: @Model.Codigo \nDescripción: @Model.Descripcion')">Eliminar Artículo</button>
                 }
             }

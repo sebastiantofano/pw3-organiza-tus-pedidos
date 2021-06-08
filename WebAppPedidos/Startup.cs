@@ -98,7 +98,9 @@ namespace WebAppPedidos
 
             services.AddTransient<IPedidosService, PedidosServiceImpl>();
             services.AddTransient<IPedidosRepository, PedidosRepositoryImpl>();
-            
+
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             /* FIN: IoC (Inyeccion de Dependencias) para Servicios y Repositorios */
         }
 

@@ -1,5 +1,6 @@
 ﻿using DAL.Modelos;
 using DAL.Repositorios.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Servicios.UsuarioGeneral.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -11,10 +12,12 @@ namespace Servicios.UsuarioGeneral
 {
     public class PedidosServiceImpl : BaseServiceImpl<Pedido>, IPedidosService
     {
-        private readonly IPedidosRepository pedidosRepository;
-        public PedidosServiceImpl(IPedidosRepository pedidosRepository) : base(pedidosRepository)
+        private readonly IPedidosRepository _pedidosRepository;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public PedidosServiceImpl(IPedidosRepository pedidosRepository, IHttpContextAccessor httpContextAccessor) : base(pedidosRepository, httpContextAccessor)
         {
-            this.pedidosRepository = pedidosRepository;
+            _pedidosRepository = pedidosRepository;
+            _httpContextAccessor = httpContextAccessor;
         }
     }
 }

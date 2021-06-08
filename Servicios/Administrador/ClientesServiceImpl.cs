@@ -1,5 +1,6 @@
 ﻿using DAL.Modelos;
 using DAL.Repositorios.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Servicios.Administrador.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -12,9 +13,11 @@ namespace Servicios.Administrador
     public class ClientesServiceImpl : BaseServiceImpl<Cliente>, IClientesService
     {
         private readonly IClientesRepository _clientesRepository;
-        public ClientesServiceImpl(IClientesRepository clientesRepository) : base(clientesRepository)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public ClientesServiceImpl(IClientesRepository clientesRepository, IHttpContextAccessor httpContextAccessor) : base(clientesRepository, httpContextAccessor)
         {
             _clientesRepository = clientesRepository;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         

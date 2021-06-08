@@ -1,5 +1,5 @@
 ﻿using DAL.Modelos.Interfaces;
-using DAL.Modelos.Metadata;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -12,13 +12,13 @@ using System.Threading.Tasks;
 namespace DAL.Modelos
 {
     
-    [MetadataType(typeof(ArticuloMetadata))] // Con este decorador "MetadataType" asociamos las clases "Metadata" que realizarán validaciones sobre el modelo
-    public partial class Articulo : ITrackeableEntity
+    [ModelMetadataType(typeof(ArticuloMetadata))] // Con este decorador "MetadataType" asociamos las clases "Metadata" que realizarán validaciones sobre el modelo
+    public partial class Articulo : ITrackeableEntity // Debo implementar ItrackeableEntity porque lo utilizamos en BaseServiceImpl para manejar sus properties
     {
 
     }
 
-    [MetadataType(typeof(UsuarioMetadata))] // Con este decorador "MetadataType" asociamos las clases "Metadata" que realizarán validaciones sobre el modelo
+    [ModelMetadataType(typeof(UsuarioMetadata))] // Con este decorador "MetadataType" asociamos las clases "Metadata" que realizarán validaciones sobre el modelo
     public partial class Usuario : ITrackeableEntity
     {
         [NotMapped] // Para que no se tenga en cuenta esta property en la base de datos, ya que es una propiedad logica de la aplicacion

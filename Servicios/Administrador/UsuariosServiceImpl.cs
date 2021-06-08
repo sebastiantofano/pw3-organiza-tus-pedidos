@@ -1,5 +1,6 @@
 ﻿using DAL.Modelos;
 using DAL.Repositorios.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Servicios.Administrador.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -11,15 +12,17 @@ namespace Servicios.Administrador
 {
     public class UsuariosServiceImpl : BaseServiceImpl<Usuario>, IUsuariosService
     {
-        private readonly IUsuariosRepository usuariosRepository;
-        public UsuariosServiceImpl(IUsuariosRepository usuariosRepository) : base(usuariosRepository)
+        private readonly IUsuariosRepository _usuariosRepository;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public UsuariosServiceImpl(IUsuariosRepository usuariosRepository, IHttpContextAccessor httpContextAccessor) : base(usuariosRepository, httpContextAccessor)
         {
-            this.usuariosRepository = usuariosRepository;
+            _usuariosRepository = usuariosRepository;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public bool ValidarEmailExistente(string email)
         {
-            return usuariosRepository.ValidarEmailExistente(email);
+            return _usuariosRepository.ValidarEmailExistente(email);
         }
     }
 }

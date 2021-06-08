@@ -11,6 +11,7 @@ using Servicios.UsuarioGeneral.Interfaces;
 using DAL.Repositorios;
 using DAL.Modelos;
 using Servicios.Helpers.Exceptions;
+using Microsoft.AspNetCore.Http;
 
 namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
 {
@@ -58,9 +59,9 @@ namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
 
                 if (usuarioValidado.EsAdmin)
                 {
-                    
-                //HttpContext.Session.SetString("NombreUsuario", usuarioValidado.Nombre.ToString());
-                //HttpContext.Session.SetString("ApellidoUsuario", usuarioValidado.Apellido.ToString());
+                    HttpContext.Session.SetString("IdUsuario", usuarioValidado.IdUsuario.ToString());
+                    HttpContext.Session.SetString("NombreUsuario", usuarioValidado.Nombre.ToString());
+                    HttpContext.Session.SetString("ApellidoUsuario", usuarioValidado.Apellido.ToString());
                     TempData["toastr_success"] = $"Bienvenido {usuarioValidado.Nombre} (Usted es Administrador)";
                     return RedirectToAction("Index", "Home", new { Area = "Administrador" });
                 }

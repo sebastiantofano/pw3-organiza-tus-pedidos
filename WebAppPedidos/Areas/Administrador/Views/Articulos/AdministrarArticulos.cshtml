@@ -30,8 +30,6 @@
                                 <h4>Agregar un nuevo artículo</h4>
                             </div>
 
-                            <input type="hidden" name="CreadoPor" value="@User.Identity.Name" />
-
                             <div class="form-group row">
                                 <label class="col-form-label m-auto" for="val-codigo">
                                     Código <span class="text-danger">*</span>
@@ -97,7 +95,7 @@
                                                 </a>
                                                 @if (articulo.FechaBorrado == null)
                                                 {
-                                                    <form method="POST" asp-area="Administrador" asp-controller="Articulos" asp-action="EliminarArticuloPorId" asp-route-id="@articulo.IdArticulo" asp-route-who="@User.Identity.Name">
+                                                    <form method="POST" asp-area="Administrador" asp-controller="Articulos" asp-action="EliminarArticulo" asp-route-IdArticulo="@articulo.IdArticulo">
                                                         <button type="submit" class="btn btn-danger btn-flat btn-addon btn-sm" onclick="return confirm('¿Usted está seguro que desea eliminar artículo? \nCódigo: @articulo.Codigo \nDescripción: @articulo.Descripcion')"> <i class="ti-close"></i>Eliminar</button>
                                                     </form>
 
@@ -116,6 +114,7 @@
     </div>
     <div class="row">
         <div class="col-lg-12 d-flex align-items-center">
+            <a asp-area="Administrador" asp-controller="Articulos" asp-action="AgregarArticulo" class="btn btn-success btn-large">Agregar un nuevo Artículo</a>
             <a asp-area="Administrador" asp-controller="Home" asp-action="Index" class="btn btn-default ml-auto ">Volver</a>
         </div>
     </div>

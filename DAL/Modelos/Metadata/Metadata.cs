@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 /* En este namespace encontramos todas las clases "Metadata" donde se realizarán las validaciones sobre los Data Models */
 /* Las validaciones no se podrán hacer sobre las clases originales ya que se sobrescriben al inicializar el contexto nuevamente */
-namespace DAL.Modelos.Metadata
+namespace DAL.Modelos
 {
 
     public class ArticuloMetadata

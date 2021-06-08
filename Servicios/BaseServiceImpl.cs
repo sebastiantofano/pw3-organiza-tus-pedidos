@@ -14,11 +14,14 @@ namespace Servicios
     public abstract class BaseServiceImpl<TEntity> : IBaseService<TEntity> where TEntity : class, ITrackeableEntity
     {
         private readonly IBaseRepository<TEntity> _entityRepository;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public BaseServiceImpl(IBaseRepository<TEntity> entityRepository)
+
+        public BaseServiceImpl(IBaseRepository<TEntity> entityRepository, IHttpContextAccessor httpContextAccessor)
         {
 
             _entityRepository = entityRepository;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public TEntity ObtenerPorId(int id)
@@ -35,6 +38,8 @@ namespace Servicios
         /* Este método es "Virtual" porque puede ser sobrescrito para agregar logica en los servicios particulares */
         public virtual void Insertar(TEntity entity)
         {
+            string idUsuario = _httpContextAccessor.HttpContext.Session.GetString("IdUsuario");
+            entity.CreadoPor = int.Parse(idUsuario);
             entity.FechaCreacion = DateTime.Today;
             _entityRepository.Insertar(entity);
         }
@@ -42,19 +47,22 @@ namespace Servicios
         /* Este método es "Virtual" porque puede ser sobrescrito para agregar logica en los servicios particulares */
         public virtual void Actualizar(TEntity entity)
         {
+            string idUsuario = _httpContextAccessor.HttpContext.Session.GetString("IdUsuario");
+            entity.ModificadoPor = int.Parse(idUsuario);
             entity.FechaModificacion = DateTime.Today;
+
             _entityRepository.Actualizar(entity);
         }
 
         public void Eliminar(TEntity entity)
         {
+            string idUsuario = _httpContextAccessor.HttpContext.Session.GetString("IdUsuario");
+            entity.BorradoPor = int.Parse(idUsuario);
+            entity.FechaBorrado = DateTime.Today;
+
             _entityRepository.Eliminar(entity);
         }
 
-        public void EliminarPorId(int id, string who)
-        {
-            _entityRepository.EliminarPorId(id, who);
-        }
 
 
 
