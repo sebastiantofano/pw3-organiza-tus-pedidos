@@ -13,11 +13,9 @@ namespace Servicios.Administrador
     public class UsuariosServiceImpl : BaseServiceImpl<Usuario>, IUsuariosService
     {
         private readonly IUsuariosRepository _usuariosRepository;
-        private readonly IHttpContextAccessor _httpContextAccessor;
         public UsuariosServiceImpl(IUsuariosRepository usuariosRepository, IHttpContextAccessor httpContextAccessor) : base(usuariosRepository, httpContextAccessor)
         {
             _usuariosRepository = usuariosRepository;
-            _httpContextAccessor = httpContextAccessor;
         }
 
         public bool ValidarEmailExistente(string email)

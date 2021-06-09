@@ -18,9 +18,6 @@ namespace DAL.Repositorios
 
         public bool ValidarEmailExistente(string email)
         {
-            /*bool EsUsuarioExistente = usuariosDAO.ValidarEmailExistente(email);
-            return EsUsuarioExistente;*/
-
 
             Usuario usuarioExistente = _pedidosPW3Context.Usuarios.Where(o => o.Email == email).FirstOrDefault();
             if (usuarioExistente == null)
@@ -30,6 +27,25 @@ namespace DAL.Repositorios
 
             return true;
 
+        }
+
+        public override void Actualizar(Usuario usuario)
+        {
+            // Pasa de estar en estado Detached a Unchanged
+            _pedidosPW3Context.Set<Usuario>().Attach(usuario);
+
+            //Specify the fields that should be updated.
+            _pedidosPW3Context.Entry(usuario).Property(x => x.EsAdmin).IsModified = true;
+            _pedidosPW3Context.Entry(usuario).Property(x => x.Email).IsModified = true;
+            _pedidosPW3Context.Entry(usuario).Property(x => x.Password).IsModified = true;
+            _pedidosPW3Context.Entry(usuario).Property(x => x.Nombre).IsModified = true;
+            _pedidosPW3Context.Entry(usuario).Property(x => x.Apellido).IsModified = true;
+            _pedidosPW3Context.Entry(usuario).Property(x => x.FechaNacimiento).IsModified = true;
+            _pedidosPW3Context.Entry(usuario).Property(x => x.FechaUltLogin).IsModified = true;
+            _pedidosPW3Context.Entry(usuario).Property(x => x.ModificadoPor).IsModified = true;
+            _pedidosPW3Context.Entry(usuario).Property(x => x.FechaModificacion).IsModified = true;
+
+            _pedidosPW3Context.SaveChanges();
         }
     }
 }

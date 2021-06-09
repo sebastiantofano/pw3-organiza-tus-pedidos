@@ -13,13 +13,13 @@ namespace DAL.Modelos
 {
     
     [ModelMetadataType(typeof(ArticuloMetadata))] // Con este decorador "MetadataType" asociamos las clases "Metadata" que realizarán validaciones sobre el modelo
-    public partial class Articulo : ITrackeableEntity // Debo implementar ItrackeableEntity porque lo utilizamos en BaseServiceImpl para manejar sus properties
+    public partial class Articulo : IAuditableEntity // Debo implementar ItrackeableEntity porque lo utilizamos en BaseServiceImpl para manejar sus properties
     {
 
     }
 
     [ModelMetadataType(typeof(UsuarioMetadata))] // Con este decorador "MetadataType" asociamos las clases "Metadata" que realizarán validaciones sobre el modelo
-    public partial class Usuario : ITrackeableEntity
+    public partial class Usuario : IAuditableEntity
     {
         [NotMapped] // Para que no se tenga en cuenta esta property en la base de datos, ya que es una propiedad logica de la aplicacion
         public string Roles {
@@ -35,13 +35,13 @@ namespace DAL.Modelos
     }
 
     [MetadataType(typeof(ClienteMetadata))] // Con este decorador "MetadataType" asociamos las clases "Metadata" que realizarán validaciones sobre el modelo
-    public partial class Cliente : ITrackeableEntity
+    public partial class Cliente : IAuditableEntity
     {
 
     }
 
     [MetadataType(typeof(PedidoMetadata))] // Con este decorador "MetadataType" asociamos las clases "Metadata" que realizarán validaciones sobre el modelo
-    public partial class Pedido : ITrackeableEntity
+    public partial class Pedido : IAuditableEntity
     {
 
     }

@@ -49,12 +49,11 @@ namespace WebAppPedidos
                            context.Response.StatusCode = 401;
                            return Task.CompletedTask;
                        };
-
                        /* FIN: Agregado para solucionar el problema de que devolvía un statusCode 302(Redireccion) en vez del 401 (No autorizado)*/
 
                        options.LoginPath = "/login";
                        //options.LogoutPath = "/Account/SignOut";
-                       options.AccessDeniedPath = "/401unauthorized";  // Ver porque no funciona ???????????
+                       options.AccessDeniedPath = "/401unauthorized";  // TODO: Ver! ¿Por qué no funciona?
                    });
             /* FIN: Agregado para el uso de seguridad por roles */
 
@@ -66,10 +65,7 @@ namespace WebAppPedidos
             services.AddSession(options =>
             {
                 options.Cookie.Name = "WebAppPedidosSession";
-                options.IdleTimeout = TimeSpan.FromSeconds(10000);
-                //options.Cookie.HttpOnly = true;
-                //options.Cookie.IsEssential = true;
-                
+                options.IdleTimeout = TimeSpan.FromSeconds(10000);         
             });
             /* FIN: Agregado para el uso de sesiones */
 
@@ -78,8 +74,9 @@ namespace WebAppPedidos
 
 
             /* INICIO: IoC (Inyeccion de Dependencias) para la base de datos */
+            /* ADEMAS: Agregamos LazyLoading */
             services.AddDbContext<PedidosPW3Context>(options => 
-                options.UseSqlServer(Configuration.GetConnectionString("WebAppPedidosContext")));
+                options.UseSqlServer(Configuration.GetConnectionString("WebAppPedidosContext")).UseLazyLoadingProxies());
             /* FIN: IoC (Inyeccion de Dependencias) para la base de datos */
 
 
@@ -99,9 +96,12 @@ namespace WebAppPedidos
             services.AddTransient<IPedidosService, PedidosServiceImpl>();
             services.AddTransient<IPedidosRepository, PedidosRepositoryImpl>();
 
-
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             /* FIN: IoC (Inyeccion de Dependencias) para Servicios y Repositorios */
+
+            /* INICIO: IoC (Inyeccion de Dependencias) para el utilizar HttpContext desde los servicios */
+            /* TODO: ¿Esta bien acceder al contexto desde un servicio o solo tiene que ser visible desde el controller? */
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            /* FIN: IoC (Inyeccion de Dependencias) para el utilizar HttpContext desde los servicios */
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -121,8 +121,8 @@ namespace WebAppPedidos
 
             /* INICIO: Agregado - Redirecciones a páginas de errores */
             app.UseStatusCodePages(context => {
-                if (context.HttpContext.Response.StatusCode == 401) context.HttpContext.Response.Redirect("/401unauthorized"); /* Utiliza un Route al endpoint /UsuarioGeneral/Errores/Error401 */
-                if (context.HttpContext.Response.StatusCode == 404) context.HttpContext.Response.Redirect("/404notfound"); /* Utiliza un Route al endpoint /UsuarioGeneral/Errores/Error404 */
+                if (context.HttpContext.Response.StatusCode == 401) context.HttpContext.Response.Redirect("/401unauthorized"); /* Utiliza un Route configurado al endpoint /UsuarioGeneral/Errores/Error401 */
+                if (context.HttpContext.Response.StatusCode == 404) context.HttpContext.Response.Redirect("/404notfound"); /* Utiliza un Route configurado al endpoint /UsuarioGeneral/Errores/Error404 */
                
                 return Task.CompletedTask;
             });

@@ -14,13 +14,13 @@ namespace Servicios.UsuarioGeneral
 {
     public class LoginServiceImpl : ILoginService
     {
-        private readonly ILoginRepository loginRepository;
+        private readonly ILoginRepository _loginRepository;
         private readonly SecurityManager _securityManager;
        
 
         public LoginServiceImpl(ILoginRepository loginRepository)
         {
-            this.loginRepository = loginRepository;
+            _loginRepository = loginRepository;
             _securityManager = new SecurityManager(); // Clase encargada de manejar Autentificacion y Autorizacion de la Web App
         }
         public void CerrarSesion(HttpContext httpContext)
@@ -30,18 +30,17 @@ namespace Servicios.UsuarioGeneral
 
         public Usuario IniciarSesion(HttpContext httpContext, Usuario usuario)
         {
-            try
-            {
-                Usuario usuarioEncontrado = loginRepository.IniciarSesion(usuario);
-                usuarioEncontrado.Token = TokenService.CreateToken(usuarioEncontrado); // Eso sera de ayuda cuando se inicie la APP en modo API
-                _securityManager.SignIn(httpContext, usuarioEncontrado); // Agrega los claims al usuario actual
 
-                return usuarioEncontrado;
-            }
-            catch (LoginException)
+            Usuario usuarioEncontrado = _loginRepository.IniciarSesion(usuario);
+            if(usuarioEncontrado == null)
             {
-                throw;
+                throw new LoginException("No ha ingresado correctamente sus credenciales !");
             }
+
+            usuarioEncontrado.Token = TokenService.CreateToken(usuarioEncontrado); // Eso sera de ayuda cuando se inicie la APP en modo API
+            _securityManager.SignIn(httpContext, usuarioEncontrado); // Agrega los claims al usuario actual
+            return usuarioEncontrado;
+
             
         }
     }

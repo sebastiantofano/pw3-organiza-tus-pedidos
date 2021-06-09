@@ -14,7 +14,7 @@
                 </div>
                 <div class="header-icon">
                     <i class="ti-user"> </i>
-                    <span class="user-avatar">@*@nombreUsuario (Tipo de Usuario - Aquí va Administrador o Modereador)*@</span>
+                    <span class="user-avatar">@User.Identity.Name  <span class="text-info">( @(User.IsInRole("Administrador") ? "Administrador" : "Moderador") )</span></span>
                 </div>
                 @using (Html.BeginForm("CerrarSesion", "Login", new { area = "UsuarioGeneral" }, FormMethod.Post))
                 {

@@ -17,11 +17,6 @@ namespace DAL.Repositorios
             _pedidosPW3Context = pedidosPW3Context;
         }
 
-        public void AlgoParticularDelArticulo()
-        {
-            throw new NotImplementedException();
-        }
-
         public bool ValidarCodigoExistente(string codigo)
         {
             Articulo articuloExistente = _pedidosPW3Context.Articulos.Where(o => o.Codigo == codigo).FirstOrDefault();
@@ -30,6 +25,7 @@ namespace DAL.Repositorios
 
         public override void Actualizar(Articulo articulo)
         {
+            // Pasa de estar en estado Detached a Unchanged
             _pedidosPW3Context.Set<Articulo>().Attach(articulo);
 
             //Specify the fields that should be updated.

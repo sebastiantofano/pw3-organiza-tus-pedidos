@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace DAL.Modelos.Interfaces
 {
     /* Interface con properties necesarias para realizar el seguimiento del objeto */
-    public interface ITrackeableEntity
+    public interface IAuditableEntity
     {
 
         public DateTime FechaCreacion { get; set; }

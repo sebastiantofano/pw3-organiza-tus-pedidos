@@ -11,15 +11,14 @@ using System.Threading.Tasks;
 
 namespace Servicios
 {
-    public abstract class BaseServiceImpl<TEntity> : IBaseService<TEntity> where TEntity : class, ITrackeableEntity
+    public abstract class BaseServiceImpl<TEntity> : IBaseService<TEntity> where TEntity : class, IAuditableEntity
     {
         private readonly IBaseRepository<TEntity> _entityRepository;
-        private readonly IHttpContextAccessor _httpContextAccessor;
+        readonly protected IHttpContextAccessor _httpContextAccessor;
 
 
         public BaseServiceImpl(IBaseRepository<TEntity> entityRepository, IHttpContextAccessor httpContextAccessor)
         {
-
             _entityRepository = entityRepository;
             _httpContextAccessor = httpContextAccessor;
         }
@@ -54,6 +53,7 @@ namespace Servicios
             _entityRepository.Actualizar(entity);
         }
 
+        /* Clase encargada de la logica de negocio del borrado logico, sera quien sepa QUE valores actualizar*/
         public void Eliminar(TEntity entity)
         {
             string idUsuario = _httpContextAccessor.HttpContext.Session.GetString("IdUsuario");

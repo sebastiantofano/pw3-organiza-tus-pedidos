@@ -54,26 +54,20 @@ namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
             try
             {
                 Usuario usuarioValidado = _loginService.IniciarSesion(HttpContext, usuario);
-                //var token = TokenService.CreateToken(usuarioValidado);
-                //_securityManager.SignIn(HttpContext, usuarioValidado);
 
-                if (usuarioValidado.EsAdmin)
-                {
-                    HttpContext.Session.SetString("IdUsuario", usuarioValidado.IdUsuario.ToString());
-                    HttpContext.Session.SetString("NombreUsuario", usuarioValidado.Nombre.ToString());
-                    HttpContext.Session.SetString("ApellidoUsuario", usuarioValidado.Apellido.ToString());
-                    TempData["toastr_success"] = $"Bienvenido {usuarioValidado.Nombre} (Usted es Administrador)";
-                    return RedirectToAction("Index", "Home", new { Area = "Administrador" });
-                }
-                else
-                { 
-                    TempData["toastr_success"] = $"Bienvenido {usuarioValidado.Nombre} (Usted es Moderador)";
-                    return RedirectToAction("Index", "Home", new { Area = "Moderador" });
-                }
+                HttpContext.Session.SetString("IdUsuario", usuarioValidado.IdUsuario.ToString());
+                HttpContext.Session.SetString("NombreUsuario", usuarioValidado.Nombre.ToString());
+                HttpContext.Session.SetString("ApellidoUsuario", usuarioValidado.Apellido.ToString());
+
+                string rolUsuario = usuarioValidado.Roles.ToString();
+
+                TempData["toastr_success"] = $"Bienvenido {usuarioValidado.Nombre} (Usted es {rolUsuario})";
+
+                return RedirectToAction("Index", "Home", new { Area = rolUsuario });
             }
-            catch (LoginException)
+            catch (LoginException e)
             {
-                TempData["toastr_error"] = "Credenciales Inválidas";
+                TempData["toastr_error"] = e.Message;
                 return RedirectToAction("Index", "Login", new { Area = "UsuarioGeneral" });
             }
         }

@@ -51,7 +51,7 @@
                                                         <div class="stat-text">Fecha de Creación</div>
                                                         <div class="stat-heading">@Model.FechaCreacion.ToShortDateString()</div>
                                                         <div class="stat-text">Creado Por</div>
-                                                        <div class="stat-heading">@(Model.CreadoPor != null ? Model.CreadoPor : "Sin identificar")</div>
+                                                        <div class="stat-heading">@(Model.CreadoPor != null ? @String.Format("{0} {1}", @Model.CreadoPorNavigation.Nombre, @Model.CreadoPorNavigation.Apellido) : "Sin identificar")</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -68,7 +68,7 @@
                                                         <div class="stat-text">Fecha de Última Modificación</div>
                                                         <div class="stat-heading">@(Model.FechaModificacion != null ? Model.FechaModificacion?.ToShortDateString() : "...")</div>
                                                         <div class="stat-text">Modificado Por</div>
-                                                        <div class="stat-heading">@(Model.ModificadoPor != null ? Model.ModificadoPor : "Sin identificar")</div>
+                                                        <div class="stat-heading">@(Model.ModificadoPor != null ? @String.Format("{0} {1}", @Model.ModificadoPorNavigation.Nombre, @Model.ModificadoPorNavigation.Apellido) : "Sin identificar")</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -87,7 +87,7 @@
                                                             <div class="stat-text">Fecha de Borrado</div>
                                                             <div class="stat-heading">@(Model.FechaBorrado != null ? Model.FechaBorrado?.ToShortDateString() : "...")</div>
                                                             <div class="stat-text">Modificado Por</div>
-                                                            <div class="stat-heading">@(Model.BorradoPor != null ? Model.BorradoPor : "No ha sido eliminado")</div>
+                                                            <div class="stat-heading">@(Model.BorradoPor != null ? @String.Format("{0} {1}", @Model.BorradoPorNavigation.Nombre, @Model.BorradoPorNavigation.Apellido) : "Sin identificar")</div>
                                                         </div>
                                                     </div>
                                                 </div>
