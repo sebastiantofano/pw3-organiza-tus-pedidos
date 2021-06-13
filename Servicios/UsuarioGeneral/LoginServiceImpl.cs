@@ -25,12 +25,11 @@ namespace Servicios.UsuarioGeneral
         }
         public void CerrarSesion(HttpContext httpContext)
         {
-            _securityManager.SignOut(httpContext); //Agregar esta linea para eliminar los claims del usuario
+            _securityManager.SignOut(httpContext); //Eliminar los claims del usuario
         }
 
         public Usuario IniciarSesion(HttpContext httpContext, Usuario usuario)
         {
-
             Usuario usuarioEncontrado = _loginRepository.IniciarSesion(usuario);
             if(usuarioEncontrado == null)
             {
@@ -39,9 +38,7 @@ namespace Servicios.UsuarioGeneral
 
             usuarioEncontrado.Token = TokenService.CreateToken(usuarioEncontrado); // Eso sera de ayuda cuando se inicie la APP en modo API
             _securityManager.SignIn(httpContext, usuarioEncontrado); // Agrega los claims al usuario actual
-            return usuarioEncontrado;
-
-            
+            return usuarioEncontrado;    
         }
     }
 }

@@ -124,6 +124,7 @@ namespace WebAppPedidos
                 if (context.HttpContext.Response.StatusCode == 401) context.HttpContext.Response.Redirect("/401unauthorized"); /* Utiliza un Route configurado al endpoint /UsuarioGeneral/Errores/Error401 */
                 if (context.HttpContext.Response.StatusCode == 404) context.HttpContext.Response.Redirect("/404notfound"); /* Utiliza un Route configurado al endpoint /UsuarioGeneral/Errores/Error404 */
                
+
                 return Task.CompletedTask;
             });
             /* FIN: Agregado - Redirecciones a páginas de errores */

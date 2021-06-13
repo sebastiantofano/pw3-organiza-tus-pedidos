@@ -33,14 +33,13 @@
     <Folder Include="Areas\Moderador\Views\Shared\" />
     <Folder Include="Areas\UsuarioGeneral\Data\" />
     <Folder Include="Areas\UsuarioGeneral\Models\" />
-    <Folder Include="Helpers\" />
     <Folder Include="wwwroot\bundles\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj" />
     <ProjectReference Include="..\Servicios\Servicios.csproj" />
-    <ProjectReference Include="..\WebAppPedidosAPI\WebAppPedidosAPI.csproj" />
+    <ProjectReference Include="..\WebAppPedidosAPI\WebAPI.csproj" />
   </ItemGroup>
 
 	

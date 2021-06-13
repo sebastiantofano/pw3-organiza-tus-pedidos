@@ -21,7 +21,6 @@ namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
     {
         private readonly ILoginService _loginService;
 
-
         public LoginController(ILoginService loginService) // IoC en StartUp.cs
         {
             _loginService = loginService;
@@ -41,8 +40,7 @@ namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
                 else if(User.IsInRole("Moderador"))
                 {
                     return RedirectToAction("Index", "Home", new { Area = "Moderador" });
-                }
-                
+                }     
             }
             return View();
         }
@@ -54,12 +52,9 @@ namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
             try
             {
                 Usuario usuarioValidado = _loginService.IniciarSesion(HttpContext, usuario);
-
-                HttpContext.Session.SetString("IdUsuario", usuarioValidado.IdUsuario.ToString());
-                HttpContext.Session.SetString("NombreUsuario", usuarioValidado.Nombre.ToString());
-                HttpContext.Session.SetString("ApellidoUsuario", usuarioValidado.Apellido.ToString());
-
                 string rolUsuario = usuarioValidado.Roles.ToString();
+
+                GuardarInformacionUsuarioSesion(usuarioValidado);
 
                 TempData["toastr_success"] = $"Bienvenido {usuarioValidado.Nombre} (Usted es {rolUsuario})";
 
@@ -81,6 +76,11 @@ namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
             return RedirectToAction("Index", "Login", new { Area = "UsuarioGeneral" });
         }
 
-
+        private void GuardarInformacionUsuarioSesion(Usuario usuario)
+        {
+            HttpContext.Session.SetString("IdUsuario", usuario.IdUsuario.ToString());
+            HttpContext.Session.SetString("NombreUsuario", usuario.Nombre.ToString());
+            HttpContext.Session.SetString("ApellidoUsuario", usuario.Apellido.ToString());
+        }
     }
 }

@@ -27,19 +27,19 @@ namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
             return View();
         }
 
-        //[Route("GestionarPedidos")]
+
         public IActionResult GestionarPedidos()
         {
             return View();
         }
 
-        //[Route("AgregarPedido")]
+
         public IActionResult AgregarPedido()
         {
             return View();
         }
 
-        //[Route("EditarPedido")]
+
         public IActionResult EditarPedido()
         {
             return View();

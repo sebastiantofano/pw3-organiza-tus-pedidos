@@ -25,7 +25,6 @@ namespace Servicios.Helpers.Security
         /* Metodo para la Desautenticacion */
         public async void SignOut(HttpContext httpContext)
         {
-
             await httpContext.SignOutAsync(); //TODO: No se puede cerrar sesion y que el token deje de funcionar
         }
 

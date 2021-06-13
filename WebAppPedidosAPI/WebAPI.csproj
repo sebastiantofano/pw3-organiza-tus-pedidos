@@ -17,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ModeloDatosProvisorios\ModeloDatosProvisorios.csproj" />
     <ProjectReference Include="..\Servicios\Servicios.csproj" />
   </ItemGroup>
 
