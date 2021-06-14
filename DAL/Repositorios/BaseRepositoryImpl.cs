@@ -31,7 +31,7 @@ namespace DAL.Repositorios
 
         public List<TEntity> ObtenerTodos()
         {
-            return _dbSet.AsNoTracking().ToList();
+            return _dbSet.ToList();
         }
 
         public void Insertar(TEntity entity)

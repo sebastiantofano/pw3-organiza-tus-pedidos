@@ -15,5 +15,10 @@ namespace DAL.Repositorios
         {
             _pedidosPW3Context = pedidosPW3Context;
         }
+
+        public Dictionary<Articulo, int> ObtenerArticulosYCantidadesDelPedido(int idPedido)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

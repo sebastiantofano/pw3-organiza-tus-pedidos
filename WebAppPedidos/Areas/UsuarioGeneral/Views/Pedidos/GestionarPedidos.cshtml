@@ -1,6 +1,5 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using DAL.Modelos
+@model List<Pedido>
 @{
 }
 
@@ -24,9 +23,8 @@
         <div class="card">
             <div class="card-title">
                 <h4>Listado de Pedidos</h4>
-
             </div>
-            <div class="col-lg-12 bootstrap-data-table-panel">
+            <div class="bootstrap-data-table-panel">
                 <div class="table-responsive">
                     <table id="row-select" class="display table table-borderd table-hover">
                         <thead>
@@ -39,47 +37,25 @@
                                 <th class=""></th>
                             </tr>
                         </thead>
-
                         <tbody>
+                            @foreach (var pedido in Model)
+                            {
                             <tr>
-                                <td>11</td>
-                                <td>System Architect System Architect ystem Architect </td>
-                                <td class="estado-pedido">CERRADO</td>
-                                <td>VIGENTE</td>
-                                <td>2011/04/25 (Alguien Apellido)</td>
-                                <td>
-                                    <a href="/Usuario/Pedidos/EditarPedido"
-                                       class="btn btn-warning btn-flat btn-addon btn-sm">
+                                <td>@pedido.NroPedido</td>
+                                <td>@pedido.IdClienteNavigation.Nombre</td>
+                                <td class="estado-pedido">@pedido.IdEstadoNavigation.Descripcion</td>
+                                <td>@(pedido.FechaBorrado == null ? "VIGENTE" : "ELIMINADO")</td>
+                                <td>@(pedido.ModificadoPor != null ? @String.Format("El día {0} por {1} {2}", pedido.FechaModificacion?.ToShortDateString(), pedido.ModificadoPorNavigation.Nombre, pedido.ModificadoPorNavigation.Apellido): "Modificación no identificada" )</td>
+                                <td class="row justify-content-between align-items-center">
+                                    <a asp-area="UsuarioGeneral" asp-controller="Pedidos" asp-action="EditarPedido" asp-route-id="@pedido.IdPedido"
+                                       class="btn btn-warning btn-flat btn-addon btn-sm ml-4">
                                         <i class="ti-pencil"></i>Editar
                                     </a>
+
                                 </td>
                             </tr>
-                            <tr>
-                                <td>11</td>
-                                <td>System Architect System Architect ystem Architect </td>
-                                <td class="col-1">ENTREGADO</td>
-                                <td class="col-1">ELIMINADO</td>
-                                <td>2011/04/25 (Alguien Apellido)</td>
-                                <td>
-                                    <a href="/Usuario/Pedidos/EditarPedido"
-                                       class="btn btn-warning btn-flat btn-addon btn-sm">
-                                        <i class="ti-pencil"></i>Editar
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>11</td>
-                                <td>System Architect System Architect ystem Architect </td>
-                                <td class="col-1">ABIERTO</td>
-                                <td class="col-1">VIGENTE</td>
-                                <td>2011/04/25 (Alguien Apellido)</td>
-                                <td>
-                                    <a href="/Usuario/Pedidos/EditarPedido"
-                                       class="btn btn-warning btn-flat btn-addon btn-sm">
-                                        <i class="ti-pencil"></i>Editar
-                                    </a>
-                                </td>
-                            </tr>
+                            }
+                           
                         <tfoot class="col-lg-12">
                             <tr>
                                 <th class="invisible">Pedido</th>

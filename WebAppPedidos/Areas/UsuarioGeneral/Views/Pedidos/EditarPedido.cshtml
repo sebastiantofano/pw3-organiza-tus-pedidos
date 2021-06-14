@@ -1,6 +1,5 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using DAL.Modelos
+@model Pedido
 @{
 }
 <div class="row">
@@ -27,14 +26,14 @@
                                     </div>
                                     <div class="stat-content">
                                         <div class="text-left dib">
-                                            <div class="stat-heading">Nombre del Cliente</div>
+                                            <div class="stat-heading">@Model.IdClienteNavigation.Nombre</div>
                                             <div class="stat-text">Cliente</div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-3">
+                        <div class="col-lg-4">
                             <div class="card bg-warning">
                                 <div class="stat-widget-four">
                                     <div class="stat-icon">
@@ -42,7 +41,7 @@
                                     </div>
                                     <div class="stat-content">
                                         <div class="text-left dib">
-                                            <div class="stat-heading">PEDIDO <span>ABIERTO</span></div>
+                                            <div class="stat-heading">PEDIDO <span>@Model.IdEstadoNavigation.Descripcion.ToUpper()</span></div>
                                             <div class="stat-text">Estado del Pedido</div>
                                         </div>
                                     </div>
@@ -58,7 +57,8 @@
                                     <div class="stat-content">
                                         <div class="text-left dib">
                                             <div class="stat-heading">Última Modificación</div>
-                                            <div class="stat-text">Fecha: <span> 05/05/2021</span></div>
+                                            <div class="stat-text">Fecha: <span>@(Model.FechaModificacion != null ? Model.FechaModificacion?.ToShortDateString() : "...")</span></div>
+                                            <div class="stat-text">Por: <span>@(Model.ModificadoPor != null ? @String.Format("{0} {1}", @Model.ModificadoPorNavigation.Nombre, @Model.ModificadoPorNavigation.Apellido) : "Sin identificar")</span></div>
                                         </div>
                                     </div>
                                 </div>
@@ -79,11 +79,12 @@
                                 <div class="col-lg-5">
                                     <select class="form-control" id="select-articulo" name="">
                                         <option value="">Seleccione un artículo</option>
-                                        <option value="1">Código y descripción del articulo</option>
-                                        <option value="2">Código y descripción del articulo</option>
-                                        <option value="3">Código y descripción del articulo</option>
-                                        <option value="4">Código y descripción del articulo</option>
+                                        @foreach (Articulo articulo in ViewBag.Articulos)
+                                        {
+                                            <option value="@articulo.IdArticulo">Código: @articulo.Codigo -  Descripción: @articulo.Descripcion</option>
+                                        }
                                     </select>
+                                   
                                 </div>
                                 <label class="col-form-label" for="val-digits">
                                     Cantidad <span class="text-danger">*</span>
