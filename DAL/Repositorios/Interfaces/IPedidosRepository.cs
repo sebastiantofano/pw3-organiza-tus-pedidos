@@ -10,5 +10,6 @@ namespace DAL.Repositorios.Interfaces
     public interface IPedidosRepository : IBaseRepository<Pedido> // Esta interface hereda todos los metodos del la interface del repositorio base
     {
         Dictionary<Articulo, int> ObtenerArticulosYCantidadesDelPedido(int idPedido);
+        void AgregarArticuloYCantidadAlPedido(PedidoArticulo pedidoArticulo);
     }
 }

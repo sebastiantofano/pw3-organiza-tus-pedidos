@@ -37,4 +37,17 @@ namespace DAL.Modelos
     {
 
     }
+
+    public class PedidoArticuloMetadata
+    {
+        [Required]
+        public int IdPedido { get; set; }
+
+        [Required(ErrorMessage = "Debe seleccionar obligatoriamente un artículo")]
+        public int IdArticulo { get; set; }
+
+        [Required(ErrorMessage = "Debe introducir obligatoriamente una cantidad")]
+        [RegularExpression("([1-9][0-9]*)")]
+        public int Cantidad { get; set; }
+    }
 }

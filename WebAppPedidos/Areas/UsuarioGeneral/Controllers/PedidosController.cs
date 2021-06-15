@@ -57,9 +57,18 @@ namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
         }
 
         [HttpPost]
-        public IActionResult AgregarArticuloAlPedido(int idArticulo, int cantidad)
+        public IActionResult AgregarArticuloAlPedido(PedidoArticulo pedidoArticulo)
         {
-            return View();
+            if (!ModelState.IsValid)
+            {
+                TempData["toastr_error"] = "No ha ingresado correctamente la información del Artículo !";
+                return View();
+            }
+
+            //TODO: AGREGAR UN TRY CATCH PARA LAS VALIDACIONES EN EL SERVICIO
+            _pedidosService.AgregarArticuloYCantidadAlPedido(pedidoArticulo);
+            TempData["toastr_success"] = "Se ha añadido el artículo al pedido correctamente !";
+            return RedirectToAction("GestionarPedidos"); //TODO Agregar validaciones en la vista 
         }
     }
 }

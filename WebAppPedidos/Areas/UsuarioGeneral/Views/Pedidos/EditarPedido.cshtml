@@ -69,6 +69,7 @@
 
                     <div class="form-validation">
                         <form method="POST" asp-area="UsuarioGeneral" asp-controller="Pedidos" asp-action="AgregarArticuloAlPedido">
+                            <input type="hidden" name="IdPedido" value="@Model.IdPedido"/>
                             <div class="form-valide" action="#" method="post">
                                 <div class="card-title">
                                     <h4>Agregar un artículo</h4>

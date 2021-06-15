@@ -16,6 +16,12 @@ namespace DAL.Repositorios
             _pedidosPW3Context = pedidosPW3Context;
         }
 
+        public void AgregarArticuloYCantidadAlPedido(PedidoArticulo pedidoArticulo)
+        {
+            _pedidosPW3Context.Add(pedidoArticulo);
+            _pedidosPW3Context.SaveChanges();
+        }
+
         public Dictionary<Articulo, int> ObtenerArticulosYCantidadesDelPedido(int idPedido)
         {
             List<PedidoArticulo> articulosContenidosEnPedido = _pedidosPW3Context.PedidoArticulos.Where(p => p.IdPedido == idPedido).ToList();

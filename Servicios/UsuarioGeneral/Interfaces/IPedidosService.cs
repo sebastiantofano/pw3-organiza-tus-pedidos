@@ -10,5 +10,6 @@ namespace Servicios.UsuarioGeneral.Interfaces
     public interface IPedidosService : IBaseService<Pedido>
     {
         Dictionary<Articulo, int> ObtenerArticulosYCantidadesDelPedido(int idPedido);
+        void AgregarArticuloYCantidadAlPedido(PedidoArticulo pedidoArticulo);
     }
 }

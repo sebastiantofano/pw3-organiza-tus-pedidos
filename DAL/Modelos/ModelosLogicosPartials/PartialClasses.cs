@@ -46,4 +46,10 @@ namespace DAL.Modelos
 
     }
 
+    [MetadataType(typeof(PedidoArticuloMetadata))] // Con este decorador "MetadataType" asociamos las clases "Metadata" que realizarán validaciones sobre el modelo
+    public partial class PedidoArticulo
+    {
+
+    }
+
 }
