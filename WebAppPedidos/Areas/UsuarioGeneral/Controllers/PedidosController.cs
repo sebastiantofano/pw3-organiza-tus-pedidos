@@ -50,8 +50,16 @@ namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
         {
             Pedido pedido = _pedidosService.ObtenerPorId(id);
 
-            ViewBag.Articulos = _articulosService.ObtenerTodos();
+            ViewBag.Articulos = _articulosService.ObtenerTodos(); // TODO: VER SI CAMBIAMOS POR VIEWMODELS
+            ViewBag.ArticulosYCantidadesDelPedido = _pedidosService.ObtenerArticulosYCantidadesDelPedido(id); // TODO: VER SI CAMBIAMOS POR VIEWMODELS
+
             return View(pedido);
+        }
+
+        [HttpPost]
+        public IActionResult AgregarArticuloAlPedido(int idArticulo, int cantidad)
+        {
+            return View();
         }
     }
 }

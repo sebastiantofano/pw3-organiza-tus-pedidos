@@ -18,7 +18,17 @@ namespace DAL.Repositorios
 
         public Dictionary<Articulo, int> ObtenerArticulosYCantidadesDelPedido(int idPedido)
         {
-            throw new NotImplementedException();
+            List<PedidoArticulo> articulosContenidosEnPedido = _pedidosPW3Context.PedidoArticulos.Where(p => p.IdPedido == idPedido).ToList();
+
+            Dictionary<Articulo, int> articulosYCantidadesDelPedido = new();
+
+            foreach (PedidoArticulo articulo in articulosContenidosEnPedido)
+            {
+                articulosYCantidadesDelPedido.Add(articulo.IdArticuloNavigation, articulo.Cantidad);
+            }
+
+            return articulosYCantidadesDelPedido;
+
         }
     }
 }

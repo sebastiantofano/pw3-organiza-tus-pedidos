@@ -68,36 +68,39 @@
 
 
                     <div class="form-validation">
-                        <form class="form-valide" action="#" method="post">
-                            <div class="card-title">
-                                <h4>Agregar un artículo</h4>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-form-label" for="val-skill">
-                                    Artículo <span class="text-danger">*</span>
-                                </label>
-                                <div class="col-lg-5">
-                                    <select class="form-control" id="select-articulo" name="">
-                                        <option value="">Seleccione un artículo</option>
-                                        @foreach (Articulo articulo in ViewBag.Articulos)
-                                        {
-                                            <option value="@articulo.IdArticulo">Código: @articulo.Codigo -  Descripción: @articulo.Descripcion</option>
-                                        }
-                                    </select>
-                                   
+                        <form method="POST" asp-area="UsuarioGeneral" asp-controller="Pedidos" asp-action="AgregarArticuloAlPedido">
+                            <div class="form-valide" action="#" method="post">
+                                <div class="card-title">
+                                    <h4>Agregar un artículo</h4>
                                 </div>
-                                <label class="col-form-label" for="val-digits">
-                                    Cantidad <span class="text-danger">*</span>
-                                </label>
-                                <div class="col-lg-2">
-                                    <input type="text" class="form-control" id="val-cantidad"
-                                           name="val-digits" placeholder="Ingrese cantidad">
-                                </div>
-                                <div class="col-lg-1">
-                                    <button type="submit" class="btn btn-success">
-                                        Agregar
-                                        artículo
-                                    </button>
+
+                                <div class="form-group row">
+                                    <label class="col-form-label" for="val-skill">
+                                        Artículo <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-5">
+                                        <select class="form-control" id="select-articulo" name="IdArticulo">
+                                            <option value="">Seleccione un artículo</option>
+                                            @foreach (Articulo articulo in ViewBag.Articulos)
+                                            {
+                                                <option value="@articulo.IdArticulo">Código: @articulo.Codigo -  Descripción: @articulo.Descripcion</option>
+                                            }
+                                        </select>
+
+                                    </div>
+                                    <label class="col-form-label" for="val-digits">
+                                        Cantidad <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-2">
+                                        <input type="text" class="form-control" id="val-cantidad"
+                                               name="cantidad" placeholder="Ingrese cantidad">
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <button type="submit" class="btn btn-success">
+                                            Agregar
+                                            artículo
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </form>
@@ -106,7 +109,7 @@
                             <label class="col-form-label" for="val-suggestions">Comentario </label>
                             <div class="col-lg-10">
                                 <textarea class="form-control"
-                                          placeholder="¿Que comentario te gustaría ponerle al pedido?"></textarea>
+                                          placeholder="¿Que comentario te gustaría ponerle al pedido?">@Model.Comentarios</textarea>
                             </div>
                         </div>
                     </div>
@@ -120,7 +123,6 @@
             <div class="card">
                 <div class="card-title">
                     <h4>Contenido del pedido</h4>
-
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -134,50 +136,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Descripción del Artículo</td>
-                                    <td>Código del Artículo</td>
-                                    <td>Cantidad</td>
-                                    <td>
-                                        <button type="button"
-                                                class="btn btn-danger btn-flat btn-addon btn-sm">
-                                            <i class="ti-close"></i>Quitar
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Descripción del Artículo</td>
-                                    <td>Código del Artículo</td>
-                                    <td>Cantidad</td>
-                                    <td>
-                                        <button type="button"
-                                                class="btn btn-danger btn-flat btn-addon btn-sm">
-                                            <i class="ti-close"></i>Quitar
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Descripción del Artículo</td>
-                                    <td>Código del Artículo</td>
-                                    <td>Cantidad</td>
-                                    <td>
-                                        <button type="button"
-                                                class="btn btn-danger btn-flat btn-addon btn-sm">
-                                            <i class="ti-close"></i>Quitar
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Descripción del Artículo</td>
-                                    <td>Código del Artículo</td>
-                                    <td>Cantidad</td>
-                                    <td>
-                                        <button type="button"
-                                                class="btn btn-danger btn-flat btn-addon btn-sm">
-                                            <i class="ti-close"></i>Quitar
-                                        </button>
-                                    </td>
-                                </tr>
+                                @foreach (KeyValuePair<Articulo, int> articuloEnPedido in ViewBag.ArticulosYCantidadesDelPedido)
+                                {
+                                    <tr>
+                                        <td>@articuloEnPedido.Key.Descripcion</td>
+                                        <td>@articuloEnPedido.Key.Codigo</td>
+                                        <td>@articuloEnPedido.Value</td>
+                                        <td>
+                                            <button type="button"
+                                                    class="btn btn-danger btn-flat btn-addon btn-sm">
+                                                <i class="ti-close"></i>Quitar
+                                            </button>
+                                        </td>
+                                    </tr>
+                                }
                             </tbody>
                         </table>
                     </div>
@@ -192,7 +164,7 @@
             <button type="button" class="btn btn-warning m-1">Cerrar Pedido</button>
             <button type="button" class="btn btn-success m-1">Marcar como Entregado</button>
             <button type="button" class="btn btn-danger ml-auto">Eliminar Pedido</button>
-            <a href="javascript:history.back(-1);" class="btn btn-default ml-3">Volver</a>
+            <a asp-area="UsuarioGeneral" asp-controller="Pedidos" asp-action="GestionarPedidos" class="btn btn-default ml-auto ">Volver</a>
         </div>
     </div>
 </section>

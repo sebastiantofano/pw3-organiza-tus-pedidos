@@ -17,5 +17,10 @@ namespace Servicios.UsuarioGeneral
         {
             _pedidosRepository = pedidosRepository;
         }
+
+        public Dictionary<Articulo, int> ObtenerArticulosYCantidadesDelPedido(int idPedido)
+        {
+            return _pedidosRepository.ObtenerArticulosYCantidadesDelPedido(idPedido);
+        }
     }
 }
