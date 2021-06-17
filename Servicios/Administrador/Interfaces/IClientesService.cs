@@ -9,5 +9,6 @@ namespace Servicios.Administrador.Interfaces
 {
     public interface IClientesService : IBaseService<Cliente> // Esta interface hereda el CRUD de Servicio Base
     {
+        bool ValidarEmailExistente(string email);
     }
 }

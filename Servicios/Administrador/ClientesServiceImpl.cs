@@ -18,6 +18,12 @@ namespace Servicios.Administrador
             _clientesRepository = clientesRepository;
         }
 
-        
+
+        public bool ValidarEmailExistente(string email)
+        {
+            return _clientesRepository.ValidarEmailExistente(email);
+        }
+
+
     }
 }

@@ -31,6 +31,34 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult CrearCliente()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public IActionResult CrearUsuario(Cliente cliente)
+        {
+            if (ModelState.IsValid)
+            {
+                // Donde se debe validar si ya existe el email? En este Controller o en el Service
+                bool emailYaExistente = _clientesService.ValidarEmailExistente(cliente.Email);
+                if (emailYaExistente)
+                {
+                    TempData["toastr_error"] = "El email ya se encuentra registrado!";
+                    return RedirectToAction("AdministrarUsuarios");
+                }
+                _clientesService.Insertar(cliente);
+                TempData["toastr_success"] = "Se ha creado al usuario correctamente !";
+                return RedirectToAction("AdministrarUsuarios");
+            }
+
+            TempData["toastr_error"] = "No se ha podido crear el usuario correctamente !";
+            return View();
+        }
+
         public IActionResult AdministrarClientes()
         {
 
@@ -38,9 +66,32 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
             return View(listaClientes);
         }
 
-        public IActionResult EditarCliente()
+        [HttpGet]
+        public IActionResult EditarCliente(string id)
         {
-            return View();
+            int idCliente = int.Parse(id);
+            Cliente cliente = _clientesService.ObtenerPorId(idCliente);
+
+            return View(cliente);
         }
+
+        [HttpPost]
+        public IActionResult EditarCliente(Cliente cliente)
+        {
+            if (ModelState.IsValid)
+            {
+                _clientesService.Actualizar(cliente);
+
+                TempData["toastr_success"] = "Se ha editado el cliente correctamente !";
+                return RedirectToAction("AdministrarUsuarios");
+
+            }
+            else
+            {
+                TempData["toastr_error"] = "No se ha podido editar al cliente correctamente";
+                return View(cliente);
+            }
+        }
+
     }
 }

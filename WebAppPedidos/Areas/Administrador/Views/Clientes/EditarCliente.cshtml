@@ -1,4 +1,9 @@
-﻿@section Styles{
+﻿@using DAL.Modelos
+@model Cliente
+@{
+}
+
+@section Styles{
     <style>
         input[type="number"] {
             -webkit-appearance: textfield !important;
@@ -22,63 +27,100 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="form-validation">
-                <form class="form-valide">
-                    <div class="card">
+                @using (Html.BeginForm("EditarCliente", "Clientes", new { area = "Administrador" }, FormMethod.Post))
+                {
+                        <form class="form-valide">
+                            <div class="card">
 
-                        <div class="card-body">
+                                <div class="card-body">
 
 
-                            <div class="form-group row align-items-center">
-                                <label class="col-lg-1 col-form-label">Nombre <span class="text-danger">*</span></label>
-                                <div class="col-lg-5">
-                                    <input type="text" class="form-control" placeholder="Nombre" required>
+                                    <div class="form-group row align-items-center">
+                                        <label class="col-lg-1 col-form-label">Nombre <span class="text-danger">*</span></label>
+                                        <div class="col-lg-5">
+                                            <input type="text" class="form-control" placeholder="Nombre" value="@Model.Nombre" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row align-items-center">
+                                        <label class="col-lg-1 col-form-label">Nro Cliente</label>
+                                        <div class="col-lg-1">
+                                            <input type="number" class="form-control" placeholder="    N°" value="@Model.Numero">
+                                        </div>
+                                        <label class="col-lg-1 col-form-label">Teléfono</label>
+                                        <div class="col-lg-3">
+                                            <input type="text" class="form-control "
+                                                   placeholder="Telefono" value="@Model.Telefono">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="input-group align-items-center">
+                                            <label  asp-for="Email" class="col-lg-1 col-form-label val-email">E-mail</label>
+                                            <div class="input-group-prepend col-lg-10">
+                                                <span class="input-group-text">@@</span>
+                                                <input type="text" name="Email" asp-for="Email" class="form-control" placeholder="E-mail" value="@Model.Email">
+                                                <span asp-validation-for="Email" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row align-items-center">
+                                        <label class="col-lg-1 col-form-label">CUIT</label>
+                                        <div class="col-lg-4">
+                                            <input type="text" class="form-control" placeholder="CUIT" value="@Model.Cuit">
+                                        </div>
+                                        <label class="col-lg-1 col-form-label">Dirección</label>
+                                        <div class="col-lg-5">
+                                            <input type="text" class="form-control" placeholder="Dirección" value="@Model.Direccion">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 d-flex align-items-center">
+                                    <button type="submit" class="btn btn-info col-lg-4 m-1">Guardar Modificaciones</button>
+                                    <button type="submit" class="btn btn-danger col-lg-3 ml-auto">Eliminar Cliente</button>
+                                    <a href="javascript:history.back(-1);" class="btn btn-default ml-2 ">Volver</a>
                                 </div>
                             </div>
-                            <div class="form-group row align-items-center">
-                                <label class="col-lg-1 col-form-label">Nro Cliente</label>
-                                <div class="col-lg-1">
-                                    <input type="number" class="form-control" placeholder="    N°">
-                                </div>
-                                <label class="col-lg-1 col-form-label">Teléfono</label>
-                                <div class="col-lg-3">
-                                    <input type="text" class="form-control "
-                                           placeholder="Telefono">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="input-group align-items-center">
-                                    <label class="col-lg-1 col-form-label val-email">E-mail</label>
-                                    <div class="input-group-prepend col-lg-10">
-                                        <span class="input-group-text">@@</span>
-                                        <input type="text" class="form-control" placeholder="E-mail">
+                        </form>
+                }
+
+                  <div class="row align-items-center">
+                            <div class="col-lg-4">
+                                <div class="card">
+                                    <div class="stat-widget-four">
+                                        <div class="stat-icon">
+                                            <i class="ti-plus"></i>
+                                        </div>
+                                        <div class="stat-content">
+                                            <div class="text-left dib">
+                                                <div class="stat-text">Fecha de Creación</div>
+                                                <div class="stat-heading">@Model.FechaCreacion.ToShortDateString()</div>
+                                                <div class="stat-text">Creado Por</div>
+                                                <div class="stat-heading">@(Model.CreadoPor != null ? @String.Format("{0} {1}", @Model.CreadoPorNavigation.Nombre, @Model.CreadoPorNavigation.Apellido) : "Sin identificar")</div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group row align-items-center">
-                                <label class="col-lg-1 col-form-label">CUIT</label>
-                                <div class="col-lg-4">
-                                    <input type="text" class="form-control" placeholder="CUIT">
-                                </div>
-                                <label class="col-lg-1 col-form-label">Dirección</label>
-                                <div class="col-lg-5">
-                                    <input type="text" class="form-control" placeholder="Dirección">
+                            <div class="col-lg-4">
+                                <div class="card">
+                                    <div class="stat-widget-four">
+                                        <div class="stat-icon">
+                                            <i class="ti-pencil"></i>
+                                        </div>
+                                        <div class="stat-content">
+                                            <div class="text-left dib">
+                                                <div class="stat-text">Fecha de Última Modificación</div>
+                                                <div class="stat-heading">@(Model.FechaModificacion != null ? Model.FechaModificacion?.ToShortDateString() : "...")</div>
+                                                <div class="stat-text">Modificado Por</div>
+                                                <div class="stat-heading">@(Model.ModificadoPor != null ? @String.Format("{0} {1}", @Model.ModificadoPorNavigation.Nombre, @Model.ModificadoPorNavigation.Apellido) : "Sin identificar")</div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-
-
-
-                        </div>
-
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-12 d-flex align-items-center">
-                            <button type="submit" class="btn btn-info col-lg-4 m-1">Guardar Modificaciones</button>
-                            <button type="submit" class="btn btn-danger col-lg-3 ml-auto">Eliminar Cliente</button>
-                            <a href="javascript:history.back(-1);" class="btn btn-default ml-2 ">Volver</a>
-                        </div>
-                    </div>
-                </form>
-            </div>
+                </div>
         </div>
     </div>
 </section>

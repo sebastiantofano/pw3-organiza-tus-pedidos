@@ -16,6 +16,16 @@ namespace DAL.Repositorios
             _pedidosPW3Context = pedidosPW3Context;
         }
 
+        public bool ValidarEmailExistente(string email)
+        {
 
+            Cliente clienteExistente = _pedidosPW3Context.Clientes.Where(o => o.Email == email).FirstOrDefault();
+            if (clienteExistente == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }
