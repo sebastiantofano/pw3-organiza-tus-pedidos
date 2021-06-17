@@ -25,7 +25,18 @@ namespace DAL.Modelos
 
     public class UsuarioMetadata
     {
+        [Required(ErrorMessage = "Debe ingresar un obligatoriamente un email")]
+        [EmailAddress(ErrorMessage = "Ingrese un formato de email válido")]
+        public string Email { get; set; }
 
+        [Required(ErrorMessage = "Debe ingresar obligatoriamente una contraseña")]
+        public string Password { get; set; }
+
+        [Required(ErrorMessage = "Debe completar este campo obligatoriamente")]
+        public bool EsAdmin { get; set; }
+
+        [Required(ErrorMessage = "Debe ingresar obligatoriamente un nombre")]
+        public string Nombre { get; set; }
     }
 
     public class ClienteMetadata
