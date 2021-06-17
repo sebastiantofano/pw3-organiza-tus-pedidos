@@ -59,20 +59,21 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
 
 
         [HttpPost]
-        public IActionResult AgregarArticulo(Articulo articulo)
+        public IActionResult AgregarArticulo(Articulo articulo, bool permanecerView)
         {
             /* Intentar realizar una validación cuando tenemos el atajo de agregar un articulo en la vista de administracion de articulos */
             if (!ModelState.IsValid)
             {
-                TempData["toastr_error"] = "No ha ingresado correctamente la información del Artículo !";
+                TempData["toastr_error"] = "No ha ingresado correctamente la información del nuevo artículo !";
                 return View();
             }
             
             try
             {
                 _articulosService.Insertar(articulo);
-                TempData["toastr_success"] = "Se ha creado el artículo correctamente !";
-                return RedirectToAction("AdministrarArticulos");
+                TempData["toastr_success"] = $"Se ha creado exitosamente el artículo {articulo.Descripcion} ({articulo.Codigo})";
+
+                return (permanecerView) ? RedirectToAction("AgregarArticulo") : RedirectToAction("AdministrarArticulos");
             }
             catch (ArticuloException e)
             {
