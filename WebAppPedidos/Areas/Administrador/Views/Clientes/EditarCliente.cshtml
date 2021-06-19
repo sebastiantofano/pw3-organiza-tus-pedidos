@@ -32,6 +32,9 @@
                         <form class="form-valide">
                             <div class="card">
 
+                                <input type="hidden" name="IdCliente" value="@Model.IdCliente" />
+                                <input type="hidden" name="FechaCreacion" value="@Model.FechaCreacion" />   @*Ver como solucionar este problema de la fecha*@
+
                                 <div class="card-body">
 
 
@@ -51,12 +54,12 @@
                                         <label class="col-lg-1 col-form-label" asp-for="Telefono">Teléfono</label>
                                         <div class="col-lg-3">
                                             <input type="text" class="form-control "
-                                                   placeholder="Telefono" value="@Model.Telefono"  asp-for="Telefono">
+                                                   placeholder="Telefono" value="@Model.Telefono" asp-for="Telefono">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="input-group align-items-center">
-                                            <label  asp-for="Email" class="col-lg-1 col-form-label val-email">E-mail</label>
+                                            <label asp-for="Email" class="col-lg-1 col-form-label val-email">E-mail</label>
                                             <div class="input-group-prepend col-lg-10">
                                                 <span class="input-group-text">@@</span>
                                                 <input type="text" name="Email" asp-for="Email" class="form-control" placeholder="E-mail" value="@Model.Email">
