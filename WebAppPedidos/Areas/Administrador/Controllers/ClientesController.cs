@@ -37,9 +37,9 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
             return View();
         }
 
-
+        
         [HttpPost]
-        public IActionResult CrearUsuario(Cliente cliente)
+        public IActionResult CrearCliente(Cliente cliente)
         {
             if (ModelState.IsValid)
             {
@@ -48,16 +48,16 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
                 if (emailYaExistente)
                 {
                     TempData["toastr_error"] = "El email ya se encuentra registrado!";
-                    return RedirectToAction("AdministrarUsuarios");
+                    return RedirectToAction("AdministrarClientes");
                 }
                 _clientesService.Insertar(cliente);
-                TempData["toastr_success"] = "Se ha creado al usuario correctamente !";
-                return RedirectToAction("AdministrarUsuarios");
+                TempData["toastr_success"] = "Se ha creado al cliente correctamente !";
+                return RedirectToAction("AdministrarClientes");
             }
 
-            TempData["toastr_error"] = "No se ha podido crear el usuario correctamente !";
+            TempData["toastr_error"] = "No se ha podido crear el cliente correctamente !";
             return View();
-        }
+        } 
 
         public IActionResult AdministrarClientes()
         {
@@ -82,8 +82,8 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
             {
                 _clientesService.Actualizar(cliente);
 
-                TempData["toastr_success"] = "Se ha editado el cliente correctamente !";
-                return RedirectToAction("AdministrarUsuarios");
+                TempData["toastr_success"] = "¡Se ha editado el cliente correctamente!";
+                return RedirectToAction("AdministrarClientes");
 
             }
             else
