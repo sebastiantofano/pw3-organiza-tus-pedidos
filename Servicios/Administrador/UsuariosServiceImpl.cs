@@ -17,10 +17,13 @@ namespace Servicios.Administrador
         {
             _usuariosRepository = usuariosRepository;
         }
-
         public bool ValidarEmailExistente(string email)
         {
             return _usuariosRepository.ValidarEmailExistente(email);
+        }
+        public List<Usuario> ObtenerTodosPorIdUsuario(int idUsuario)
+        {
+            return _usuariosRepository.ObtenerTodosPorIdUsuario(idUsuario);
         }
     }
 }

@@ -10,5 +10,6 @@ namespace Servicios.Administrador.Interfaces
     public interface IUsuariosService : IBaseService<Usuario> // Esta interface hereda el CRUD de Servicio Base
     {
         bool ValidarEmailExistente(string email);
+        List<Usuario> ObtenerTodosPorIdUsuario(int idUsuario);
     }
 }

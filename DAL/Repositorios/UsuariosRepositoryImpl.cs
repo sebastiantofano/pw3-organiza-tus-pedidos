@@ -47,5 +47,11 @@ namespace DAL.Repositorios
 
             _pedidosPW3Context.SaveChanges();
         }
+
+        public List<Usuario> ObtenerTodosPorIdUsuario(int idUsuario)
+        {
+            return _pedidosPW3Context.Usuarios.Where(o => o.IdUsuario == idUsuario).ToList();        
+        }
+
     }
 }
