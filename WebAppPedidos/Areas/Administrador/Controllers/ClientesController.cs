@@ -43,7 +43,6 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Donde se debe validar si ya existe el email? En este Controller o en el Service
                 bool emailYaExistente = _clientesService.ValidarEmailExistente(cliente.Email);
                 if (emailYaExistente)
                 {
@@ -91,6 +90,15 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
                 TempData["toastr_error"] = "No se ha podido editar al cliente correctamente";
                 return View(cliente);
             }
+        }
+
+        public IActionResult eliminarCliente(string id)
+        {
+            int idCliente = int.Parse(id);
+            Cliente cliente = _clientesService.ObtenerPorId(idCliente);
+            _clientesService.Eliminar(cliente);
+
+            return RedirectToAction("AdministrarClientes");
         }
 
     }

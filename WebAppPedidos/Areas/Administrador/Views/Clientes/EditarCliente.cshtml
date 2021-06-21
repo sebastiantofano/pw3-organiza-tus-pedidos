@@ -41,9 +41,8 @@
                                     <div class="form-group row align-items-center">
                                         <label asp-for="Nombre" class="col-lg-1 col-form-label">Nombre <span class="text-danger">*</span></label>
                                         <div class="col-lg-5">
-                                            <input type="text" class="form-control" asp-for="Nombre" placeholder="Nombre" value="@Model.Nombre" required>
+                                            <input type="text" class="form-control" asp-for="Nombre" placeholder="Nombre" value="@Model.Nombre">
                                             <span asp-validation-for="Nombre" class="text-danger"></span>
-
                                         </div>
                                     </div>
                                     <div class="form-group row align-items-center">

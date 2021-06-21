@@ -41,7 +41,21 @@ namespace DAL.Modelos
 
     public class ClienteMetadata
     {
+        [Required(ErrorMessage = "Debe ingresar obligatoriamente un nombre")]
+        public string Nombre { get; set; }
 
+        [Required(ErrorMessage = "Debe ingresar un obligatoriamente un email")]
+        [EmailAddress(ErrorMessage = "Ingrese un formato de email válido")]
+        public string Email { get; set; }
+
+        [RegularExpression("(^[0-9]+$)", ErrorMessage = "Solo se permiten números")]
+        public string Numero { get; set; }
+
+        [RegularExpression("(^[0-9]+$)", ErrorMessage = "Solo se permiten números")]
+        public string Cuit { get; set; }
+
+        [RegularExpression("(^[0-9]+$)", ErrorMessage = "Solo se permiten números")]
+        public string Telefono { get; set; }
     }
 
     public class PedidoMetadata

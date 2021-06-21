@@ -22,7 +22,7 @@
                         <label class="col-lg-1 col-form-label" asp-for="Nombre" >Nombre <span class="text-danger">*</span></label>
                         <div class="col-lg-5">
                             <input type="text" class="form-control" placeholder="Nombre" asp-for="Nombre" required>
-
+                            <span asp-validation-for="Nombre" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="form-group row align-items-center">
@@ -34,6 +34,7 @@
                         <div class="col-lg-3">
                             <input type="text" class="form-control "
                                    placeholder="Telefono">
+                            <span asp-validation-for="Telefono" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -51,6 +52,7 @@
                         <label class="col-lg-1 col-form-label"  asp-for="Cuit">CUIT</label>
                         <div class="col-lg-4">
                             <input type="text" class="form-control" placeholder="CUIT" asp-for="Cuit">
+                            <span asp-validation-for="Cuit" class="text-danger"></span>
                         </div>
                         <label class="col-lg-1 col-form-label" asp-for="Direccion">Dirección</label>
                         <div class="col-lg-5">
