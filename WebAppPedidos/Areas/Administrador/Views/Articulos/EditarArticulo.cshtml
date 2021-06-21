@@ -24,18 +24,23 @@
                             <div class="card-body">
 
                                 <input type="hidden" name="IdArticulo" value="@Model.IdArticulo"/>
-                                <input type="hidden" name="FechaCreacion" value="@Model.FechaCreacion" />   @*TODO: Ver como solucionar este problema de la fecha*@
 
                                 <div class="form-group row align-items-center">
-                                    <label class="col-lg-1 col-form-label">Código <span class="text-danger">*</span></label>
+                                    <label asp-for="Codigo" class="col-lg-1 col-form-label">Código <span class="text-danger">*</span></label>
                                     <div class="col-lg-5">
-                                        <input type="text" class="form-control" name="Codigo" placeholder="Código del Artículo" value="@Model.Codigo" required @(Model.FechaBorrado != null ? "disabled": "")>
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">COD_</div>
+
+                                            <input type="text" asp-for="Codigo" class="form-control" name="Codigo" placeholder="Código del Artículo" value="@Model.Codigo.Substring(4)" required disabled="@(Model.FechaBorrado == null ? false : true)">
+                                        </div>
+                                            <span asp-validation-for="Codigo" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="form-group row align-items-center">
-                                    <label class="col-lg-1 col-form-label p-0">Descripción <span class="text-danger">*</span></label>
+                                    <label asp-for="Descripcion" class="col-lg-1 col-form-label p-0">Descripción <span class="text-danger">*</span></label>
                                     <div class="col-lg-11">
-                                        <input type="text" class="form-control" name="Descripcion" placeholder="Descripción del Artículo" value="@Model.Descripcion" @(Model.FechaBorrado != null ? "disabled": "")>
+                                        <input type="text" asp-for="Descripcion" class="form-control" name="Descripcion" placeholder="Descripción del Artículo" value="@Model.Descripcion" disabled="@(Model.FechaBorrado == null ? false : true)">
+                                        <span asp-validation-for="Descripcion" class="text-danger"></span>
                                     </div>
                                 </div>
 

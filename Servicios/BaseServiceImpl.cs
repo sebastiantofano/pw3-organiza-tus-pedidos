@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Servicios
 {
-    public abstract class BaseServiceImpl<TEntity> : IBaseService<TEntity> where TEntity : class, IAuditableEntity
+    public abstract class BaseServiceImpl<TEntity> : IBaseService<TEntity> where TEntity : class, IIdentificableEntity, IAuditableEntity
     {
         private readonly IBaseRepository<TEntity> _entityRepository;
         readonly protected IHttpContextAccessor _httpContextAccessor;
@@ -35,12 +35,12 @@ namespace Servicios
         }
 
         /* Este método es "Virtual" porque puede ser sobrescrito para agregar logica en los servicios particulares */
-        public virtual void Insertar(TEntity entity)
+        public virtual int Insertar(TEntity entity)
         {
             string idUsuario = _httpContextAccessor.HttpContext.Session.GetString("IdUsuario");
             entity.CreadoPor = int.Parse(idUsuario);
             entity.FechaCreacion = DateTime.Today;
-            _entityRepository.Insertar(entity);
+            return _entityRepository.Insertar(entity);
         }
 
         /* Este método es "Virtual" porque puede ser sobrescrito para agregar logica en los servicios particulares */

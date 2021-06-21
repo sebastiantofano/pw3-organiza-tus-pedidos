@@ -1,7 +1,8 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using DAL.Modelos
 @{
+    List<Articulo> selectArticulos = ViewBag.Articulos;
+    List<Cliente> selectClientes = ViewBag.Clientes;
+    Dictionary<Articulo, int> ArticulosYCantidadesDelPedido = ViewBag.ArticulosYCantidadesDelPedido;
 }
 <div class="row">
     <div class="col-lg-8 p-r-0 title-margin-right">
@@ -19,14 +20,19 @@
             <div class="card">
                 <div class="card-body">
                     <div class="form-validation">
-                        <form class="form-valide" action="#" method="post">
+                        <form asp-area="UsuarioGeneral" asp-controller="Pedidos" asp-action="AgregarPedido" method="POST">
                             <div class="form-group row">
                                 <label class="col-form-label" for="val-username">
                                     Cliente <span class="text-danger">*</span>
                                 </label>
                                 <div class="col-lg-5">
-                                    <input type="text" class="form-control" id="val-username"
-                                           name="val-username" placeholder="Ingrese cliente">
+                                    <select class="form-control" id="select-cliente" name="idCliente">
+                                        <option value="">Seleccione un cliente</option>
+                                        @foreach (Cliente cliente in selectClientes)
+                                        {
+                                            <option value="@cliente.IdCliente">Nro Cliente: @cliente.Numero -  Nombre: @cliente.Nombre</option>
+                                        }
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -34,12 +40,12 @@
                                     Artículo <span class="text-danger">*</span>
                                 </label>
                                 <div class="col-lg-5">
-                                    <select class="form-control" id="select-articulo" name="">
+                                    <select class="form-control" id="select-articulo" name="IdArticulo">
                                         <option value="">Seleccione un artículo</option>
-                                        <option value="1">Código y descripción del articulo</option>
-                                        <option value="2">Código y descripción del articulo</option>
-                                        <option value="3">Código y descripción del articulo</option>
-                                        <option value="4">Código y descripción del articulo</option>
+                                        @foreach (Articulo articulo in selectArticulos)
+                                        {
+                                            <option value="@articulo.IdArticulo">Código: @articulo.Codigo -  Descripción: @articulo.Descripcion</option>
+                                        }
                                     </select>
                                 </div>
                                 <label class="col-form-label" for="val-digits">
@@ -47,13 +53,21 @@
                                 </label>
                                 <div class="col-lg-2">
                                     <input type="text" class="form-control" id="val-cantidad"
-                                           name="val-digits" placeholder="Ingrese cantidad">
+                                           name="Cantidad" placeholder="Ingrese cantidad">
                                 </div>
                                 <div class="col-lg-1">
                                     <button type="submit" class="btn btn-success">
                                         Agregar
                                         artículo al pedido
                                     </button>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12 d-flex align-items-center">
+                                    <button type="submit" class="btn btn-info col-lg-4 m-1">Agregar Pedido</button>
+                                    <button type="submit" class="btn btn-info m-1">Agregar Pedido y cargar otro</button>
+                                    <a href="javascript:history.back(-1);" class="btn btn-default ml-auto ">Volver</a>
                                 </div>
                             </div>
                         </form>
@@ -90,50 +104,25 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Descripción del Artículo</td>
-                                    <td>Código del Artículo</td>
-                                    <td>Cantidad</td>
-                                    <td>
-                                        <button type="button"
-                                                class="btn btn-info btn-flat btn-addon btn-sm">
-                                            <i class="ti-search"></i>Editar
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Descripción del Artículo</td>
-                                    <td>Código del Artículo</td>
-                                    <td>Cantidad</td>
-                                    <td>
-                                        <button type="button"
-                                                class="btn btn-info btn-flat btn-addon btn-sm">
-                                            <i class="ti-search"></i>Editar
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Descripción del Artículo</td>
-                                    <td>Código del Artículo</td>
-                                    <td>Cantidad</td>
-                                    <td>
-                                        <button type="button"
-                                                class="btn btn-info btn-flat btn-addon btn-sm">
-                                            <i class="ti-search"></i>Editar
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Descripción del Artículo</td>
-                                    <td>Código del Artículo</td>
-                                    <td>Cantidad</td>
-                                    <td>
-                                        <button type="button"
-                                                class="btn btn-info btn-flat btn-addon btn-sm">
-                                            <i class="ti-search"></i>Editar
-                                        </button>
-                                    </td>
-                                </tr>
+                                @if (ArticulosYCantidadesDelPedido != null)
+                                {
+                                    @foreach (KeyValuePair<Articulo, int> articuloEnPedido in ArticulosYCantidadesDelPedido)
+                                    {
+                                        <tr>
+                                            <td>@articuloEnPedido.Key.Descripcion</td>
+                                            <td>@articuloEnPedido.Key.Codigo</td>
+                                            <td>@articuloEnPedido.Value</td>
+                                            <td>
+                                                <button type="button"
+                                                        class="btn btn-danger btn-flat btn-addon btn-sm">
+                                                    <i class="ti-close"></i>Quitar
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    }
+
+                            }
+
                             </tbody>
                         </table>
                     </div>
@@ -142,11 +131,5 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-lg-12 d-flex align-items-center">
-            <button type="button" class="btn btn-info col-lg-4 m-1">Agregar Pedido</button>
-            <button type="button" class="btn btn-info m-1">Agregar Pedido y cargar otro</button>
-            <a href="javascript:history.back(-1);" class="btn btn-default ml-auto ">Volver</a>
-        </div>
-    </div>
+
 </section>

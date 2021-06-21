@@ -3,12 +3,14 @@ using DAL.Repositorios;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Servicios.Administrador.Interfaces;
+using Servicios.Helpers.Exceptions;
 using Servicios.UsuarioGeneral;
 using Servicios.UsuarioGeneral.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebAppPedidos.Areas.UsuarioGeneral.Models;
 
 namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
 {
@@ -18,11 +20,13 @@ namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
     {
         private readonly IPedidosService _pedidosService;
         private readonly IArticulosService _articulosService;
+        private readonly IClientesService _clientesService;
 
-        public PedidosController(IPedidosService pedidosService, IArticulosService articulosService) // IoC en StartUp.cs
+        public PedidosController(IPedidosService pedidosService, IArticulosService articulosService, IClientesService clientesService) // IoC en StartUp.cs
         {
             _pedidosService = pedidosService;
             _articulosService = articulosService;
+            _clientesService = clientesService;
 
         }
 
@@ -42,33 +46,80 @@ namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
         [HttpGet]
         public IActionResult AgregarPedido()
         {
+
+            ViewBag.Articulos = _articulosService.ObtenerTodos(); // TODO: VER SI CAMBIAMOS POR VIEWMODELS
+            ViewBag.Clientes = _clientesService.ObtenerTodos(); // TODO: PONER SOLO CLIENTES VALIDOS COMO DICE EL ENUNCIADO
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult AgregarPedido(Pedido pedido, PedidoArticulo pedidoArticulo) // TODO: ¿Puedo hacer esto, o conviene un ViewModel?
+        {
+            if (!ModelState.IsValid)
+            {
+                TempData["toastr_error"] = "No ha ingresado correctamente la información del pedido !";
+                return View();
+            }
+
+            try
+            {
+                int idPedidoInsertado = _pedidosService.Insertar(pedido);
+                pedidoArticulo.IdPedido = idPedidoInsertado;
+                _pedidosService.AgregarArticuloYCantidadAlPedido(pedidoArticulo);
+                TempData["toastr_success"] = $"Se ha creado exitosamente el pedido !";
+                return RedirectToAction("EditarPedido", new { id = idPedidoInsertado });
+            }
+            catch (PedidoException e)
+            {
+                TempData["toastr_error"] = e.Message;
+                return RedirectToAction("AgregarPedido");
+            }
+
+            
+
         }
 
         [HttpGet]
         public IActionResult EditarPedido(int id)
         {
             Pedido pedido = _pedidosService.ObtenerPorId(id);
+            EditarPedidoViewModel editarPedidoViewModel = new() { Pedido = pedido };
 
             ViewBag.Articulos = _articulosService.ObtenerTodos(); // TODO: VER SI CAMBIAMOS POR VIEWMODELS
             ViewBag.ArticulosYCantidadesDelPedido = _pedidosService.ObtenerArticulosYCantidadesDelPedido(id); // TODO: VER SI CAMBIAMOS POR VIEWMODELS
 
-            return View(pedido);
+            return View(editarPedidoViewModel);
         }
 
         [HttpPost]
-        public IActionResult AgregarArticuloAlPedido(PedidoArticulo pedidoArticulo)
+        public IActionResult EditarPedido(Pedido pedido)
+        {
+            _pedidosService.Actualizar(pedido);
+            TempData["toastr_success"] = "Se ha actualizado el pedido exitosamente !";
+            return RedirectToAction("EditarPedido", new { id = pedido.IdPedido });
+        }
+
+        [HttpPost]
+        public IActionResult AgregarArticuloAlPedido(EditarPedidoViewModel editarPedidoViewModel)
         {
             if (!ModelState.IsValid)
             {
                 TempData["toastr_error"] = "No ha ingresado correctamente la información del Artículo !";
-                return View();
+                return RedirectToAction("EditarPedido", new { id = editarPedidoViewModel.PedidoArticulo.IdPedido });
             }
 
-            //TODO: AGREGAR UN TRY CATCH PARA LAS VALIDACIONES EN EL SERVICIO
-            _pedidosService.AgregarArticuloYCantidadAlPedido(pedidoArticulo);
-            TempData["toastr_success"] = "Se ha añadido el artículo al pedido correctamente !";
-            return RedirectToAction("GestionarPedidos"); //TODO Agregar validaciones en la vista 
+            _pedidosService.AgregarArticuloYCantidadAlPedido(editarPedidoViewModel.PedidoArticulo);
+            TempData["toastr_success"] = "Se ha añadido el artículo al pedido exitosamente !";
+            return RedirectToAction("EditarPedido", new { id = editarPedidoViewModel.PedidoArticulo.IdPedido });
         }
+
+        [HttpPost]
+        public IActionResult CerrarPedido(Pedido pedido)
+        {
+            _pedidosService.Actualizar(pedido);
+            TempData["toastr_success"] = "Se ha actualizado el pedido exitosamente !";
+            return RedirectToAction("EditarPedido", new { id = pedido.IdPedido });
+        }
+
     }
 }

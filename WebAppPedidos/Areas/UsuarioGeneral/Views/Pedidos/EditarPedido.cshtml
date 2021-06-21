@@ -1,6 +1,22 @@
 ﻿@using DAL.Modelos
-@model Pedido
+@using WebAppPedidos.Areas.UsuarioGeneral.Models
+@using Servicios.Helpers.Enums
+@model EditarPedidoViewModel
 @{
+    List<Articulo> selectArticulos = ViewBag.Articulos;
+    Dictionary<Articulo, int> ArticulosYCantidadesDelPedido = ViewBag.ArticulosYCantidadesDelPedido;
+
+    string cssEstadoPedidoColor = "";
+    if (@Model.Pedido.IdEstado == (int)EstadoPedidoEnum.ABIERTO)
+    {
+        cssEstadoPedidoColor = "primary";
+    } else if (@Model.Pedido.IdEstado == (int)EstadoPedidoEnum.ENTREGADO)
+    {
+        cssEstadoPedidoColor = "success";
+    } else if (@Model.Pedido.IdEstado == (int)EstadoPedidoEnum.CERRADO)
+    {
+        cssEstadoPedidoColor = "danger";
+    }
 }
 <div class="row">
     <div class="col-lg-8 p-r-0 title-margin-right">
@@ -26,7 +42,7 @@
                                     </div>
                                     <div class="stat-content">
                                         <div class="text-left dib">
-                                            <div class="stat-heading">@Model.IdClienteNavigation.Nombre</div>
+                                            <div class="stat-heading">@Model.Pedido.IdClienteNavigation.Nombre</div>
                                             <div class="stat-text">Cliente</div>
                                         </div>
                                     </div>
@@ -34,14 +50,14 @@
                             </div>
                         </div>
                         <div class="col-lg-4">
-                            <div class="card bg-warning">
+                            <div class="card bg-@cssEstadoPedidoColor.ToString()">
                                 <div class="stat-widget-four">
                                     <div class="stat-icon">
                                         <i class="ti-stats-up"></i>
                                     </div>
                                     <div class="stat-content">
                                         <div class="text-left dib">
-                                            <div class="stat-heading">PEDIDO <span>@Model.IdEstadoNavigation.Descripcion.ToUpper()</span></div>
+                                            <div class="stat-heading">PEDIDO <span>@Model.Pedido.IdEstadoNavigation.Descripcion.ToUpper()</span></div>
                                             <div class="stat-text">Estado del Pedido</div>
                                         </div>
                                     </div>
@@ -57,8 +73,8 @@
                                     <div class="stat-content">
                                         <div class="text-left dib">
                                             <div class="stat-heading">Última Modificación</div>
-                                            <div class="stat-text">Fecha: <span>@(Model.FechaModificacion != null ? Model.FechaModificacion?.ToShortDateString() : "...")</span></div>
-                                            <div class="stat-text">Por: <span>@(Model.ModificadoPor != null ? @String.Format("{0} {1}", @Model.ModificadoPorNavigation.Nombre, @Model.ModificadoPorNavigation.Apellido) : "Sin identificar")</span></div>
+                                            <div class="stat-text">Fecha: <span>@(Model.Pedido.FechaModificacion != null ? Model.Pedido.FechaModificacion?.ToShortDateString() : "...")</span></div>
+                                            <div class="stat-text">Por: <span>@(Model.Pedido.ModificadoPor != null ? @String.Format("{0} {1}", @Model.Pedido.ModificadoPorNavigation.Nombre, @Model.Pedido.ModificadoPorNavigation.Apellido) : "Sin identificar")</span></div>
                                         </div>
                                     </div>
                                 </div>
@@ -69,32 +85,35 @@
 
                     <div class="form-validation">
                         <form method="POST" asp-area="UsuarioGeneral" asp-controller="Pedidos" asp-action="AgregarArticuloAlPedido">
-                            <input type="hidden" name="IdPedido" value="@Model.IdPedido"/>
+                            <input type="hidden" name="PedidoArticulo.IdPedido" value="@Model.Pedido.IdPedido" />
                             <div class="form-valide" action="#" method="post">
                                 <div class="card-title">
                                     <h4>Agregar un artículo</h4>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label class="col-form-label" for="val-skill">
+                                    <label asp-for="PedidoArticulo.IdArticulo" class="col-form-label" for="val-skill">
                                         Artículo <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-5">
-                                        <select class="form-control" id="select-articulo" name="IdArticulo">
+                                        <select class="form-control" id="select-articulo" name="PedidoArticulo.IdArticulo" asp-for="PedidoArticulo.IdArticulo">
                                             <option value="">Seleccione un artículo</option>
-                                            @foreach (Articulo articulo in ViewBag.Articulos)
+                                            @foreach (Articulo articulo in selectArticulos)
                                             {
                                                 <option value="@articulo.IdArticulo">Código: @articulo.Codigo -  Descripción: @articulo.Descripcion</option>
                                             }
                                         </select>
+                                        <span asp-validation-for="PedidoArticulo.IdArticulo" class="text-danger"></span>
+
 
                                     </div>
-                                    <label class="col-form-label" for="val-digits">
+                                    <label asp-for="PedidoArticulo.Cantidad" class="col-form-label" for="val-digits">
                                         Cantidad <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-2">
                                         <input type="text" class="form-control" id="val-cantidad"
-                                               name="cantidad" placeholder="Ingrese cantidad">
+                                               name="PedidoArticulo.Cantidad" asp-for="PedidoArticulo.Cantidad" placeholder="Ingrese cantidad">
+                                        <span asp-validation-for="PedidoArticulo.Cantidad" class="text-danger"></span>
                                     </div>
                                     <div class="col-lg-1">
                                         <button type="submit" class="btn btn-success">
@@ -106,17 +125,12 @@
                             </div>
                         </form>
 
-                        <div class="form-group row">
-                            <label class="col-form-label" for="val-suggestions">Comentario </label>
-                            <div class="col-lg-10">
-                                <textarea class="form-control"
-                                          placeholder="¿Que comentario te gustaría ponerle al pedido?">@Model.Comentarios</textarea>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
     <div class="row">
@@ -137,7 +151,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (KeyValuePair<Articulo, int> articuloEnPedido in ViewBag.ArticulosYCantidadesDelPedido)
+                                @foreach (KeyValuePair<Articulo, int> articuloEnPedido in ArticulosYCantidadesDelPedido)
                                 {
                                     <tr>
                                         <td>@articuloEnPedido.Key.Descripcion</td>
@@ -153,19 +167,31 @@
                                 }
                             </tbody>
                         </table>
+
                     </div>
+                    <form method="POST" asp-area="UsuarioGeneral" asp-controller="Pedidos" asp-action="EditarPedido">
+                        <div class="form-group row mt-5">
+                            <label class="col-form-label" for="val-suggestions">Comentario </label>
+                            <div class="col-lg-10">
+                                <textarea class="form-control" name="Comentarios"
+                                          placeholder="¿Que comentario te gustaría ponerle al pedido?">@Model.Pedido.Comentarios</textarea>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-info m-1">Guardar Modificaciones</button>
+                    </form>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <div class="row">
-        <div class="col-lg-12 d-flex align-items-center">
-            <button type="button" class="btn btn-info m-1">Guardar Modificaciones</button>
-            <button type="button" class="btn btn-warning m-1">Cerrar Pedido</button>
-            <button type="button" class="btn btn-success m-1">Marcar como Entregado</button>
-            <button type="button" class="btn btn-danger ml-auto">Eliminar Pedido</button>
-            <a asp-area="UsuarioGeneral" asp-controller="Pedidos" asp-action="GestionarPedidos" class="btn btn-default ml-auto ">Volver</a>
+
         </div>
-    </div>
+
+        <div class="row">
+            <div class="col-lg-12 d-flex align-items-center">
+                
+                <button type="button" class="btn btn-warning m-1">Cerrar Pedido</button>
+                <button type="button" class="btn btn-success m-1">Marcar como Entregado</button>
+                <button type="button" class="btn btn-danger ml-auto">Eliminar Pedido</button>
+                <a asp-area="UsuarioGeneral" asp-controller="Pedidos" asp-action="GestionarPedidos" class="btn btn-default ml-auto ">Volver</a>
+            </div>
+        </div>
 </section>

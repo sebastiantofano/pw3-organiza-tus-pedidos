@@ -11,5 +11,10 @@ namespace DAL.Repositorios.Interfaces
     {
         Dictionary<Articulo, int> ObtenerArticulosYCantidadesDelPedido(int idPedido);
         void AgregarArticuloYCantidadAlPedido(PedidoArticulo pedidoArticulo);
+
+        bool ValidarExistenciaDeArticuloEnPedido(PedidoArticulo pedidoArticulo);
+
+        void AdicionarCantidadAlArticuloDelPedido(PedidoArticulo pedidoArticulo);
+
     }
 }

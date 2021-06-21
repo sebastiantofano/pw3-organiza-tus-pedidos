@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Repositorios
 {
-    public abstract class BaseRepositoryImpl<TEntity> : IBaseRepository<TEntity> where TEntity : class, IAuditableEntity
+    public abstract class BaseRepositoryImpl<TEntity> : IBaseRepository<TEntity> where TEntity : class, IIdentificableEntity, IAuditableEntity
     {
 
         private readonly PedidosPW3Context _pedidosPW3Context;
@@ -34,10 +34,11 @@ namespace DAL.Repositorios
             return _dbSet.ToList();
         }
 
-        public void Insertar(TEntity entity)
+        public int Insertar(TEntity entity)
         {
             _pedidosPW3Context.Add(entity);
             _pedidosPW3Context.SaveChanges();
+            return entity.Id;
         }
 
         public virtual void Actualizar(TEntity entity)

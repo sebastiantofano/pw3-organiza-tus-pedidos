@@ -23,7 +23,7 @@ namespace Servicios.Administrador
         }
 
         /* Sobrescribimos el metodo Insertar "Virtual" del Servicio Base ya que queremos agregar validaciones extras en la capa de Servicios */
-        public override void Insertar(Articulo articulo)
+        public override int Insertar(Articulo articulo)
         {
             articulo.Codigo = string.Concat("COD_", articulo.Codigo);
             bool codigoYaExistente = _articulosRepository.ValidarCodigoExistente(articulo.Codigo);
@@ -31,7 +31,7 @@ namespace Servicios.Administrador
             {
                 throw new ArticuloException($"Ya existe un artículo con el código {articulo.Codigo}");
             }
-            base.Insertar(articulo);
+            return base.Insertar(articulo);
         }
 
     }

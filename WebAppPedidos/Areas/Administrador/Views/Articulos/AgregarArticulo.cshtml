@@ -26,14 +26,15 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">COD_</div>
                                     </div>
-                                    <input type="text" name="Codigo" class="form-control" placeholder="Código del Artículo" asp-for="Codigo">
-                                    <span asp-validation-for="Codigo" class="text-danger"></span>
+                                    <input asp-for="Codigo" type="text" name="Codigo" class="form-control" placeholder="Código del Artículo">
+
                                 </div>
+                                <span asp-validation-for="Codigo" class="text-danger"></span>
                             </div>
                             <div class="form-group row align-items-center">
                                 <label asp-for="Descripcion" class="col-lg-1 col-form-label p-0">Descripción <span class="text-danger">*</span></label>
                                 <div class="col-lg-11">
-                                    <input asp-for="Descripcion" type="text" name="Descripcion" class="form-control" placeholder="Descripción del Artículo">
+                                    <input type="text" name="Descripcion" class="form-control" placeholder="Descripción del Artículo">
                                     <span asp-validation-for="Descripcion" class="text-danger"></span>
                                 </div>
                             </div>

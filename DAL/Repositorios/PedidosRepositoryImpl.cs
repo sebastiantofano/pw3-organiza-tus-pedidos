@@ -16,6 +16,13 @@ namespace DAL.Repositorios
             _pedidosPW3Context = pedidosPW3Context;
         }
 
+        public void AdicionarCantidadAlArticuloDelPedido(PedidoArticulo pedidoArticulo)
+        {
+            PedidoArticulo articuloAActualizarCantidad = _pedidosPW3Context.PedidoArticulos.Where(p => p.IdPedido == pedidoArticulo.IdPedido && p.IdArticulo == pedidoArticulo.IdArticulo).FirstOrDefault();
+            articuloAActualizarCantidad.Cantidad += pedidoArticulo.Cantidad;
+            _pedidosPW3Context.SaveChanges();
+        }
+
         public void AgregarArticuloYCantidadAlPedido(PedidoArticulo pedidoArticulo)
         {
             _pedidosPW3Context.Add(pedidoArticulo);
@@ -35,6 +42,26 @@ namespace DAL.Repositorios
 
             return articulosYCantidadesDelPedido;
 
+        }
+
+        public bool ValidarExistenciaDeArticuloEnPedido(PedidoArticulo pedidoArticulo)
+        {
+            bool articuloYaExiste = _pedidosPW3Context.PedidoArticulos.Where(p => p.IdPedido == pedidoArticulo.IdPedido && p.IdArticulo == pedidoArticulo.IdArticulo).Count() > 0;
+
+            return articuloYaExiste;
+        }
+
+        public override void Actualizar(Pedido pedido)
+        {
+            // Pasa de estar en estado Detached a Unchanged
+            _pedidosPW3Context.Set<Pedido>().Attach(pedido);
+
+            //Specify the fields that should be updated.
+            _pedidosPW3Context.Entry(pedido).Property(x => x.Comentarios).IsModified = true;
+            _pedidosPW3Context.Entry(pedido).Property(x => x.ModificadoPor).IsModified = true;
+            _pedidosPW3Context.Entry(pedido).Property(x => x.FechaModificacion).IsModified = true;
+
+            _pedidosPW3Context.SaveChanges();
         }
     }
 }
