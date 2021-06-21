@@ -1,6 +1,8 @@
 ﻿@using DAL.Modelos
 @model List<Usuario>
 @{
+    List<Usuario> todosUsuarios = ViewBag.todosUsuarios;
+    int? idUsuarioSeleccionado = ViewBag.idUsuarioSeleccionado;
 }
 
 @section Styles{
@@ -23,7 +25,29 @@
             <div class="card">
                 <div class="bootstrap-data-table-panel">
                     <div class="table-responsive">
+                        <form action="/Administrador/Usuarios/AdministrarUsuarios" method="post">
+                            Nombre usuario:
+                            <select name="idUsuario">
+                                <option value="">Nombre usuario</option>
+                                @foreach (var usuario in todosUsuarios)
+                                {
+                                    if (idUsuarioSeleccionado.HasValue && idUsuarioSeleccionado == usuario.IdUsuario)
+                                    {
+                                        <option value="@usuario.IdUsuario" selected>@usuario.Nombre</option>
+                                    }
+
+                                    else
+                                    {
+                                        <option value="@usuario.IdUsuario">@usuario.Nombre</option>
+                                    }
+
+                                }
+                            </select>
+                            <input type="submit" value="Filtrar" />
+                        </form>
                         <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
+
+
                             <thead>
                                 <tr>
                                     <th class="col-md-3">Nombre del Usuario</th>

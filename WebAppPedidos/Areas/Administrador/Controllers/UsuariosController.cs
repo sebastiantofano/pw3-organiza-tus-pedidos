@@ -26,9 +26,19 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult AdministrarUsuarios()
         {
+            ViewBag.todosUsuarios = _usuariosService.ObtenerTodos();
             List<Usuario> usuarios = _usuariosService.ObtenerTodos();
+            return View(usuarios);
+        }
+        [HttpPost]
+        public IActionResult AdministrarUsuarios(int idUsuario)
+        {
+            ViewBag.todosUsuarios = _usuariosService.ObtenerTodos();
+            ViewBag.idUsuarioSeleccionado = idUsuario;
+            List<Usuario> usuarios = _usuariosService.ObtenerTodosPorIdUsuario(idUsuario);
             return View(usuarios);
         }
 
