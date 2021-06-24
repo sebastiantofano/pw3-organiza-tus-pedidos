@@ -3,11 +3,15 @@
 @{
     List<Usuario> todosUsuarios = ViewBag.todosUsuarios;
     int? idUsuarioSeleccionado = ViewBag.idUsuarioSeleccionado;
+    string? emailSeleccionado = ViewBag.emailSeleccionado;
 }
 
 @section Styles{
 
     <link href="~/themes/assets/css/lib/data-table/buttons.bootstrap.min.css" rel="stylesheet" />
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="path/to/select2.min.css" rel="stylesheet" />
 }
 <div class="row">
     <div class="col-lg-8 p-r-0 title-margin-right">
@@ -27,9 +31,9 @@
                     <div class="table-responsive">
                         <form action="/Administrador/Usuarios/AdministrarUsuarios" method="post">
                             Nombre usuario:
-                            <select name="idUsuario">
-                                <option value="">Nombre usuario</option>
-                                @foreach (var usuario in todosUsuarios)
+                            <select class="js-example-basic-single" name="idUsuario">
+                                <option value="">Todos</option>
+                                @foreach (var usuario in todosUsuarios.OrderBy(e => e.Nombre))
                                 {
                                     if (idUsuarioSeleccionado.HasValue && idUsuarioSeleccionado == usuario.IdUsuario)
                                     {
@@ -39,6 +43,23 @@
                                     else
                                     {
                                         <option value="@usuario.IdUsuario">@usuario.Nombre</option>
+                                    }
+
+                                }
+                            </select>
+                            Email:
+                            <select class="js-example-basic-single" name="email">
+                                <option value="">Email</option>
+                                @foreach (var email in todosUsuarios.OrderBy(e => e.Email))
+                                {
+                                    if (emailSeleccionado == email.Email)
+                                    {
+                                        <option value="@email.Email" selected>@email.Email</option>
+                                    }
+
+                                    else
+                                    {
+                                        <option value="@email.Email">@email.Email</option>
                                     }
 
                                 }
@@ -105,4 +126,8 @@
     <script src="~/themes/assets/js/lib/data-table/buttons.html5.min.js"></script>
     <script src="~/themes/assets/js/lib/data-table/buttons.print.min.js"></script>
     <script src="~/themes/assets/js/lib/data-table/datatables-init.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="path/to/select2.min.js"></script>
+    <script src="~/js/BusquedaEnDesplegable.js"></script>
 }

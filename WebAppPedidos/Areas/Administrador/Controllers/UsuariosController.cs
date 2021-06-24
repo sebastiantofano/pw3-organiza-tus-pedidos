@@ -29,16 +29,17 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
         [HttpGet]
         public IActionResult AdministrarUsuarios()
         {
-            ViewBag.todosUsuarios = _usuariosService.ObtenerTodos();
             List<Usuario> usuarios = _usuariosService.ObtenerTodos();
+            ViewBag.todosUsuarios = usuarios;
             return View(usuarios);
         }
         [HttpPost]
-        public IActionResult AdministrarUsuarios(int idUsuario)
+        public IActionResult AdministrarUsuarios(int idUsuario, string email)
         {
             ViewBag.todosUsuarios = _usuariosService.ObtenerTodos();
             ViewBag.idUsuarioSeleccionado = idUsuario;
-            List<Usuario> usuarios = _usuariosService.ObtenerTodosPorIdUsuario(idUsuario);
+            ViewBag.emailSeleccionado = email;
+            List<Usuario> usuarios = _usuariosService.ObtenerTodosPorIdUsuarioOPorEmail(idUsuario,email);
             return View(usuarios);
         }
 
