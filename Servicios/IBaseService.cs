@@ -15,5 +15,7 @@ namespace Servicios
         void Actualizar(TEntity entity);
         void Eliminar(TEntity entity);
 
+        List<TEntity> ObtenerTodosNoEliminados();
+
     }
 }

@@ -47,8 +47,8 @@ namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
         public IActionResult AgregarPedido()
         {
 
-            ViewBag.Articulos = _articulosService.ObtenerTodos(); // TODO: VER SI CAMBIAMOS POR VIEWMODELS
-            ViewBag.Clientes = _clientesService.ObtenerTodos(); // TODO: PONER SOLO CLIENTES VALIDOS COMO DICE EL ENUNCIADO
+            ViewBag.Articulos = _articulosService.ObtenerTodosNoEliminados(); // TODO: VER SI CAMBIAMOS POR VIEWMODELS
+            ViewBag.Clientes = _clientesService.ObtenerTodosNoEliminados(); // TODO: VER SI CAMBIAMOS POR VIEWMODELS
             return View();
         }
 
@@ -85,7 +85,7 @@ namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
             Pedido pedido = _pedidosService.ObtenerPorId(id);
             EditarPedidoViewModel editarPedidoViewModel = new() { Pedido = pedido };
 
-            ViewBag.Articulos = _articulosService.ObtenerTodos(); // TODO: VER SI CAMBIAMOS POR VIEWMODELS
+            ViewBag.Articulos = _articulosService.ObtenerTodosNoEliminados(); // TODO: VER SI CAMBIAMOS POR VIEWMODELS
             ViewBag.ArticulosYCantidadesDelPedido = _pedidosService.ObtenerArticulosYCantidadesDelPedido(id); // TODO: VER SI CAMBIAMOS POR VIEWMODELS
 
             return View(editarPedidoViewModel);

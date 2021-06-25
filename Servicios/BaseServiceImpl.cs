@@ -63,10 +63,9 @@ namespace Servicios
             _entityRepository.Eliminar(entity);
         }
 
-
-
-
-
-
+        public List<TEntity> ObtenerTodosNoEliminados()
+        {
+            return _entityRepository.ObtenerTodosNoEliminados();
+        }
     }
 }

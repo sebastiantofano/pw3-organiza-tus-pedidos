@@ -18,5 +18,7 @@ namespace DAL.Repositorios.Interfaces
         void Actualizar(TEntity entity);
 
         void Eliminar(TEntity entity);
+
+        List<TEntity> ObtenerTodosNoEliminados();
     }
 }

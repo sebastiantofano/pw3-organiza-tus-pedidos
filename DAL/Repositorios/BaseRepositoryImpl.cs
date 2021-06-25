@@ -62,5 +62,9 @@ namespace DAL.Repositorios
             _pedidosPW3Context.SaveChanges();
         }
 
+        public List<TEntity> ObtenerTodosNoEliminados()
+        {
+            return _dbSet.Where(e => e.FechaBorrado == null).ToList();
+        }
     }
 }
