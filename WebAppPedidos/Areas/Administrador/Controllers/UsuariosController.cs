@@ -97,7 +97,13 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
                 return View(usuario);
             }
         }
-
+        public IActionResult EliminarUsuario(int id)
+        {
+            Usuario usuario = _usuariosService.ObtenerPorId(id);
+            _usuariosService.Eliminar(usuario);
+            TempData["toastr_info"] = "Se ha eliminado el usuario correctamente !";
+            return RedirectToAction("AdministrarUsuarios");
+        }
 
 
 

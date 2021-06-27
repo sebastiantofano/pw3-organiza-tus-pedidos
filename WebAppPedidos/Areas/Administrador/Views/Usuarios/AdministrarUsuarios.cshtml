@@ -79,7 +79,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (var usuario in Model)
+                                @foreach (var usuario in Model.OrderBy(e => e.Nombre))
                                 {
                                     <tr>
                                         <td>@usuario.Nombre @usuario.Apellido</td>
@@ -91,10 +91,10 @@
                                                class="btn btn-warning btn-flat btn-addon btn-sm ml-4">
                                                 <i class="ti-pencil"></i>Editar
                                             </a>
-                                            <button type="button"
-                                                    class="btn btn-danger btn-flat btn-addon btn-sm">
-                                                <i class="ti-close"></i>Eliminar
-                                            </button>
+                                            <a asp-area="Administrador" asp-controller="Usuarios" asp-action="EliminarUsuario" asp-route-id="@usuario.IdUsuario"
+                                               class="btn btn-danger btn-flat btn-addon btn-sm">
+                                                <i class="ti-close"></i>Eliminar Usuario
+                                            </a>
                                         </td>
                                     </tr>
                                 }
