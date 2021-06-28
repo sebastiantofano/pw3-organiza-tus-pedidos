@@ -21,9 +21,10 @@ namespace Servicios.Administrador
         {
             return _usuariosRepository.ValidarEmailExistente(email);
         }
-        public List<Usuario> ObtenerTodosPorIdUsuario(int idUsuario)
+        public List<Usuario> ObtenerTodosPorIdUsuarioOPorEmail(int idUsuario,string email)
         {
-            return _usuariosRepository.ObtenerTodosPorIdUsuario(idUsuario);
+            return _usuariosRepository.ObtenerTodosPorIdUsuarioOPorEmail(idUsuario,email);
         }
+
     }
 }
