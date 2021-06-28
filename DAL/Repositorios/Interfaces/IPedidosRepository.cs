@@ -16,5 +16,7 @@ namespace DAL.Repositorios.Interfaces
 
         void AdicionarCantidadAlArticuloDelPedido(PedidoArticulo pedidoArticulo);
 
+        bool ComprobarExistenciaDeUnPedidoAbiertoDeCliente(int idCliente);
+
     }
 }

@@ -63,5 +63,11 @@ namespace DAL.Repositorios
 
             _pedidosPW3Context.SaveChanges();
         }
+
+        public bool ComprobarExistenciaDeUnPedidoAbiertoDeCliente(int idCliente)
+        {
+            bool ExistePedidoAbiertoDeCliente = _pedidosPW3Context.Pedidos.Where(p => p.IdCliente == idCliente && p.IdEstado == 1).Count() > 0;
+            return ExistePedidoAbiertoDeCliente;
+        }
     }
 }

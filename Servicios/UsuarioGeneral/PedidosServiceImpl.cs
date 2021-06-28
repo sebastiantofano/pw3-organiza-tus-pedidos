@@ -2,6 +2,7 @@
 using DAL.Repositorios.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Servicios.Helpers.Enums;
+using Servicios.Helpers.Exceptions;
 using Servicios.UsuarioGeneral.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -14,9 +15,11 @@ namespace Servicios.UsuarioGeneral
     public class PedidosServiceImpl : BaseServiceImpl<Pedido>, IPedidosService
     {
         private readonly IPedidosRepository _pedidosRepository;
-        public PedidosServiceImpl(IPedidosRepository pedidosRepository, IHttpContextAccessor httpContextAccessor) : base(pedidosRepository, httpContextAccessor)
+        private readonly IClientesRepository _clientesRepository;
+        public PedidosServiceImpl(IPedidosRepository pedidosRepository, IClientesRepository clientesRepository, IHttpContextAccessor httpContextAccessor) : base(pedidosRepository, httpContextAccessor)
         {
             _pedidosRepository = pedidosRepository;
+            _clientesRepository = clientesRepository;
         }
 
         public void AgregarArticuloYCantidadAlPedido(PedidoArticulo pedidoArticulo)
@@ -45,6 +48,12 @@ namespace Servicios.UsuarioGeneral
         /* Sobrescribimos el metodo Insertar "Virtual" del Servicio Base ya que queremos agregar validaciones extras en la capa de Servicios */
         public override int Insertar(Pedido pedido)
         {
+            bool existePedidoAbiertoDeCliente = _pedidosRepository.ComprobarExistenciaDeUnPedidoAbiertoDeCliente(pedido.IdCliente);
+            if (existePedidoAbiertoDeCliente)
+            {
+                Cliente cliente = _clientesRepository.ObtenerPorId(pedido.IdCliente);
+                throw new PedidoException($"Ya existe un pedido abierto para el cliente {cliente.Nombre}");
+            }
             pedido.IdEstado = (int)EstadoPedidoEnum.ABIERTO;
             return base.Insertar(pedido);
         }
@@ -54,5 +63,6 @@ namespace Servicios.UsuarioGeneral
             pedido.Comentarios = pedido.Comentarios;
             base.Actualizar(pedido);
         }
+
     }
 }

@@ -74,9 +74,6 @@ namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
                 TempData["toastr_error"] = e.Message;
                 return RedirectToAction("AgregarPedido");
             }
-
-            
-
         }
 
         [HttpGet]
