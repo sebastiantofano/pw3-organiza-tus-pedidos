@@ -58,7 +58,7 @@ namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
             if (!ModelState.IsValid)
             {
                 TempData["toastr_error"] = "No ha ingresado correctamente la información del pedido !";
-                return View();
+                return RedirectToAction("AgregarPedido");
             }
 
             try
@@ -111,11 +111,52 @@ namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
         }
 
         [HttpPost]
-        public IActionResult CerrarPedido(Pedido pedido)
+        public IActionResult EliminarArticuloAlPedido(EditarPedidoViewModel editarPedidoViewModel)
         {
-            _pedidosService.Actualizar(pedido);
-            TempData["toastr_success"] = "Se ha actualizado el pedido exitosamente !";
-            return RedirectToAction("EditarPedido", new { id = pedido.IdPedido });
+            _pedidosService.EliminarArticuloAlPedido(editarPedidoViewModel.PedidoArticulo);
+            TempData["toastr_success"] = "Se ha eliminado el artículo del pedido exitosamente !";
+            return RedirectToAction("EditarPedido", new { id = editarPedidoViewModel.PedidoArticulo.IdPedido });
+        }
+
+        [HttpPost]
+        public IActionResult MarcarComoCerrado(Pedido pedido)
+        {
+            try
+            {
+                _pedidosService.MarcarComoCerrado(pedido.IdPedido);
+                TempData["toastr_success"] = "Se ha cerrado el pedido exitosamente !";
+                return RedirectToAction("EditarPedido", new { id = pedido.IdPedido });
+            }
+            catch (PedidoException e)
+            {
+                TempData["toastr_error"] = e.Message;
+                return RedirectToAction("EditarPedido", new { id = pedido.IdPedido });
+            }
+        }
+
+        [HttpPost]
+        public IActionResult MarcarComoEntregado(Pedido pedido)
+        {
+            try
+            {
+                _pedidosService.MarcarComoEntregado(pedido.IdPedido);
+                TempData["toastr_success"] = "Se ha entregado el pedido exitosamente !";
+                return RedirectToAction("EditarPedido", new { id = pedido.IdPedido });
+            }
+            catch (PedidoException e)
+            {
+                TempData["toastr_error"] = e.Message;
+                return RedirectToAction("EditarPedido", new { id = pedido.IdPedido });
+            }
+        }
+
+        [HttpPost]
+        public IActionResult EliminarPedido(Pedido pedido)
+        {
+            _pedidosService.Eliminar(pedido);
+
+            TempData["toastr_info"] = "Se ha eliminado el pedido correctamente !";
+            return RedirectToAction("GestionarPedidos");
         }
 
     }

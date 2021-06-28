@@ -25,7 +25,7 @@
                                 <label class="col-form-label" for="val-username">
                                     Cliente <span class="text-danger">*</span>
                                 </label>
-                                <div class="col-lg-5">
+                                <div class="col-lg-7">
                                     <select class="form-control" id="select-cliente" name="idCliente">
                                         <option value="">Seleccione un cliente</option>
                                         @foreach (Cliente cliente in selectClientes)
@@ -39,7 +39,7 @@
                                 <label class="col-form-label" for="val-skill">
                                     Artículo <span class="text-danger">*</span>
                                 </label>
-                                <div class="col-lg-5">
+                                <div class="col-lg-7">
                                     <select class="form-control" id="select-articulo" name="IdArticulo">
                                         <option value="">Seleccione un artículo</option>
                                         @foreach (Articulo articulo in selectArticulos)
@@ -54,12 +54,6 @@
                                 <div class="col-lg-2">
                                     <input type="text" class="form-control" id="val-cantidad"
                                            name="Cantidad" placeholder="Ingrese cantidad">
-                                </div>
-                                <div class="col-lg-1">
-                                    <button type="submit" class="btn btn-success">
-                                        Agregar
-                                        artículo al pedido
-                                    </button>
                                 </div>
                             </div>
 

@@ -20,11 +20,19 @@ namespace DAL.Repositorios
         {
             PedidoArticulo articuloAActualizarCantidad = _pedidosPW3Context.PedidoArticulos.Where(p => p.IdPedido == pedidoArticulo.IdPedido && p.IdArticulo == pedidoArticulo.IdArticulo).FirstOrDefault();
             articuloAActualizarCantidad.Cantidad += pedidoArticulo.Cantidad;
+            if(articuloAActualizarCantidad.Cantidad <= 0)
+            {
+                articuloAActualizarCantidad.Cantidad = 0;
+            }
             _pedidosPW3Context.SaveChanges();
         }
 
         public void AgregarArticuloYCantidadAlPedido(PedidoArticulo pedidoArticulo)
         {
+            if (pedidoArticulo.Cantidad <= 0)
+            {
+                pedidoArticulo.Cantidad = 0;
+            }
             _pedidosPW3Context.Add(pedidoArticulo);
             _pedidosPW3Context.SaveChanges();
         }
@@ -66,8 +74,29 @@ namespace DAL.Repositorios
 
         public bool ComprobarExistenciaDeUnPedidoAbiertoDeCliente(int idCliente)
         {
-            bool ExistePedidoAbiertoDeCliente = _pedidosPW3Context.Pedidos.Where(p => p.IdCliente == idCliente && p.IdEstado == 1).Count() > 0;
+            bool ExistePedidoAbiertoDeCliente = _pedidosPW3Context.Pedidos.Where(p => p.IdCliente == idCliente && p.IdEstado == 1 && p.FechaBorrado == null).Count() > 0;
             return ExistePedidoAbiertoDeCliente;
+        }
+
+        public void MarcarComoCerrado(int idPedido)
+        {
+            Pedido pedido = _pedidosPW3Context.Pedidos.Where(p => p.IdPedido == idPedido).FirstOrDefault();
+            pedido.IdEstado = 2;
+            _pedidosPW3Context.SaveChanges();
+        }
+
+        public void MarcarComoEntregado(int idPedido)
+        {
+            Pedido pedido = _pedidosPW3Context.Pedidos.Where(p => p.IdPedido == idPedido).FirstOrDefault();
+            pedido.IdEstado = 3;
+            _pedidosPW3Context.SaveChanges();
+        }
+
+        public void EliminarArticuloAlPedido(PedidoArticulo pedidoArticulo)
+        {
+            PedidoArticulo articuloAEliminarDelPedido = _pedidosPW3Context.PedidoArticulos.Where(p => p.IdPedido == pedidoArticulo.IdPedido && p.IdArticulo == pedidoArticulo.IdArticulo).FirstOrDefault();
+            _pedidosPW3Context.PedidoArticulos.Remove(articuloAEliminarDelPedido);
+            _pedidosPW3Context.SaveChanges();
         }
     }
 }

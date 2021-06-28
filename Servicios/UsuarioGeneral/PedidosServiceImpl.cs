@@ -64,5 +64,34 @@ namespace Servicios.UsuarioGeneral
             base.Actualizar(pedido);
         }
 
+        public void MarcarComoCerrado(int idPedido)
+        {
+            Pedido pedido = _pedidosRepository.ObtenerPorId(idPedido);
+
+            if(!(pedido.IdEstado == (int)EstadoPedidoEnum.ABIERTO))
+            {
+                throw new PedidoException("El pedido ya se encuentra Cerrado o Entregado");
+            }
+
+            _pedidosRepository.MarcarComoCerrado(idPedido);
+
+        }
+
+        public void MarcarComoEntregado(int idPedido)
+        {
+            Pedido pedido = _pedidosRepository.ObtenerPorId(idPedido);
+
+            if (!(pedido.IdEstado == (int)EstadoPedidoEnum.CERRADO))
+            {
+                throw new PedidoException("El pedido no se encuentra cerrado");
+            }
+
+            _pedidosRepository.MarcarComoEntregado(idPedido);
+        }
+
+        public void EliminarArticuloAlPedido(PedidoArticulo pedidoArticulo)
+        {
+            _pedidosRepository.EliminarArticuloAlPedido(pedidoArticulo);
+        }
     }
 }
