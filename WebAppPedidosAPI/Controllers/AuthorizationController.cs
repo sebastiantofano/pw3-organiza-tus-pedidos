@@ -13,12 +13,12 @@ using System.Linq;
 using System.Security;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using WebAppPedidosAPI.ResponseObjects;
+using WebAPI.ResponseObjects;
 
-namespace WebAppPedidosAPI.Controllers
+namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
-    public class AuthorizationController : Controller
+    public class AuthorizationController : ControllerBase
     {
         private readonly ILoginService _loginService;
 

@@ -98,5 +98,10 @@ namespace DAL.Repositorios
             _pedidosPW3Context.PedidoArticulos.Remove(articuloAEliminarDelPedido);
             _pedidosPW3Context.SaveChanges();
         }
+
+        public int UltimoNumeroPedidoInsertadoParaCliente(int idCliente)
+        {
+            return _pedidosPW3Context.Pedidos.Where(p => p.IdCliente == idCliente).Max(p => (int?)p.NroPedido) ?? 0;
+        }
     }
 }

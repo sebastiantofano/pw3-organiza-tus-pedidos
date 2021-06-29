@@ -17,5 +17,6 @@ namespace DAL.Repositorios.Interfaces
         void MarcarComoCerrado(int idPedido);
         void MarcarComoEntregado(int idPedido);
         void EliminarArticuloAlPedido(PedidoArticulo pedidoArticulo);
+        int UltimoNumeroPedidoInsertadoParaCliente(int idCliente);
     }
 }

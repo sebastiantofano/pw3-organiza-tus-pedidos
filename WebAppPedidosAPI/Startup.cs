@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -26,7 +27,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace WebAppPedidosAPI
+namespace WebAPI
 {
     public class Startup
     {
@@ -44,7 +45,7 @@ namespace WebAppPedidosAPI
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAppPedidosAPI", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPI", Version = "v1" });
             });
 
             /* INICIO: Agregado para el uso de Json Web Token (JWT) */
@@ -108,10 +109,15 @@ namespace WebAppPedidosAPI
             services.AddTransient<IUsuariosService, UsuariosServiceImpl>();
             services.AddTransient<IUsuariosRepository, UsuariosRepositoryImpl>();
 
-            _ = services.AddTransient<IPedidosService, PedidosServiceImpl>();
+            services.AddTransient<IPedidosService, PedidosServiceImpl>();
             services.AddTransient<IPedidosRepository, PedidosRepositoryImpl>();
 
             /* FIN: IoC (Inyeccion de Dependencias) para Servicios y Repositorios */
+
+            /* INICIO: IoC (Inyeccion de Dependencias) para el utilizar HttpContext desde los servicios */
+            /* TODO: ¿Esta bien acceder al contexto desde un servicio o solo tiene que ser visible desde el controller? */
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            /* FIN: IoC (Inyeccion de Dependencias) para el utilizar HttpContext desde los servicios */
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -121,7 +127,7 @@ namespace WebAppPedidosAPI
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAppPedidosAPI v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPI v1"));
             }
 
             app.UseHttpsRedirection();

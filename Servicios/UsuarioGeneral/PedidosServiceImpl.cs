@@ -32,6 +32,10 @@ namespace Servicios.UsuarioGeneral
             }
             else
             {
+                if(pedidoArticulo.Cantidad <= 0)
+                {
+                    throw new PedidoException("La cantidad ingresada debe ser mayor a 0 (cero)");
+                }
                 _pedidosRepository.AgregarArticuloYCantidadAlPedido(pedidoArticulo);
             }
 
@@ -55,6 +59,8 @@ namespace Servicios.UsuarioGeneral
                 throw new PedidoException($"Ya existe un pedido abierto para el cliente {cliente.Nombre}");
             }
             pedido.IdEstado = (int)EstadoPedidoEnum.ABIERTO;
+            int idIUltimoPedidoInsertadoParaCliente = _pedidosRepository.UltimoNumeroPedidoInsertadoParaCliente(pedido.IdCliente);
+            pedido.NroPedido = idIUltimoPedidoInsertadoParaCliente + 1;
             return base.Insertar(pedido);
         }
 
