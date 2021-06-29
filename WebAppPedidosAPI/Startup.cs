@@ -126,7 +126,6 @@ namespace WebAPI
             {
                 m.AddProfile(new MappingProfile());
             });
-
             IMapper mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
             /* FIN: Configuracion del Mapper */

@@ -1,5 +1,6 @@
 ﻿using DAL.Modelos;
 using DAL.Repositorios.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,14 @@ namespace DAL.Repositorios
             _pedidosPW3Context = pedidosPW3Context;
         }
 
+        public List<Cliente> FiltrarPorNombre(string cadena)
+        {
+            IQueryable<Cliente> matches = from c in _pedidosPW3Context.Clientes
+                          where c.Nombre.Contains(cadena)
+                          select c;
 
+            return matches.ToList();
+            //return (List<Cliente>)_pedidosPW3Context.Clientes.Where(c => EF.Functions.Like(c.Nombre, cadena));
+        }
     }
 }

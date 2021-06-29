@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebAPI.DTOs
 {
-    public class ClienteDTO
+    public class ClienteResponse
     {
         public int IdCliente { get; set; }
         public string Numero { get; set; }
@@ -14,7 +14,7 @@ namespace WebAPI.DTOs
         public string Direccion { get; set; }
         public string Telefono { get; set; }
 
-        public ClienteDTO(int idCliente, string numero, string nombre, string direccion, string telefono)
+        public ClienteResponse(int idCliente, string numero, string nombre, string direccion, string telefono)
         {
             IdCliente = idCliente;
             Numero = numero;

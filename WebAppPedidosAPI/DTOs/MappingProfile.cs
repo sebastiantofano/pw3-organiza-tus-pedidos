@@ -11,7 +11,7 @@ namespace WebAPI.DTOs
     {
         public MappingProfile()
         {
-            CreateMap<Cliente, ClienteDTO>();
+            CreateMap<Cliente, ClienteResponse>();
                //.ForMember(u => u.IdCliente, opt => opt.MapFrom(x => x.IdCliente))
                //.ForMember(u => u.Nombre, opt => opt.MapFrom(x => x.Nombre))
                //.ForMember(u => u.Numero, opt => opt.MapFrom(x => x.Telefono));

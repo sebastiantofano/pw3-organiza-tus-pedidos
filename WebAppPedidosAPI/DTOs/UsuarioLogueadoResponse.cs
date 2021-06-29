@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebAPI.DTOs
 {
-    public class UsuarioLogueadoDTO
+    public class UsuarioLogueadoResponse
     {
         public int IdUsuario { get; set; }
         public string Nombre { get; set; }
@@ -14,7 +14,7 @@ namespace WebAPI.DTOs
 
         public DateTime? FechaNacimiento { get; set; }
 
-        public UsuarioLogueadoDTO(int idUsuario, string nombre, string apellido, DateTime? fechaNacimiento)
+        public UsuarioLogueadoResponse(int idUsuario, string nombre, string apellido, DateTime? fechaNacimiento)
         {
             IdUsuario = idUsuario;
             Nombre = nombre;

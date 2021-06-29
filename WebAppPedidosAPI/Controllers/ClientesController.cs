@@ -25,18 +25,34 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<dynamic>> Get()
+        public ActionResult<dynamic> Get()
         {
             List<Cliente> clientes = _clientesService.ObtenerTodos();
-            List<ClienteDTO> clientesDTOs = new();
-            foreach(Cliente cliente in clientes)
+            List<ClienteResponse> clientesResponse = new();
+            foreach (Cliente cliente in clientes)
             {
-                ClienteDTO clienteDTO = _mapper.Map<ClienteDTO>(cliente);
-                clientesDTOs.Add(clienteDTO);
+                ClienteResponse clienteResponse = _mapper.Map<ClienteResponse>(cliente);
+                clientesResponse.Add(clienteResponse);
             }
             return new {
-                count = clientesDTOs.Count,
-                clientes = clientesDTOs
+                count = clientesResponse.Count,
+                clientes = clientesResponse
+            };
+        }
+
+        [HttpPost]
+        public ActionResult<dynamic> Filtrar([FromBody] FiltroRequest filtroRequest)
+        {
+            List<Cliente> clientes = _clientesService.FiltrarPorNombre(filtroRequest?.Filtro);
+            List<ClienteResponse> clientesResponse = new();
+            foreach (Cliente cliente in clientes)
+            {
+                ClienteResponse clienteResponse = _mapper.Map<ClienteResponse>(cliente);
+                clientesResponse.Add(clienteResponse);
+            }
+            return new {
+                count = clientesResponse.Count,
+                clientes = clientesResponse
             };
         }
     }

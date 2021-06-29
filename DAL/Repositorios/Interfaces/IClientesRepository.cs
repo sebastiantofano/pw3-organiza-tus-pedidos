@@ -9,5 +9,6 @@ namespace DAL.Repositorios.Interfaces
 {
     public interface IClientesRepository : IBaseRepository<Cliente> // Esta interface hereda todos los metodos del la interface del repositorio base
     {
+        List<Cliente> FiltrarPorNombre(string cadena);
     }
 }

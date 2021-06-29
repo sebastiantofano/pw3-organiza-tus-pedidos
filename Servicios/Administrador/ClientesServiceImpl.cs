@@ -18,6 +18,9 @@ namespace Servicios.Administrador
             _clientesRepository = clientesRepository;
         }
 
-        
+        public List<Cliente> FiltrarPorNombre(string cadena)
+        {
+            return _clientesRepository.FiltrarPorNombre(cadena);
+        }
     }
 }

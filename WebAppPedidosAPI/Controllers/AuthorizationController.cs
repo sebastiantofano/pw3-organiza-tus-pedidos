@@ -37,7 +37,7 @@ namespace WebAPI.Controllers
             {
                 Usuario usuarioValidado = _loginService.IniciarSesion(HttpContext, usuarioValidar);
                 //var token = TokenService.CreateToken(usuarioValidado);
-                UsuarioLogueadoDTO usuarioLogueadoResponse = new(usuarioValidado.IdUsuario, usuarioValidado.Nombre,
+                UsuarioLogueadoResponse usuarioLogueadoResponse = new(usuarioValidado.IdUsuario, usuarioValidado.Nombre,
                                                                       usuarioValidado.Apellido, usuarioValidado.FechaNacimiento);
                 // Devuelvo un JSON con los datos del usuario y el JWT
                 return new {
