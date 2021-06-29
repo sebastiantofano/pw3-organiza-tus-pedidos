@@ -1,3 +1,4 @@
+using AutoMapper;
 using DAL.Modelos;
 using DAL.Repositorios;
 using DAL.Repositorios.Interfaces;
@@ -25,7 +26,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using WebAPI.DTOs;
 
 namespace WebAPI
 {
@@ -118,6 +119,17 @@ namespace WebAPI
             /* TODO: ¿Esta bien acceder al contexto desde un servicio o solo tiene que ser visible desde el controller? */
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             /* FIN: IoC (Inyeccion de Dependencias) para el utilizar HttpContext desde los servicios */
+
+
+            /* INICIO: Configuracion del Mapper */
+            var mapperConfig = new MapperConfiguration(m =>
+            {
+                m.AddProfile(new MappingProfile());
+            });
+
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
+            /* FIN: Configuracion del Mapper */
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

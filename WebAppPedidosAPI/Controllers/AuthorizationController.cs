@@ -13,7 +13,7 @@ using System.Linq;
 using System.Security;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using WebAPI.ResponseObjects;
+using WebAPI.DTOs;
 
 namespace WebAPI.Controllers
 {
@@ -37,7 +37,7 @@ namespace WebAPI.Controllers
             {
                 Usuario usuarioValidado = _loginService.IniciarSesion(HttpContext, usuarioValidar);
                 //var token = TokenService.CreateToken(usuarioValidado);
-                UsuarioLogueadoResponse usuarioLogueadoResponse = new(usuarioValidado.IdUsuario, usuarioValidado.Nombre,
+                UsuarioLogueadoDTO usuarioLogueadoResponse = new(usuarioValidado.IdUsuario, usuarioValidado.Nombre,
                                                                       usuarioValidado.Apellido, usuarioValidado.FechaNacimiento);
                 // Devuelvo un JSON con los datos del usuario y el JWT
                 return new {

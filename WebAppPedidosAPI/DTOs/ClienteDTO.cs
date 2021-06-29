@@ -4,17 +4,17 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebAppPedidosAPI.ResponseObjects
+namespace WebAPI.DTOs
 {
-    public class ClienteResponse
+    public class ClienteDTO
     {
         public int IdCliente { get; set; }
         public string Numero { get; set; }
         public string Nombre { get; set; }
         public string Direccion { get; set; }
-        public long Telefono { get; set; }
+        public string Telefono { get; set; }
 
-        public ClienteResponse(int idCliente, string numero, string nombre, string direccion, long telefono)
+        public ClienteDTO(int idCliente, string numero, string nombre, string direccion, string telefono)
         {
             IdCliente = idCliente;
             Numero = numero;

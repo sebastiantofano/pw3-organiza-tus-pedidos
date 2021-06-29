@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebAPI.ResponseObjects
+namespace WebAPI.DTOs
 {
-    public class UsuarioLogueadoResponse
+    public class UsuarioLogueadoDTO
     {
         public int IdUsuario { get; set; }
         public string Nombre { get; set; }
@@ -14,7 +14,7 @@ namespace WebAPI.ResponseObjects
 
         public DateTime? FechaNacimiento { get; set; }
 
-        public UsuarioLogueadoResponse(int idUsuario, string nombre, string apellido, DateTime? fechaNacimiento)
+        public UsuarioLogueadoDTO(int idUsuario, string nombre, string apellido, DateTime? fechaNacimiento)
         {
             IdUsuario = idUsuario;
             Nombre = nombre;
