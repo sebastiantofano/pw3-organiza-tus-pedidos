@@ -22,6 +22,11 @@ namespace Servicios.Administrador
             _articulosRepository = articulosRepository;
         }
 
+        public List<Articulo> FiltrarPorDescripcion(string cadena)
+        {
+            return _articulosRepository.FiltrarPorDescripcion(cadena);
+        }
+
         /* Sobrescribimos el metodo Insertar "Virtual" del Servicio Base ya que queremos agregar validaciones extras en la capa de Servicios */
         public override int Insertar(Articulo articulo)
         {

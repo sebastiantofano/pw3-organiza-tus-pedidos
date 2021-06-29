@@ -13,6 +13,7 @@ using WebAPI.ResponseObjects;
 
 namespace WebAPI.Controllers
 {
+    //TODO: Falta agregar la autorizacion
     [Route("api/[controller]")]
     public class ClientesController : ControllerBase
     {
@@ -42,6 +43,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
+        [Route("filtrar")]
         public ActionResult<dynamic> Filtrar([FromBody] FiltroRequest filtroRequest)
         {
             List<Cliente> clientes = _clientesService.FiltrarPorNombre(filtroRequest?.Filtro);

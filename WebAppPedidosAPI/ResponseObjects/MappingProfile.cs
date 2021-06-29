@@ -21,6 +21,8 @@ namespace WebAPI.ResponseObjects
 
             CreateMap<Usuario, UsuarioLogueadoResponse>();
 
+            CreateMap<Articulo, ArticuloResponse>();
+
         }
     }
 }
