@@ -36,7 +36,7 @@ namespace Servicios.UsuarioGeneral
                 throw new LoginException("No ha ingresado correctamente sus credenciales !");
             }
 
-            usuarioEncontrado.Token = TokenService.CreateToken(usuarioEncontrado); // Eso sera de ayuda cuando se inicie la APP en modo API
+            usuarioEncontrado.Token = TokenService.CreateToken(usuarioEncontrado); // Este token se creara para cuando se inicie la APP en modo API
             _securityManager.SignIn(httpContext, usuarioEncontrado); // Agrega los claims al usuario actual
             return usuarioEncontrado;    
         }

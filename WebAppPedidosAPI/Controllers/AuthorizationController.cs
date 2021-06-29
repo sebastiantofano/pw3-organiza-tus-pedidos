@@ -1,4 +1,5 @@
-﻿using DAL.Modelos;
+﻿using AutoMapper;
+using DAL.Modelos;
 using DAL.Repositorios;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +14,8 @@ using System.Linq;
 using System.Security;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using WebAPI.DTOs;
+using WebAPI.RequestObjects;
+using WebAPI.ResponseObjects;
 
 namespace WebAPI.Controllers
 {
@@ -21,24 +23,25 @@ namespace WebAPI.Controllers
     public class AuthorizationController : ControllerBase
     {
         private readonly ILoginService _loginService;
+        private readonly IMapper _mapper;
 
 
-        public AuthorizationController(ILoginService loginService)
+        public AuthorizationController(ILoginService loginService, IMapper mapper)
         {
             _loginService = loginService;
+            _mapper = mapper;
         }
 
         [HttpPost]
         [Route("login")]
         [AllowAnonymous]
-        public async Task<ActionResult<dynamic>> IniciarSesion([FromBody] Usuario usuarioValidar)
+        public ActionResult<dynamic> IniciarSesion([FromBody] UsuarioLoginRequest usuarioLoginRequest)
         {
             try
             {
-                Usuario usuarioValidado = _loginService.IniciarSesion(HttpContext, usuarioValidar);
-                //var token = TokenService.CreateToken(usuarioValidado);
-                UsuarioLogueadoResponse usuarioLogueadoResponse = new(usuarioValidado.IdUsuario, usuarioValidado.Nombre,
-                                                                      usuarioValidado.Apellido, usuarioValidado.FechaNacimiento);
+                Usuario usuarioValidacion = _mapper.Map<Usuario>(usuarioLoginRequest);
+                Usuario usuarioValidado = _loginService.IniciarSesion(HttpContext, usuarioValidacion);
+                UsuarioLogueadoResponse usuarioLogueadoResponse = _mapper.Map<UsuarioLogueadoResponse>(usuarioValidado);
                 // Devuelvo un JSON con los datos del usuario y el JWT
                 return new {
                     usuario = usuarioLogueadoResponse,
@@ -57,7 +60,7 @@ namespace WebAPI.Controllers
         [HttpPost]
         [Route("logout")]
         [Authorize] // Solo puede cerrar sesion quien este autenticado
-        public async Task<ActionResult<dynamic>> CerrarSesion([FromBody] Usuario usuarioValidar)
+        public ActionResult<dynamic> CerrarSesion([FromBody] Usuario usuarioValidar)
         {
             _loginService.CerrarSesion(HttpContext);
             return new {
@@ -81,14 +84,5 @@ namespace WebAPI.Controllers
         {
             return $"You are a Administrador - {User.Identity.Name}";
         }
-
-        [HttpGet]
-        [Route("validar")]
-        [Authorize(Roles = "Administrador")]
-        public string Validar(string id)
-        {
-            return $"You are a Administrador - {User.Identity.Name}";
-        }
-
     }
 }
