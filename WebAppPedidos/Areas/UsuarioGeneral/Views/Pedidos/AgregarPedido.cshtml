@@ -56,11 +56,13 @@
                                            name="Cantidad" placeholder="Ingrese cantidad">
                                 </div>
                             </div>
-
+                            <div class="custom-control custom-checkbox mr-sm-2">
+                                <input type="checkbox" class="custom-control-input" id="customControlAutosizing" name="permanecerView" value="true">
+                                <label class="custom-control-label" for="customControlAutosizing">Seguiré en la ventana de creación de pedidos</label>
+                            </div>
                             <div class="row">
                                 <div class="col-lg-12 d-flex align-items-center">
                                     <button type="submit" class="btn btn-info col-lg-4 m-1">Agregar Pedido</button>
-                                    <button type="submit" class="btn btn-info m-1">Agregar Pedido y cargar otro</button>
                                     <a href="javascript:history.back(-1);" class="btn btn-default ml-auto ">Volver</a>
                                 </div>
                             </div>
@@ -73,52 +75,6 @@
                                           placeholder="¿Que comentario te gustaría ponerle al pedido?"></textarea>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-title">
-                    <h4>Contenido del pedido</h4>
-
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Descripción</th>
-                                    <th>Código</th>
-                                    <th>Cantidad</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @if (ArticulosYCantidadesDelPedido != null)
-                                {
-                                    @foreach (KeyValuePair<Articulo, int> articuloEnPedido in ArticulosYCantidadesDelPedido)
-                                    {
-                                        <tr>
-                                            <td>@articuloEnPedido.Key.Descripcion</td>
-                                            <td>@articuloEnPedido.Key.Codigo</td>
-                                            <td>@articuloEnPedido.Value</td>
-                                            <td>
-                                                <button type="button"
-                                                        class="btn btn-danger btn-flat btn-addon btn-sm">
-                                                    <i class="ti-close"></i>Quitar
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    }
-
-                            }
-
-                            </tbody>
-                        </table>
                     </div>
                 </div>
             </div>

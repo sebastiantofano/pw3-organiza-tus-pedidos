@@ -53,7 +53,7 @@ namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
         }
 
         [HttpPost]
-        public IActionResult AgregarPedido(Pedido pedido, PedidoArticulo pedidoArticulo) // TODO: ¿Puedo hacer esto, o conviene un ViewModel?
+        public IActionResult AgregarPedido(Pedido pedido, PedidoArticulo pedidoArticulo, bool permanecerView) // TODO: ¿Puedo hacer esto, o conviene un ViewModel?
         {
             if (!ModelState.IsValid)
             {
@@ -67,7 +67,7 @@ namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
                 pedidoArticulo.IdPedido = idPedidoInsertado;
                 _pedidosService.AgregarArticuloYCantidadAlPedido(pedidoArticulo);
                 TempData["toastr_success"] = $"Se ha creado exitosamente el pedido !";
-                return RedirectToAction("EditarPedido", new { id = idPedidoInsertado });
+                return (permanecerView) ? RedirectToAction("AgregarPedido") : RedirectToAction("EditarPedido", new { id = idPedidoInsertado });
             }
             catch (PedidoException e)
             {

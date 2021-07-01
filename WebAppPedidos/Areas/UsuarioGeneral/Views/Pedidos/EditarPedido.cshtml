@@ -15,7 +15,7 @@
         cssEstadoPedidoColor = "success";
     } else if (@Model.Pedido.IdEstado == (int)EstadoPedidoEnum.CERRADO)
     {
-        cssEstadoPedidoColor = "danger";
+        cssEstadoPedidoColor = "warning";
     }
 }
 <div class="row">
@@ -191,24 +191,34 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @if (ArticulosYCantidadesDelPedido.Count() == 0)
+                                {
+                                    <tr>
+                                        <td class="text-danger font-weight-bold">Este pedido no contiene artículos</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                }
+
                                 @foreach (KeyValuePair<Articulo, int> articuloEnPedido in ArticulosYCantidadesDelPedido)
                                 {
-                                <tr>
-                                    <td>@articuloEnPedido.Key.Descripcion</td>
-                                    <td>@articuloEnPedido.Key.Codigo</td>
-                                    <td>@articuloEnPedido.Value <span class="text-danger">@(articuloEnPedido.Value == 0? " (Se recomienda quitar este articulo del pedido)" : "")</span></td>
-                                    <td>
-                                        @if (@Model.Pedido.IdEstado == (int)EstadoPedidoEnum.ABIERTO && @Model.Pedido.FechaBorrado == null)
-                                        {
-                                        <form method="POST" asp-area="UsuarioGeneral" asp-controller="Pedidos" asp-action="EliminarArticuloAlPedido">
-                                            <input type="hidden" name="PedidoArticulo.IdPedido" value="@Model.Pedido.IdPedido" />
-                                            <input type="hidden" name="PedidoArticulo.IdArticulo" value="@articuloEnPedido.Key.IdArticulo" />
-                                            <button type="submit"
-                                                    class="btn btn-danger btn-flat btn-addon btn-sm">
-                                                <i class="ti-close"></i>Quitar
-                                            </button>
-                                        </form>
-                                        }
+                                    <tr>
+                                        <td>@articuloEnPedido.Key.Descripcion</td>
+                                        <td>@articuloEnPedido.Key.Codigo</td>
+                                        <td>@articuloEnPedido.Value <span class="text-danger">@(articuloEnPedido.Value == 0? " (Se recomienda quitar este articulo del pedido)" : "")</span></td>
+                                        <td>
+                                            @if (@Model.Pedido.IdEstado == (int)EstadoPedidoEnum.ABIERTO && @Model.Pedido.FechaBorrado == null)
+                                            {
+                                                <form method="POST" asp-area="UsuarioGeneral" asp-controller="Pedidos" asp-action="EliminarArticuloAlPedido">
+                                                    <input type="hidden" name="PedidoArticulo.IdPedido" value="@Model.Pedido.IdPedido" />
+                                                    <input type="hidden" name="PedidoArticulo.IdArticulo" value="@articuloEnPedido.Key.IdArticulo" />
+                                                    <button type="submit"
+                                                            class="btn btn-danger btn-flat btn-addon btn-sm">
+                                                        <i class="ti-close"></i>Quitar
+                                                    </button>
+                                                </form>
+                                            }
                                         </td>
                                     </tr>
                                 }

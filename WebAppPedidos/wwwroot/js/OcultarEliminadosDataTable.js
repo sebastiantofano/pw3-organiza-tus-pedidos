@@ -13,3 +13,6 @@ $(".dataTables_paginate, #CheckboxOcultarEliminados, #CheckboxOcultarModificados
         $("#body-table").find("tr").hide().filter(`:contains('${ano}')`).show();
     }
 })
+$("#body-table").find("tr").filter(":contains('Abierto')").css("background-color", "#c4fcae");
+$("#body-table").find("tr").filter(":contains('ELIMINADO')").css("background-color", "#fce5df");
+
