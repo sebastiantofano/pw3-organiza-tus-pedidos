@@ -16,6 +16,10 @@ namespace DAL.Repositorios
             _pedidosPW3Context = pedidosPW3Context;
         }
 
+        public override List<Pedido> ObtenerTodos()
+        {
+            return base.ObtenerTodos().OrderByDescending(p => p.FechaModificacion).ToList();
+        }
         public void AdicionarCantidadAlArticuloDelPedido(PedidoArticulo pedidoArticulo)
         {
             PedidoArticulo articuloAActualizarCantidad = _pedidosPW3Context.PedidoArticulos.Where(p => p.IdPedido == pedidoArticulo.IdPedido && p.IdArticulo == pedidoArticulo.IdArticulo).FirstOrDefault();

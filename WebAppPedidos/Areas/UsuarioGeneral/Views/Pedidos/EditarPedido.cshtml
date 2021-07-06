@@ -120,35 +120,25 @@
                     {
                         <div class="form-validation">
                             <form method="POST" asp-area="UsuarioGeneral" asp-controller="Pedidos" asp-action="AgregarArticuloAlPedido">
-                                <input type="hidden" name="PedidoArticulo.IdPedido" value="@Model.Pedido.IdPedido" />
+                                <input type="hidden" name="IdPedido" value="@Model.Pedido.IdPedido" />
                                 <div class="form-valide" action="#" method="post">
                                     <div class="card-title">
                                         <h4>Agregar un artículo</h4>
                                     </div>
 
                                     <div class="form-group row">
-                                        <label asp-for="PedidoArticulo.IdArticulo" class="col-form-label" for="val-skill">
-                                            Artículo <span class="text-danger">*</span>
-                                        </label>
                                         <div class="col-lg-5">
-                                            <select class="form-control" id="select-articulo" name="PedidoArticulo.IdArticulo" asp-for="PedidoArticulo.IdArticulo">
+                                            <select class="form-control" id="select-articulo" name="IdArticulo">
                                                 <option value="">Seleccione un artículo</option>
                                                 @foreach (Articulo articulo in Model.SelectArticulosDisponibles)
                                                 {
                                                     <option value="@articulo.IdArticulo">Código: @articulo.Codigo -  Descripción: @articulo.Descripcion</option>
                                                 }
                                             </select>
-                                            <span asp-validation-for="PedidoArticulo.IdArticulo" class="text-danger"></span>
-
-
                                         </div>
-                                        <label asp-for="PedidoArticulo.Cantidad" class="col-form-label" for="val-digits">
-                                            Cantidad <span class="text-danger">*</span>
-                                        </label>
                                         <div class="col-lg-4">
                                             <input type="text" class="form-control" id="val-cantidad"
-                                                   name="PedidoArticulo.Cantidad" asp-for="PedidoArticulo.Cantidad" placeholder="Ingrese cantidad adicional o decremental">
-                                            <span asp-validation-for="PedidoArticulo.Cantidad" class="text-danger"></span>
+                                                   name="Cantidad" placeholder="Ingrese cantidad adicional o decremental">
                                         </div>
                                         <div class="col-lg-1">
                                             <button type="submit" class="btn btn-success">

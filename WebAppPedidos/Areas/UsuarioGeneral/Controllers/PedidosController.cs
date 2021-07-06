@@ -97,17 +97,17 @@ namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
         }
 
         [HttpPost]
-        public IActionResult AgregarArticuloAlPedido(EditarPedidoViewModel editarPedidoViewModel)
+        public IActionResult AgregarArticuloAlPedido(PedidoArticulo pedidoArticulo)
         {
             if (!ModelState.IsValid)
             {
                 TempData["toastr_error"] = "No ha ingresado correctamente la información del Artículo !";
-                return RedirectToAction("EditarPedido", new { id = editarPedidoViewModel.PedidoArticulo.IdPedido });
+                return RedirectToAction("EditarPedido", new { id = pedidoArticulo.IdPedido });
             }
 
-            _pedidosService.AgregarArticuloYCantidadAlPedido(editarPedidoViewModel.PedidoArticulo);
+            _pedidosService.AgregarArticuloYCantidadAlPedido(pedidoArticulo);
             TempData["toastr_success"] = "Se ha añadido el artículo al pedido exitosamente !";
-            return RedirectToAction("EditarPedido", new { id = editarPedidoViewModel.PedidoArticulo.IdPedido });
+            return RedirectToAction("EditarPedido", new { id = pedidoArticulo.IdPedido });
         }
 
         [HttpPost]

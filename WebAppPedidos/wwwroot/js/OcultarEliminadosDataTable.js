@@ -1,6 +1,8 @@
 ﻿// Feature: Agrego boton de ocultamiento de articulos eliminados
 var ano = new Date().getFullYear();
 $("#body-table").find("tr").hide().filter(":contains('VIGENTE')").show();
+$("#body-table").find("tr").filter(":contains('Abierto')").css("background-color", "#c4fcae");
+$("#body-table").find("tr").filter(":contains('ELIMINADO')").css("background-color", "#fce5df");
 $(".dataTables_paginate, #CheckboxOcultarEliminados, #CheckboxOcultarModificadosAntiguos, .form-control").on('click', function () {
     $("#body-table").find("tr").show();
     if ($("#CheckboxOcultarEliminados").prop("checked") == true && $("#CheckboxOcultarModificadosAntiguos").prop("checked") == true) {
@@ -12,7 +14,8 @@ $(".dataTables_paginate, #CheckboxOcultarEliminados, #CheckboxOcultarModificados
     else if ($("#CheckboxOcultarEliminados").prop("checked") != true && $("#CheckboxOcultarModificadosAntiguos").prop("checked") == true) {
         $("#body-table").find("tr").hide().filter(`:contains('${ano}')`).show();
     }
+    $("#body-table").find("tr").filter(":contains('Abierto')").css("background-color", "#c4fcae");
+    $("#body-table").find("tr").filter(":contains('ELIMINADO')").css("background-color", "#fce5df");
 })
-$("#body-table").find("tr").filter(":contains('Abierto')").css("background-color", "#c4fcae");
-$("#body-table").find("tr").filter(":contains('ELIMINADO')").css("background-color", "#fce5df");
+
 
