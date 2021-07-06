@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,6 +26,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using WebAPI.ResponseObjects;
 
@@ -43,7 +46,19 @@ namespace WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
 
+            
             services.AddControllers();
+
+            /*INICIO: Solucion a: A possible object cycle was detected. This can either be due to a cycle or if the object depth is larger than the maximum allowed depth of 32. */
+            /*options =>
+            {
+                options.OutputFormatters.RemoveType<SystemTextJsonOutputFormatter>();
+                options.OutputFormatters.Add(new SystemTextJsonOutputFormatter(new JsonSerializerOptions(JsonSerializerDefaults.Web) {
+                    ReferenceHandler = ReferenceHandler.Preserve,
+                }));
+            });*/
+            /*FIN: Solucion a: A possible object cycle was detected. This can either be due to a cycle or if the object depth is larger than the maximum allowed depth of 32. */
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPI", Version = "v1" });
@@ -92,7 +107,7 @@ namespace WebAPI
 
             /* INICIO: IoC (Inyeccion de Dependencias) para la base de datos */
             services.AddDbContext<PedidosPW3Context>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("WebAppPedidosContext")));
+                options.UseSqlServer(Configuration.GetConnectionString("WebAppPedidosContext")).UseLazyLoadingProxies());
             /* FIN: IoC (Inyeccion de Dependencias) para la base de datos */
 
 
@@ -116,7 +131,6 @@ namespace WebAPI
             /* FIN: IoC (Inyeccion de Dependencias) para Servicios y Repositorios */
 
             /* INICIO: IoC (Inyeccion de Dependencias) para el utilizar HttpContext desde los servicios */
-            /* TODO: ¿Esta bien acceder al contexto desde un servicio o solo tiene que ser visible desde el controller? */
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             /* FIN: IoC (Inyeccion de Dependencias) para el utilizar HttpContext desde los servicios */
 

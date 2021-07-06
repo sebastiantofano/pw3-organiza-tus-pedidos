@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DAL.Modelos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Servicios.Administrador.Interfaces;
@@ -13,8 +14,8 @@ using WebAPI.ResponseObjects;
 
 namespace WebAPI.Controllers
 {
-    //TODO: Falta agregar la autorizacion
     [Route("api/[controller]")]
+    [Authorize(Roles = "Administrador")]
     public class ClientesController : ControllerBase
     {
         private readonly IClientesService _clientesService;
