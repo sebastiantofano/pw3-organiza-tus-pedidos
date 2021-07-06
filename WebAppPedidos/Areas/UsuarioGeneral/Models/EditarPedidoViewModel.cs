@@ -11,5 +11,12 @@ namespace WebAppPedidos.Areas.UsuarioGeneral.Models
         public Pedido Pedido { get; set; }
 
         public PedidoArticulo PedidoArticulo { get; set; }
+
+        public List<Articulo> SelectArticulosDisponibles { get; set; }
+
+        public Dictionary<Articulo, int> ArticulosYCantidadesDelPedido { get; set; }
+
+        public List<Cliente> SelectClientesDisponibles { get; set; }
+
     }
 }

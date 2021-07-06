@@ -82,8 +82,8 @@ namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
             Pedido pedido = _pedidosService.ObtenerPorId(id);
             EditarPedidoViewModel editarPedidoViewModel = new() { Pedido = pedido };
 
-            ViewBag.Articulos = _articulosService.ObtenerTodosNoEliminados(); // TODO: VER SI CAMBIAMOS POR VIEWMODELS
-            ViewBag.ArticulosYCantidadesDelPedido = _pedidosService.ObtenerArticulosYCantidadesDelPedido(id); // TODO: VER SI CAMBIAMOS POR VIEWMODELS
+            editarPedidoViewModel.SelectArticulosDisponibles = _articulosService.ObtenerTodosNoEliminados();
+            editarPedidoViewModel.ArticulosYCantidadesDelPedido = _pedidosService.ObtenerArticulosYCantidadesDelPedido(id);
 
             return View(editarPedidoViewModel);
         }
@@ -111,11 +111,11 @@ namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
         }
 
         [HttpPost]
-        public IActionResult EliminarArticuloAlPedido(EditarPedidoViewModel editarPedidoViewModel)
+        public IActionResult EliminarArticuloAlPedido(PedidoArticulo pedidoArticulo)
         {
-            _pedidosService.EliminarArticuloAlPedido(editarPedidoViewModel.PedidoArticulo);
+            _pedidosService.EliminarArticuloAlPedido(pedidoArticulo);
             TempData["toastr_success"] = "Se ha eliminado el artículo del pedido exitosamente !";
-            return RedirectToAction("EditarPedido", new { id = editarPedidoViewModel.PedidoArticulo.IdPedido });
+            return RedirectToAction("EditarPedido", new { id = pedidoArticulo.IdPedido });
         }
 
         [HttpPost]
