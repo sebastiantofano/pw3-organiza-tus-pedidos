@@ -107,5 +107,10 @@ namespace DAL.Repositorios
         {
             return _pedidosPW3Context.Pedidos.Where(p => p.IdCliente == idCliente).Max(p => (int?)p.NroPedido) ?? 0;
         }
+
+        public List<Pedido> BuscarPedidosPorCliente(int idCliente)
+        {
+            return _pedidosPW3Context.Pedidos.Where(p => p.IdCliente == idCliente).ToList();
+        }
     }
 }

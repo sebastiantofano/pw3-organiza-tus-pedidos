@@ -46,6 +46,25 @@ namespace WebAPI.Controllers
             };
         }
 
+        [HttpPost]
+        [Route("buscar")]
+        public ActionResult<dynamic> BuscarPedido([FromBody] PedidosBusquedaRequest pedidosBusquedaRequest)
+        {
+            List<Pedido> pedidos = _pedidosService.BuscarPedidosPorCliente(pedidosBusquedaRequest.IdCliente);
+            List<PedidoResponse> pedidosResponse = new();
+            foreach (Pedido pedido in pedidos)
+            {
+                PedidoResponse pedidoResponse = _mapper.Map<PedidoResponse>(pedido);
+                List<ArticuloPedidoResponse> articulosDelPedido = _mapper.Map<List<ArticuloPedidoResponse>>(_pedidosService.ObtenerArticulosYCantidadesDelPedido(pedido.Id));
+                pedidoResponse.Articulos = articulosDelPedido;
+                pedidosResponse.Add(pedidoResponse);
+            }
+            return new {
+                count = pedidosResponse.Count,
+                pedidos = pedidosResponse
+            };
+        }
+
 
     }
 }

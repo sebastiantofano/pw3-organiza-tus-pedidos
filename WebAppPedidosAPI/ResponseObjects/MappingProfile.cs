@@ -17,7 +17,6 @@ namespace WebAPI.ResponseObjects
             CreateMap<Articulo, ArticuloResponse>();
             CreateMap<Usuario, UsuarioResponse>();
 
-
             CreateMap<KeyValuePair<Articulo, int>, ArticuloPedidoResponse>()
                 .ForMember(p => p.IdArticulo, opt => opt.MapFrom(x => x.Key.IdArticulo))
                 .ForMember(p => p.Codigo, opt => opt.MapFrom(x => x.Key.Codigo))
@@ -27,7 +26,6 @@ namespace WebAPI.ResponseObjects
             CreateMap<Pedido, PedidoResponse>()
                 .ForMember(p => p.Estado, opt => opt.MapFrom(x => x.IdEstadoNavigation.Descripcion))
                 .ForMember(p => p.ModificadoPor, opt => opt.MapFrom(x => x.ModificadoPorNavigation));
-
 
             CreateMap<UsuarioLoginRequest, Usuario>();
 

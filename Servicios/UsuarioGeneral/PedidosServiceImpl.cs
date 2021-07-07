@@ -99,5 +99,10 @@ namespace Servicios.UsuarioGeneral
         {
             _pedidosRepository.EliminarArticuloAlPedido(pedidoArticulo);
         }
+
+        public List<Pedido> BuscarPedidosPorCliente(int idCliente)
+        {
+            return _pedidosRepository.BuscarPedidosPorCliente(idCliente);
+        }
     }
 }

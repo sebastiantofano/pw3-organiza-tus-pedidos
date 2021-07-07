@@ -46,18 +46,7 @@ namespace WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
 
-            
             services.AddControllers();
-
-            /*INICIO: Solucion a: A possible object cycle was detected. This can either be due to a cycle or if the object depth is larger than the maximum allowed depth of 32. */
-            /*options =>
-            {
-                options.OutputFormatters.RemoveType<SystemTextJsonOutputFormatter>();
-                options.OutputFormatters.Add(new SystemTextJsonOutputFormatter(new JsonSerializerOptions(JsonSerializerDefaults.Web) {
-                    ReferenceHandler = ReferenceHandler.Preserve,
-                }));
-            });*/
-            /*FIN: Solucion a: A possible object cycle was detected. This can either be due to a cycle or if the object depth is larger than the maximum allowed depth of 32. */
 
             services.AddSwaggerGen(c =>
             {

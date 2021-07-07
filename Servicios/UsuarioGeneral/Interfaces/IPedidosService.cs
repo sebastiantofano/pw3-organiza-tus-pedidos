@@ -14,5 +14,6 @@ namespace Servicios.UsuarioGeneral.Interfaces
         void MarcarComoCerrado(int idPedido);
         void MarcarComoEntregado(int idPedido);
         void EliminarArticuloAlPedido(PedidoArticulo pedidoArticulo);
+        List<Pedido> BuscarPedidosPorCliente(int idCliente);
     }
 }
