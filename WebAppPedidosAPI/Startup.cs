@@ -55,26 +55,24 @@ namespace WebAPI
 
             /* INICIO: Agregado para el uso de Json Web Token (JWT) */
             var key = Encoding.ASCII.GetBytes(Settings.Secret);
-            services.AddAuthentication(x =>
-            {
-                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(x =>
-            {
-                x.RequireHttpsMetadata = false;
-                x.SaveToken = true;
-                x.TokenValidationParameters = new TokenValidationParameters {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuer = false,
-                    ValidateAudience = false
-                };
-
-            });
+            services
+                .AddAuthentication(x =>
+                    {
+                        x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                        x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                    })
+                .AddJwtBearer(x =>
+                {
+                    x.RequireHttpsMetadata = false;
+                    x.SaveToken = true;
+                    x.TokenValidationParameters = new TokenValidationParameters {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(key),
+                        ValidateIssuer = false,
+                        ValidateAudience = false
+                    };
+                });
             /* FIN: Agregado para el uso de Json Web Token (JWT) */
-
-
 
             /* INICIO: Agregado para el uso de seguridad por roles */
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -87,7 +85,6 @@ namespace WebAPI
                            context.Response.StatusCode = 401;
                            return Task.CompletedTask;
                        };
-
                        /* FIN: Agregado para solucionar el problema de que devolvía un statusCode 302(Redireccion) en vez del 401 (No autorizado)*/
                    });
             /* FIN: Agregado para el uso de seguridad por roles */

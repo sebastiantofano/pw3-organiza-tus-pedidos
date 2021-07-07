@@ -40,7 +40,7 @@ namespace WebAPI.Controllers
             try
             {
                 Usuario usuarioValidacion = _mapper.Map<Usuario>(usuarioLoginRequest);
-                Usuario usuarioValidado = _loginService.IniciarSesion(HttpContext, usuarioValidacion);
+                Usuario usuarioValidado = _loginService.IniciarSesionAPI(usuarioValidacion);
                 UsuarioLogueadoResponse usuarioLogueadoResponse = _mapper.Map<UsuarioLogueadoResponse>(usuarioValidado);
                 // Devuelvo un JSON con los datos del usuario y el JWT
                 return new {
@@ -64,7 +64,7 @@ namespace WebAPI.Controllers
         [Authorize] // Solo puede cerrar sesion quien este autenticado
         public ActionResult<dynamic> CerrarSesion([FromBody] Usuario usuarioValidar)
         {
-            _loginService.CerrarSesion(HttpContext);
+            //_loginService.CerrarSesion(HttpContext);
             return new {
                 mensaje = "Ha cerrado sesión exitosamente"
             };

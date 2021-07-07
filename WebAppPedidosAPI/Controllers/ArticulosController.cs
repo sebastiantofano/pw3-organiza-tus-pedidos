@@ -14,7 +14,6 @@ using WebAPI.ResponseObjects;
 
 namespace WebAPI.Controllers
 {
-    //TODO: Falta agregar la autorizacion
     [Route("api/[controller]")]
     [Authorize(Roles = "Administrador")]
     public class ArticulosController : ControllerBase
