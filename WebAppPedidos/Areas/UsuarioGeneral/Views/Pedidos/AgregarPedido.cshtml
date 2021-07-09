@@ -20,12 +20,14 @@
             <div class="card">
                 <div class="card-body">
                     <div class="form-validation">
+
                         <form asp-area="UsuarioGeneral" asp-controller="Pedidos" asp-action="AgregarPedido" method="POST">
-                            <div class="form-group row">
-                                <label class="col-form-label" for="val-username">
+
+                            <div class="form-group row ml-2">
+                                <label class="col-form-label mt-2" for="val-username">
                                     Cliente <span class="text-danger">*</span>
                                 </label>
-                                <div class="col-lg-7">
+                                <div class="col-lg-7 ml-3">
                                     <select class="form-control" id="select-cliente" name="idCliente">
                                         <option value="">Seleccione un cliente</option>
                                         @foreach (Cliente cliente in selectClientes)
@@ -35,11 +37,11 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-form-label" for="val-skill">
+                            <div class="form-group row ml-2">
+                                <label class="col-form-label mt-2" for="val-skill">
                                     Artículo <span class="text-danger">*</span>
                                 </label>
-                                <div class="col-lg-7">
+                                <div class="col-lg-7 ml-3">
                                     <select class="form-control" id="select-articulo" name="IdArticulo">
                                         <option value="">Seleccione un artículo</option>
                                         @foreach (Articulo articulo in selectArticulos)
@@ -48,33 +50,37 @@
                                         }
                                     </select>
                                 </div>
-                                <label class="col-form-label" for="val-digits">
+                                <label class="col-form-label mt-2" for="val-digits">
                                     Cantidad <span class="text-danger">*</span>
                                 </label>
-                                <div class="col-lg-2">
+                                <div class="col-lg-3">
                                     <input type="text" class="form-control" id="val-cantidad"
                                            name="Cantidad" placeholder="Ingrese cantidad">
                                 </div>
                             </div>
+
+                            <div class="form-group row ml-2">
+                                <label class="col-form-label mt-2" for="val-suggestions">Comentario </label>
+                                <div class="col-lg-11">
+                                    <textarea class="form-control"
+                                              placeholder="¿Que comentario te gustaría ponerle al pedido?"></textarea>
+                                </div>
+                            </div>
+
                             <div class="custom-control custom-checkbox mr-sm-2">
                                 <input type="checkbox" class="custom-control-input" id="customControlAutosizing" name="permanecerView" value="true">
                                 <label class="custom-control-label" for="customControlAutosizing">Seguiré en la ventana de creación de pedidos</label>
                             </div>
+
                             <div class="row">
                                 <div class="col-lg-12 d-flex align-items-center">
-                                    <button type="submit" class="btn btn-info col-lg-4 m-1">Agregar Pedido</button>
+                                    <button type="submit" class="btn btn-dark col-lg-4 m-1">Agregar Pedido</button>
                                     <a href="javascript:history.back(-1);" class="btn btn-default ml-auto ">Volver</a>
                                 </div>
                             </div>
-                        </form>
 
-                        <div class="form-group row">
-                            <label class="col-form-label" for="val-suggestions">Comentario </label>
-                            <div class="col-lg-10">
-                                <textarea class="form-control"
-                                          placeholder="¿Que comentario te gustaría ponerle al pedido?"></textarea>
-                            </div>
-                        </div>
+                        </form>
+                    </div>
                     </div>
                 </div>
             </div>
