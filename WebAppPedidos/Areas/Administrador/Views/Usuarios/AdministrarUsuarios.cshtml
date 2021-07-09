@@ -104,13 +104,13 @@
                                                 <td>@usuario.FechaCreacion.ToShortDateString()</td>
                                                 <td class="row justify-content-between align-items-center">
                                                     <a asp-area="Administrador" asp-controller="Usuarios" asp-action="EditarUsuario" asp-route-id="@usuario.IdUsuario"
-                                                       class="btn btn-outline-info btn-flat btn-addon btn-sm ml-4">
+                                                       class="btn btn-outline-info btn-flat btn-addon btn-sm ml-2">
                                                         <i class="ti-pencil"></i>Editar
                                                     </a>
                                                     @if (usuario.FechaBorrado == null)
                                                     {
                                                         <form method="POST" asp-area="Administrador" asp-controller="Usuarios" asp-action="EliminarUsuario" asp-route-id="@usuario.IdUsuario">
-                                                            <button type="submit" class="btn btn-outline-danger btn-flat btn-addon btn-sm mr-3" onclick="return confirm('¿Usted está seguro que desea eliminar el usuario? \nEmail: @usuario.Email')"> <i class="ti-close"></i>Eliminar</button>
+                                                            <button type="submit" class="btn btn-outline-danger btn-flat btn-addon btn-sm mr-2" onclick="return confirm('¿Usted está seguro que desea eliminar el usuario? \nEmail: @usuario.Email')"> <i class="ti-close"></i>Eliminar</button>
                                                         </form>
 
                                                     }
