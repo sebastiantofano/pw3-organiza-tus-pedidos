@@ -3,6 +3,7 @@ using DAL.Repositorios;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Servicios.Administrador;
 using Servicios.Administrador.Interfaces;
 using Servicios.Helpers.Exceptions;
@@ -49,30 +50,29 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
 
 
         [HttpGet]
-        public IActionResult EditarArticulo(string id)
+        public IActionResult EditarArticulo(int id)
         {
-            int IdArticulo = int.Parse(id);
-            Articulo articulo = _articulosService.ObtenerPorId(IdArticulo);
+            Articulo articulo = _articulosService.ObtenerPorId(id);
 
             return View(articulo);
         }
 
 
         [HttpPost]
-        public IActionResult AgregarArticulo(Articulo articulo)
+        public IActionResult AgregarArticulo(Articulo articulo, bool permanecerView)
         {
-            /* Intentar realizar una validación cuando tenemos el atajo de agregar un articulo en la vista de administracion de articulos */
             if (!ModelState.IsValid)
             {
-                TempData["toastr_error"] = "No ha ingresado correctamente la información del Artículo !";
+                TempData["toastr_error"] = "No ha ingresado correctamente la información del nuevo artículo !";
                 return View();
             }
             
             try
             {
                 _articulosService.Insertar(articulo);
-                TempData["toastr_success"] = "Se ha creado el artículo correctamente !";
-                return RedirectToAction("AdministrarArticulos");
+                TempData["toastr_success"] = $"Se ha creado exitosamente el artículo {articulo.Descripcion} ({articulo.Codigo})";
+
+                return (permanecerView) ? RedirectToAction("AgregarArticulo") : RedirectToAction("AdministrarArticulos");
             }
             catch (ArticuloException e)
             {
@@ -89,7 +89,7 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
             if (!ModelState.IsValid)
             {
                 TempData["toastr_error"] = "No se ha podido editar el artículo correctamente !";
-                return View();
+                return View(articulo);
             }
 
             _articulosService.Actualizar(articulo);
@@ -100,7 +100,7 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
         
 
         [HttpPost]
-        public IActionResult EliminarArticulo(Articulo articulo) //TODO: Editar
+        public IActionResult EliminarArticulo(Articulo articulo)
         {
             _articulosService.Eliminar(articulo);
 

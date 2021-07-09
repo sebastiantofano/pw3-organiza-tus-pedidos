@@ -10,5 +10,6 @@ namespace DAL.Repositorios.Interfaces
     public interface IArticulosRepository : IBaseRepository<Articulo> // Esta interface hereda todos los metodos del la interface del repositorio base
     {
         bool ValidarCodigoExistente(string codigo);
+        List<Articulo> FiltrarPorDescripcion(string cadena);
     }
 }

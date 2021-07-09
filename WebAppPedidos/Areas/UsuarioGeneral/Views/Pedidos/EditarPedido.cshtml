@@ -1,6 +1,19 @@
 ﻿@using DAL.Modelos
-@model Pedido
+@using WebAppPedidos.Areas.UsuarioGeneral.Models
+@using Servicios.Helpers.Enums
+@model EditarPedidoViewModel
 @{
+    string cssEstadoPedidoColor = "";
+    if (@Model.Pedido.IdEstado == (int)EstadoPedidoEnum.ABIERTO)
+    {
+        cssEstadoPedidoColor = "primary";
+    } else if (@Model.Pedido.IdEstado == (int)EstadoPedidoEnum.ENTREGADO)
+    {
+        cssEstadoPedidoColor = "success";
+    } else if (@Model.Pedido.IdEstado == (int)EstadoPedidoEnum.CERRADO)
+    {
+        cssEstadoPedidoColor = "warning";
+    }
 }
 <div class="row">
     <div class="col-lg-8 p-r-0 title-margin-right">
@@ -11,7 +24,6 @@
         </div>
     </div>
 </div>
-<!-- /# row -->
 <section id="main-content">
     <div class="row">
         <div class="col-lg-12">
@@ -26,29 +38,30 @@
                                     </div>
                                     <div class="stat-content">
                                         <div class="text-left dib">
-                                            <div class="stat-heading">@Model.IdClienteNavigation.Nombre</div>
+                                            <div class="stat-heading">@Model.Pedido.IdClienteNavigation.Nombre</div>
                                             <div class="stat-text">Cliente</div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4">
-                            <div class="card bg-warning">
+                        <div class="col-lg-5">
+                            <div class="card bg-@cssEstadoPedidoColor.ToString()">
                                 <div class="stat-widget-four">
                                     <div class="stat-icon">
                                         <i class="ti-stats-up"></i>
                                     </div>
                                     <div class="stat-content">
                                         <div class="text-left dib">
-                                            <div class="stat-heading">PEDIDO <span>@Model.IdEstadoNavigation.Descripcion.ToUpper()</span></div>
+                                            <div class="stat-heading">PEDIDO <span>@Model.Pedido.IdEstadoNavigation.Descripcion.ToUpper()</span></div>
                                             <div class="stat-text">Estado del Pedido</div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-3 ml-auto">
+
+                        <div class="col-lg-4 ml-auto">
                             <div class="card">
                                 <div class="stat-widget-four">
                                     <div class="stat-icon">
@@ -57,63 +70,89 @@
                                     <div class="stat-content">
                                         <div class="text-left dib">
                                             <div class="stat-heading">Última Modificación</div>
-                                            <div class="stat-text">Fecha: <span>@(Model.FechaModificacion != null ? Model.FechaModificacion?.ToShortDateString() : "...")</span></div>
-                                            <div class="stat-text">Por: <span>@(Model.ModificadoPor != null ? @String.Format("{0} {1}", @Model.ModificadoPorNavigation.Nombre, @Model.ModificadoPorNavigation.Apellido) : "Sin identificar")</span></div>
+                                            <div class="stat-text">Fecha: <span>@(Model.Pedido.FechaModificacion != null ? Model.Pedido.FechaModificacion?.ToShortDateString() : "...")</span></div>
+                                            <div class="stat-text">Por: <span>@(Model.Pedido.ModificadoPor != null ? @String.Format("{0} {1}", @Model.Pedido.ModificadoPorNavigation.Nombre, @Model.Pedido.ModificadoPorNavigation.Apellido) : "Sin identificar")</span></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    @if (@Model.Pedido.FechaBorrado != null)
+                    {
+                        <div class="card bg-danger">
+                            <div class="stat-widget-six">
+                          
+                                <div class="row align-items-center">
+                                    <div class="col-6">
+                                        <div class="stat-icon">
+                                            <i class="ti-close"></i>
+                                        </div>
+                                        <div class="stat-content">
+                                            <div class="text-left dib">
+                                                <div class="stat-heading font-weight-bold">PEDIDO ELIMINADO</div>
+                                                <div class="stat-text">Estatus Actual del Artículo</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="stat-content">
+                                            <div class="text-left dib">
+                                                <div class="stat-text">Fecha de Borrado</div>
+                                                <div class="stat-heading">@(Model.Pedido.FechaBorrado != null ? Model.Pedido.FechaBorrado?.ToShortDateString() : "...")</div>
+                                                <div class="stat-text">Modificado Por</div>
+                                                <div class="stat-heading">@(Model.Pedido.BorradoPor != null ? @String.Format("{0} {1}", @Model.Pedido.BorradoPorNavigation.Nombre, @Model.Pedido.BorradoPorNavigation.Apellido) : "Sin identificar")</div>
+                                            </div>
+                                        </div>
+                                    </div>
 
 
-                    <div class="form-validation">
-                        <form method="POST" asp-area="UsuarioGeneral" asp-controller="Pedidos" asp-action="AgregarArticuloAlPedido">
-                            <input type="hidden" name="IdPedido" value="@Model.IdPedido"/>
-                            <div class="form-valide" action="#" method="post">
-                                <div class="card-title">
-                                    <h4>Agregar un artículo</h4>
                                 </div>
+                            
+                         
 
-                                <div class="form-group row">
-                                    <label class="col-form-label" for="val-skill">
-                                        Artículo <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-5">
-                                        <select class="form-control" id="select-articulo" name="IdArticulo">
-                                            <option value="">Seleccione un artículo</option>
-                                            @foreach (Articulo articulo in ViewBag.Articulos)
-                                            {
-                                                <option value="@articulo.IdArticulo">Código: @articulo.Codigo -  Descripción: @articulo.Descripcion</option>
-                                            }
-                                        </select>
-
-                                    </div>
-                                    <label class="col-form-label" for="val-digits">
-                                        Cantidad <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-2">
-                                        <input type="text" class="form-control" id="val-cantidad"
-                                               name="cantidad" placeholder="Ingrese cantidad">
-                                    </div>
-                                    <div class="col-lg-1">
-                                        <button type="submit" class="btn btn-success">
-                                            Agregar
-                                            artículo
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-
-                        <div class="form-group row">
-                            <label class="col-form-label" for="val-suggestions">Comentario </label>
-                            <div class="col-lg-10">
-                                <textarea class="form-control"
-                                          placeholder="¿Que comentario te gustaría ponerle al pedido?">@Model.Comentarios</textarea>
                             </div>
                         </div>
-                    </div>
+     
+                    }
+
+                    @if (@Model.Pedido.IdEstado == (int)EstadoPedidoEnum.ABIERTO && @Model.Pedido.FechaBorrado == null)
+                    {
+                        <div class="form-validation">
+                            <form method="POST" asp-area="UsuarioGeneral" asp-controller="Pedidos" asp-action="AgregarArticuloAlPedido">
+                                <input type="hidden" name="IdPedido" value="@Model.Pedido.IdPedido" />
+                                <div class="form-valide" action="#" method="post">
+                                    <div class="card-title">
+                                        <h4>Agregar un artículo</h4>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-lg-5">
+                                            <select class="form-control" id="select-articulo" name="IdArticulo">
+                                                <option value="">Seleccione un artículo</option>
+                                                @foreach (Articulo articulo in Model.SelectArticulosDisponibles)
+                                                {
+                                                    <option value="@articulo.IdArticulo">Código: @articulo.Codigo -  Descripción: @articulo.Descripcion</option>
+                                                }
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <input type="text" class="form-control" id="val-cantidad"
+                                                   name="Cantidad" placeholder="Ingrese cantidad adicional o decremental">
+                                        </div>
+                                        <div class="col-lg-1">
+                                            <button type="submit" class="btn btn-success">
+                                                Agregar
+                                                artículo
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+
+                        </div>
+                    }
                 </div>
             </div>
         </div>
@@ -137,35 +176,88 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (KeyValuePair<Articulo, int> articuloEnPedido in ViewBag.ArticulosYCantidadesDelPedido)
+                                @if (Model.ArticulosYCantidadesDelPedido.Count() == 0)
                                 {
                                     <tr>
-                                        <td>@articuloEnPedido.Key.Descripcion</td>
-                                        <td>@articuloEnPedido.Key.Codigo</td>
-                                        <td>@articuloEnPedido.Value</td>
+                                        <td class="text-danger font-weight-bold">Este pedido no contiene artículos</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                }
+
+                                @foreach (KeyValuePair<Articulo, int> articuloYCantidadEnPedido in Model.ArticulosYCantidadesDelPedido)
+                                {
+                                    <tr>
+                                        <td>@articuloYCantidadEnPedido.Key.Descripcion</td>
+                                        <td>@articuloYCantidadEnPedido.Key.Codigo</td>
+                                        <td>@articuloYCantidadEnPedido.Value <span class="text-danger">@(articuloYCantidadEnPedido.Value == 0? " (Se recomienda quitar este articulo del pedido)" : "")</span></td>
                                         <td>
-                                            <button type="button"
-                                                    class="btn btn-danger btn-flat btn-addon btn-sm">
-                                                <i class="ti-close"></i>Quitar
-                                            </button>
+                                            @if (@Model.Pedido.IdEstado == (int)EstadoPedidoEnum.ABIERTO && @Model.Pedido.FechaBorrado == null)
+                                            {
+                                                <form method="POST" asp-area="UsuarioGeneral" asp-controller="Pedidos" asp-action="EliminarArticuloAlPedido">
+                                                    <input type="hidden" name="IdPedido" value="@Model.Pedido.IdPedido" />
+                                                    <input type="hidden" name="IdArticulo" value="@articuloYCantidadEnPedido.Key.IdArticulo" />
+                                                    <button type="submit"
+                                                            class="btn btn-danger btn-flat btn-addon btn-sm">
+                                                        <i class="ti-close"></i>Quitar
+                                                    </button>
+                                                </form>
+                                            }
                                         </td>
                                     </tr>
                                 }
                             </tbody>
                         </table>
+
                     </div>
+
+                    <form method="POST" asp-area="UsuarioGeneral" asp-controller="Pedidos" asp-action="EditarPedido">
+                        <div class="form-group row mt-5">
+                            <label class="col-form-label" for="val-suggestions">Comentario </label>
+                            <div class="col-lg-10">
+                                <textarea class="form-control" name="Comentarios" disabled="@(Model.Pedido.IdEstado == (int)EstadoPedidoEnum.ABIERTO && @Model.Pedido.FechaBorrado  == null ? false : true)"
+                                          placeholder="¿Que comentario te gustaría ponerle al pedido?">@Model.Pedido.Comentarios</textarea>
+                            </div>
+                        </div>
+                        @if (@Model.Pedido.IdEstado == (int)EstadoPedidoEnum.ABIERTO && @Model.Pedido.FechaBorrado == null)
+                        {
+                            <button type="submit" class="btn btn-info m-1">Actualizar Comentario</button>
+                        }
+                    </form>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="col-lg-12 d-flex align-items-center">
-            <button type="button" class="btn btn-info m-1">Guardar Modificaciones</button>
-            <button type="button" class="btn btn-warning m-1">Cerrar Pedido</button>
-            <button type="button" class="btn btn-success m-1">Marcar como Entregado</button>
-            <button type="button" class="btn btn-danger ml-auto">Eliminar Pedido</button>
-            <a asp-area="UsuarioGeneral" asp-controller="Pedidos" asp-action="GestionarPedidos" class="btn btn-default ml-auto ">Volver</a>
         </div>
-    </div>
+
+        <div class="row col-11">
+            <div class="col-lg-12 d-flex align-items-center">
+                @if (@Model.Pedido.IdEstado == (int)EstadoPedidoEnum.ABIERTO && @Model.Pedido.FechaBorrado == null)
+                {
+                    <form method="POST" asp-area="UsuarioGeneral" asp-controller="Pedidos" asp-action="MarcarComoCerrado">
+                        <input type="hidden" name="IdPedido" value="@Model.Pedido.IdPedido" />
+                        <button type="submit" class="btn btn-warning m-1">Cerrar Pedido</button>
+                    </form>
+                }
+
+                @if (@Model.Pedido.IdEstado == (int)EstadoPedidoEnum.CERRADO && @Model.Pedido.FechaBorrado == null)
+                {
+                    <form method="POST" asp-area="UsuarioGeneral" asp-controller="Pedidos" asp-action="MarcarComoEntregado">
+                        <input type="hidden" name="IdPedido" value="@Model.Pedido.IdPedido" />
+                        <button type="submit" class="btn btn-success m-1">Entregar Pedido</button>
+                    </form>
+                }
+                @if (@Model.Pedido.FechaBorrado == null)
+                {
+                    <form method="POST" asp-area="UsuarioGeneral" asp-controller="Pedidos" asp-action="EliminarPedido" asp-route-IdPedido="@Model.Pedido.IdPedido">
+                        <button type="submit" class="btn btn-danger ml-auto" onclick="return confirm('¿Usted está seguro que desea eliminar el pedido?')">Eliminar Pedido</button>
+                    </form>
+                }
+
+                <a asp-area="UsuarioGeneral" asp-controller="Pedidos" asp-action="GestionarPedidos" class="btn btn-default ml-auto">Volver</a>
+            </div>
+            
+        </div>
+        
 </section>

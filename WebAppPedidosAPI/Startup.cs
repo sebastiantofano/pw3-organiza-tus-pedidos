@@ -1,3 +1,4 @@
+using AutoMapper;
 using DAL.Modelos;
 using DAL.Repositorios;
 using DAL.Repositorios.Interfaces;
@@ -5,8 +6,10 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,10 +26,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using WebAPI.ResponseObjects;
 
-
-namespace WebAppPedidosAPI
+namespace WebAPI
 {
     public class Startup
     {
@@ -42,33 +47,32 @@ namespace WebAppPedidosAPI
         {
 
             services.AddControllers();
+
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAppPedidosAPI", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPI", Version = "v1" });
             });
 
             /* INICIO: Agregado para el uso de Json Web Token (JWT) */
             var key = Encoding.ASCII.GetBytes(Settings.Secret);
-            services.AddAuthentication(x =>
-            {
-                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(x =>
-            {
-                x.RequireHttpsMetadata = false;
-                x.SaveToken = true;
-                x.TokenValidationParameters = new TokenValidationParameters {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuer = false,
-                    ValidateAudience = false
-                };
-
-            });
+            services
+                .AddAuthentication(x =>
+                    {
+                        x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                        x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                    })
+                .AddJwtBearer(x =>
+                {
+                    x.RequireHttpsMetadata = false;
+                    x.SaveToken = true;
+                    x.TokenValidationParameters = new TokenValidationParameters {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(key),
+                        ValidateIssuer = false,
+                        ValidateAudience = false
+                    };
+                });
             /* FIN: Agregado para el uso de Json Web Token (JWT) */
-
-
 
             /* INICIO: Agregado para el uso de seguridad por roles */
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -81,7 +85,6 @@ namespace WebAppPedidosAPI
                            context.Response.StatusCode = 401;
                            return Task.CompletedTask;
                        };
-
                        /* FIN: Agregado para solucionar el problema de que devolvía un statusCode 302(Redireccion) en vez del 401 (No autorizado)*/
                    });
             /* FIN: Agregado para el uso de seguridad por roles */
@@ -90,7 +93,7 @@ namespace WebAppPedidosAPI
 
             /* INICIO: IoC (Inyeccion de Dependencias) para la base de datos */
             services.AddDbContext<PedidosPW3Context>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("WebAppPedidosContext")));
+                options.UseSqlServer(Configuration.GetConnectionString("WebAppPedidosContext")).UseLazyLoadingProxies());
             /* FIN: IoC (Inyeccion de Dependencias) para la base de datos */
 
 
@@ -108,10 +111,24 @@ namespace WebAppPedidosAPI
             services.AddTransient<IUsuariosService, UsuariosServiceImpl>();
             services.AddTransient<IUsuariosRepository, UsuariosRepositoryImpl>();
 
-            _ = services.AddTransient<IPedidosService, PedidosServiceImpl>();
+            services.AddTransient<IPedidosService, PedidosServiceImpl>();
             services.AddTransient<IPedidosRepository, PedidosRepositoryImpl>();
 
             /* FIN: IoC (Inyeccion de Dependencias) para Servicios y Repositorios */
+
+            /* INICIO: IoC (Inyeccion de Dependencias) para el utilizar HttpContext desde los servicios */
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            /* FIN: IoC (Inyeccion de Dependencias) para el utilizar HttpContext desde los servicios */
+
+
+            /* INICIO: Configuracion del Mapper */
+            var mapperConfig = new MapperConfiguration(m =>
+            {
+                m.AddProfile(new MappingProfile());
+            });
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
+            /* FIN: Configuracion del Mapper */
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -121,7 +138,7 @@ namespace WebAppPedidosAPI
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAppPedidosAPI v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPI v1"));
             }
 
             app.UseHttpsRedirection();
