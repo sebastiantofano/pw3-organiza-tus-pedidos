@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Repositorios
 {
-    public abstract class BaseRepositoryImpl<TEntity> : IBaseRepository<TEntity> where TEntity : class, IAuditableEntity
+    public abstract class BaseRepositoryImpl<TEntity> : IBaseRepository<TEntity> where TEntity : class, IIdentificableEntity, IAuditableEntity
     {
 
         private readonly PedidosPW3Context _pedidosPW3Context;
@@ -23,21 +23,22 @@ namespace DAL.Repositorios
         }
 
 
-        public TEntity ObtenerPorId(int id)
+        public virtual TEntity ObtenerPorId(int id)
         {
             return _pedidosPW3Context.Find<TEntity>(id);
         }
 
 
-        public List<TEntity> ObtenerTodos()
+        public virtual List<TEntity> ObtenerTodos()
         {
             return _dbSet.ToList();
         }
 
-        public void Insertar(TEntity entity)
+        public virtual int Insertar(TEntity entity)
         {
             _pedidosPW3Context.Add(entity);
             _pedidosPW3Context.SaveChanges();
+            return entity.Id;
         }
 
         public virtual void Actualizar(TEntity entity)
@@ -48,7 +49,7 @@ namespace DAL.Repositorios
 
         /* Borrado logico, este metodo solo tendra la responsabilidad de actualizar las propiedades. 
             No es el encargado de la logica sino que es el servicio*/
-        public void Eliminar(TEntity entity)
+        public virtual void Eliminar(TEntity entity)
         {
 
             // Pasa de estar en estado Detached a Unchanged
@@ -61,5 +62,9 @@ namespace DAL.Repositorios
             _pedidosPW3Context.SaveChanges();
         }
 
+        public virtual List<TEntity> ObtenerTodosNoEliminados()
+        {
+            return _dbSet.Where(e => e.FechaBorrado == null).ToList();
+        }
     }
 }

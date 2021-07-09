@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebAppPedidosAPI.ResponseObjects
+namespace WebAPI.ResponseObjects
 {
     public class UsuarioLogueadoResponse
     {

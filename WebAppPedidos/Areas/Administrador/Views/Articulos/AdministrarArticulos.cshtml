@@ -13,7 +13,7 @@
     <div class="col-lg-8 p-r-0 title-margin-right">
         <div class="page-header">
             <div class="page-title">
-                <h2>Administración de Artículos</h2>
+                <h2><i class="ti-receipt text-default"></i> Administración de Artículos</h2>
             </div>
         </div>
     </div>
@@ -26,29 +26,31 @@
                 <div class="card-body">
                     <div class="form-validation">
                         <form class="form-valide" action="/Administrador/Articulos/AgregarArticulo" method="POST">
-                            <div class="card-title">
-                                <h4>Agregar un nuevo artículo</h4>
+                            <div class="card-title mb-3">
+                                <h4>Agregar un nuevo artículo al inventario</h4>
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-form-label m-auto" for="val-codigo">
+                                <label class="col-form-label mr-2 ml-2 mt-2" for="val-codigo">
                                     Código <span class="text-danger">*</span>
                                 </label>
-                                <div class="col-lg-2">
+                                <div class="col-lg-4 input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">COD_</div>
+                                    </div>
                                     <input type="text" name="Codigo" class="form-control" id="val-codigo"
-                                           placeholder="Código del Artículo">
-                                    <span class="text-danger"></span>
+                                           placeholder="Código del Artículo" />
                                 </div>
 
-                                <label class="col-form-label m-auto" for="Codigo">
+                                <label class="col-form-label mr-2 mt-2" for="Codigo">
                                     Descripción <span class="text-danger">*</span>
                                 </label>
-                                <div class="col-lg-7">
+                                <div class="col-lg-6">
                                     <input type="text" name="Descripcion" class="form-control" id="val-descripcion" placeholder="Descripción del Artículo" required>
                                 </div>
-                                <button type="submit" class="btn btn-success">
-                                    Agregar
-                                    Artículo
+
+                                <button type="submit" class="btn btn-dark mt-3 ml-2">
+                                    Guardar Artículo
                                 </button>
                             </div>
                         </form>
@@ -65,42 +67,48 @@
                     <h4>Inventario de Artículos</h4>
 
                 </div>
+                <div class="form-check ml-auto ">
+                    <input class="form-check-input  " type="checkbox" id="CheckboxOcultarEliminados" checked>
+                    <label class="form-check-label">
+                        Ocultar artículos eliminados del inventario
+                    </label>
+                </div>
                 <div class="card-body">
+
                     <div class="bootstrap-data-table-panel">
                         <div class="table-responsive">
                             <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
                                 <thead>
                                     <tr>
-                                        <th class="col-md-1">Código</th>
-                                        <th class="col-md-5">Descripción</th>
-                                        <th class="col-md-1">Vigencia</th>
+                                        <th class="col-md-1">Código <i class="ti-arrows-vertical"></i></th>
+                                        <th class="col-md-5">Descripción <i class="ti-arrows-vertical"></i></th>
+                                        <th class="col-md-1">Vigencia <i class="ti-arrows-vertical"></i></th>
                                         <th class="col-md-2"></th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="body-table">
                                     @foreach (var articulo in Model)
                                     {
                                         <tr>
                                             <td>@articulo.Codigo</td>
                                             <td>@articulo.Descripcion</td>
                                             <td>
-                                                <span class="badge badge-@(articulo.FechaBorrado == null ? "info" : "danger")">
+                                                <span class="badge badge-@(articulo.FechaBorrado == null ? "success" : "danger")">
                                                     @(articulo.FechaBorrado == null ? "VIGENTE" : "ELIMINADO")
                                                 </span>
                                             </td>
                                             <td class="row justify-content-between align-items-center">
                                                 <a asp-area="Administrador" asp-controller="Articulos" asp-action="EditarArticulo" asp-route-id="@articulo.IdArticulo"
-                                                   class="btn btn-warning btn-flat btn-addon btn-sm ml-4">
+                                                   class="btn btn-outline-info btn-flat btn-addon btn-sm ml-2">
                                                     <i class="ti-pencil"></i>Editar
                                                 </a>
                                                 @if (articulo.FechaBorrado == null)
                                                 {
                                                     <form method="POST" asp-area="Administrador" asp-controller="Articulos" asp-action="EliminarArticulo" asp-route-IdArticulo="@articulo.IdArticulo">
-                                                        <button type="submit" class="btn btn-danger btn-flat btn-addon btn-sm" onclick="return confirm('¿Usted está seguro que desea eliminar artículo? \nCódigo: @articulo.Codigo \nDescripción: @articulo.Descripcion')"> <i class="ti-close"></i>Eliminar</button>
+                                                        <button type="submit" class="btn btn-outline-danger btn-flat btn-addon btn-sm" onclick="return confirm('¿Usted está seguro que desea eliminar artículo? \nCódigo: @articulo.Codigo \nDescripción: @articulo.Descripcion')"> <i class="ti-close"></i>Eliminar</button>
                                                     </form>
 
                                                 }
-
                                             </td>
                                         </tr>
                                     }
@@ -114,7 +122,7 @@
     </div>
     <div class="row">
         <div class="col-lg-12 d-flex align-items-center">
-            <a asp-area="Administrador" asp-controller="Articulos" asp-action="AgregarArticulo" class="btn btn-success btn-large">Agregar un nuevo Artículo</a>
+            <a asp-area="Administrador" asp-controller="Articulos" asp-action="AgregarArticulo" class="btn btn-dark btn-large">Agregar un nuevo artículo al inventario</a>
             <a asp-area="Administrador" asp-controller="Home" asp-action="Index" class="btn btn-default ml-auto ">Volver</a>
         </div>
     </div>
@@ -133,4 +141,6 @@
     <script src="~/themes/assets/js/lib/data-table/buttons.html5.min.js"></script>
     <script src="~/themes/assets/js/lib/data-table/buttons.print.min.js"></script>
     <script src="~/themes/assets/js/lib/data-table/datatables-init.js"></script>
+
+    <script src="~/js/OcultarEliminadosDataTable.js"></script>
 }

@@ -11,5 +11,9 @@ namespace Servicios.UsuarioGeneral.Interfaces
     {
         Dictionary<Articulo, int> ObtenerArticulosYCantidadesDelPedido(int idPedido);
         void AgregarArticuloYCantidadAlPedido(PedidoArticulo pedidoArticulo);
+        void MarcarComoCerrado(int idPedido);
+        void MarcarComoEntregado(int idPedido);
+        void EliminarArticuloAlPedido(PedidoArticulo pedidoArticulo);
+        List<Pedido> BuscarPedidosPorCliente(int idCliente);
     }
 }

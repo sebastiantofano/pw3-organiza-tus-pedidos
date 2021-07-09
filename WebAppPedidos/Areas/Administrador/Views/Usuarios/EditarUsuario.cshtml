@@ -21,56 +21,60 @@
                     <div class="form-validation">
                         @using (Html.BeginForm("EditarUsuario", "Usuarios", new { area = "Administrador" }, FormMethod.Post))
                         {
-                            <form class="form-valide">
-                                <div class="form-group row">
+                        <form class="form-valide">
+                            <div class="form-group row">
 
-                                    <input type="hidden" name="IdUsuario" value="@Model.IdUsuario" />
-                                    <input type="hidden" name="FechaCreacion" value="@Model.FechaCreacion" />   @*Ver como solucionar este problema de la fecha*@
+                                <input type="hidden" name="IdUsuario" value="@Model.IdUsuario" />
+                                <input type="hidden" name="FechaCreacion" value="@Model.FechaCreacion" />   @*Ver como solucionar este problema de la fecha*@
 
-                                    <div class="input-group align-items-center">
-                                        <label asp-for="Email" class="col-lg-1 col-form-label">E-mail</label>
-                                        <div class="input-group-prepend col-lg-10">
-                                            <span class="input-group-text">@@</span>
-                                            <input type="text" name="Email" asp-for="Email" class="form-control" placeholder="E-mail" value="@Model.Email">
-                                            <span asp-validation-for="Email" class="text-danger"></span>
-                                        </div>
+                                <div class="input-group align-items-center">
+                                    <label asp-for="Email" class="col-lg-1 col-form-label ml-2 p-1">E-mail</label>
+                                    <div class="input-group-prepend col-lg-12">
+                                        <span class="input-group-text">@@</span>
+                                        <input type="text" name="Email" asp-for="Email" class="form-control" placeholder="E-mail" value="@Model.Email">
+                                        <span asp-validation-for="Email" class="text-danger"></span>
                                     </div>
                                 </div>
-                                <div class="form-group row align-items-center">
-                                    <label asp-for="Password" class="col-lg-1 col-form-label p-2">Contraseña</label>
-                                    <div class="col-lg-10">
-                                        <input type="password" name="Password" asp-for="Password" class="form-control" placeholder="Contraseña" value="@Model.Password">
-                                        <span asp-validation-for="Password" class="text-danger"></span>
-                                    </div>
+                            </div>
+                            <div class="form-group row align-items-center">
+                                <label asp-for="Password" class="col-lg-1 col-form-label  p-1 ml-2">Contraseña</label>
+                                <div class="col-lg-12">
+                                    <input type="password" name="Password" asp-for="Password" class="form-control" placeholder="Contraseña" value="@Model.Password">
+                                    <span asp-validation-for="Password" class="text-danger"></span>
                                 </div>
-                                <div class="form-group row align-items-center">
-                                    <label asp-for="Nombre" class="col-lg-1 col-form-label">Nombre</label>
-                                    <div class="col-lg-3">
-                                        <input type="text" name="Nombre" asp-for="Nombre" class="form-control" placeholder="Nombre" value="@Model.Nombre">
-                                        <span asp-validation-for="Nombre" class="text-danger"></span>
-                                    </div>
-                                    <label asp-for="Apellido" class="col-lg-1 col-form-label">Apellido</label>
-                                    <div class="col-lg-3">
-                                        <input type="text" name="Apellido" asp-for="Apellido" class="form-control" placeholder="Apellido" value="@Model.Apellido">
-                                        <span asp-validation-for="Apellido" class="text-danger"></span>
-                                    </div>
-                                    <label asp-for="FechaNacimiento" class="col-lg-1 col-form-label p-0">Fecha de Nacimiento</label>
-                                    <div class="col-lg-2">
-                                        <input type="date" name="FechaNacimiento" asp-for="FechaNacimiento" class="form-control" placeholder="Fecha de Nacimiento" value="@string.Format("{0:yyyy-MM-dd}", Model.FechaNacimiento)">
-                                        <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
-                                    </div>
+                            </div>
+                            <div class="form-group row align-items-center">
+                                <label asp-for="Nombre" class="col-lg-1 col-form-label">Nombre</label>
+                                <div class="col-lg-3">
+                                    <input type="text" name="Nombre" asp-for="Nombre" class="form-control" placeholder="Nombre" value="@Model.Nombre">
+                                    <span asp-validation-for="Nombre" class="text-danger"></span>
                                 </div>
+                                <label asp-for="Apellido" class="col-lg-1 col-form-label">Apellido</label>
+                                <div class="col-lg-3">
+                                    <input type="text" name="Apellido" asp-for="Apellido" class="form-control" placeholder="Apellido" value="@Model.Apellido">
+                                    <span asp-validation-for="Apellido" class="text-danger"></span>
+                                </div>
+                                <label asp-for="FechaNacimiento" class="col-lg-1 col-form-label p-0">Fecha de Nacimiento</label>
+                                <div class="col-lg-3">
+                                    <input type="date" name="FechaNacimiento" asp-for="FechaNacimiento" class="form-control" placeholder="Fecha de Nacimiento" value="@string.Format("{0:yyyy-MM-dd}", Model.FechaNacimiento)">
+                                    <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
+                                </div>
+                            </div>
 
-                                <div class="form-group row">
-                                    <div class="col-auto my-1">
-                                        <div class="custom-control custom-checkbox mr-sm-2">
-                                            <input type="checkbox" name="EsAdmin" value="true" class="custom-control-input" id="customControlAutosizing" @(Model.EsAdmin ? "checked" : "")>
-                                            <label class="custom-control-label" for="customControlAutosizing">Usuario Administrador</label>
-                                        </div>
+                            <div class="form-group row">
+                                <div class="col-auto my-1">
+                                    <div class="custom-control custom-checkbox mr-sm-2">
+                                        <input type="checkbox" name="EsAdmin" value="true" class="custom-control-input" id="customControlAutosizing" @(Model.EsAdmin ? "checked" : "")>
+                                        <label class="custom-control-label" for="customControlAutosizing">Usuario Administrador</label>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-info col-lg-4 m-1">Guardar Modificaciones</button>
-                            </form>
+                            </div>
+                            <button type="submit" class="btn btn-dark col-lg-4 m-1">Guardar Modificaciones</button>
+                            <a asp-area="Administrador" asp-controller="Usuarios" asp-action="EliminarUsuario" asp-route-id="@Model.IdUsuario"
+                               class="btn btn-outline-danger btn-flat btn-addon btn-sm">
+                                <i class="ti-close"></i>Eliminar Usuario
+                            </a>
+                        </form>
                         }
                         <div class="row align-items-center">
                             <div class="col-lg-4">
@@ -128,7 +132,7 @@
                                 </div>
                             }
 
-                            <div class="col-lg-3 ml-auto">
+                            <div class="col-lg-4 ml-auto">
                                 @if (Model.FechaBorrado == null)
                                 {
                                     <div class="card bg-success">
@@ -138,8 +142,8 @@
                                             </div>
                                             <div class="stat-content">
                                                 <div class="text-left dib">
-                                                    <div class="stat-heading font-weight-bold">ARTÍCULO VIGENTE</div>
-                                                    <div class="stat-text">Estatus Actual del Artículo</div>
+                                                    <div class="stat-heading font-weight-bold">USUARIO VIGENTE</div>
+                                                    <div class="stat-text">Estatus Actual del Usuario</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -154,8 +158,8 @@
                                             </div>
                                             <div class="stat-content">
                                                 <div class="text-left dib">
-                                                    <div class="stat-heading font-weight-bold">ARTÍCULO ELIMINADO</div>
-                                                    <div class="stat-text">Estatus Actual del Artículo</div>
+                                                    <div class="stat-heading font-weight-bold">USUARIO ELIMINADO</div>
+                                                    <div class="stat-text">Estatus Actual del Usuario</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -169,12 +173,12 @@
             </div>
         </div>
     </div>
-
-    <div class="row">
-        <div class="col-lg-12 d-flex align-items-center">
-            <a asp-area="Administrador" asp-controller="Usuarios" asp-action="AdministrarUsuarios" class="btn btn-default ml-auto">Descartar Modificaciones</a>
+    
+        <div class="row">
+            <div class="col-lg-12 d-flex align-items-center">
+                <a asp-area="Administrador" asp-controller="Usuarios" asp-action="AdministrarUsuarios" class="btn btn-default ml-auto">Descartar Modificaciones</a>
+            </div>
         </div>
-    </div>
 </section>
 
 

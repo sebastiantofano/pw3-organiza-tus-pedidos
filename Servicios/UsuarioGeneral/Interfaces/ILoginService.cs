@@ -13,7 +13,7 @@ namespace Servicios.UsuarioGeneral.Interfaces
     {
         Usuario IniciarSesion(HttpContext httpContext, Usuario usuario);
         void CerrarSesion(HttpContext httpContext);
-
+        Usuario IniciarSesionAPI(Usuario usuario);
 
     }
 }

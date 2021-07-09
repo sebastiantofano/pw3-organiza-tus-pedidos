@@ -1,13 +1,8 @@
 ﻿@using DAL.Modelos
 @model Articulo
 @{
-}
-
-@{
-
 
 }
-
 <div class="row">
     <div class="col-lg-8 p-r-0 title-margin-right">
         <div class="page-header">
@@ -17,42 +12,52 @@
         </div>
     </div>
 </div>
-<!-- /# row -->
 <section id="main-content">
     <div class="row">
         <div class="col-lg-12">
             <div class="form-validation">
-                <form class="form-valide" action="/Administrador/Articulos/AgregarArticulo" method="POST">
-                    <div class="card">
+                <div class="card">
+                    <form class="form-valide" action="/Administrador/Articulos/AgregarArticulo" method="POST">
+
                         <div class="card-body">
 
                             <div class="form-group row align-items-center">
                                 <label asp-for="Codigo" class="col-lg-1 col-form-label">Código <span class="text-danger">*</span></label>
-                                <div class="col-lg-5">
-                                    <input type="text" name="Codigo" class="form-control" placeholder="Código del Artículo" asp-for="Codigo">
-                                    <span asp-validation-for="Codigo" class="text-danger"></span>
+                                <div class="col-lg-5 input-group ml-3">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">COD_</div>
+                                    </div>
+                                    <input asp-for="Codigo" type="text" name="Codigo" class="form-control" placeholder="Código del Artículo">
+
                                 </div>
+                                <span asp-validation-for="Codigo" class="text-danger"></span>
                             </div>
                             <div class="form-group row align-items-center">
-                                <label asp-for="Descripcion" class="col-lg-1 col-form-label p-0">Descripción <span class="text-danger">*</span></label>
-                                <div class="col-lg-11">
-                                    <input asp-for="Descripcion" type="text" name="Descripcion" class="form-control" placeholder="Descripción del Artículo">
+                                <label asp-for="Descripcion" class="col-lg-1 col-form-label p-0 ml-3">Descripción <span class="text-danger">*</span></label>
+                                <div class="col-lg-10">
+                                    <input type="text" name="Descripcion" class="form-control" placeholder="Descripción del Artículo">
                                     <span asp-validation-for="Descripcion" class="text-danger"></span>
                                 </div>
                             </div>
 
 
                         </div>
-                    </div>
-
-
-                    <div class="row">
-                        <div class="col-lg-12 d-flex align-items-center">
-                            <button type="submit" class="btn btn-info col-lg-4 m-1">Agregar Artículo al Inventario</button>
-                            <a asp-area="Administrador" asp-controller="Articulos" asp-action="AdministrarArticulos" class="btn btn-default ml-auto ">Volver</a>
+                        <div class="col-auto my-1">
+                            <div class="custom-control custom-checkbox mr-sm-3">
+                                <input type="checkbox" class="custom-control-input" id="customControlAutosizing" name="permanecerView" value="true">
+                                <label class="custom-control-label" for="customControlAutosizing">Seguiré en la ventana de creación de artículos</label>
+                            </div>
                         </div>
-                    </div>
-                </form>
+
+
+                        <div class="row">
+                            <div class="col-lg-12 d-flex align-items-center">
+                                <button type="submit" class="btn btn-dark col-lg-4 m-1">Guardar artículo en el Inventario</button>
+                                <a asp-area="Administrador" asp-controller="Articulos" asp-action="AdministrarArticulos" class="btn btn-default ml-auto ">Volver</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

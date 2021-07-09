@@ -36,5 +36,14 @@ namespace DAL.Repositorios
 
             _pedidosPW3Context.SaveChanges();
         }
+
+        public List<Articulo> FiltrarPorDescripcion(string cadena)
+        {
+            IQueryable<Articulo> matches = from a in _pedidosPW3Context.Articulos
+                                          where a.Descripcion.Contains(cadena)
+                                          select a;
+
+            return matches.ToList();
+        }
     }
 }

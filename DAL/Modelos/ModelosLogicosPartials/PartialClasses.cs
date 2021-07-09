@@ -11,16 +11,21 @@ using System.Threading.Tasks;
 /* Namespace hardcodeado para poder utilizar partial classes y tener nuestras clases partials en otro directorio ordenadamente */
 namespace DAL.Modelos
 {
-    
-    [ModelMetadataType(typeof(ArticuloMetadata))] // Con este decorador "MetadataType" asociamos las clases "Metadata" que realizarán validaciones sobre el modelo
-    public partial class Articulo : IAuditableEntity // Debo implementar ItrackeableEntity porque lo utilizamos en BaseServiceImpl para manejar sus properties
-    {
 
+    [ModelMetadataType(typeof(ArticuloMetadata))] // Con este decorador "MetadataType" asociamos las clases "Metadata" que realizarán validaciones sobre el modelo
+    public partial class Articulo : IIdentificableEntity, IAuditableEntity // Debo implementar ItrackeableEntity porque lo utilizamos en BaseServiceImpl para manejar sus properties
+    {
+        [NotMapped] // Para que no se tenga en cuenta esta property en la base de datos, ya que es una propiedad logica de la aplicacion
+        public int Id { get => IdArticulo; set => IdArticulo = value; }
     }
 
     [ModelMetadataType(typeof(UsuarioMetadata))] // Con este decorador "MetadataType" asociamos las clases "Metadata" que realizarán validaciones sobre el modelo
-    public partial class Usuario : IAuditableEntity
+    public partial class Usuario : IIdentificableEntity, IAuditableEntity
     {
+        [NotMapped] // Para que no se tenga en cuenta esta property en la base de datos, ya que es una propiedad logica de la aplicacion
+        public int Id { get => IdUsuario; set => IdUsuario = value; }
+
+
         [NotMapped] // Para que no se tenga en cuenta esta property en la base de datos, ya que es una propiedad logica de la aplicacion
         public string Roles {
             get {
@@ -35,21 +40,23 @@ namespace DAL.Modelos
     }
 
     [MetadataType(typeof(ClienteMetadata))] // Con este decorador "MetadataType" asociamos las clases "Metadata" que realizarán validaciones sobre el modelo
-    public partial class Cliente : IAuditableEntity
+    public partial class Cliente : IIdentificableEntity, IAuditableEntity
     {
+        [NotMapped] // Para que no se tenga en cuenta esta property en la base de datos, ya que es una propiedad logica de la aplicacion
+        public int Id { get => IdCliente; set => IdCliente = value; }
 
     }
 
     [MetadataType(typeof(PedidoMetadata))] // Con este decorador "MetadataType" asociamos las clases "Metadata" que realizarán validaciones sobre el modelo
-    public partial class Pedido : IAuditableEntity
+    public partial class Pedido : IIdentificableEntity, IAuditableEntity
     {
-
+        [NotMapped] // Para que no se tenga en cuenta esta property en la base de datos, ya que es una propiedad logica de la aplicacion
+        public int Id { get => IdPedido; set => IdPedido = value; }
     }
 
     [MetadataType(typeof(PedidoArticuloMetadata))] // Con este decorador "MetadataType" asociamos las clases "Metadata" que realizarán validaciones sobre el modelo
     public partial class PedidoArticulo
     {
-
     }
 
 }

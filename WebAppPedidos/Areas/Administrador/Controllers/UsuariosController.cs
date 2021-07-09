@@ -26,9 +26,20 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult AdministrarUsuarios()
         {
             List<Usuario> usuarios = _usuariosService.ObtenerTodos();
+            ViewBag.todosUsuarios = usuarios;
+            return View(usuarios);
+        }
+        [HttpPost]
+        public IActionResult AdministrarUsuarios(int idUsuario, string email)
+        {
+            ViewBag.todosUsuarios = _usuariosService.ObtenerTodos();
+            ViewBag.idUsuarioSeleccionado = idUsuario;
+            ViewBag.emailSeleccionado = email;
+            List<Usuario> usuarios = _usuariosService.ObtenerTodosPorIdUsuarioOPorEmail(idUsuario,email);
             return View(usuarios);
         }
 
@@ -86,7 +97,13 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
                 return View(usuario);
             }
         }
-
+        public IActionResult EliminarUsuario(int id)
+        {
+            Usuario usuario = _usuariosService.ObtenerPorId(id);
+            _usuariosService.Eliminar(usuario);
+            TempData["toastr_info"] = "Se ha eliminado el usuario correctamente !";
+            return RedirectToAction("AdministrarUsuarios");
+        }
 
 
 

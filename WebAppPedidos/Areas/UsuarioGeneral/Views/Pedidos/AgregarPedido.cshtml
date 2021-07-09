@@ -1,7 +1,8 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using DAL.Modelos
 @{
+    List<Articulo> selectArticulos = ViewBag.Articulos;
+    List<Cliente> selectClientes = ViewBag.Clientes;
+    Dictionary<Articulo, int> ArticulosYCantidadesDelPedido = ViewBag.ArticulosYCantidadesDelPedido;
 }
 <div class="row">
     <div class="col-lg-8 p-r-0 title-margin-right">
@@ -19,134 +20,72 @@
             <div class="card">
                 <div class="card-body">
                     <div class="form-validation">
-                        <form class="form-valide" action="#" method="post">
-                            <div class="form-group row">
-                                <label class="col-form-label" for="val-username">
+
+                        <form asp-area="UsuarioGeneral" asp-controller="Pedidos" asp-action="AgregarPedido" method="POST">
+
+                            <div class="form-group row ml-2">
+                                <label class="col-form-label mt-2" for="val-username">
                                     Cliente <span class="text-danger">*</span>
                                 </label>
-                                <div class="col-lg-5">
-                                    <input type="text" class="form-control" id="val-username"
-                                           name="val-username" placeholder="Ingrese cliente">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-form-label" for="val-skill">
-                                    Artículo <span class="text-danger">*</span>
-                                </label>
-                                <div class="col-lg-5">
-                                    <select class="form-control" id="select-articulo" name="">
-                                        <option value="">Seleccione un artículo</option>
-                                        <option value="1">Código y descripción del articulo</option>
-                                        <option value="2">Código y descripción del articulo</option>
-                                        <option value="3">Código y descripción del articulo</option>
-                                        <option value="4">Código y descripción del articulo</option>
+                                <div class="col-lg-7 ml-3">
+                                    <select class="form-control" id="select-cliente" name="idCliente">
+                                        <option value="">Seleccione un cliente</option>
+                                        @foreach (Cliente cliente in selectClientes)
+                                        {
+                                            <option value="@cliente.IdCliente">Nro Cliente: @cliente.Numero -  Nombre: @cliente.Nombre</option>
+                                        }
                                     </select>
                                 </div>
-                                <label class="col-form-label" for="val-digits">
+                            </div>
+                            <div class="form-group row ml-2">
+                                <label class="col-form-label mt-2" for="val-skill">
+                                    Artículo <span class="text-danger">*</span>
+                                </label>
+                                <div class="col-lg-7 ml-3">
+                                    <select class="form-control" id="select-articulo" name="IdArticulo">
+                                        <option value="">Seleccione un artículo</option>
+                                        @foreach (Articulo articulo in selectArticulos)
+                                        {
+                                            <option value="@articulo.IdArticulo">Código: @articulo.Codigo -  Descripción: @articulo.Descripcion</option>
+                                        }
+                                    </select>
+                                </div>
+                                <label class="col-form-label mt-2" for="val-digits">
                                     Cantidad <span class="text-danger">*</span>
                                 </label>
-                                <div class="col-lg-2">
+                                <div class="col-lg-3">
                                     <input type="text" class="form-control" id="val-cantidad"
-                                           name="val-digits" placeholder="Ingrese cantidad">
-                                </div>
-                                <div class="col-lg-1">
-                                    <button type="submit" class="btn btn-success">
-                                        Agregar
-                                        artículo al pedido
-                                    </button>
+                                           name="Cantidad" placeholder="Ingrese cantidad">
                                 </div>
                             </div>
+
+                            <div class="form-group row ml-2">
+                                <label class="col-form-label mt-2" for="val-suggestions">Comentario </label>
+                                <div class="col-lg-11">
+                                    <textarea class="form-control"
+                                              placeholder="¿Que comentario te gustaría ponerle al pedido?"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="custom-control custom-checkbox mr-sm-2">
+                                <input type="checkbox" class="custom-control-input" id="customControlAutosizing" name="permanecerView" value="true">
+                                <label class="custom-control-label" for="customControlAutosizing">Seguiré en la ventana de creación de pedidos</label>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12 d-flex align-items-center">
+                                    <button type="submit" class="btn btn-dark col-lg-4 m-1">Agregar Pedido</button>
+                                    <a href="javascript:history.back(-1);" class="btn btn-default ml-auto ">Volver</a>
+                                </div>
+                            </div>
+
                         </form>
-
-                        <div class="form-group row">
-                            <label class="col-form-label" for="val-suggestions">Comentario </label>
-                            <div class="col-lg-10">
-                                <textarea class="form-control"
-                                          placeholder="¿Que comentario te gustaría ponerle al pedido?"></textarea>
-                            </div>
-                        </div>
+                    </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-title">
-                    <h4>Contenido del pedido</h4>
 
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Descripción</th>
-                                    <th>Código</th>
-                                    <th>Cantidad</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Descripción del Artículo</td>
-                                    <td>Código del Artículo</td>
-                                    <td>Cantidad</td>
-                                    <td>
-                                        <button type="button"
-                                                class="btn btn-info btn-flat btn-addon btn-sm">
-                                            <i class="ti-search"></i>Editar
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Descripción del Artículo</td>
-                                    <td>Código del Artículo</td>
-                                    <td>Cantidad</td>
-                                    <td>
-                                        <button type="button"
-                                                class="btn btn-info btn-flat btn-addon btn-sm">
-                                            <i class="ti-search"></i>Editar
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Descripción del Artículo</td>
-                                    <td>Código del Artículo</td>
-                                    <td>Cantidad</td>
-                                    <td>
-                                        <button type="button"
-                                                class="btn btn-info btn-flat btn-addon btn-sm">
-                                            <i class="ti-search"></i>Editar
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Descripción del Artículo</td>
-                                    <td>Código del Artículo</td>
-                                    <td>Cantidad</td>
-                                    <td>
-                                        <button type="button"
-                                                class="btn btn-info btn-flat btn-addon btn-sm">
-                                            <i class="ti-search"></i>Editar
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-lg-12 d-flex align-items-center">
-            <button type="button" class="btn btn-info col-lg-4 m-1">Agregar Pedido</button>
-            <button type="button" class="btn btn-info m-1">Agregar Pedido y cargar otro</button>
-            <a href="javascript:history.back(-1);" class="btn btn-default ml-auto ">Volver</a>
-        </div>
-    </div>
 </section>

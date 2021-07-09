@@ -49,12 +49,13 @@
                                             </span>
                                         </td>
                                         <td>
+
                                             <a asp-area="Administrador" asp-controller="Clientes" asp-action="EditarCliente" asp-route-id="@cliente.IdCliente"
-                                               class="btn btn-warning btn-flat btn-addon btn-sm">
+                                               class="btn btn-outline-info btn-flat btn-addon btn-sm mr-2">
                                                 <i class="ti-pencil"></i>Editar
                                             </a>
                                             <a asp-area="Administrador" asp-controller="Clientes" asp-action="EliminarCliente" asp-route-id="@cliente.IdCliente"
-                                               class="btn btn-danger btn-flat btn-addon btn-sm">
+                                               class="btn btn-outline-danger btn-flat btn-addon btn-sm">
                                                 <i class="ti-close"></i>Eliminar
                                             </a>
                                         </td>
@@ -69,7 +70,7 @@
     </div>
     <div class="row">
         <div class="col-lg-12 d-flex align-items-center">
-            <a href="/Administrador/Clientes/AgregarCliente" class="btn btn-info col-lg-5 m-1">Agregar Cliente</a>
+            <a href="/Administrador/Clientes/AgregarCliente" class="btn btn-dark col-lg-5 m-1">Agregar Cliente</a>
             <a href="javascript:history.back(-1);" class="btn btn-default ml-auto ">Volver</a>
         </div>
     </div>
