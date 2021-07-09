@@ -30,25 +30,25 @@
 
                             <div class="form-group row align-items-center">
                                 <label class="col-lg-1 col-form-label">Nombre <span class="text-danger">*</span></label>
-                                <div class="col-lg-5">
+                                <div class="col-lg-11">
                                     <input type="text" class="form-control" placeholder="Nombre" required>
                                 </div>
                             </div>
                             <div class="form-group row align-items-center">
-                                <label class="col-lg-1 col-form-label">Nro Cliente</label>
-                                <div class="col-lg-1">
-                                    <input type="number" class="form-control" placeholder="    N°">
+                                <label class="col-lg-1 col-form-label">N° Cliente</label>
+                                <div class="col-lg-5">
+                                    <input type="number" class="form-control" placeholder="N°">
                                 </div>
-                                <label class="col-lg-1 col-form-label">Teléfono</label>
-                                <div class="col-lg-3">
+                                <label class="col-lg-0 ml-4 col-form-label">Teléfono</label>
+                                <div class="col-lg-5">
                                     <input type="text" class="form-control "
-                                           placeholder="Telefono">
+                                           placeholder="Teléfono">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <div class="input-group align-items-center">
                                     <label class="col-lg-1 col-form-label val-email">E-mail</label>
-                                    <div class="input-group-prepend col-lg-10">
+                                    <div class="input-group-prepend col-lg-11">
                                         <span class="input-group-text">@@</span>
                                         <input type="text" class="form-control" placeholder="E-mail">
                                     </div>
@@ -56,28 +56,29 @@
                             </div>
                             <div class="form-group row align-items-center">
                                 <label class="col-lg-1 col-form-label">CUIT</label>
-                                <div class="col-lg-4">
+                                <div class="col-lg-5">
                                     <input type="text" class="form-control" placeholder="CUIT">
                                 </div>
-                                <label class="col-lg-1 col-form-label">Dirección</label>
+                                <label class="col-lg-0 ml-4 col-form-label">Dirección</label>
                                 <div class="col-lg-5">
                                     <input type="text" class="form-control" placeholder="Dirección">
                                 </div>
                             </div>
 
+                            <div class="row">
+                                <div class="col-lg-12 d-flex align-items-center">
+                                    <button type="submit" class="btn btn-dark col-lg-4 m-1">Guardar Modificaciones</button>
+                                    <button type="submit" class="btn btn-outline-danger col-lg-3 ml-auto">Eliminar Cliente</button>
 
+                                </div>
+                            </div>
 
                         </div>
 
                     </div>
-                    <div class="row">
-                        <div class="col-lg-12 d-flex align-items-center">
-                            <button type="submit" class="btn btn-info col-lg-4 m-1">Guardar Modificaciones</button>
-                            <button type="submit" class="btn btn-danger col-lg-3 ml-auto">Eliminar Cliente</button>
-                            <a href="javascript:history.back(-1);" class="btn btn-default ml-2 ">Volver</a>
-                        </div>
-                    </div>
+                    
                 </form>
+                <a href="javascript:history.back(-1);" class="btn btn-default ml-2 ">Volver</a>
             </div>
         </div>
     </div>

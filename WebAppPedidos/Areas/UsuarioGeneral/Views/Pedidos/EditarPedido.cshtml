@@ -251,7 +251,7 @@
                 @if (@Model.Pedido.FechaBorrado == null)
                 {
                     <form method="POST" asp-area="UsuarioGeneral" asp-controller="Pedidos" asp-action="EliminarPedido" asp-route-IdPedido="@Model.Pedido.IdPedido">
-                        <button type="submit" class="btn btn-danger ml-auto" onclick="return confirm('¿Usted está seguro que desea eliminar el pedido?')">Eliminar Pedido</button>
+                        <button type="submit" class="btn btn-outline-danger ml-auto" onclick="return confirm('¿Usted está seguro que desea eliminar el pedido?')">Eliminar Pedido</button>
                     </form>
                 }
 

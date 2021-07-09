@@ -26,15 +26,15 @@
                 <div class="card-body">
                     <div class="form-validation">
                         <form class="form-valide" action="/Administrador/Articulos/AgregarArticulo" method="POST">
-                            <div class="card-title">
+                            <div class="card-title mb-3">
                                 <h4>Agregar un nuevo artículo al inventario</h4>
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-form-label m-auto" for="val-codigo">
+                                <label class="col-form-label mr-2 ml-2 mt-2" for="val-codigo">
                                     Código <span class="text-danger">*</span>
                                 </label>
-                                <div class="col-lg-3 input-group">
+                                <div class="col-lg-4 input-group">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">COD_</div>
                                     </div>
@@ -42,15 +42,15 @@
                                            placeholder="Código del Artículo" />
                                 </div>
 
-                                <label class="col-form-label m-auto" for="Codigo">
+                                <label class="col-form-label mr-2 mt-2" for="Codigo">
                                     Descripción <span class="text-danger">*</span>
                                 </label>
                                 <div class="col-lg-6">
                                     <input type="text" name="Descripcion" class="form-control" id="val-descripcion" placeholder="Descripción del Artículo" required>
                                 </div>
-                                <button type="submit" class="btn btn-success">
-                                    Guardar
-                                    Artículo
+
+                                <button type="submit" class="btn btn-dark mt-3 ml-2">
+                                    Guardar Artículo
                                 </button>
                             </div>
                         </form>
@@ -93,19 +93,19 @@
                                             <td>@articulo.Codigo</td>
                                             <td>@articulo.Descripcion</td>
                                             <td>
-                                                <span class="badge badge-@(articulo.FechaBorrado == null ? "info" : "danger")">
+                                                <span class="badge badge-@(articulo.FechaBorrado == null ? "success" : "danger")">
                                                     @(articulo.FechaBorrado == null ? "VIGENTE" : "ELIMINADO")
                                                 </span>
                                             </td>
                                             <td class="row justify-content-between align-items-center">
                                                 <a asp-area="Administrador" asp-controller="Articulos" asp-action="EditarArticulo" asp-route-id="@articulo.IdArticulo"
-                                                   class="btn btn-warning btn-flat btn-addon btn-sm ml-4">
+                                                   class="btn btn-outline-info btn-flat btn-addon btn-sm ml-2">
                                                     <i class="ti-pencil"></i>Editar
                                                 </a>
                                                 @if (articulo.FechaBorrado == null)
                                                 {
                                                     <form method="POST" asp-area="Administrador" asp-controller="Articulos" asp-action="EliminarArticulo" asp-route-IdArticulo="@articulo.IdArticulo">
-                                                        <button type="submit" class="btn btn-danger btn-flat btn-addon btn-sm" onclick="return confirm('¿Usted está seguro que desea eliminar artículo? \nCódigo: @articulo.Codigo \nDescripción: @articulo.Descripcion')"> <i class="ti-close"></i>Eliminar</button>
+                                                        <button type="submit" class="btn btn-outline-danger btn-flat btn-addon btn-sm" onclick="return confirm('¿Usted está seguro que desea eliminar artículo? \nCódigo: @articulo.Codigo \nDescripción: @articulo.Descripcion')"> <i class="ti-close"></i>Eliminar</button>
                                                     </form>
 
                                                 }
@@ -122,7 +122,7 @@
     </div>
     <div class="row">
         <div class="col-lg-12 d-flex align-items-center">
-            <a asp-area="Administrador" asp-controller="Articulos" asp-action="AgregarArticulo" class="btn btn-success btn-large">Agregar un nuevo artículo al inventario</a>
+            <a asp-area="Administrador" asp-controller="Articulos" asp-action="AgregarArticulo" class="btn btn-dark btn-large">Agregar un nuevo artículo al inventario</a>
             <a asp-area="Administrador" asp-controller="Home" asp-action="Index" class="btn btn-default ml-auto ">Volver</a>
         </div>
     </div>
