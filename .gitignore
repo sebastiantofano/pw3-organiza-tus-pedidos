@@ -1,6 +1,8 @@
 /WebAppPedidos/obj
 /WebAppPedidos/bin
 
+/WebAppPedidos/appsettings.json
+
 # Don't include bundled files in git
 **/wwwroot/bundles
 
@@ -139,4 +141,3 @@ $RECYCLE.BIN/
 _NCrunch*
 
 /.vs
-/WebAppPedidos/appsettings.json
