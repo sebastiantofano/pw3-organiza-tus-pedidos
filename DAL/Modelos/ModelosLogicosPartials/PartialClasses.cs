@@ -39,7 +39,7 @@ namespace DAL.Modelos
 
     }
 
-    [MetadataType(typeof(ClienteMetadata))] // Con este decorador "MetadataType" asociamos las clases "Metadata" que realizarán validaciones sobre el modelo
+    [ModelMetadataType(typeof(ClienteMetadata))] // Con este decorador "MetadataType" asociamos las clases "Metadata" que realizarán validaciones sobre el modelo
     public partial class Cliente : IIdentificableEntity, IAuditableEntity
     {
         [NotMapped] // Para que no se tenga en cuenta esta property en la base de datos, ya que es una propiedad logica de la aplicacion
@@ -47,14 +47,14 @@ namespace DAL.Modelos
 
     }
 
-    [MetadataType(typeof(PedidoMetadata))] // Con este decorador "MetadataType" asociamos las clases "Metadata" que realizarán validaciones sobre el modelo
+    [ModelMetadataType(typeof(PedidoMetadata))] // Con este decorador "MetadataType" asociamos las clases "Metadata" que realizarán validaciones sobre el modelo
     public partial class Pedido : IIdentificableEntity, IAuditableEntity
     {
         [NotMapped] // Para que no se tenga en cuenta esta property en la base de datos, ya que es una propiedad logica de la aplicacion
         public int Id { get => IdPedido; set => IdPedido = value; }
     }
 
-    [MetadataType(typeof(PedidoArticuloMetadata))] // Con este decorador "MetadataType" asociamos las clases "Metadata" que realizarán validaciones sobre el modelo
+    [ModelMetadataType(typeof(PedidoArticuloMetadata))] // Con este decorador "MetadataType" asociamos las clases "Metadata" que realizarán validaciones sobre el modelo
     public partial class PedidoArticulo
     {
     }

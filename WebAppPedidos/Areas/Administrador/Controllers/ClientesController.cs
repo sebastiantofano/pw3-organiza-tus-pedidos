@@ -1,13 +1,9 @@
 ﻿using DAL.Modelos;
-using DAL.Repositorios;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Servicios.Administrador;
 using Servicios.Administrador.Interfaces;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace WebAppPedidos.Areas.Administrador.Controllers
 {
@@ -26,6 +22,7 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
             return RedirectToAction("AdministrarClientes");
         }
 
+        [HttpGet]
         public IActionResult AgregarCliente()
         {
             return View();
