@@ -4,11 +4,14 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Servicios.Administrador.Interfaces;
+using Servicios.Helpers.Exceptions;
 using Servicios.UsuarioGeneral.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 using WebAPI.RequestObjects;
 using WebAPI.ResponseObjects;
@@ -70,21 +73,29 @@ namespace WebAPI.Controllers
         [Route("guardar")]
         public ActionResult<dynamic> GuardarPedido([FromBody] NuevoPedidoRequest nuevoPedidoRequest)
         {
-            Pedido nuevoPedido = new();
+            Pedido nuevoPedido = _mapper.Map<Pedido>(nuevoPedidoRequest);
             nuevoPedido.IdCliente = nuevoPedidoRequest.IdCliente;
+            nuevoPedido.CreadoPor = nuevoPedidoRequest.CreadoPor;
 
-            int idPedidoInsertado = _pedidosService.(nuevoPedido);
-         
-            List<PedidoArticulo> pedidoArticulos = _mapper.Map<List<PedidoArticulo>>(nuevoPedidoRequest.Articulos);
-            foreach (PedidoArticulo pedidoArticulo in pedidoArticulos)
+            try
             {
-                pedidoArticulo.IdPedido = idPedidoInsertado;
-                _pedidosService.AgregarArticuloYCantidadAlPedido(pedidoArticulo);
+                int idPedidoInsertado = _pedidosService.CrearPedidoAPI(nuevoPedido);
+                List<PedidoArticulo> pedidoArticulos = _mapper.Map<List<PedidoArticulo>>(nuevoPedidoRequest.Articulos);
+                foreach (PedidoArticulo pedidoArticulo in pedidoArticulos)
+                {
+                    pedidoArticulo.IdPedido = idPedidoInsertado;
+                    _pedidosService.AgregarArticuloYCantidadAlPedidoAPI(pedidoArticulo);
+                }
+                return new {
+                    mensaje = "Pedido guardado exitosamente"
+                };
             }
-           
-            return new {
-               mensaje = "Pedido guardado exitosamente"
-            };
+            catch(PedidoException e)
+            {
+                return new {
+                    mensaje = e.Message
+                };
+            } 
         }
     }
 }

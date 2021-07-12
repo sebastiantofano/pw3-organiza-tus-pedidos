@@ -115,7 +115,9 @@ namespace DAL.Repositorios
 
         public int CrearPedidoAPI(Pedido pedido)
         {
-            throw new NotImplementedException();
+            _pedidosPW3Context.Add(pedido);
+            _pedidosPW3Context.SaveChanges();
+            return pedido.Id;
         }
     }
 }

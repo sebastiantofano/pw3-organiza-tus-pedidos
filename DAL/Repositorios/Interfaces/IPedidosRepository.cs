@@ -19,7 +19,7 @@ namespace DAL.Repositorios.Interfaces
         void EliminarArticuloAlPedido(PedidoArticulo pedidoArticulo);
         int UltimoNumeroPedidoInsertadoParaCliente(int idCliente);
         List<Pedido> BuscarPedidosPorCliente(int idCliente);
-
         int CrearPedidoAPI(Pedido pedido);
+
     }
 }

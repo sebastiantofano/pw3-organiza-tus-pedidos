@@ -15,5 +15,8 @@ namespace Servicios.UsuarioGeneral.Interfaces
         void MarcarComoEntregado(int idPedido);
         void EliminarArticuloAlPedido(PedidoArticulo pedidoArticulo);
         List<Pedido> BuscarPedidosPorCliente(int idCliente);
+        int CrearPedidoAPI(Pedido pedido);
+
+        void AgregarArticuloYCantidadAlPedidoAPI(PedidoArticulo pedidoArticulo);
     }
 }

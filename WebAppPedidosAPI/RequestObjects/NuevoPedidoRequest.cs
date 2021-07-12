@@ -9,7 +9,7 @@ namespace WebAPI.RequestObjects
     {
         public int IdCliente { get; set; }
 
-        public int ModificadoPor { get; set; }
+        public int CreadoPor { get; set; }
 
         public List<PedidoArticuloRequest> Articulos { get; set; }
     }
