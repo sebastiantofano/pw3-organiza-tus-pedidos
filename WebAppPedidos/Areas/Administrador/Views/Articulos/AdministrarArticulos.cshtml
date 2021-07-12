@@ -7,6 +7,7 @@
 @section Styles{
 
     <link href="~/themes/assets/css/lib/data-table/buttons.bootstrap.min.css" rel="stylesheet" />
+    <link href="~/themes/assets/css/lib/sweetalert/sweetalert.css" rel="stylesheet">
 }
 
 <div class="row">
@@ -105,7 +106,7 @@
                                                 @if (articulo.FechaBorrado == null)
                                                 {
                                                     <form method="POST" asp-area="Administrador" asp-controller="Articulos" asp-action="EliminarArticulo" asp-route-IdArticulo="@articulo.IdArticulo">
-                                                        <button type="submit" class="btn btn-outline-danger btn-flat btn-addon btn-sm" onclick="return confirm('¿Usted está seguro que desea eliminar artículo? \nCódigo: @articulo.Codigo \nDescripción: @articulo.Descripcion')"> <i class="ti-close"></i>Eliminar</button>
+                                                        <button type="button" value="submit" class="btn btn-outline-danger btn-flat btn-addon btn-sm sweet-confirm"> <i class="ti-close"></i>Eliminar</button>
                                                     </form>
 
                                                 }
@@ -131,7 +132,6 @@
 
 
 @section Scripts{
-
     <script src="~/themes/assets/js/lib/data-table/datatables.min.js"></script>
     <script src="~/themes/assets/js/lib/data-table/dataTables.buttons.min.js"></script>
     <script src="~/themes/assets/js/lib/data-table/buttons.flash.min.js"></script>
@@ -143,4 +143,7 @@
     <script src="~/themes/assets/js/lib/data-table/datatables-init.js"></script>
 
     <script src="~/js/OcultarEliminadosDataTable.js"></script>
+
+    <script src="~/themes/assets/js/lib/sweetalert/sweetalert.min.js"></script>
+    <script src="~/js/SweetAlertEliminarArticulo.js"></script>
 }
