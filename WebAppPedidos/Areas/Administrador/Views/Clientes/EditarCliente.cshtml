@@ -73,6 +73,8 @@
                                     <label class="col-lg-1 col-form-label" asp-for="Cuit">CUIT</label>
                                     <div class="col-lg-4">
                                         <input type="text" class="form-control" placeholder="CUIT" asp-for="Cuit" value="@Model.Cuit">
+                                        <span asp-validation-for="Cuit" class="text-danger"></span>
+
                                     </div>
                                     <label class="col-lg-0 col-form-label">Dirección</label>
                                     <div class="col-lg-6">
