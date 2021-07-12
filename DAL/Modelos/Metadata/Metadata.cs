@@ -11,6 +11,26 @@ using System.Threading.Tasks;
 namespace DAL.Modelos
 {
 
+    public class ClienteMetadata
+    {
+        [Required(ErrorMessage = "Debe ingresar un obligatoriamente un nombre")]
+        [StringLength(10, ErrorMessage = "El nombre no puede tener más de 10 caractéres")]
+        public string Nombre { get; set; }
+
+
+        public string Email { get; set; }
+
+
+        public string Numero { get; set; }
+
+
+        public string Cuit { get; set; }
+
+
+        public string Telefono { get; set; }
+    }
+
+
     public class ArticuloMetadata
     {
         [Required(ErrorMessage = "Debe introducir obligatoriamente un código de artículo")]
@@ -39,24 +59,7 @@ namespace DAL.Modelos
         public string Nombre { get; set; }
     }
 
-    public class ClienteMetadata
-    {
-        [Required(ErrorMessage = "Debe ingresar obligatoriamente un nombre")]
-        public string Nombre { get; set; }
 
-        [Required(ErrorMessage = "Debe ingresar un obligatoriamente un email")]
-        [EmailAddress(ErrorMessage = "Ingrese un formato de email válido")]
-        public string Email { get; set; }
-
-        [RegularExpression("(^[0-9]+$)", ErrorMessage = "Solo se permiten números")]
-        public string Numero { get; set; }
-
-        [RegularExpression("(^[0-9]+$)", ErrorMessage = "Solo se permiten números")]
-        public string Cuit { get; set; }
-
-        [RegularExpression("(^[0-9]+$)", ErrorMessage = "Solo se permiten números")]
-        public string Telefono { get; set; }
-    }
 
     public class PedidoMetadata
     {

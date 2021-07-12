@@ -12,6 +12,7 @@
         </div>
     </div>
 </div>
+
 <section id="main-content">
     <div class="row">
         <div class="col-lg-12">
@@ -20,7 +21,6 @@
                     <form class="form-valide" action="/Administrador/Articulos/AgregarArticulo" method="POST">
 
                         <div class="card-body">
-
                             <div class="form-group row align-items-center">
                                 <label asp-for="Codigo" class="col-lg-1 col-form-label">Código <span class="text-danger">*</span></label>
                                 <div class="col-lg-5 input-group ml-3">
@@ -28,7 +28,6 @@
                                         <div class="input-group-text">COD_</div>
                                     </div>
                                     <input asp-for="Codigo" type="text" name="Codigo" class="form-control" placeholder="Código del Artículo">
-
                                 </div>
                                 <span asp-validation-for="Codigo" class="text-danger"></span>
                             </div>
@@ -39,8 +38,6 @@
                                     <span asp-validation-for="Descripcion" class="text-danger"></span>
                                 </div>
                             </div>
-
-
                         </div>
                         <div class="col-auto my-1">
                             <div class="custom-control custom-checkbox mr-sm-3">
@@ -48,8 +45,6 @@
                                 <label class="custom-control-label" for="customControlAutosizing">Seguiré en la ventana de creación de artículos</label>
                             </div>
                         </div>
-
-
                         <div class="row">
                             <div class="col-lg-12 d-flex align-items-center">
                                 <button type="submit" class="btn btn-dark col-lg-4 m-1">Guardar artículo en el Inventario</button>

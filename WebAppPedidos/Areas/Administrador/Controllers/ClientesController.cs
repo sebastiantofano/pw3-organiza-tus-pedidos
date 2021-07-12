@@ -30,16 +30,9 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
         {
             return View();
         }
-
-        [HttpGet]
-        public IActionResult CrearCliente()
-        {
-            return View();
-        }
-
         
         [HttpPost]
-        public IActionResult CrearCliente(Cliente cliente)
+        public IActionResult AgregarCliente(Cliente cliente)
         {
             if (ModelState.IsValid)
             {
