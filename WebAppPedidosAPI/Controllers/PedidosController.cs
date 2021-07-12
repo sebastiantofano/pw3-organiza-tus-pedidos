@@ -20,7 +20,7 @@ namespace WebAPI.Controllers
     public class PedidosController : ControllerBase
     {
         private readonly IPedidosService _pedidosService;
-        private readonly IMapper _mapper; 
+        private readonly IMapper _mapper;
 
         public PedidosController(IPedidosService pedidosService, IMapper mapper)
         {
@@ -66,5 +66,25 @@ namespace WebAPI.Controllers
         }
 
 
+        [HttpPost]
+        [Route("guardar")]
+        public ActionResult<dynamic> GuardarPedido([FromBody] NuevoPedidoRequest nuevoPedidoRequest)
+        {
+            Pedido nuevoPedido = new();
+            nuevoPedido.IdCliente = nuevoPedidoRequest.IdCliente;
+
+            int idPedidoInsertado = _pedidosService.(nuevoPedido);
+         
+            List<PedidoArticulo> pedidoArticulos = _mapper.Map<List<PedidoArticulo>>(nuevoPedidoRequest.Articulos);
+            foreach (PedidoArticulo pedidoArticulo in pedidoArticulos)
+            {
+                pedidoArticulo.IdPedido = idPedidoInsertado;
+                _pedidosService.AgregarArticuloYCantidadAlPedido(pedidoArticulo);
+            }
+           
+            return new {
+               mensaje = "Pedido guardado exitosamente"
+            };
+        }
     }
 }

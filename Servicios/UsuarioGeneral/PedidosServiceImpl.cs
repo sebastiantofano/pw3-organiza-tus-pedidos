@@ -32,10 +32,10 @@ namespace Servicios.UsuarioGeneral
             }
             else
             {
-                if(pedidoArticulo.Cantidad <= 0)
-                {
-                    throw new PedidoException("La cantidad ingresada debe ser mayor a 0 (cero)");
-                }
+                //if(pedidoArticulo.Cantidad <= 0)
+                //{
+                //    throw new PedidoException("La cantidad ingresada debe ser mayor a 0 (cero)");
+                //}
                 _pedidosRepository.AgregarArticuloYCantidadAlPedido(pedidoArticulo);
             }
 

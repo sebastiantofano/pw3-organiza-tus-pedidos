@@ -66,7 +66,8 @@ namespace DAL.Modelos
 
     public class PedidoMetadata
     {
-
+        [Required(ErrorMessage = "Debe seleccionar obligatoriamente un cliente")]
+        public int IdCliente { get; set; }
     }
 
     public class PedidoArticuloMetadata
@@ -78,7 +79,6 @@ namespace DAL.Modelos
         public int IdArticulo { get; set; }
 
         [Required(ErrorMessage = "Debe introducir obligatoriamente una cantidad")]
-        [RegularExpression("([1-9][0-9]*)")]
         public int Cantidad { get; set; }
     }
 }

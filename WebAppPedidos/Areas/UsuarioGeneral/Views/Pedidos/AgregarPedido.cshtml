@@ -1,4 +1,5 @@
 ﻿@using DAL.Modelos
+@model Pedido
 @{
     List<Articulo> selectArticulos = ViewBag.Articulos;
     List<Cliente> selectClientes = ViewBag.Clientes;
@@ -24,19 +25,22 @@
                         <form asp-area="UsuarioGeneral" asp-controller="Pedidos" asp-action="AgregarPedido" method="POST">
 
                             <div class="form-group row ml-2">
-                                <label class="col-form-label mt-2" for="val-username">
+                                <label asp-for="IdCliente" class="col-form-label mt-2" for="val-username">
                                     Cliente <span class="text-danger">*</span>
                                 </label>
                                 <div class="col-lg-7 ml-3">
-                                    <select class="form-control" id="select-cliente" name="idCliente">
+                                    <select class="form-control" id="select-cliente" name="idCliente" asp-for="IdCliente">
                                         <option value="">Seleccione un cliente</option>
                                         @foreach (Cliente cliente in selectClientes)
                                         {
                                             <option value="@cliente.IdCliente">Nro Cliente: @cliente.Numero -  Nombre: @cliente.Nombre</option>
                                         }
                                     </select>
+                                    <span asp-validation-for="IdCliente" class="text-danger"></span>
                                 </div>
+                               
                             </div>
+                           
                             <div class="form-group row ml-2">
                                 <label class="col-form-label mt-2" for="val-skill">
                                     Artículo <span class="text-danger">*</span>
@@ -81,11 +85,12 @@
 
                         </form>
                     </div>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-
 </section>
+
+@section Scripts{
+    @{await Html.RenderPartialAsync("~/Views/Shared/_ValidationScriptsPartial.cshtml");}
+}

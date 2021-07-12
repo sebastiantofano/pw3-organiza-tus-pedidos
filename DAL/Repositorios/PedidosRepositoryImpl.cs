@@ -112,5 +112,10 @@ namespace DAL.Repositorios
         {
             return _pedidosPW3Context.Pedidos.Where(p => p.IdCliente == idCliente).ToList();
         }
+
+        public int CrearPedidoAPI(Pedido pedido)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
