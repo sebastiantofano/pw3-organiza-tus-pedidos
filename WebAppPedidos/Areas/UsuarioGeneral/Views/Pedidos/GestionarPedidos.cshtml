@@ -56,32 +56,32 @@
                                     <tbody id="body-table">
                                         @foreach (var pedido in Model)
                                         {
-                                        <tr>
-                                            <td>@pedido.NroPedido</td>
+                                            <tr>
+                                                <td>@pedido.NroPedido</td>
 
-                                            <td>@pedido.IdClienteNavigation.Nombre</td>
+                                                <td>@pedido.IdClienteNavigation.Nombre</td>
 
-                                            <td class="estado-pedido">@pedido.IdEstadoNavigation.Descripcion</td>
+                                                <td class="estado-pedido">@pedido.IdEstadoNavigation.Descripcion</td>
 
-                                            <td>@(pedido.FechaBorrado == null ? "VIGENTE" : "ELIMINADO")</td>
+                                                <td>@(pedido.FechaBorrado == null ? "VIGENTE" : "ELIMINADO")</td>
 
-                                            <td class="">@(pedido.ModificadoPor != null ? @String.Format("El día {0} por {1} {2}", pedido.FechaModificacion?.ToShortDateString(), pedido.ModificadoPorNavigation.Nombre, pedido.ModificadoPorNavigation.Apellido): "Modificación no identificada" )</td>
+                                                <td class="">@(pedido.ModificadoPor != null ? @String.Format("El día {0} por {1} {2}", pedido.FechaModificacion?.ToShortDateString(), pedido.ModificadoPorNavigation.Nombre, pedido.ModificadoPorNavigation.Apellido): "Modificación no identificada" )</td>
 
-                                            <td class="row justify-content-between align-items-center">
-                                                <a asp-area="UsuarioGeneral" asp-controller="Pedidos" asp-action="EditarPedido" asp-route-id="@pedido.IdPedido"
-                                                   class="btn btn-outline-info btn-flat btn-addon btn-sm mr-1">
-                                                    <i class="ti-pencil"></i>Editar
-                                                </a>
-                                                @if (pedido.FechaBorrado == null)
-                                                {
-                                                    <form method="POST" asp-area="UsuarioGeneral" asp-controller="Pedidos" asp-action="EliminarPedido" asp-route-IdPedido="@pedido.IdPedido">
-                                                        <button type="submit" class="btn btn-outline-danger btn-flat btn-addon btn-sm" onclick="return confirm('¿Usted está seguro que desea eliminar el pedido?')"> <i class="ti-close"></i>Eliminar</button>
-                                                    </form>
+                                                <td class="row justify-content-between align-items-center">
+                                                    <a asp-area="UsuarioGeneral" asp-controller="Pedidos" asp-action="EditarPedido" asp-route-id="@pedido.IdPedido"
+                                                       class="btn btn-outline-info btn-flat btn-addon btn-sm mr-1">
+                                                        <i class="ti-pencil"></i>Editar
+                                                    </a>
+                                                    @if (pedido.FechaBorrado == null)
+                                                    {
+                                                        <form method="POST" asp-area="UsuarioGeneral" asp-controller="Pedidos" asp-action="EliminarPedido" asp-route-IdPedido="@pedido.IdPedido">
+                                                            <button type="submit" class="btn btn-outline-danger btn-flat btn-addon btn-sm" onclick="return confirm('¿Usted está seguro que desea eliminar el pedido?')"> <i class="ti-close"></i>Eliminar</button>
+                                                        </form>
 
-                                                }
+                                                    }
 
-                                            </td>
-                                        </tr>
+                                                </td>
+                                            </tr>
                                         }
                                     </tbody>
                                     <tfoot class="col-12">
@@ -100,8 +100,12 @@
                     </div>
                 </div>
             </div>
-            
-            <script src="~/themes/assets/js/lib/data-table/datatables.min.js"></script>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/themes/assets/js/lib/data-table/datatables.min.js"></script>
     <script src="~/themes/assets/js/lib/data-table/dataTables.buttons.min.js"></script>
     <script src="~/themes/assets/js/lib/data-table/jszip.min.js"></script>
     <script src="~/themes/assets/js/lib/data-table/pdfmake.min.js"></script>
@@ -111,4 +115,8 @@
     <script src="~/themes/assets/js/lib/data-table/buttons.colVis.min.js"></script>
     <script src="~/themes/assets/js/lib/data-table/datatables-init.js"></script>
     <script src="~/js/OcultarEliminadosDataTable.js"></script>
+    <script src="~/js/OrdenarDataTablesPedidos.js"></script>
+
+  
 }
+

@@ -32,10 +32,6 @@ namespace Servicios.UsuarioGeneral
             }
             else
             {
-                if(pedidoArticulo.Cantidad <= 0)
-                {
-                    throw new PedidoException("La cantidad ingresada debe ser mayor a 0 (cero)");
-                }
                 _pedidosRepository.AgregarArticuloYCantidadAlPedido(pedidoArticulo);
             }
 
@@ -103,6 +99,34 @@ namespace Servicios.UsuarioGeneral
         public List<Pedido> BuscarPedidosPorCliente(int idCliente)
         {
             return _pedidosRepository.BuscarPedidosPorCliente(idCliente);
+        }
+
+        public int CrearPedidoAPI(Pedido pedido)
+        {
+            bool existePedidoAbiertoDeCliente = _pedidosRepository.ComprobarExistenciaDeUnPedidoAbiertoDeCliente(pedido.IdCliente);
+            if (existePedidoAbiertoDeCliente)
+            {
+                Cliente cliente = _clientesRepository.ObtenerPorId(pedido.IdCliente);
+                throw new PedidoException($"Ya existe un pedido abierto para el cliente {cliente.Nombre}");
+            }
+            pedido.IdEstado = (int)EstadoPedidoEnum.ABIERTO;
+            int idIUltimoPedidoInsertadoParaCliente = _pedidosRepository.UltimoNumeroPedidoInsertadoParaCliente(pedido.IdCliente);
+            pedido.NroPedido = idIUltimoPedidoInsertadoParaCliente + 1;
+            return _pedidosRepository.CrearPedidoAPI(pedido);
+        }
+
+        public void AgregarArticuloYCantidadAlPedidoAPI(PedidoArticulo pedidoArticulo)
+        {
+            bool articuloYaExiste = _pedidosRepository.ValidarExistenciaDeArticuloEnPedido(pedidoArticulo);
+
+            if (articuloYaExiste)
+            {
+                _pedidosRepository.AdicionarCantidadAlArticuloDelPedido(pedidoArticulo);
+            }
+            else
+            {
+                _pedidosRepository.AgregarArticuloYCantidadAlPedido(pedidoArticulo);
+            }
         }
     }
 }

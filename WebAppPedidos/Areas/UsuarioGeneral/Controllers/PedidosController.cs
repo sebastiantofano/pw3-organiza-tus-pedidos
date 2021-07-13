@@ -55,7 +55,7 @@ namespace WebAppPedidos.Areas.UsuarioGeneral.Controllers
         [HttpPost]
         public IActionResult AgregarPedido(Pedido pedido, PedidoArticulo pedidoArticulo, bool permanecerView) // TODO: ¿Puedo hacer esto, o conviene un ViewModel?
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid || pedidoArticulo.Cantidad <= 0)
             {
                 TempData["toastr_error"] = "No ha ingresado correctamente la información del pedido !";
                 return RedirectToAction("AgregarPedido");

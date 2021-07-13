@@ -28,6 +28,8 @@ namespace WebAPI.ResponseObjects
                 .ForMember(p => p.ModificadoPor, opt => opt.MapFrom(x => x.ModificadoPorNavigation));
 
             CreateMap<UsuarioLoginRequest, Usuario>();
+            CreateMap<NuevoPedidoRequest, Pedido>();
+            CreateMap<PedidoArticuloRequest, PedidoArticulo>();
 
         }
     }

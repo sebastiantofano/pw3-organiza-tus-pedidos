@@ -37,7 +37,7 @@
                                     <input type="text" name="Descripcion" asp-for="Descripcion" class="form-control" placeholder="Descripción del Artículo">
                                     <span asp-validation-for="Descripcion" class="text-danger"></span>
                                 </div>
-                                
+
                             </div>
                         </div>
                         <div class="col-auto my-1">
@@ -58,6 +58,12 @@
         </div>
     </div>
 </section>
+
+@section Styles{
+    <link href="~/themes/assets/css/lib/sweetalert/sweetalert.css" rel="stylesheet">
+}
+
+
 
 @section Scripts{
     @{await Html.RenderPartialAsync("~/Views/Shared/_ValidationScriptsPartial.cshtml");}
