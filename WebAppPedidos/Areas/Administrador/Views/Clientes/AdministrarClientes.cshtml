@@ -27,39 +27,45 @@
                         <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th class="col-md-1">N° Cliente</th>
+                                    <th class="col-md-1">N°</th>
                                     <th class="col-md-3">Nombre de Cliente</th>
                                     <th class="col-md-3">E-mail</th>
                                     <th class="col-md-2">CUIT</th>
                                     <th>Vigencia</th>
+                                    <th>Modificacion</th>
                                     <th class="col-md-3"></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach (var cliente in Model)
                                 {
-                                    <tr>
-                                        <td>@cliente.IdCliente</td>
-                                        <td>@cliente.Nombre</td>
-                                        <td>@cliente.Email</td>
-                                        <td>@cliente.Cuit</td>
-                                        <td>
-                                            <span class="badge badge-@(cliente.FechaBorrado == null ? "success" : "danger")">
-                                                @(cliente.FechaBorrado == null ? "VIGENTE" : "ELIMINADO")
-                                            </span>
-                                        </td>
-                                        <td>
+                                <tr>
+                                    <td>@cliente.IdCliente</td>
+                                    <td>@cliente.Nombre</td>
+                                    <td>@cliente.Email</td>
+                                    <td>@cliente.Cuit</td>
+                                    <td>
+                                        <span class="badge badge-@(cliente.FechaBorrado == null ? "success" : "danger")">
+                                            @(cliente.FechaBorrado == null ? "VIGENTE" : "ELIMINADO")
+                                        </span>
+                                    </td>
+                                    <td class="">@(cliente.ModificadoPor != null ? @String.Format("El día {0} por {1} {2}", cliente.FechaModificacion?.ToShortDateString(), cliente.ModificadoPorNavigation.Nombre, cliente.ModificadoPorNavigation.Apellido): "Modificación no identificada" )</td>
+
+                                    <td>
+                                        @if (cliente.FechaBorrado == null)
+                                        {
 
                                             <a asp-area="Administrador" asp-controller="Clientes" asp-action="EditarCliente" asp-route-id="@cliente.IdCliente"
                                                class="btn btn-outline-info btn-flat btn-addon btn-sm mr-2">
                                                 <i class="ti-pencil"></i>Editar
                                             </a>
-                                            <a asp-area="Administrador" asp-controller="Clientes" asp-action="EliminarCliente" asp-route-id="@cliente.IdCliente"
-                                               class="btn btn-outline-danger btn-flat btn-addon btn-sm">
-                                                <i class="ti-close"></i>Eliminar
-                                            </a>
-                                        </td>
-                                    </tr>
+                                        <a asp-area="Administrador" asp-controller="Clientes" asp-action="EliminarCliente" asp-route-id="@cliente.IdCliente"
+                                           class="btn btn-outline-danger btn-flat btn-addon btn-sm">
+                                            <i class="ti-close"></i>Eliminar
+                                        </a>
+                                        }
+                                    </td>
+                                </tr>
                                 }
                             </tbody>
                         </table>
