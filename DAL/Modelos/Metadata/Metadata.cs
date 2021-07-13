@@ -14,24 +14,23 @@ namespace DAL.Modelos
     public class ClienteMetadata
     {
         [Required(ErrorMessage = "Debe ingresar un obligatoriamente un nombre")]
-        [StringLength(50, ErrorMessage = "El nombre no puede tener más de 10 caractéres")]
+        [StringLength(50, ErrorMessage = "El nombre no puede tener más de 50 caractéres")]
         public string Nombre { get; set; }
 
-        [Required(ErrorMessage = "Debe ingresar obligatoriamente un email")]
+        [Required(ErrorMessage = "Debe ingresar un obligatoriamente un email")]
         [EmailAddress(ErrorMessage = "Ingrese un formato de email válido")]
         public string Email { get; set; }
 
         [RegularExpression("(^[0-9]+$)", ErrorMessage = "Solo se permiten números")]
-        [StringLength(5, ErrorMessage = "El numero no puede tener más de 5 caractéres")]
-        public string Numero { get; set; }
+        public int Numero { get; set; }
 
         [RegularExpression("(^[0-9]+$)", ErrorMessage = "Solo se permiten números")]
-      /*  [Range(8,11, ErrorMessage = "El cuit no puede tener menos de 8 caractéres, ni mas de 11")] */
         public string Cuit { get; set; }
 
         [RegularExpression("(^[0-9]+$)", ErrorMessage = "Solo se permiten números")]
-        public string Telefono { get; set; }
+        public string Telefono { get; set;
     }
+
 
 
     public class ArticuloMetadata
