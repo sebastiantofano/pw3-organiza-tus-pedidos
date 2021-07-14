@@ -89,8 +89,11 @@
                             <div class="row">
                                 <div class="col-lg-12 d-flex align-items-center">
                                     <button type="submit" class="btn btn-dark col-lg-4 m-1">Guardar Modificaciones</button>
-                                    <button type="submit" class="btn btn-outline-danger col-lg-3 ml-auto">Eliminar Cliente</button>
-                                    <a href="javascript:history.back(-1);" class="btn btn-default ml-2 ">Volver</a>
+                                    <a asp-area="Administrador" asp-controller="Clientes" asp-action="EliminarCliente" asp-route-id="@Model.IdCliente"
+                                        class="btn btn-outline-danger col-lg-3 ml-auto" onclick="return confirm('¿Usted está seguro que desea eliminar el cliente?')">
+                                        <i class="ti-close"></i>   Eliminar
+                                    </a>
+                                    <a href="javascript:history.back(-1);" class="btn btn-default ml-2 ">Cancelar</a>
                                 </div>
                             </div>
 
