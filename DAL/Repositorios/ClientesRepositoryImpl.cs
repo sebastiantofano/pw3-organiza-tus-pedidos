@@ -21,11 +21,10 @@ namespace DAL.Repositorios
         {
 
             Cliente clienteExistente = _pedidosPW3Context.Clientes.Where(o => o.Email == email).FirstOrDefault();
-            if (clienteExistente == null || clienteExistente.BorradoPor != null)
+            if (clienteExistente == null || clienteExistente.Email == null)
             {
                 return false;
             }
-
             return true;
 
         }

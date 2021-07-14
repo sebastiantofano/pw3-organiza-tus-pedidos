@@ -65,7 +65,6 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
 
         public IActionResult AdministrarClientes()
         {
-
             List<Cliente> listaClientes = _clientesService.ObtenerTodosOrdenAnalfabetico();
             return View(listaClientes);
         }

@@ -17,7 +17,6 @@ namespace DAL.Modelos
         [StringLength(50, ErrorMessage = "El nombre no puede tener más de 50 caractéres")]
         public string Nombre { get; set; }
 
-        [Required(ErrorMessage = "Debe ingresar un obligatoriamente un email")]
         [EmailAddress(ErrorMessage = "Ingrese un formato de email válido")]
         public string Email { get; set; }
 
