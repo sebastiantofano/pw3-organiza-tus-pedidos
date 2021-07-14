@@ -29,7 +29,7 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
         }
         
         [HttpPost]
-        public IActionResult AgregarCliente(Cliente cliente)
+        public IActionResult AgregarCliente(Cliente cliente, string guardar)
         {
             if (ModelState.IsValid)
             {
@@ -40,13 +40,20 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
                     return RedirectToAction("AdministrarClientes");
                 }
                 _clientesService.Insertar(cliente);
+
+                if (guardar.ToLower().Equals("guardar"))
+                {
+                    TempData["toastr_success"] = "Se ha creado al cliente correctamente !";
+                    return RedirectToAction("AdministrarClientes");
+                }
                 TempData["toastr_success"] = "Se ha creado al cliente correctamente !";
-                return RedirectToAction("AdministrarClientes");
+                return RedirectToAction("AgregarCliente");
+
             }
 
             TempData["toastr_error"] = "No se ha podido crear el cliente correctamente !";
             return View();
-        } 
+        }
 
         public IActionResult AdministrarClientes()
         {
