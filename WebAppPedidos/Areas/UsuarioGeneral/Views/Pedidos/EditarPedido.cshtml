@@ -189,7 +189,7 @@
                                     <tr>
                                         <td>@articuloYCantidadEnPedido.Key.Descripcion</td>
                                         <td>@articuloYCantidadEnPedido.Key.Codigo</td>
-                                        <td>@articuloYCantidadEnPedido.Value <span class="text-danger">@(articuloYCantidadEnPedido.Value == 0? " (Se recomienda quitar este articulo del pedido)" : "")</span></td>
+                                        <td>@articuloYCantidadEnPedido.Value Unidades<span class="text-danger">@(articuloYCantidadEnPedido.Value == 0? " (Se recomienda quitar este articulo del pedido)" : "")</span></td>
                                         <td>
                                             @if (@Model.Pedido.IdEstado == (int)EstadoPedidoEnum.ABIERTO && @Model.Pedido.FechaBorrado == null)
                                             {

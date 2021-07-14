@@ -31,7 +31,7 @@
                                         <div class="input-group-prepend ml-3">
                                             <div class="input-group-text">COD_</div>
 
-                                            <input type="text" asp-for="Codigo" class="form-control" name="Codigo" placeholder="Código del Artículo" value="@Model.Codigo.Substring(4)" required disabled="@(Model.FechaBorrado == null ? false : true)">
+                                            <input type="text" asp-for="Codigo" class="form-control" name="Codigo" placeholder="Código del Artículo" value="@Model.Codigo" required disabled="@(Model.FechaBorrado == null ? false : true)">
                                         </div>
                                         <span asp-validation-for="Codigo" class="text-danger"></span>
                                     </div>
