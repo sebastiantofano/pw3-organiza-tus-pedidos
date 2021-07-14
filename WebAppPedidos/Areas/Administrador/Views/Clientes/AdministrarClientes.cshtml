@@ -38,7 +38,7 @@
                     <div class="card">
                         <div class="bootstrap-data-table-panel">
                             <div class="table-responsive">
-                                <table  class="display table table-borderd table-hover">
+                                <table  id="row-select" class="display table table-borderd table-hover">
                                     <thead>
                                         <tr>
                                             <th class="col-md-1">N°</th>
@@ -74,6 +74,16 @@
                                                         <a asp-area="Administrador" asp-controller="Clientes" asp-action="EditarCliente" asp-route-id="@cliente.IdCliente"
                                                            class="btn btn-outline-info btn-flat btn-addon btn-sm mr-2">
                                                             <i class="ti-pencil"></i>Editar
+                                                        </a>
+
+                                                    }
+
+                                                    @if (cliente.FechaBorrado != null)
+                                                    {
+
+                                                        <a asp-area="Administrador" asp-controller="Clientes" asp-action="EditarCliente" asp-route-id="@cliente.IdCliente"
+                                                           class="btn btn-outline-info btn-flat btn-addon btn-sm mr-2">
+                                                            <i class="ti-pencil"></i> Ver
                                                         </a>
 
                                                     }

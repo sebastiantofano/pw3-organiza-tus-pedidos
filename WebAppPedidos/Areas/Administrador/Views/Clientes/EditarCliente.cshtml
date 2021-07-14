@@ -20,7 +20,15 @@
     <div class="col-lg-8 p-r-0 title-margin-right">
         <div class="page-header">
             <div class="page-title">
-                <h2><i class="ti-user text-default"></i> Editar Cliente </h2>
+                @if (@Model.FechaBorrado == null)
+                {
+                    <h2><i class="ti-user text-default"></i> Editar Cliente </h2>
+                }
+                @if (@Model.FechaBorrado != null)
+                {
+                    <h2><i class="ti-user text-default"></i> Ver Cliente </h2>
+                }
+
             </div>
         </div>
     </div>
@@ -29,89 +37,156 @@
 <section id="main-content">
     <div class="row">
         <div class="col-lg-12">
+         
+
             <div class="form-validation">
+
                 @using (Html.BeginForm("EditarCliente", "Clientes", FormMethod.Post))
                 {
-                    <form class="form-valide">
-                        <div class="card">
+                    @if (@Model.FechaBorrado == null)
+                    {
+                        <form class="form-valide">
+                            <div class="card">
 
-                            <input type="hidden" name="IdCliente" value="@Model.IdCliente" />
-                            <input type="hidden" name="FechaCreacion" value="@Model.FechaCreacion" />   @*Ver como solucionar este problema de la fecha*@
+                                <input type="hidden" name="IdCliente" value="@Model.IdCliente" />
+                                <input type="hidden" name="FechaCreacion" value="@Model.FechaCreacion" />   @*Ver como solucionar este problema de la fecha*@
 
-                            <div class="card-body">
+                                <div class="card-body">
 
 
-                                <div class="form-group row align-items-center">
-                                    <label asp-for="Nombre" class="col-lg-1 col-form-label">Nombre <span class="text-danger">*</span></label>
-                                    <div class="col-lg-11">
-                                        <input type="text" class="form-control" asp-for="Nombre" placeholder="Nombre" value="@Model.Nombre">
-                                        <span asp-validation-for="Nombre" class="text-danger"></span>
+                                    <div class="form-group row align-items-center">
+                                        <label asp-for="Nombre" class="col-lg-1 col-form-label">Nombre <span class="text-danger">*</span></label>
+                                        <div class="col-lg-11">
+                                            <input type="text" class="form-control" asp-for="Nombre" placeholder="Nombre" value="@Model.Nombre">
+                                            <span asp-validation-for="Nombre" class="text-danger"></span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group row align-items-center">
-                                    <label class="col-lg-1 col-form-label">Nro Cliente</label>
-                                    <div class="col-lg-4">
-                                        <input type="number" class="form-control" placeholder="N°" value="@Model.Numero">
-                                    </div>
-                                    <label class="col-lg-1 col-form-label" asp-for="Telefono">Teléfono</label>
-                                    <div class="col-lg-6">
-                                        <input type="text" class="form-control "
-                                               placeholder="Telefono" value="@Model.Telefono" asp-for="Telefono">
-                                        <span asp-validation-for="Telefono" class="text-danger"></span>
+                                    <div class="form-group row align-items-center">
+                                        <label class="col-lg-1 col-form-label">Nro Cliente</label>
+                                        <div class="col-lg-4">
+                                            <input type="number" class="form-control" placeholder="N°" value="@Model.Numero">
+                                        </div>
+                                        <label class="col-lg-1 col-form-label" asp-for="Telefono">Teléfono</label>
+                                        <div class="col-lg-6">
+                                            <input type="text" class="form-control "
+                                                   placeholder="Telefono" value="@Model.Telefono" asp-for="Telefono">
+                                            <span asp-validation-for="Telefono" class="text-danger"></span>
 
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="input-group align-items-center">
-                                        <label asp-for="Email" class="col-lg-1 col-form-label val-email">E-mail</label>
-                                        <div class="input-group-prepend col-lg-11">
-                                            <span class="input-group-text">@@</span>
-                                            <input type="text" name="Email" asp-for="Email" class="form-control" placeholder="E-mail" value="@Model.Email">
-                                            <span asp-validation-for="Email" class="text-danger"></span>
+                                    <div class="form-group row">
+                                        <div class="input-group align-items-center">
+                                            <label asp-for="Email" class="col-lg-1 col-form-label val-email">E-mail</label>
+                                            <div class="input-group-prepend col-lg-11">
+                                                <span class="input-group-text">@@</span>
+                                                <input type="text" name="Email" asp-for="Email" class="form-control" placeholder="E-mail" value="@Model.Email">
+                                                <span asp-validation-for="Email" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row align-items-center">
+                                        <label class="col-lg-1 col-form-label" asp-for="Cuit">CUIT</label>
+                                        <div class="col-lg-4">
+                                            <input type="text" class="form-control" placeholder="CUIT" asp-for="Cuit" value="@Model.Cuit">
+                                            <span asp-validation-for="Cuit" class="text-danger"></span>
+
+                                        </div>
+                                        <label class="col-lg-0 col-form-label">Dirección</label>
+                                        <div class="col-lg-6">
+                                            <input type="text" class="form-control" placeholder="Dirección" value="@Model.Direccion">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group row align-items-center">
-                                    <label class="col-lg-1 col-form-label" asp-for="Cuit">CUIT</label>
-                                    <div class="col-lg-4">
-                                        <input type="text" class="form-control" placeholder="CUIT" asp-for="Cuit" value="@Model.Cuit">
-                                        <span asp-validation-for="Cuit" class="text-danger"></span>
 
-                                    </div>
-                                    <label class="col-lg-0 col-form-label">Dirección</label>
-                                    <div class="col-lg-6">
-                                        <input type="text" class="form-control" placeholder="Dirección" value="@Model.Direccion">
+
+                                <div class="row">
+                                    <div class="col-lg-12 d-flex align-items-center">
+                                        <button type="submit" class="btn btn-dark col-lg-4 m-1">Guardar Modificaciones</button>
+                                        @if (@Model.Pedidos.Count() == 0)
+                                        {
+                                            <a asp-area="Administrador" asp-controller="Clientes" asp-action="EliminarCliente" asp-route-id="@Model.IdCliente"
+                                               class="btn btn-outline-danger col-lg-3 ml-auto" onclick="return confirm('¿Usted está seguro que desea eliminar el cliente @Model.Nombre?')">
+                                                <i class="ti-close"></i>   Eliminar
+                                            </a>
+                                        }
+                                        @if (@Model.Pedidos.Count() > 0)
+                                        {
+                                            <a asp-area="Administrador" asp-controller="Clientes" asp-action="EliminarCliente" asp-route-id="@Model.IdCliente"
+                                               class="btn btn-outline-danger col-lg-3 ml-auto" onclick="return confirm('¿Usted está seguro que desea eliminar el cliente @Model.Nombre? ¡¡ADVERTENCIA!! al hacerlo también se eliminarán sus pedidos')">
+                                                <i class="ti-close"></i>   Eliminar
+                                            </a>
+                                        }
+
+                                        <a href="javascript:history.back(-1);" class="btn btn-default ml-2 ">Cancelar</a>
                                     </div>
                                 </div>
+
                             </div>
+                        </form>
+                    }
 
-
-                            <div class="row">
-                                <div class="col-lg-12 d-flex align-items-center">
-                                    <button type="submit" class="btn btn-dark col-lg-4 m-1">Guardar Modificaciones</button>
-                                    @if (@Model.Pedidos.Count() == 0)
-                                    {
-                                        <a asp-area="Administrador" asp-controller="Clientes" asp-action="EliminarCliente" asp-route-id="@Model.IdCliente"
-                                           class="btn btn-outline-danger col-lg-3 ml-auto" onclick="return confirm('¿Usted está seguro que desea eliminar el cliente @Model.Nombre?')">
-                                            <i class="ti-close"></i>   Eliminar
-                                        </a>
-                                    }
-                                    @if (@Model.Pedidos.Count() > 0)
-                                    {
-                                        <a asp-area="Administrador" asp-controller="Clientes" asp-action="EliminarCliente" asp-route-id="@Model.IdCliente"
-                                           class="btn btn-outline-danger col-lg-3 ml-auto" onclick="return confirm('¿Usted está seguro que desea eliminar el cliente @Model.Nombre? ¡¡ADVERTENCIA!! al hacerlo también se eliminarán sus pedidos')">
-                                            <i class="ti-close"></i>   Eliminar
-                                        </a>
-                                    }
-
-                                    <a href="javascript:history.back(-1);" class="btn btn-default ml-2 ">Cancelar</a>
-                                </div>
-                            </div>
-
-                        </div>
-                    </form>
                 }
 
+                @if (@Model.FechaBorrado != null)
+                {
+            <form class="form-valide">
+                <div class="card">
+
+                    <input type="hidden" name="IdCliente" value="@Model.IdCliente" />
+                    <input type="hidden" name="FechaCreacion" value="@Model.FechaCreacion" />   @*Ver como solucionar este problema de la fecha*@
+
+                    <div class="card-body">
+
+
+                        <div class="form-group row align-items-center">
+                            <label asp-for="Nombre" class="col-lg-1 col-form-label">Nombre <span class="text-danger">*</span></label>
+                            <div class="col-lg-11">
+                                <h3>@Model.Nombre</h3>
+                            </div>
+                        </div>
+                        <div class="form-group row align-items-center">
+                            <label class="col-lg-1 col-form-label">Nro Cliente</label>
+                            <div class="col-lg-4">
+                                <h5>@Model.Numero</h5>
+                            </div>
+                            <label class="col-lg-1 col-form-label" asp-for="Telefono">Teléfono</label>
+                            <div class="col-lg-6">
+                                <h5>@Model.Telefono</h5>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="input-group align-items-center">
+                                <label asp-for="Email" class="col-lg-1 col-form-label val-email">E-mail</label>
+                                <div class="input-group-prepend col-lg-11">
+                                    <h5>@Model.Email</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row align-items-center">
+                            <label class="col-lg-1 col-form-label" asp-for="Cuit">CUIT</label>
+                            <div class="col-lg-4">
+                                <h5>@Model.Cuit</h5>
+
+                            </div>
+                            <label class="col-lg-0 col-form-label">Dirección</label>
+                            <div class="col-lg-6">
+                                <h5>@Model.Direccion</h5>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row justify-content-end">
+                        <a href="javascript:history.back(-1);" class="btn btn-default ml-2 ">Volver</a>
+                        <div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </form>
+
+                }
                 <div class="row align-items-center">
                     <div class="col-lg-4">
                         <div class="card">
