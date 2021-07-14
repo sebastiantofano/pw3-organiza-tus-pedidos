@@ -38,13 +38,23 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
 
                 if (emailYaExistente)
                 {
+                    if (guardar.ToLower().Equals("guardar"))
+                    {
+                        TempData["toastr_error"] = "El email ya se encuentra registrado!";
+                        return RedirectToAction("AdministrarClientes");
+                    }
                     TempData["toastr_error"] = "El email ya se encuentra registrado!";
-                    return RedirectToAction("AdministrarClientes");
+                    return RedirectToAction("AgregarCliente");
                 }
                 if (numeroYaExistente)
                 {
+                    if (guardar.ToLower().Equals("guardar"))
+                    {
+                        TempData["toastr_error"] = "El numero de cliente ya se encuentra registrado!";
+                        return RedirectToAction("AdministrarClientes");
+                    }
                     TempData["toastr_error"] = "El numero de cliente ya se encuentra registrado!";
-                    return RedirectToAction("AdministrarClientes");
+                    return RedirectToAction("AgregarCliente");
                 }
 
                 _clientesService.Insertar(cliente);
