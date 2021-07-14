@@ -29,5 +29,12 @@ namespace Servicios.Administrador
         {
             return _clientesRepository.FiltrarPorNombre(cadena);
         }
+
+        public List<Cliente> ObtenerTodosOrdenAnalfabetico()
+        {
+            return _clientesRepository.ObtenerTodosOrdenAnalfabetico();
+
+        }
+
     }
 }

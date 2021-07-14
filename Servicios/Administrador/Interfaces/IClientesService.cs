@@ -11,5 +11,7 @@ namespace Servicios.Administrador.Interfaces
     {
         bool ValidarEmailExistente(string email);
         List<Cliente> FiltrarPorNombre(string cadena);
+        public List<Cliente> ObtenerTodosOrdenAnalfabetico();
+
     }
 }

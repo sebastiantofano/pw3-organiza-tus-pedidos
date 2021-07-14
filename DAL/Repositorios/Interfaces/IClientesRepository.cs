@@ -11,5 +11,8 @@ namespace DAL.Repositorios.Interfaces
     {
         bool ValidarEmailExistente(string email);
         List<Cliente> FiltrarPorNombre(string cadena);
+
+        List<Cliente> ObtenerTodosOrdenAnalfabetico();
+
     }
 }

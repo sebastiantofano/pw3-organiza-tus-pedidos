@@ -39,5 +39,10 @@ namespace DAL.Repositorios
             return matches.ToList();
             //return (List<Cliente>)_pedidosPW3Context.Clientes.Where(c => EF.Functions.Like(c.Nombre, cadena));
         }
+
+        public List<Cliente> ObtenerTodosOrdenAnalfabetico()
+        {
+            return _pedidosPW3Context.Clientes.OrderBy(o => o.Nombre).ToList();
+        }
     }
 }
