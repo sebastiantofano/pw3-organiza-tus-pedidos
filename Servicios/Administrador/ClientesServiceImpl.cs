@@ -13,6 +13,7 @@ namespace Servicios.Administrador
     public class ClientesServiceImpl : BaseServiceImpl<Cliente>, IClientesService
     {
         private readonly IClientesRepository _clientesRepository;
+
         public ClientesServiceImpl(IClientesRepository clientesRepository, IHttpContextAccessor httpContextAccessor) : base(clientesRepository, httpContextAccessor)
         {
             _clientesRepository = clientesRepository;
@@ -34,6 +35,11 @@ namespace Servicios.Administrador
         {
             return _clientesRepository.ObtenerTodosOrdenAnalfabetico();
 
+        }
+
+        public bool ValidarNumeroExistente(int numero)
+        {
+            return _clientesRepository.ValidarNumeroExistente(numero);
         }
 
     }

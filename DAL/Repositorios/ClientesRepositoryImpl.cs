@@ -21,7 +21,7 @@ namespace DAL.Repositorios
         {
 
             Cliente clienteExistente = _pedidosPW3Context.Clientes.Where(o => o.Email == email).FirstOrDefault();
-            if (clienteExistente == null)
+            if (clienteExistente == null || clienteExistente.BorradoPor != null)
             {
                 return false;
             }
@@ -43,6 +43,16 @@ namespace DAL.Repositorios
         public List<Cliente> ObtenerTodosOrdenAnalfabetico()
         {
             return _pedidosPW3Context.Clientes.OrderBy(o => o.Nombre).ToList();
+        }
+
+        public bool ValidarNumeroExistente(int numero)
+        {
+            Cliente clienteExistente = _pedidosPW3Context.Clientes.Where(o => o.Numero == numero).FirstOrDefault();
+            if (clienteExistente == null)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

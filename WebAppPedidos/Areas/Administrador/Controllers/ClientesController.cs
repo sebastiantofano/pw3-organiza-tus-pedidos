@@ -34,11 +34,19 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
             if (ModelState.IsValid)
             {
                 bool emailYaExistente = _clientesService.ValidarEmailExistente(cliente.Email);
+                bool numeroYaExistente = _clientesService.ValidarNumeroExistente(cliente.Numero);
+
                 if (emailYaExistente)
                 {
                     TempData["toastr_error"] = "El email ya se encuentra registrado!";
                     return RedirectToAction("AdministrarClientes");
                 }
+                if (numeroYaExistente)
+                {
+                    TempData["toastr_error"] = "El numero de cliente ya se encuentra registrado!";
+                    return RedirectToAction("AdministrarClientes");
+                }
+
                 _clientesService.Insertar(cliente);
 
                 if (guardar.ToLower().Equals("guardar"))
@@ -94,7 +102,6 @@ namespace WebAppPedidos.Areas.Administrador.Controllers
             int idCliente = int.Parse(id);
             Cliente cliente = _clientesService.ObtenerPorId(idCliente);
             _clientesService.Eliminar(cliente);
-
             return RedirectToAction("AdministrarClientes");
         }
 

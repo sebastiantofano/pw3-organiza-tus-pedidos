@@ -59,7 +59,6 @@ namespace Servicios
             string idUsuario = _httpContextAccessor.HttpContext.Session.GetString("IdUsuario");
             entity.BorradoPor = int.Parse(idUsuario);
             entity.FechaBorrado = DateTime.Today;
-
             _entityRepository.Eliminar(entity);
         }
 

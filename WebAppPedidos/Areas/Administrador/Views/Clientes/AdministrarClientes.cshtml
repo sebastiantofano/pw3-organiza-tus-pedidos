@@ -42,8 +42,8 @@
                                     <th class="col-md-3">Nombre de Cliente</th>
                                     <th class="col-md-3">E-mail</th>
                                     <th class="col-md-2">CUIT</th>
-                                    <th>Vigencia</th>
-                                    <th>Modificacion</th>
+                                    <th class="col-md-2">Telefono</th>
+                                    <th class="col-md-2">Vigencia</th>
                                     <th class="col-md-3"></th>
                                 </tr>
                             </thead>
@@ -51,34 +51,31 @@
                                 @foreach (var cliente in Model)
                                 {
 
-                                    <tr>
-                                        <td>@cliente.IdCliente</td>
-                                        <td>@cliente.Nombre</td>
-                                        <td>@cliente.Email</td>
-                                        <td>@cliente.Cuit</td>
-                                        <td>
-                                            <span class="badge badge-@(cliente.FechaBorrado == null ? "success" : "danger")">
-                                                @(cliente.FechaBorrado == null ? "VIGENTE" : "ELIMINADO")
-                                            </span>
-                                        </td>
-                                        <td class="">@(cliente.ModificadoPor != null ? @String.Format("El día {0} por {1} {2}", cliente.FechaModificacion?.ToShortDateString(), cliente.ModificadoPorNavigation.Nombre, cliente.ModificadoPorNavigation.Apellido): "Modificación no identificada" )</td>
+                                <tr>
+                                    <td>@cliente.Numero</td>
+                                    <td>@cliente.Nombre</td>
+                                    <td>@cliente.Email</td>
+                                    <td>@cliente.Cuit</td>
+                                    <td>@cliente.Telefono</td>
 
-                                        <td>
-                                            @if (cliente.FechaBorrado == null)
-                                            {
+                                    <td>
+                                        <span class="badge badge-@(cliente.FechaBorrado == null ? "success" : "danger")">
+                                            @(cliente.FechaBorrado == null ? "VIGENTE" : "ELIMINADO")
+                                        </span>
+                                    </td>
 
-                                                <a asp-area="Administrador" asp-controller="Clientes" asp-action="EditarCliente" asp-route-id="@cliente.IdCliente"
-                                                   class="btn btn-outline-info btn-flat btn-addon btn-sm mr-2">
-                                                    <i class="ti-pencil"></i>Editar
-                                                </a>
-                                                <a asp-area="Administrador" asp-controller="Clientes" asp-action="EliminarCliente" asp-route-id="@cliente.IdCliente"
-                                                   class="btn btn-outline-danger btn-flat btn-addon btn-sm" onclick="return confirm('¿Usted está seguro que desea eliminar el cliente?')">
-                                                    <i class="ti-close"></i>Eliminar
-                                                </a>
+                                    <td>
+                                        @if (cliente.FechaBorrado == null)
+                                        {
 
-                                            }
-                                        </td>
-                                    </tr>
+                                            <a asp-area="Administrador" asp-controller="Clientes" asp-action="EditarCliente" asp-route-id="@cliente.IdCliente"
+                                               class="btn btn-outline-info btn-flat btn-addon btn-sm mr-2">
+                                                <i class="ti-pencil"></i>Editar
+                                            </a>
+
+                                        }
+                                    </td>
+                                </tr>
                                 }
                             </tbody>
                         </table>
