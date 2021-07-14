@@ -31,7 +31,7 @@
                                     <label asp-for="Email" class="col-lg-1 col-form-label ml-2 p-1">E-mail</label>
                                     <div class="input-group-prepend col-lg-12">
                                         <span class="input-group-text">@@</span>
-                                        <input type="text" name="Email" asp-for="Email" class="form-control" placeholder="E-mail" value="@Model.Email">
+                                        <input type="text" name="Email" asp-for="Email" class="form-control" placeholder="E-mail" value="@Model.Email" required disabled="@(Model.FechaBorrado == null ? false : true)">
                                         <span asp-validation-for="Email" class="text-danger"></span>
                                     </div>
                                 </div>
@@ -39,24 +39,24 @@
                             <div class="form-group row align-items-center">
                                 <label asp-for="Password" class="col-lg-1 col-form-label  p-1 ml-2">Contraseña</label>
                                 <div class="col-lg-12">
-                                    <input type="password" name="Password" asp-for="Password" class="form-control" placeholder="Contraseña" value="@Model.Password">
+                                    <input type="password" name="Password" asp-for="Password" class="form-control" placeholder="Contraseña" value="@Model.Password" required disabled="@(Model.FechaBorrado == null ? false : true)">
                                     <span asp-validation-for="Password" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="form-group row align-items-center">
                                 <label asp-for="Nombre" class="col-lg-1 col-form-label">Nombre</label>
                                 <div class="col-lg-3">
-                                    <input type="text" name="Nombre" asp-for="Nombre" class="form-control" placeholder="Nombre" value="@Model.Nombre">
+                                    <input type="text" name="Nombre" asp-for="Nombre" class="form-control" placeholder="Nombre" value="@Model.Nombre" required disabled="@(Model.FechaBorrado == null ? false : true)">
                                     <span asp-validation-for="Nombre" class="text-danger"></span>
                                 </div>
                                 <label asp-for="Apellido" class="col-lg-1 col-form-label">Apellido</label>
                                 <div class="col-lg-3">
-                                    <input type="text" name="Apellido" asp-for="Apellido" class="form-control" placeholder="Apellido" value="@Model.Apellido">
+                                    <input type="text" name="Apellido" asp-for="Apellido" class="form-control" placeholder="Apellido" value="@Model.Apellido" required disabled="@(Model.FechaBorrado == null ? false : true)">
                                     <span asp-validation-for="Apellido" class="text-danger"></span>
                                 </div>
                                 <label asp-for="FechaNacimiento" class="col-lg-1 col-form-label p-0">Fecha de Nacimiento</label>
                                 <div class="col-lg-3">
-                                    <input type="date" name="FechaNacimiento" asp-for="FechaNacimiento" class="form-control" placeholder="Fecha de Nacimiento" value="@string.Format("{0:yyyy-MM-dd}", Model.FechaNacimiento)">
+                                    <input type="date" name="FechaNacimiento" asp-for="FechaNacimiento" class="form-control" placeholder="Fecha de Nacimiento" value="@string.Format("{0:yyyy-MM-dd}", Model.FechaNacimiento)" required disabled="@(Model.FechaBorrado == null ? false : true)">
                                     <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
                                 </div>
                             </div>
@@ -64,17 +64,20 @@
                             <div class="form-group row">
                                 <div class="col-auto my-1">
                                     <div class="custom-control custom-checkbox mr-sm-2">
-                                        <input type="checkbox" name="EsAdmin" value="true" class="custom-control-input" id="customControlAutosizing" @(Model.EsAdmin ? "checked" : "")>
+                                        <input type="checkbox" name="EsAdmin" value="true" class="custom-control-input" id="customControlAutosizing" @(Model.EsAdmin ? "checked" : "") required disabled="@(Model.FechaBorrado == null ? false : true)">
                                         <label class="custom-control-label" for="customControlAutosizing">Usuario Administrador</label>
                                     </div>
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-dark col-lg-4 m-1">Guardar Modificaciones</button>
-                            <a asp-area="Administrador" asp-controller="Usuarios" asp-action="EliminarUsuario" asp-route-id="@Model.IdUsuario"
-                               class="btn btn-outline-danger btn-flat btn-smcol-lg-3 ml-auto">
-                                Eliminar Usuario
-                            </a>
-                        </form>
+                            @if (Model.FechaBorrado == null)
+                            {
+                                <a asp-area="Administrador" asp-controller="Usuarios" asp-action="EliminarUsuario" asp-route-id="@Model.IdUsuario"
+                                   class="btn btn-outline-danger btn-flat btn-smcol-lg-3 ml-auto">
+                                    Eliminar Usuario
+                                </a>
+                            }
+                            </form>
                         }
                         <div class="row align-items-center">
                             <div class="col-lg-4">
@@ -176,7 +179,7 @@
     
         <div class="row">
             <div class="col-lg-12 d-flex align-items-center">
-                <a asp-area="Administrador" asp-controller="Usuarios" asp-action="AdministrarUsuarios" class="btn btn-default ml-auto">Descartar Modificaciones</a>
+                <a asp-area="Administrador" asp-controller="Usuarios" asp-action="AdministrarUsuarios" class="btn btn-default ml-auto">Volver</a>
             </div>
         </div>
 </section>
