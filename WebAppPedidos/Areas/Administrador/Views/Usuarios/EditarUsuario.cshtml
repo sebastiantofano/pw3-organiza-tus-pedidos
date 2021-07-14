@@ -7,7 +7,15 @@
     <div class="col-lg-8 p-r-0 title-margin-right">
         <div class="page-header">
             <div class="page-title">
-                <h2><i class="ti-user text-default"></i> Editar Usuario </h2>
+                @if (@Model.FechaBorrado == null)
+                {
+                    <h2><i class="ti-user text-default"></i> Editar Usuario </h2>
+                }
+                @if (@Model.FechaBorrado != null)
+                {
+                    <h2><i class="ti-user text-default"></i> Ver Usuario </h2>
+                }
+
             </div>
         </div>
     </div>
@@ -68,16 +76,17 @@
                                         <label class="custom-control-label" for="customControlAutosizing">Usuario Administrador</label>
                                     </div>
                                 </div>
-                            </div>
-                            <button type="submit" class="btn btn-dark col-lg-4 m-1">Guardar Modificaciones</button>
+                            </div> 
                             @if (Model.FechaBorrado == null)
                             {
+                                <button type="submit" class="btn btn-dark col-lg-4 m-1">Guardar Modificaciones</button>
+
                                 <a asp-area="Administrador" asp-controller="Usuarios" asp-action="EliminarUsuario" asp-route-id="@Model.IdUsuario"
                                    class="btn btn-outline-danger btn-flat btn-smcol-lg-3 ml-auto">
                                     Eliminar Usuario
                                 </a>
                             }
-                            </form>
+                        </form>
                         }
                         <div class="row align-items-center">
                             <div class="col-lg-4">

@@ -103,10 +103,21 @@
                                                 </td>
                                                 <td>@usuario.FechaCreacion.ToShortDateString()</td>
                                                 <td class="row justify-content-between align-items-center">
-                                                    <a asp-area="Administrador" asp-controller="Usuarios" asp-action="EditarUsuario" asp-route-id="@usuario.IdUsuario"
-                                                       class="btn btn-outline-info btn-flat btn-addon btn-sm ml-2">
-                                                        <i class="ti-pencil"></i>Editar
-                                                    </a>
+                                                    @if (usuario.FechaBorrado == null)
+                                                    {
+                                                        <a asp-area="Administrador" asp-controller="Usuarios" asp-action="EditarUsuario" asp-route-id="@usuario.IdUsuario"
+                                                           class="btn btn-outline-info btn-flat btn-addon btn-sm ml-2">
+                                                            <i class="ti-pencil"></i>Editar
+                                                        </a>
+                                                    }
+
+                                                    @if (usuario.FechaBorrado != null)
+                                                    {
+                                                        <a asp-area="Administrador" asp-controller="Usuarios" asp-action="EditarUsuario" asp-route-id="@usuario.IdUsuario"
+                                                           class="btn btn-outline-info btn-flat btn-addon btn-sm ml-2">
+                                                            <i class="ti-pencil"></i>Ver
+                                                        </a>
+                                                    }
                                                     @if (usuario.FechaBorrado == null)
                                                     {
                                                         <form method="POST" asp-area="Administrador" asp-controller="Usuarios" asp-action="EliminarUsuario" asp-route-id="@usuario.IdUsuario">
@@ -114,6 +125,7 @@
                                                         </form>
 
                                                     }
+
                                                 </td>
                                             </tr>
                                         }
